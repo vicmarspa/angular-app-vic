@@ -1,0 +1,271 @@
+<div class="container-fluid col-12 mt-5">
+    <div class="row">     
+        
+    </div>
+</div>
+
+<!--Filtro para mostrar datos borrados-->
+<h2 style="display: inline; margin-left: 2%;">SELECCIONA TIPO DE REGISTRO POR FILTRO</h2>
+<select style="margin-left: 5%;" [(ngModel)]="tipoSelected" >
+    <option *ngFor="let t of Eliminados" [ngValue]="null" [value]="t.Tipo" > 
+      {{t.Tipo}}       
+    </option>                
+</select>
+
+
+<!--Tabla Calibrado-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Procesos'">
+    <div class="row">
+        <div class="col-11 mt-3 ml-5">
+            <table class="table" >
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" style="width: 3%;">Proceso</th>
+                    <th scope="col" class="pl-3" style="width: 3%;">Fruta</th>                                        
+                    <th scope="col" class="pl-4" style="width: 2%;">Valor</th>
+                    <th scope="col" class="pl-3" style="width: 5%;">Tipo Pago</th>
+                    <th scope="col" class="pl-3" style="width: 4%;">Fecha de Creación</th>
+                    <th scope="col" class="pl-2" style="width: 4%;">Fecha de Eliminacion</th>
+                    <th scope="col" class="pl-5" style="width: 4%;">Opciones</th>                   
+                    <th scope="col" class="pl-4" style="width: 5%;">Cliente</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let row of calibrado'>                    
+                    <td class="pl-4">{{row.numero_proceso}}</td>
+                    <td>{{row.tipo_fruta}}</td>                                                   
+                    <td class="pl-4">{{row.valor_servicio}}</td>
+                    <td class="pl-4">{{row.tipo_pago}}</td>
+                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                    <td>{{row.fecha_proceso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                    
+                    <td>
+                      <a class="btn btn-primary" (click) = "RestaurarCalibradoPapelera(row.numero_proceso);">RESTAURAR</a>
+                      <button class="btn btn-danger ml-2 material-icons" (click)="deleteCalibrado(row.numero_proceso)" >
+                        delete 
+                          </button>
+                    </td>
+                        
+                                         
+                    <td>{{row.nombre}}</td>                   
+                  </tr>                  
+                </tbody>
+              </table>                           
+        </div>
+    </div>
+</div>
+
+<!--Tabla Calibre-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Calibre'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" style="width:30%;">
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" class="pl-4" style="width: 5%;">Calibre</th>
+                  <th scope="col" class="pl-4" style="width: 15%;" >Fecha Eliminación</th> 
+                  <th scope="col" class="pl-4" style="width: 10%;">Opciones</th>            
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let c of calibre'>                    
+                  <td class="pl-4" style="width: 1%;">{{c.calibre}}</td>
+                  <td>{{c.calibre_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                               
+                  <td >
+                      <a class="btn btn-primary" (click)="RestaurarCalibrePapelera(c.idcalibre)">RESTAURAR</a>
+                      
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+<!--Tabla Fruta-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Fruta'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" style="width:30%;">
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" class="pl-4" style="width: 5%;">Fruta</th>
+                  <th scope="col" class="pl-4" style="width: 15%;">Fecha Eliminación</th> 
+                  <th scope="col" class="pl-4" style="width: 10%;">Opciones</th>            
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let f of fruta'>                    
+                  <td class="pl-4">{{f.tipo_fruta}}</td>
+                  <td>{{f.fruta_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                               
+                  <td>
+                      <a class="btn btn-primary" (click)="RestaurarFrutaPapelera(f.idtipo_fruta)">RESTAURAR</a>                      
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+<!--Tabla Pago-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Pago'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" style="width:30%;">
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" class="pl-4" style="width: 5%;">Pago</th>
+                  <th scope="col" class="pl-4" style="width: 15%;">Fecha Eliminación</th> 
+                  <th scope="col" class="pl-4" style="width: 10%;">Opciones</th>            
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let p of pago'>                    
+                  <td class="pl-4">{{p.tipo_pago}}</td>
+                  <td>{{p.pago_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                               
+                  <td>
+                      <a class="btn btn-primary" (click)="RestaurarPagoPapelera(p.idtipo_pago)">RESTAURAR</a>
+                      
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Clientes'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" >
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" style="padding-left: 2%;">Cliente</th>               
+                  <th scope="col" style="padding-left: 3%;">Correo</th>
+                  <th scope="col" style="padding-left: 2%;">Telefono</th>
+                  <th scope="col" >Direccion</th>
+                  <th scope="col" style="padding-left: 2%;">Fecha Creación</th>
+                  <th scope="col" style="padding-left: 1.5%;">Fecha Eliminación</th>
+                  <th scope="col" style="padding-left: 1.5%;">Opciones</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let cl of clientes'>                     
+                  <td >{{cl.nombre}}</td>
+                  <td >{{cl.correo}}</td>
+                  <td >{{cl.telefono}}</td>
+                  <td >{{cl.direccion}}</td>
+                  <td >{{cl.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                  <td >{{cl.fecha_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+
+                  <td class="" >
+                      <a  class="btn btn-primary" (click)="RestaurarClientesPapelera(cl.id_cliente)">RESTAURAR</a>                                   
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>             
+      </div>
+  </div>
+</div>
+
+<!--Tabla Compras-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Compras'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" style="width:40%;">
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" class="pl-2" >Compra</th>
+                  <th scope="col" class="pl-5" >Cliente</th> 
+                  <th scope="col" class="pl-3" >Fecha de Eliminación</th> 
+                  <th scope="col" style="padding-left: 4%;">Opciones</th>           
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let cs of compras'>                    
+                  <td class="pl-4">{{cs.idcompra}}</td>
+                  <td>{{cs.nombre}}</td> 
+                  <td>{{cs.compra_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                              
+                  <td>
+                      <a class="btn btn-primary" (click)="RestaurarComprasPapelera(cs.idcompra)">RESTAURAR</a>  
+                      <button class="btn btn-danger ml-2 material-icons" (click)="deleteCompra(cs.idcompra)" >
+                        delete 
+                          </button>                    
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+
+<!--Tabla Ventas-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Ventas'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+          <table class="table" style="width:40%;">
+              <thead class="thead-dark">
+                <tr>                    
+                  <th scope="col" class="pl-2" >Venta</th>
+                  <th scope="col" class="pl-5" >Cliente</th> 
+                  <th scope="col" class="pl-3" >Fecha de Eliminación</th> 
+                  <th scope="col" style="padding-left: 4%;">Opciones</th>           
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ='let v of ventas'>                    
+                  <td class="pl-4">{{v.idventa}}</td>
+                  <td>{{v.nombre}}</td> 
+                  <td>{{v.venta_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                              
+                  <td>
+                      <a class="btn btn-primary" (click)=RestaurarVentasPapelera(v.idventa)>RESTAURAR</a>  
+                      <button class="btn btn-danger ml-2 material-icons" (click)=deleteVenta(v.idventa)>
+                        delete 
+                          </button>                    
+                  </td>                             
+                </tr>                  
+              </tbody>
+            </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+<!--Tabla Productos-->
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Productos'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+        <table class="table" style="width: 30%;">
+          <thead class="thead-dark">
+            <tr>                    
+              <th scope="col">Lote</th>
+              <th scope="col" class="pl-2" >Producto</th>                                    
+              <th scope="col" >Cantidad</th>  
+              <th scope="col" class="pl-2" >Bines</th>  
+                               
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of products">                    
+              <td class="pl-3">{{p.idcompra}}</td>
+              <td class="pl-4">{{p.tipo_fruta}}</td>                                                   
+              <td class="pl-4">{{p.cantidad}}</td>                                                           
+              <td class="pl-4">{{p.lote_bines}}</td> 
+                                
+                                
+            </tr>                  
+          </tbody>
+        </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+<!--Input con valor 1 para restaurar-->
+<input type="text" value="1" id="restaurado" style="display: none;">

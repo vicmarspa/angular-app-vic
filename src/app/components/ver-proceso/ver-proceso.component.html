@@ -1,0 +1,155 @@
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <h4 class="d-inline">NUMERO DE PROCESO :</h4>
+            <h4 class="d-inline pl-3" id="proceso">{{calibrado1.numero_proceso}}</h4>
+            <br>
+            <h4 class="d-inline">CORRELATIVO DEL CLIENTE :</h4>
+            <h4 class="d-inline pl-3" id="correlativoProceso">{{correlativoProceso}}</h4>
+            <br>
+            <h4 class="d-inline">TIPO DE PROCESO :</h4>
+            <h4 class="d-inline pl-3" id="proceso">{{calibrado1.tipo_proceso}}</h4>
+            <br>
+            <h4 class="d-inline">FECHA :</h4>
+            <h4 class="d-inline pl-3" id="fecha">{{calibrado1.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
+            <br>
+            <h4 class="d-inline">FECHA SALIDA :</h4>
+            <h4 class="d-inline pl-3" id="fechasalida">{{salidaUna.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
+            <br>
+            <h4 class="d-inline">CLIENTE :</h4> 
+            <h4 class="d-inline pl-3" id="cliente">{{calibrado.nombre}}</h4>
+
+
+
+        </div>
+
+        <div class="col-6 mt-5">
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <h4>OPCIONES DE USUARIO</h4>
+            <button class="btn btn-primary  position-relative mr-2"  (click)="nuevoPDF()" >GENERAR DOCUMENTO</button>               
+            <button class="btn btn-success  position-relative mr-2"   (click)="copiaClientePDF()" >COPIA DE CLIENTE</button>               
+            <button class="btn btn-warning  position-relative material-icons mr-2" style="color:white" [routerLink] ="['/busqueda/detalle/', calibrado1.numero_proceso]">refresh</button>
+            <button [routerLink] = "['/busqueda']" class="btn btn-danger position-relative">VOLVER</button> 
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">TOTAL INGRESO:</h5>
+                <h5 class="d-inline position-relative" id="totalingreso" style="left: 2%;">{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KGs</h5> 
+            </div>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">CANTIDAD BINES INGRESADOS:</h5>
+                <h5 class="d-inline position-relative" id="bins" style="left: 2.5%;">{{cantidadbinsEntradaSum()}}</h5>
+            </div>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">CANTIDAD BINES DE SALIDA:</h5>
+                <h5 class="d-inline position-relative" id="binsSalida" style="left: 2.5%;">{{cantidadbinsSalidaSum()}}</h5>
+            </div>
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">TIPO DE FRUTA:  </h5>
+                <h5 class="d-inline pl-3" id="fruta">{{calibrado.tipo_fruta}}</h5>                
+            </div> 
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">MERMA:  </h5>
+                <h5 class="d-inline position-relative" id="merma" style="left: .5%;">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
+            </div>          
+        </div>
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">VALOR SERVICIO: </h5>
+                <h5 class="d-inline pl-3" id="valor">${{calibrado1.valor_servicio}}</h5>                
+            </div>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">VALOR TOTAL:</h5>
+                <h5 class="d-inline position-relative" id="valortotal" style="left: 5%;">${{(kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) * calibrado.valor_servicio | number: '000.000'}}</h5>
+            </div>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">TIPO DE PAGO: </h5>
+                <h5 class="d-inline pl-3" id="pago">{{calibrado.tipo_pago}}</h5>
+            </div>           
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-3 ml-5 mt-2 table-responsive ">  
+            <h5>PROCESO DE ENTRADA</h5>
+
+            <table class="table" id="entrada">
+                <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col">KG BRUTO</th>
+                    <th scope="col">CANT BINS</th> 
+                    <th scope="col">KG NETO</th>
+                                           
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor ='let row of calibrado1Entrada'>                    
+                    <td>{{row.kilogramos | number : '000.000'}}</td>
+                    <td>{{row.cantidad_bines}}</td>
+                    <td>{{row.kilogramos - (row.cantidad_bines*40) | number : '000.000'}}</td>              
+                </tr>
+                <tr class="table-info">
+                    <td><b>{{kilogramosEntradaSum() | number : '000.000'}}</b></td>
+                    <td><b>{{cantidadbinsEntradaSum()}}</b></td>
+                    <td><b>{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}}</b></td>
+                </tr>
+                
+
+                
+                    </tbody>
+                </table>
+                                           
+                
+            </div>
+ 
+
+            <div class="col-5 ml-5 mt-2 table-responsive">
+                <h5>PROCESO DE SALIDA</h5>
+                <table class="table" id="salida">
+                    <thead class="thead-dark">
+                    <tr>                        
+                        <th scope="col">CALIBRE</th>
+                        <th scope="col">KG BRUTO</th>
+                        <th scope="col">BINS PROCESO</th>
+                        <th scope="col">KG NETO</th>
+                        <th scope="col">PORCENTAJE</th>
+                         
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor ='let rows of calibrado1Salida'>                        
+                        <td>{{rows.calibre}}</td>
+                        <td>{{rows.kilogramos | number : '000.000'}}</td>
+                        <td>{{rows.cantidad_bines_s}}</td>
+                        <td>{{rows.kilogramos - (rows.cantidad_bines_s*43) | number : '000.000'}}</td>
+                        <td>{{(((rows.kilogramos - (rows.cantidad_bines_s*43))*100))/(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) | number : '00.00'}}%</td>
+                        
+                        
+                        
+                    </tr>
+                    <tr class="table-info">
+                        <td><b>----></b></td>
+                        <td><b>{{kilogramosSalidaSum() | number : '000.000'}}</b></td>
+                        <td><b>{{cantidadbinsSalidaSum()}}</b></td>
+                        <td><b>{{kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43) | number : '000.000'}}</b></td>
+                    </tr>
+                    
+                    </tbody>
+                </table>       
+        </div>
+    </div>
+</div>

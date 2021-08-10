@@ -1,0 +1,82 @@
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <h1 class="d-inline">NUMERO DE PROCESO :</h1>
+            <h1 class="d-inline pl-3" id="proceso">{{calibrado1.numero_proceso}}</h1>
+            <br>
+            <h1 class="d-inline">FECHA :</h1>
+            <h1 class="d-inline pl-3" id="fecha">{{calibrado1.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h1>
+            <br>
+            
+        </div>
+        <div class="col-6 ">
+            <div class="mt-5">
+                <button type="button" class="btn btn-primary ml-2 mr-2 float-right" (click)="updateCalibrado();"> MODIFICAR</button>          
+            </div>
+            <div class="mt-3">
+                <h1 class="d-inline">CLIENTE :</h1> 
+                <h5 class="d-inline pl-3" id="fruta">{{calibrado.nombre}}</h5>
+                <select style="margin-left: 2%;" [(ngModel)]="clienteSelected" >
+                    <option id="pago" *ngFor="let cl of cliente1" [value]="cl.id_cliente" >
+                       {{cl.nombre}}         
+                    </option>                
+                </select>             
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">TOTAL INGRESO:</h5>
+                <h5 class="d-inline position-relative" id="totalingreso" style="left: 2%;">{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KGs</h5> 
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">CANTIDAD BINES INGRESADOS:</h5>
+                <h5 class="d-inline position-relative" id="bins" style="left: 2.5%;">{{cantidadbinsSalidaSum()}}</h5>
+            </div>
+            <br>
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">TIPO DE FRUTA:  </h5>
+                <h5 class="d-inline pl-3" id="fruta">{{calibrado.tipo_fruta}}</h5>
+                    <select style="margin-left: 2%;" [(ngModel)]="frutaSelected">
+                        <option id="pago" *ngFor="let f of fruta1" [value]="f.idtipo_fruta" >
+                            {{f.tipo_fruta}}                                    
+                        </option>                
+                    </select>  
+                                 
+            </div> 
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">MERMA:  </h5>
+                <h5 class="d-inline position-relative" id="merma" style="left: .5%;">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
+            </div>          
+        </div>
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">VALOR SERVICIO: </h5>
+                <input type="text" [(ngModel)]=calibrado1.valor_servicio>
+                               
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">VALOR TOTAL:</h5>
+                <h5 class="d-inline position-relative" id="valortotal" style="left: 5%;">${{(kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) * calibrado.valor_servicio | number: '000.000'}}</h5>
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">TIPO DE PAGO: </h5>                
+                <h5 class="d-inline pl-3" id="pago">{{calibrado.tipo_pago}}</h5>
+                <select style="margin-left: 2%;" [(ngModel)]="pagoSelected" >
+                    <option id="pago" *ngFor="let p of pago1" [value]="p.idtipo_pago" >
+                       {{p.tipo_pago}}         
+                    </option>                
+                </select>
+                
+                <button [routerLink] = "['/busqueda']" class="btn btn-danger mt-2 float-right">VOLVER</button> 
+            </div>           
+        </div>
+    </div>
+</div>

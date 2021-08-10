@@ -1,0 +1,52 @@
+<div class="container-fluid col-12 mt-5">
+    <div class="row">     
+        <div class="col-3">
+            <div class="ml-4">                
+                <button [routerLink] ="['/ingreso-clientes']" type="button" class="btn btn-outline-primary ml-4 mb-3 material-icons">
+                add_circle_outline
+                </button>
+                  <h2 class="d-inline pl-2">Nuevo Cliente</h2>
+            </div>           
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-11 mt-3 ml-5">
+            <table class="table" >
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" style="padding-left: 2%;">Cliente</th>               
+                    <th scope="col" style="padding-left: 3%;">Telefono</th>
+                    <th scope="col" style="padding-left: 2%;">Rut</th>
+                    <th scope="col" style="padding-left: 3%;">Direccion</th>
+                    <th scope="col" style="padding-left: 2%;">Fecha Ingreso</th>
+                    <th scope="col" style="padding-left: 1.5%;">Fecha Modificación</th>
+                    <th scope="col" style="padding-left: 3%;">Opciones</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let c of cliente'>                     
+                    <td >{{c.nombre}}</td>
+                    <td >{{c.correo}}</td>
+                    <td >{{c.telefono}}</td>
+                    <td >{{c.direccion}}</td>
+                    <td >{{c.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                    <td >{{c.fecha_fin | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+
+                    <td class="" >
+                        <a  class="btn btn-primary" [routerLink] ="['../editar/clientes',c.id_cliente]">MODIFICAR</a>                        
+                        <button class="btn btn-danger ml-2 material-icons" (click)="BorrarCliente(c.id_cliente)">
+                            delete 
+                    </button>                    
+                    </td>                             
+                  </tr>                  
+                </tbody>
+              </table>             
+        </div>
+    </div>
+</div>
+<input type="text" value="0" id="borrado" style="display: none;">

@@ -1,0 +1,101 @@
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <h1 class="d-inline">NUMERO COMPRA : </h1> 
+            <h1 class="d-inline" id="compra">{{compra.idcompra}}</h1>           
+            <br>
+            <h1 class="d-inline">FECHA DE INGRESO : </h1>
+            <h2 class="d-inline pl-3" id="fecha"> {{compra.compra_inicio | date: 'dd-MM-yyyy / HH:mm:ss' }}</h2>
+            <br>
+            
+        </div>
+        <div class="col-6 ">
+            <div>
+                <button class="btn btn-primary mt-5 position-relative" style="left: 80%;" (click)=nuevoPDF();>GENERAR DOCUMENTO</button>               
+            </div>
+            <div class="mt-3">
+                <h1 class="d-inline">CLIENTE :</h1> 
+                <h2 class="d-inline pl-3" id="cliente">{{compra.nombre}}</h2>             
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">MONTO NETO:</h5>
+                <h5 class="d-inline position-relative" id="montoneto" style="left: 2%;">$ {{ProductosSum() | number: '000.000'}}</h5> 
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">IVA?: </h5>
+                <h5 class="d-inline position-relative" id="iva" style="left: .5%;">{{compra.iva_estado}} ({{compra.iva}})%</h5>
+            </div>
+            <br>
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">IMPUESTO ADICIONAL:  </h5>
+                <h5 class="d-inline pl-1" id="fruta">{{compra.impadicional}}%</h5>                
+            </div> 
+            <div class="mt-2" id="Fruta">
+                <h5 class="d-inline pt-5">TOTAL:  </h5>
+                <h5 class="d-inline position-relative" id="merma" style="left: .5%;">$ {{(((ProductosSum()*compra.iva)/100) + ProductosSum()) + ((compra.impadicional * ProductosSum())/100) | number: '000.000'}}</h5>
+            </div>          
+        </div>
+        <div class="col-5 m-5">
+            <div>
+                <h5 class="d-inline">CORREO: </h5>
+                <h5 class="d-inline pl-3" id="valor">{{compra.correo}}</h5>                
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">DIRECCION:</h5>
+                <h5 class="d-inline position-relative" id="valortotal" style="left: 2%;">{{compra.direccion}}</h5>
+            </div>
+            <br>
+            <div class="mt-2">
+                <h5 class="d-inline pt-5">TELEFONO: </h5>
+                <h5 class="d-inline pl-3" id="pago">{{compra.telefono}}</h5>
+                <button [routerLink] = "['/busqueda-compras']" class="btn btn-danger mt-2 float-right">VOLVER</button> 
+            </div>           
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 p-4 mt-2 table-responsive ">  
+                        
+            <table class="table" id="entrada">
+                <thead class="thead-dark">
+                <tr>
+                    
+                    <th scope="col">PRODUCTO</th>
+                    <th scope="col">PRECIO</th> 
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">VALOR TOTAL</th>
+                    <th scope="col">BINES</th>
+                                           
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor ="let p of producto">                    
+                    <td>{{p.tipo_fruta}}</td>
+                    <td>{{p.precio}}</td>
+                    <td>{{p.cantidad | number: '000.000'}}</td> 
+                    <td>{{p.valortotal | number: '000.000'}}</td> 
+                    <td>{{p.lote_bines}}</td>            
+                </tr>
+                
+                
+                    </tbody>
+                </table>
+                                           
+                
+            </div>
+            <div class="w-25">
+
+            </div>
+            
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container-fluid col-12 mt-4">
+    <div class="row">
+        <div class="col-3">
+            <div class="pl-5">
+                <span class=""><b>BUSQUEDA POR VENTA</b></span>
+            </div>
+            <div class="ml-5">
+                <input type="text" size="19" name="idventa" [(ngModel)] = idventa (ngModelChange) = "Search();">
+                
+            </div>
+        </div>       
+        
+        <div class="col-5">
+            <div class="mt-3">
+                
+                <button [routerLink] ="['/ingreso-venta']" type="button" class="btn btn-outline-primary ml-4 mb-3 material-icons">
+                add_circle_outline
+                </button>
+                  <h2 class="d-inline pl-2">Nueva Venta</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-11 mt-3 ml-5">
+            <table class="table" style="width: 55%;">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" >Venta</th>
+                    <th scope="col" class="pl-2" >Cliente</th>                                        
+                    <th scope="col" class="pl-4" >Creacion Venta</th>                    
+                    <th scope="col" style="padding-left: 70px;">Opciones</th>                   
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let v of ventas">                    
+                    <td class="pl-4">{{v.idventa}}</td>
+                    <td>{{v.nombre}}</td>                                                   
+                    <td class="pl-4">{{v.venta_creacion | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                    <td class="pl-4">                        
+                        <a  class="btn btn-primary ml-2" [routerLink] ="['./ver-venta',v.idventa]">DETALLE</a>
+                        <button class="btn btn-danger ml-2 material-icons" (click)=BorrarCompraPapelera(v.idventa)>
+                            delete 
+                    </button></td>
+                                       
+                  </tr>                  
+                </tbody>
+              </table>
+              <input type="text" value="0" id="borrado" style="display: none;">             
+        </div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row">        
+
+
+        <div class="sm col-6 p-4">
+            <h5 class="d-inline">NUMERO DE PROCESO: </h5>
+            <h5 class="d-inline pl-3" >{{getUltimo.numero_proceso}}</h5>
+            <br>
+            <h5 class="d-inline">CORRELATIVO DEL CLIENTE: </h5>
+            <h5 class="d-inline pl-3" >{{correlativoProceso}}</h5>
+            <br>
+            <h5 class="mt-4 d-inline">FECHA INGRESO : {{calibrado2.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5> 
+            <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;" [(ngModel)] = getUltimo.numero_proceso > 
+            <br>
+            <h5 class="mt-2">CLIENTE: {{getUltimo.nombre}}</h5> 
+            <h5>TIPO DE PROCESO: {{getUltimo.tipo_proceso}}</h5>                       
+            <h5>TIPO FRUTA: {{getUltimo.tipo_fruta}}</h5>                       
+            <h5>TIPO PAGO: {{getUltimo.tipo_pago}}</h5>  
+            <h5>MERMA: {{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
+                      
+        </div>       
+        
+        <div class="col-5 ml-5">
+
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <h4 class="ml-4">OPCIONES DE USUARIO</h4>
+            <form (submit)="insertPay(getUltimo.numero_proceso, dato2)">
+                <input type="hidden" value="{{getUltimo.numero_proceso}}">
+                <input type="hidden" class="form-control input-sm" #dato2 required>
+            <button class="btn btn-success btn-block">
+                GUARDAR
+            </button>
+            </form>
+            <button [routerLink]="['/busqueda']" class="btn btn-primary btn-block mt-2">VOLVER</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</div> 
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="sm col-2">
+            <div>
+                <span class=" d-block" style="padding-left: 43px;">KILOGRAMOS</span>
+            </div>
+            <div class="ml-4">
+                <input type="text" [(ngModel)]=calibradoEntrada.kilogramos>
+            </div>           
+            
+        </div>
+        <div class="sm col-3 ">
+            <div>
+               <span class="d-block pl-5" >BINES</span> 
+            </div>
+            <div>
+                <input type="text" [(ngModel)] = calibradoEntrada.cantidad_bines> 
+                
+            
+                <button type="button" class="btn btn-primary ml-2" (click) = guardarCalibradoEntrada(getUltimo.numero_proceso)>Ingresar</button>                
+            </div>
+               
+        </div>
+
+
+        
+        <div class="sm col-1 ">
+            <div>
+                <span class="pl-4 d-block" >KILOGRAMOS</span>
+            </div>
+            <div>
+               <input type="text" class="align-self-center ml-4" size="10" [(ngModel)] = calibradoSalida.kilogramos > 
+            </div>                         
+        </div>
+        <div class="sm col-1 ml-4">
+            <div>
+                <span class="d-block" style="padding-left: 10px;" >BINES</span>
+            </div>
+            <div>
+                <input type="text" class="align-self-center"  size="10" [(ngModel)] = calibradoSalida.cantidad_bines_s>
+            </div>
+            
+            
+        </div>
+        <div class="sm col-3">
+            <div>
+                <span class="d-block" style="padding-left: 95px;" >CALIBRE</span>
+                
+            </div> 
+            <div>
+            <select style="margin-left: 15%;" [(ngModel)]="calibreSelected">
+                <option value="0">--Selecciona Calibre--</option>
+                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
+                    {{calibre.calibre}}
+                </option>                
+            </select>                        
+            <button type="button" class="btn btn-primary ml-2" (click) = guardarCalibradoSalida(getUltimo.numero_proceso)>Ingresar</button>
+            </div>           
+            
+        </div>
+    </div>
+</div>
+   
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-3 p-4 mt-2 table-responsive ">
+            <h5 class="d-inline">PROCESO DE ENTRADA</h5>            
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>                                      
+                    <th scope="col">KG BRUTO</th>
+                    <th scope="col">CANT BINS</th> 
+                    <th scope="col">KG NETO</th>
+                    <th scope="col">Eliminar?</th>                        
+                </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor = 'let entrada of getEntrada'>
+                    <td>{{entrada.kilogramos}}</td>
+                    <td>{{entrada.cantidad_bines}}</td>
+                    <td>{{entrada.kilogramos - (entrada.cantidad_bines*43)}}</td>
+
+                    <td><button class="btn btn-danger ml-2 material-icons" (click)="BorrarEntrada(getUltimo.numero_proceso,entrada.id_entrada)">
+                        delete 
+                        </button></td>
+                </tr>                
+                <tr class="table-info">
+                    <td><b>{{kilogramosEntradaSum()}}</b></td>
+                    <td><b>{{cantidadbinsEntradaSum()}}</b></td>
+                    <td><b>{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)}}</b></td>
+                </tr>
+                
+                
+                </tbody> 
+                                     
+                </table>         
+                
+            </div>
+
+            <div class="col-1"></div> 
+
+            <div class="col-4 p-4 mt-2  table-responsive " style="margin-left:150px;" >
+                <h5>PROCESO DE SALIDA</h5>                
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        
+                        <th scope="col">KG</th>
+                        <th scope="col">CANT BINS</th> 
+                        <th scope="col">KG NETO</th>                        
+                        <th scope="col">CALIBRE</th>
+                        <th scope="col">Eliminar?</th> 
+                        
+                    </tr>
+                    </thead> 
+                    <tbody>
+                        <tr *ngFor = 'let salida of getSalida'>
+                            <td>{{salida.kilogramos}}</td>
+                            <td>{{salida.cantidad_bines_s}}</td>
+                            <td>{{salida.kilogramos - (salida.cantidad_bines_s*43)}}</td>
+                            <td>{{salida.calibre}}</td>
+                            <td><button class="btn btn-danger ml-2 material-icons" (click)="BorrarSalida(getUltimo.numero_proceso,salida.id_salida)">
+                                delete 
+                        </button></td>
+                        </tr>
+                        <tr class="table-info">
+                            <td><b>{{kilogramosSalidaSum()}}</b></td>
+                            <td><b>{{cantidadbinsSalidaSum()}}</b></td>
+                            <td><b>{{kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)}}</b></td>
+                        </tr>
+                    </tbody>
+                                       
+                </table>       
+        </div>
+    </div>
+</div>
+
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.0.min.js"
+      integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
+      crossorigin="anonymous">
+    </script>
+    <script>
+    //Esta es la función que una vez se cargue el documento será gatillada.
+    $(function(){
+        $("#calibre").val('0')
+    });
+</script>
+
+    

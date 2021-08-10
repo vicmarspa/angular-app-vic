@@ -1,0 +1,366 @@
+<div class="container-fluid col-12">
+    <div class="row">
+
+        <div class="col-2 m-2"> 
+            <h4 class="d-inline">Fecha: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
+            <br>          
+            <h4 class="d-inline">KILOGRAMOS TOTAL: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="total_kilogramos">{{sumaKilogramosCalibrados() | number : '1.0-0'}}</h4>
+            <br>          
+            <h4 class="d-inline">PRECIO TOTAL: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="total_precio">${{sumaPreciosCalibrados() | number : '1.0-0'}}</h4>
+            <br>          
+            <h4 class="d-inline">BINS TOTAL: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{sumaBinesCalibrados() | number : '1.0-0'}}</h4>              
+        </div>
+
+        <div class="col-2 m-2">       
+            <h4 class="d-inline">TOTAL ADEUDADO: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{adeudadoSum() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline">TOTAL PAGADO </h4>
+            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{pagadoSum() | number : '1.0-0'}}</h4>                  
+        </div>
+
+
+        <div class="col-4 m-2">  
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoServicio">{{selectedTipoServicio}}</h2>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+
+
+        <div class="col-2"> 
+
+            <div class="pl-2">
+                <span class=""><b>BUSCAR PROCESO</b></span>
+            </div>
+            <div class="ml-2">
+                <input class="form-control input-sm" type="text" size="30" name="numero_proceso" [(ngModel)] = numero_proceso (ngModelChange) = "Search();">
+            </div>
+
+            <div class="pl-2">
+                <span class=""><b>BUSCAR CLIENTE</b></span>
+            </div>
+            <div class="ml-2">
+                <input class="form-control input-sm" type="text" size="30" name="selectedNombre" style="text-transform:uppercase;" [(ngModel)] = selectedNombre (ngModelChange) = "SearchByClient();">
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+        <div class="col-2">
+
+
+            <div >
+                <span class="ml-2"><b>RANGO DE FECHAS</b></span>
+            </div>
+            <div class=" input-group ml-2" id="holi">
+                <input type="text" name="daterange" autocomplete="off" bsDaterangepicker 
+                [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
+                id="DateOfBirth" placeholder="Date Range" (bsValueChange)="dateRangeCreated($event)" class="form-control" />
+            </div> 
+
+
+
+
+            <div class="ml-2">
+                <span class=""><b>BUSCAR POR TIPO DE FRUTA</b></span>
+            </div>
+   
+            <div>
+                <select class="form-control ml-2" [(ngModel)]="selectedTipoFruta" (ngModelChange)="SearchByFruta()">
+                    <option value="">TODOS</option>
+                    <option>PALTA</option>
+                    <option>LIMON</option>
+                    <option>NARANJA</option>
+                    <option>MANDARINA</option>
+                    </select> 
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+<div class="col-2 ml-2">   
+    <div class="ml-2">
+        <span class=""><b>BUSCAR DEUDA</b></span>
+    </div>
+
+    <div>
+        <select class="form-control ml-2 " [(ngModel)]="selectedAdeudado" (ngModelChange)="SearchByDebt()">
+            <option value="">TODOS</option>
+            <option value="1">PAGADO</option>
+            <option value="2">ADEUDA</option>
+            </select> 
+    </div>
+
+
+
+
+
+    <div class="ml-2">
+        <span class=""><b>BUSCAR POR TIPO DE PAGO</b></span>
+    </div>
+
+    <div>
+        <select class="form-control ml-2" [(ngModel)]="selectedTipoPago" (ngModelChange)="SearchByPago()">
+            <option value="">TODOS</option>
+            <option>CREDITO</option>
+            <option>EFECTIVO</option>
+            <option>CHEQUE</option>
+            <option>TRANSFERENCIA</option>
+            </select> 
+    </div>
+
+</div>
+
+<div  class="col- ml-2">
+    <div class="ml-2">
+        <span class=""><b>BUSCAR POR TIPO DE SERVICIO</b></span>
+    </div>
+
+    <div>
+        <select class="form-control ml-2" [(ngModel)]="selectedTipoServicio" (ngModelChange)="SearchByService()">
+            <option value="">TODOS</option>
+            <option>CALIBRADO</option>
+            <option>DESVERDIZADO</option>
+            <option>CALIBRADO Y DESVERDIZADO</option>
+            </select> 
+    </div>
+
+
+
+</div>
+
+        <div class="col-3 ml-2">
+
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <h4 class="ml-4">OPCIONES DE USUARIO</h4>
+            <button [routerLink] = "['/pago_servicios']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
+            <button [routerLink] ="['/pago_servicios']" class="btn btn-warning  position-relative material-icons ml-2" style="color:white" >refresh</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-11 ml-2">
+            <table class="table table-sm"  id="entrada">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" style="width: 2%;">Proceso</th>
+                    <th scope="col" class="pl-2" style="width: 2%;">Fruta</th>                                        
+                    <th scope="col" class="pl-4" style="width: 4%;">Tipo Pago</th>
+                    <th scope="col" style="width: 4%;">Cliente</th>
+                    <th scope="col" style="width: 4%;">Kilogramos</th>
+                    <th scope="col" style="width: 4%;">Precio Total</th>
+                    <th scope="col" style="width: 2%;">Bins</th>
+                    <th scope="col" style="width: 2%;">Servicio</th>
+                    <th scope="col" class="pl-4" style="width: 4%;">Fecha Creación</th>
+                    <th scope="col" class="" style="width: 2%">Total Pagado</th>
+                    <th scope="col" class="" style="width: 2%">Total Adeudado</th>
+                    <th scope="col" style="width: 0%; padding-left: 150px;">Opciones</th>                   
+                    <th scope="col" style="width: 0%;"></th>
+                    <th scope="col" style="width: 0%;"></th>
+   
+   
+                
+
+
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let row of calibrado'>                    
+                    <td class="pl-4 ">{{row.numero_proceso}}</td>
+                    <td>{{row.tipo_fruta}}</td>           
+                    <td class="pl-4">{{row.tipo_pago}}</td>
+                    <td>{{row.nombre}}</td>
+                    <td>{{row.total_kg | number: '1.0-0'}}</td>
+                    <td class="bg-primary text-white"><h2>${{row.total_precio | number: '1.0-0'}}</h2></td>
+                    <td>{{row.total_bines | number: '1.0-0'}}</td>
+                    <td>{{row.tipo_proceso}}</td>     
+                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                    <td class="bg-primary text-white"><h2>${{row.total_pago | number: '1.0-0'}}</h2></td>
+
+                    <td [ngClass]="{'bg-success text-white' : row.adeudado < 1,  'bg-danger text-white' : row.adeudado > 1, 'bg-warning text-dark': row.adeudado == null}"><h2>${{row.adeudado | number: '1.0-0'}}</h2></td>  
+
+                    <td>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = pagos_servicios.monto_pago> -->
+                    <form (submit)="insertPay2(row.numero_proceso, dato2, dato3)">
+                            <input type="hidden" value="{{row.numero_proceso}}">
+                            <input type="text" placeholder="MONTO" class="form-control input-sm"  #dato2 required>
+                            <input type="text" placeholder="DESCRIPCIÓN" class="form-control input-sm mt-2" #dato3 required>
+
+                        <button class="btn btn-primary mt-2 btn-block">
+                            ABONAR
+                        </button>
+                    </form>
+                    <!-- <input class="" size="8" type="text" [(ngModel)]="pagos_servicios.monto_pago"> -->
+                        <!-- <input class="" size="8" type="text" [(ngModel)]="pagos_servicios.numero_proceso"> -->
+                        <!-- <button type="button" class="btn btn-success ml-2"> INGRESAR PAGO </button> -->
+                        <!-- <a [routerLink] ="['./detalle',row.numero_proceso]" class="btn btn-primary btn-xs ml-2">DETALLE</a> -->
+                    </td>
+
+                    <td>
+                        <form (submit)="insertTotalPay(row.numero_proceso, row.adeudado)">
+                                <input type="hidden" value="{{row.numero_proceso}}">
+                                <button class="btn btn-success">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    TOTAL
+                                    <br>
+                                </button>
+                        </form>
+                    </td>
+
+
+                    
+                   <td>
+
+
+                    <button class="btn btn-primary btn-sm" [routerLink] ="['/busqueda/detalle/', row.numero_proceso]">
+                        DETALLE 
+                        <br>
+                        SERVICIO
+                        <br>
+                    </button>
+
+
+                    <button class="btn btn-primary btn-sm mt-4" (click)="getPayDetail(row.numero_proceso)" data-toggle="modal" data-target="#exampleModal">
+                        DETALLE
+                        <br>
+                        PAGOS 
+                        <br>
+                    </button>
+
+
+                   </td>
+                  </tr>                  
+                </tbody>
+              </table>
+              <input type="text" value="0" id="borrado" style="display: none;">             
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false" >
+    <div class="modal-dialog modal-lg"   role="document">
+      <div class="modal-content modal-lg" >
+        <div class="modal-header modal-lg" >
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-lg">
+
+
+
+
+
+
+
+
+
+
+
+            <table class="table" id="entrada">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" style="width: 2%;">Proceso</th>
+                    <th scope="col" class="pl-2" style="width: 2%;">Fecha</th>                                        
+                    <th scope="col" class="pl-4" style="width: 4%;">Monto</th>
+                    <th scope="col" class="pl-4" style="width: 4%;">Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let row2 of payDetail'>                    
+                    <td class="pl-4 ">{{row2.numero_proceso}}</td>
+                    <td>{{row2.fecha_registro | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>           
+                    <td class="pl-4">{{row2.monto_pago}}</td>
+                    <td class="pl-4">{{row2.description}}</td>
+                  </tr>                  
+                </tbody>
+            </table>
+        </div>
+        <div class="modal-footer modal-lg" >
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+
+
+
+  
+
+

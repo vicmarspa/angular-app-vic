@@ -1,0 +1,15 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row justify-content-center">
+        <h2>INGRESE UN NUEVO CALIBRE</h2>
+    </div>
+    <div class="row d-flex justify-content-center">        
+        <div class="sm col-3 p-2 mt-3">
+            <span class=" d-block ml-2" style="padding-left: 50px;">TIPO CALIBRE</span>            
+            <input class="ml-2" type="text" [(ngModel)]= calibre.calibre >   
+            <button  type="button" class="btn btn-primary ml-2" (click)= "guardarCalibre();" >Ingresar</button> 
+            <button [routerLink] = "['/busqueda-calibre']" class="btn btn-danger ml-2 mr-2">VOLVER</button>        
+            
+        </div>
+        
+        

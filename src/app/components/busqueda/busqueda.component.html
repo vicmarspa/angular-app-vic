@@ -1,0 +1,263 @@
+<div class="container-fluid col-12">
+    <div class="row mt-4 mb-4 d-flex justify-content-center">
+        
+
+        <div class="col-2">
+            <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
+        </div>
+
+        <div class="col-2">
+            <h4 class="d-inline" style="color: #000000;">Kilogramos Total: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramos">{{sumaKilogramosCalibrados() | number : '000.000'}}</h4>
+        </div>
+            
+                     
+        <div class="col-2">
+            <h4 class="d-inline" style="color: #000000;">Precio Total: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_precio" >${{sumaPreciosCalibrados() | number : '000.000'}}</h4>
+        </div>
+            
+        <div class="col-2">
+            <h4 class="d-inline" style="color: #000000;">Bins Total: </h4>
+            <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_bines">{{sumaBinesCalibrados() | number : '000.000'}}</h4>  
+        </div>
+
+        
+                      
+             
+
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+
+
+        <div class="col-2" style="font-size:smaller"> 
+            <div class="" style="font-size:smaller">
+                <span class=""><b>PROCESO</b></span>
+            </div>
+            <div class="" style="font-size:smaller">
+                <input   type="text" size="35" name="numero_proceso" style="border: 1px solid #000000;" [(ngModel)] = numero_proceso (ngModelChange) = "Search();">
+            </div>
+            <div class="" style="font-size:smaller">
+                <span class=""><b>CLIENTE</b></span>
+            </div>
+            <div class="">
+                <input type="text" size="30" name="selectedNombre" style="border: 1px solid #000000;" [(ngModel)] = selectedNombre (ngModelChange) = "SearchByClient();">
+            </div>
+        </div>
+
+
+
+        <div class="col-2" style="font-size:smaller">
+            <div style="font-size:smaller">
+                <span class=""><b>RANGO DE FECHAS</b></span>
+            </div>
+            <div  id="holi">
+                <input type="text" style="border: 1px solid #000000; height: 24px;" name="daterange" autocomplete="off" bsDaterangepicker 
+                [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
+                id="DateOfBirth" placeholder="Rango de Fechas" (bsValueChange)="dateRangeCreated($event)" class="form-control" />
+            </div> 
+            <div class="" style="font-size:smaller">
+                <span class=""><b>TIPO DE FRUTA</b></span>
+            </div>
+            <div>
+                <select class="form-control " style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoFruta" (ngModelChange)="SearchByFruta()">
+                    <option value="">TODOS</option>
+                    <option>PALTA</option>
+                    <option>LIMON</option>
+                    <option>NARANJA</option>
+                    <option>MANDARINA</option>
+                    </select> 
+            </div>
+        </div>
+
+        <div class="col-2" style="font-size:smaller">
+            <div class="" style="font-size:smaller">
+                <span class=""><b>TIPO DE PAGO</b></span>
+            </div>
+   
+            <div>
+                <select class="form-control" style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoPago" (ngModelChange)="SearchByPago()">
+                    <option value="">TODOS</option>
+                    <option>CREDITO</option>
+                    <option>EFECTIVO</option>
+                    <option>CHEQUE</option>
+                    <option>TRANSFERENCIA</option>
+                    </select> 
+            </div>
+
+
+
+            <div class="" style="font-size:smaller">
+                <span class=""><b>TIPO DE SERVICIO</b></span>
+            </div>
+   
+            <div>
+                <select class="form-control" style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoServicio" (ngModelChange)="SearchByService()">
+                    <option value="">TODOS</option>
+                    <option>CALIBRADO</option>
+                    <option>DESVERDIZADO</option>
+                    <option>CALIBRADO Y DESVERDIZADO</option>
+                    <option>PESAJE Y GRUA</option>
+                    <option>SERVICIO DE CAMARA</option>
+                    </select> 
+            </div>
+        </div>
+
+
+        <div class="col-5">
+
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <button [routerLink] ="['/ingreso']" type="button" class="btn btn-primary ml-4 material-icons">
+                add_circle_outline
+                </button>
+                  <h4 class="d-inline pl-2"><b>Nuevo Servicio</b> </h4>
+            <button [routerLink] = "['/busqueda']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
+            <button class="btn btn-warning  position-relative material-icons ml-2" style="color:white" (click)="refreshPageDirect()">refresh</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped table-sm" id="entrada">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col">Proceso</th>
+                    <th scope="col">Fruta</th>                                        
+                    <th scope="col">Precio/Kg</th>
+                    <th scope="col">Tipo Pago</th>
+                    <th scope="col">Fecha Creación</th>
+                    <th scope="col" >Cliente</th>
+                    <th scope="col" >Kilogramos</th>
+                    <th scope="col" >Precio Total</th>
+                    <th scope="col" >Bins</th>
+                    <th scope="col" >Servicio</th>
+                    <th scope="col" >Opciones</th>                   
+
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let row of calibrado'>    
+                      
+
+                    <td><b>{{row.numero_proceso}}</b></td>
+                    <td>{{row.tipo_fruta}}</td>                                                   
+                    <td>{{row.valor_servicio}}</td>
+                    <td>{{row.tipo_pago}}</td>
+
+                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                    
+
+                    
+                    <td>{{row.nombre}}</td>
+                    <td>{{row.total_kg | number}}</td>
+                    <td>${{row.total_precio | number}}</td>
+                    <td>{{row.total_bines | number}}</td>
+                    <td>{{row.tipo_proceso}}</td>                   
+                   
+
+
+
+
+
+                    
+
+                    <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog modal-lg"   role="document">
+                          <div class="modal-content" >
+                            <div class="modal-header" >
+                              <h2 class="modal-title" id="exampleModalLabel">OPCIONES DE PROCESO N°{{selectNumeroProceso}}</h2>
+                            </div>
+                            <div class="modal-body modal-lg">
+                                <table class="table" id="entrada">
+                                    <thead class="thead-dark">
+                                        <b>Nombre del Cliente: {{selectNombre}}</b>   
+                                        <br>
+                                        <b>Fecha de Creación: {{selectFechaIngreso| date: 'dd-MM-yyyy / HH:mm:ss '}}</b> 
+                                        <br>
+                                        <b>Tipo de Servicio: {{selectTipoProceso}}</b> 
+                                        <br>
+                                        <b>Tipo de Fruta: {{selectTipoFruta}}</b> 
+                                        <br>
+                                        <b>Cantidad de Bins: {{selectTotalBines | number}}</b> 
+                                        <br>
+                                        <b>Kilogramos: {{selectTotalKg | number}}</b> 
+                                        <br>
+                                        <b>Precio Total: ${{selectTotalPrecio | number}}</b>
+                                    </thead>
+                                    <tbody>
+                                        <br>
+                                        <a [routerLink] ="['/continuar',selectNumeroProceso]" class="btn btn-primary" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> CONTINUAR</a>
+                                        <a [routerLink] ="['./editar',selectNumeroProceso]" class="btn btn-primary ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> MODIFICAR</a>
+                                        <a [routerLink] ="['./detalle',selectNumeroProceso]" class="btn btn-primary  ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> DETALLE</a>
+                                        <button class="btn btn-danger ml-2 material-icons" (click) = "BorrarCalibradoPapelera(row.numero_proceso);" style="height: 120px; width: 120px;" data-dismiss="modal">
+                                            delete 
+                                    </button>
+                                         
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer modal-lg" >
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">CERRAR</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+                    <td>                
+                        <button (click)="menuOpciones(row.numero_proceso, row.nombre, row.fecha_ingreso, row.tipo_proceso, row.tipo_fruta, row.total_bines, row.total_kg, row.total_precio)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                            OPCIONES
+                        </button>
+                    </td>
+                   
+                  </tr>                  
+                </tbody>
+              </table>
+              <input type="text" value="0" id="borrado" style="display: none;">             
+        </div>
+    </div>
+
+
+    <div>  
+        <div class="ml-5">
+            <h5 class="d-inline position-relative" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="selectedTipoServicio">{{selectedTipoServicio}}</h5>
+        </div>
+    </div>
+
+
+
+</div>
+
+

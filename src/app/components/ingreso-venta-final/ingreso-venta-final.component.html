@@ -1,0 +1,182 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row">        
+
+
+        <div class="sm col-6 p-4">
+            <h1 class="d-inline">NUMERO DE VENTA : </h1>
+            <h1 class="d-inline pl-1" >{{unaVenta.idventa}}</h1>
+            <br>
+            <h5 class="mt-4 d-inline">FECHA INGRESO : {{unaVenta.venta_creacion | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5> 
+            <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;"> 
+            <br>
+            <h5 class="mt-2">CLIENTE: {{unaVenta.nombre}}</h5> 
+            <h5>CORREO: {{unaVenta.correo}}</h5>                       
+            <h5>TELEFONO: {{unaVenta.telefono}}</h5> 
+            <h5>DIRECCION: {{unaVenta.direccion}}</h5>   
+
+        </div> 
+        <h5 class="mt-4 d-inline">TOTAL VENTA : ${{ProductosSum()}} </h5>       
+    
+    </div>
+</div> 
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="sm col-2">
+            <div>
+                <span class=" d-block" style="padding-left: 95px;">LOTE</span>
+            </div>
+            <div class="ml-4">
+                <select style="margin-left: 5%;" (change)="onSelectCompra($any($event.target).value)" [(ngModel)]="compraSelected"> 
+                    <option value="0">--Selecciona Lote--</option>                   
+                    <option *ngFor="let c of compras" id="compra" value={{c.idcompra}}>
+                        {{c.idcompra}}
+                    </option>  
+                                  
+                </select>  
+                                            
+            </div>                     
+            
+        </div>
+        <div class="ml-4 col-3">
+            <div>
+                <span class=" d-block" style="padding-left: 75px;">N°PRODUCTO</span>
+            </div>
+            <select style="margin-left: 5%;" (change)="onSelectProducto($any($event.target).value)"  [(ngModel)]="productoSelected">
+                <option value="0">--Selecciona Producto--</option>
+                <option *ngFor="let p of products" id="compra" [value]="p.idproducto">
+                    {{p.idproducto}}
+                </option>                             
+            </select>   
+                         
+        </div>
+        <div class="sm col-2">
+            <div>
+                <span class=" d-block" style="padding-left: 50px;">PRECIO</span>
+            </div>
+            <div >
+                <input type="text" id="cantidad" [(ngModel)]=prodxventa.precio_prodxventa >               
+                
+            </div>           
+            
+        </div>         
+        <div class="sm col-2">
+            <div>
+                <span class=" d-block" style="padding-left: 50px;">CANTIDAD</span>
+            </div>
+            <div >
+                <input type="text" id="cantidad" [(ngModel)]=prodxventa.cantidad_producto >
+                <input type="text" style="display: none;" [(ngModel)]=restarcantidad >
+                <input type="text" id="resta" style="display: none;" [(ngModel)]="restarcantidad - prodxventa.cantidad_producto" >
+                
+            </div>           
+            
+        </div>        
+        <div class="sm col-2 ">            
+            <div>           
+                <button type="button" class="btn btn-primary mt-3" (click)=guardarProductoxVenta()>Ingresar</button>                
+            </div>
+               
+        </div>
+
+
+        
+        
+    </div>
+</div>
+   
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-5 p-4 mt-2 table-responsive ">
+                       
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>  
+                    <th scope="col">N°PRODUCTO</th>                                  
+                    <th scope="col">PRODUCTO</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">CANTIDAD</th> 
+                    <th scope="col">TOTAL</th>                                        
+                    <th scope="col">Cancelar?</th> 
+
+                </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor="let pv of prodxventa1">
+                    <td>{{pv.idproducto}}</td>
+                    <td>{{pv.tipo_fruta}}</td>
+                    <td>${{pv.precio_prodxventa}}</td>
+                    <td>{{pv.cantidad_producto}} KGs</td>
+                    <td>${{pv.valortotal_prodxventa}} </td>
+                                        
+                    
+                    
+                    <td><button class="btn btn-danger ml-2 material-icons" (click)=CancelarVenta(unaVenta.idventa,pv.idproductosxventa,pv.idproducto)>
+                        delete 
+                        </button></td>
+                </tr>        
+                
+                
+                </tbody> 
+                                     
+                </table>         
+                
+        </div>            
+
+        <div class="col-7 p-4 mt-2 table-responsive">
+            <table class="table" style="width: 45%;">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" >Lote</th>
+                    <th scope="col" >N°Producto</th>
+                    <th scope="col" class="pl-2" >Producto</th>                                    
+                    <th scope="col"  >Cantidad</th>  
+                    <th scope="col" class="pl-2" >Bines</th>  
+                                     
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of products">                    
+                    <td class="pl-3">{{p.idcompra}}</td>
+                    <td class="pl-5">{{p.idproducto}}</td>
+                    <td class="pl-4">{{p.tipo_fruta}}</td>                                                   
+                    <td class="pl-4">{{p.cantidad}}</td>                                                           
+                    <td class="pl-4">{{p.lote_bines}}</td> 
+                                        
+                                      
+                  </tr>                  
+                </tbody>
+              </table>
+              <input type="text" value="0" id="borrado" style="display: none;"> 
+        </div>  
+    </div>
+</div>
+
+
+                         
+        
+
+    <div class="container-fluid col-12">
+        <div class="row">
+            <div class="col-3 mt-5">
+                <button [routerLink]="['/busqueda-ventas']" class="btn btn-primary mr-4" (click)=BorrarProdRestantes(prodxventa1.idventa) >GUARDAR</button>
+                
+            </div>
+        </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.0.min.js"
+      integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
+      crossorigin="anonymous">
+    </script>
+    <script>
+    //Esta es la función que una vez se cargue el documento será gatillada.
+    $(function(){
+        $("#calibre").val('0')
+    });
+</script>
+
+    
+

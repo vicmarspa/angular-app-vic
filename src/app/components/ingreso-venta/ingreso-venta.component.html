@@ -1,0 +1,27 @@
+<div class="container-fluid col-12">
+    <div class="row justify-content-center">
+        <h2>SELECCIONE CLIENTE PARA REALIZAR LA VENTA</h2>
+    </div>
+    <div class="row d-flex justify-content-center">        
+        <div class="sm col-2 p-2 mt-3 ">
+            <span class=" d-block ml-2" style="padding-left: 25px;">NOMBRE CLIENTE</span>            
+            <select class="ml-4" style="margin-left: 5%;" [(ngModel)]="clienteSelected">
+                <option *ngFor="let c of cliente" id="cliente" [value]="c.id_cliente">
+                    {{c.nombre}}
+                </option>                
+            </select>                                     
+        </div>
+    </div> 
+    <div class="sm row p-1 mt-3 d-flex justify-content-center">
+        <div>
+            <button type="button" class="btn btn-primary ml-2 mr-2" (click)="guardarVenta()" > Ingresar</button>                
+        </div>      
+        <div>
+            <button type="button" class="btn btn-primary ml-2 mr-2" [routerLink] = "['/ingreso-venta',ventaUltima.idventa,'final']" >Continuar Venta</button>
+        </div>   
+        <div>
+            <button  class="btn btn-danger ml-2 mr-2" [routerLink] = "['/busqueda-ventas']">VOLVER</button>
+        </div>   
+    </div>   
+</div>
+

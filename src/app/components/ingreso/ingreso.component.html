@@ -1,0 +1,88 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row justify-content-center">
+        <h1>INGRESAR DATOS PARA SERVICIO</h1>
+    </div>
+    <div class="row d-flex justify-content-center">        
+        <div class="sm col-2 p-2 mt-3 ">
+            <span class=" d-block ml-2" style="padding-left: 25px;">NOMBRE CLIENTE</span>            
+            <select style="margin-left: 5%;" [(ngModel)]="clienteSelected">
+                
+                <option *ngFor="let cliente of clientes" id="fruta" [value]="cliente.id_cliente">
+                    {{cliente.nombre}}
+                </option>                
+            </select>                        
+            <br>      
+            
+            <label class="ml-2" style="padding-left: 32px;">TIPO DE FRUTA</label>    
+            <br>  
+            <select style="margin-left: 5%;" [(ngModel)]="frutaSelected">
+                
+                <option *ngFor="let fruta of tipo_fruta" id="fruta" [value]="fruta.idtipo_fruta">
+                    {{fruta.tipo_fruta}}
+                </option>                
+            </select>     
+        </div>
+        
+        <div class="sm col-2 p-2 mt-3">            
+            <span class=" d-block" style="padding-left: 15px;">VALOR DE SERVICIO</span>
+
+            <input type="text" [(ngModel)] = calibrado.valor_servicio>          
+            
+
+          
+            <span class=" d-block" style="padding-left: 15px;">TIPO DE SERVICIO</span>
+
+                <select [(ngModel)]="calibrado.tipo_proceso">
+                    <option>CALIBRADO</option>
+                    <option>DESVERDIZADO</option>
+                    <option>CALIBRADO Y DESVERDIZADO</option>
+                    <option>PESAJE Y GRUA</option>
+                    <option>SERVICIO DE CAMARA</option>
+                  </select> 
+
+
+
+
+
+
+
+        </div>
+        <div class="sm col-2 p-2 mt-2  ">
+            <span class=" d-block mt-2" style="padding-left: 25px;">TIPO DE PAGO</span>
+            
+            <select style="margin-right: 35%;" [(ngModel)]="pagoSelected">
+                
+                <option *ngFor="let pago of tipo_pago" id="pago" [value]="pago.idtipo_pago">
+                    {{pago.tipo_pago}}
+                </option>                
+             </select>
+        </div>
+
+
+      
+     
+            
+
+    </div>
+
+    <div class="sm row p-2 mt-3 d-flex justify-content-center">
+        <div>
+            <button type="button" class="btn btn-primary ml-2 mr-2" (click)="guardarCalibrado();"> Ingresar</button>                
+        </div>      
+        <div>
+            <button type="button" class="btn btn-primary ml-2 mr-2" [routerLink] = "['/ingreso',calibradoUno.numero_proceso,'final']">Continuar Proceso</button>
+        </div>   
+        <div>
+            <button [routerLink] = "['/busqueda']" class="btn btn-danger ml-2 mr-2">VOLVER</button>
+        </div>   
+    </div>
+</div> 
+
+
+       
+        
+
+    
+
+    

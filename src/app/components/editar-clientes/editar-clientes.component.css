@@ -1,0 +1,22 @@
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+input[type=text] {   
+    
+    border-radius: 0.3em;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+input[type=email]:focus {
+    border: 3px solid #555;
+}
+input[type=email] {   
+    
+    border-radius: 0.3em;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}

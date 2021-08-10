@@ -1,0 +1,50 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row justify-content-center">
+        <h2>MODIFICA UN CLIENTE</h2>
+    </div>       
+            <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+            <span class=" d-block ml-2">NOMBRE CLIENTE</span>            
+            <input class="ml-2" type="text" [(ngModel)]="cliente1.nombre" >
+            </div>
+            </div>
+            <br>
+
+            <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+            <label class="d-block ml-2" style="padding-left: 64px;">CORREO</label>            
+            <input class="ml-2" type="email" [(ngModel)]="cliente1.correo" >
+            </div>
+            </div>
+            <br>
+
+            <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+            <span class="d-block ml-2" style="padding-left: 58px;">NUMERO</span>
+            <input class="ml-2" type="text" [(ngModel)]="cliente1.telefono">
+            </div>   
+            </div>
+            <br>
+
+
+            <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+            <span class=" d-block mt-2" style="padding-left: 50px;">DIRECCIÓN</span>
+            <input class="ml-2" type="text" [(ngModel)]="cliente1.direccion" >
+            </div>
+            </div>
+            <br>
+
+
+
+    <div class="sm row p-2 mt-3 d-flex justify-content-center">
+        <div>
+        <button type="button" class="btn btn-primary ml-2 mr-2" (click)="updateCliente()"> Ingresar</button>
+        <button [routerLink] = "['/busqueda-clientes']" class="btn btn-danger ml-2 mr-2">VOLVER</button>                
+    </div>       
+    </div>
+</div> 
+
+
+       
