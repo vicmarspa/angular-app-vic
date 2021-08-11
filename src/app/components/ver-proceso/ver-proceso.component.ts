@@ -1,10 +1,11 @@
 import { Component, OnInit,HostBinding } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { CalibradoService } from 'src/app/services/calibrado.service';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable'
+// import * as jsPDF from 'jspdf';
+// import 'jspdf-autotable'
 
-
+import {jsPDF } from 'jspdf';
+import { autoTable, RowInput } from 'jspdf-autotable';
 
 
 import {Calibrado} from '../../models/calibrado';
@@ -250,11 +251,9 @@ refreshPageDirect()
     var fechasalida = document.getElementById("fechasalida");
     var fechasalidahtml = fechasalida?.innerHTML;
 
-    var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
-    doc.setPage(startingPage);
 
-    doc.text(128, 8, 'Dirección: José Joaquín Godoy 100');
-    doc.text(145, 12, 'Artificio, La Calera ');
+    doc.text('Dirección: José Joaquín Godoy 100', 128, 8);
+    doc.text('Artificio, La Calera ', 145, 12, );
 
 
     var img = new Image()
@@ -262,42 +261,42 @@ refreshPageDirect()
     doc.addImage(img, 'jpg', 185, 0, 18, 18)
 
 
-    doc.text(10, 20, 'Numero de Proceso: ');
+    doc.text('Numero de Proceso: ', 10, 20);
     doc.text(procesohtml,48, 20);
 
 
-    doc.text(100, 20, 'Correlativo del Cliente: ');
+    doc.text('Correlativo del Cliente: ', 100, 20);
     doc.text(correlativoProcesohtml,138, 20);
 
 
-    doc.text(10, 25, 'Fecha de Recepción: ');
+    doc.text('Fecha de Recepción: ', 10, 25);
     doc.text(fechahtml,48, 25);
-    doc.text(93,25, '-');
-    doc.text(100,25, 'Fecha de Salida:');
+    doc.text('-', 93,25);
+    doc.text('Fecha de Salida:', 100,25);
     doc.text(fechasalidahtml,130, 25);
-    doc.text(10, 30, 'Cliente: ');
+    doc.text('Cliente: ', 10, 30);
     doc.text(clientehtml,28, 30);
-    doc.text(10, 40, 'Kilogramos Ingresados: ');
+    doc.text('Kilogramos Ingresados: ', 10, 40);
     doc.text(totalingresohtml,50,40);
-    doc.text(10, 45, 'Bins Ingresados: ');
+    doc.text('Bins Ingresados: ', 10, 45);
     doc.text(binshtml,40,45);
-    doc.text(10, 50, 'Tipo de Fruta: ');
+    doc.text('Tipo de Fruta: ', 10, 50);
     doc.text(frutahtml,35, 50);
-    doc.text(100, 40, 'Valor del Servicio: ');
+    doc.text('Valor del Servicio: ', 100, 40);
     doc.text(valorhtml,130, 40);
-    doc.text(100, 50, 'Valor Total: ');
+    doc.text('Valor Total: ', 100, 50);
     doc.text(valortotalhtml,120,50);
-    doc.text(100, 45, 'Bins Salida: ');
+    doc.text('Bins Salida: ', 100, 45);
     doc.text(binsSalidahtml,120,45);
-    doc.text(10, 55, 'Merma: ');
+    doc.text('Merma: ', 10, 55);
     doc.text(mermahtml,25,55);
-    doc.text(100, 55, 'Tipo de Pago: ');
+    doc.text('Tipo de Pago: ', 100, 55);
     doc.text(pagohtml,125, 55);
     
     doc.line(5, 33, 204, 33);
     doc.line(5, 60, 204, 60);
 
-    doc.text(5,68,'Proceso de Entrada');
+    doc.text('Proceso de Entrada' ,5,68);
  
 
 
@@ -306,7 +305,7 @@ refreshPageDirect()
 
 
 
-    doc.autoTable({ html: '#entrada',columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
 
       0: {cellWidth: 22},
       1: {cellWidth: 25},
@@ -321,9 +320,9 @@ refreshPageDirect()
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
 
-      doc.text(78,68,'Proceso de Salida');
+      doc.text('Proceso de Salida', 78, 68);
 
-    doc.autoTable({ html: '#salida',startY:70,columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#salida',startY:70,columnStyles: {
   
 
       0: {cellWidth: 22},
@@ -383,11 +382,9 @@ refreshPageDirect()
     var fechasalida = document.getElementById("fechasalida");
     var fechasalidahtml = fechasalida?.innerHTML;
 
-    var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
-    doc.setPage(startingPage);
 
-    doc.text(128, 8, 'Dirección: José Joaquín Godoy 100');
-    doc.text(145, 12, 'Artificio, La Calera ');
+    doc.text('Dirección: José Joaquín Godoy 100', 128, 8);
+    doc.text('Artificio, La Calera ', 145, 12);
 
 
     var img = new Image()
@@ -397,30 +394,30 @@ refreshPageDirect()
 
 
 
-    doc.text(10, 20, 'Numero de Proceso: ');
+    doc.text('Numero de Proceso: ', 10, 20);
     doc.text(correlativoProcesohtml,48, 20);
 
 
-    doc.text(10, 25, 'Fecha de Recepción: ');
+    doc.text('Fecha de Recepción: ', 10, 25);
     doc.text(fechahtml,48, 25);
-    doc.text(93,25, '-');
-    doc.text(100,25, 'Fecha de Salida:');
+    doc.text('-', 93,25);
+    doc.text('Fecha de Salida:', 100,25);
     doc.text(fechasalidahtml,130, 25);
-    doc.text(10, 30, 'Cliente: ');
+    doc.text('Cliente: ', 10, 30);
     doc.text(clientehtml,28, 30);
-    doc.text(10, 40, 'Kilogramos Ingresados: ');
+    doc.text('Kilogramos Ingresados: ', 10, 40);
     doc.text(totalingresohtml,50,40);
-    doc.text(10, 45, 'Bins Ingresados: ');
+    doc.text('Bins Ingresados: ', 10, 45);
     doc.text(binshtml,40,45);
-    doc.text(10, 50, 'Tipo de Fruta: ');
+    doc.text('Tipo de Fruta: ', 10, 50);
     doc.text(frutahtml,35, 50);
-    doc.text(100, 40, 'Valor del Servicio: ');
+    doc.text('Valor del Servicio: ', 100, 40);
     doc.text(valorhtml,130, 40);
-    doc.text(100, 45, 'Bins Salida: ');
+    doc.text('Bins Salida: ', 100, 45);
     doc.text(binsSalidahtml,120,45);
-    doc.text(100, 50, 'Valor Total: ');
+    doc.text('Valor Total: ', 100, 50);
     doc.text(valortotalhtml,120,50);
-    doc.text(10, 55, 'Merma: ');
+    doc.text('Merma: ', 10, 55);
     doc.text(mermahtml,25,55);
     /*
     doc.text(100, 50, 'Tipo de Pago: ');
@@ -429,7 +426,7 @@ refreshPageDirect()
     doc.line(5, 33, 204, 33);
     doc.line(5, 60, 204, 60);
 
-    doc.text(5,68,'´Proceso de Entrada');
+    doc.text('Proceso de Entrada' ,5,68);
 
 
  
@@ -437,7 +434,7 @@ refreshPageDirect()
 
     
 
-    doc.autoTable({ html: '#entrada',columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
       0: {cellWidth: 22},
       1: {cellWidth: 25},
       2: {cellWidth: 22},
@@ -450,9 +447,9 @@ refreshPageDirect()
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
 
-    doc.text(78,68,'Proceso de Salida');
+    doc.text('Proceso de Salida', 78,68);
 
-    doc.autoTable({ html: '#salida',startY:70,columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#salida',startY:70,columnStyles: {
       0: {cellWidth: 22},
       1: {cellWidth: 25},
       2: {cellWidth: 25},

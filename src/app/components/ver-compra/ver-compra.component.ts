@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { CalibradoService } from 'src/app/services/calibrado.service';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable'
+// import * as jsPDF from 'jspdf';
+// import 'jspdf-autotable'
+
+
+import {jsPDF } from 'jspdf';
+import { autoTable, RowInput } from 'jspdf-autotable';
+
+
+
 
 @Component({
   selector: 'app-ver-compra',
@@ -70,28 +77,27 @@ export class VerCompraComponent implements OnInit {
     var pago = document.getElementById("pago");
     var pagohtml = pago?.innerHTML;
 
-    var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
-    doc.setPage(startingPage);
 
-    doc.text(10, 10, 'NUMERO COMPRA: ');
+
+    doc.text('NUMERO COMPRA: ', 10, 10);
     doc.text(comprahtml,65, 10);
-    doc.text(10, 20, 'FECHA: ');
+    doc.text('FECHA: ', 10, 20);
     doc.text(fechahtml,33, 20);
-    doc.text(10, 30, 'CLIENTE: ');
+    doc.text('CLIENTE: ', 10, 30);
     doc.text(clientehtml,38, 30);
-    doc.text(10, 40, 'MONTO NETO: ');
+    doc.text('MONTO NETO: ', 10, 40);
     doc.text(totalingresohtml,52,40);
-    doc.text(10, 50, 'IVA?: ');
+    doc.text('IVA?: ', 10, 50);
     doc.text(ivahtml,25,50);
-    doc.text(10, 60, 'IMPUESTO ADICIONAL: ');
+    doc.text('IMPUESTO ADICIONAL: ', 10, 60);
     doc.text(frutahtml,75, 60);
-    doc.text(90, 40, 'CORREO: ');
+    doc.text('CORREO: ', 90, 40);
     doc.text(valorhtml,117, 40);
-    doc.text(90, 50, 'DIRECCION: ');
+    doc.text('DIRECCION: ', 90, 50);
     doc.text(valortotalhtml,125,50);
-    doc.text(10, 70, 'TOTAL: ');
+    doc.text('TOTAL: ', 10, 70);
     doc.text(mermahtml,34,70);
-    doc.text(90, 60, 'TELEFONO: ');
+    doc.text('TELEFONO: ', 90, 60);
     doc.text(pagohtml,123, 60);
 
     doc.line(5, 33, 204, 33);
@@ -102,7 +108,7 @@ export class VerCompraComponent implements OnInit {
     
     
 
-    doc.autoTable({ html: '#entrada',columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
       0: {cellWidth: 26},
       1: {cellWidth: 22},
       2: {cellWidth: 22},

@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { CalibradoService } from 'src/app/services/calibrado.service';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable'
+// import * as jsPDF from 'jspdf';
+// import 'jspdf-autotable'
+
+
+
+
+
+import {jsPDF } from 'jspdf';
+import { autoTable, RowInput } from 'jspdf-autotable';
 
 @Component({
   selector: 'app-ver-venta',
@@ -65,29 +72,28 @@ export class VerVentaComponent implements OnInit {
     var pago = document.getElementById("pago");
     var pagohtml = pago?.innerHTML;
 
-    var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
-    doc.setPage(startingPage);
 
-    doc.text(10, 10, 'NUMERO VENTA: ');
+
+    doc.text('NUMERO VENTA: ', 10, 10);
     doc.text(ventahtml,58, 10);
-    doc.text(10, 20, 'FECHA: ');
+    doc.text('FECHA: ', 10, 20);
     doc.text(fechahtml,33, 20);
-    doc.text(10, 30, 'CLIENTE: ');
+    doc.text('CLIENTE: ', 10, 30);
     doc.text(clientehtml,38, 30);
-    doc.text(10, 40, 'TOTAL: ');
+    doc.text('TOTAL: ', 10, 40);
     doc.text(totalingresohtml,31,40);    
-    doc.text(90, 40, 'CORREO: ');
+    doc.text('CORREO: ', 90, 40);
     doc.text(valorhtml,117, 40);
-    doc.text(90, 50, 'DIRECCION: ');
+    doc.text('DIRECCION: ', 90, 50);
     doc.text(valortotalhtml,125,50);   
-    doc.text(90, 60, 'TELEFONO: ');
+    doc.text('TELEFONO: ', 90, 60);
     doc.text(pagohtml,123, 60);
 
     doc.line(5, 33, 204, 33);
     doc.line(5, 75, 204, 75);    
     
 
-    doc.autoTable({ html: '#entrada',columnStyles: {
+    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
       0: {cellWidth: 28},
       1: {cellWidth: 25},
       2: {cellWidth: 22},
