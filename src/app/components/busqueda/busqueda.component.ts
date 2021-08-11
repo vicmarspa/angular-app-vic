@@ -3,11 +3,11 @@ import Swal from 'sweetalert2';
 import { CalibradoService } from 'src/app/services/calibrado.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
-// import * as jsPDF from 'jspdf';
-// import 'jspdf-autotable'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable'
 
-import {jsPDF } from 'jspdf';
-import { autoTable, RowInput } from 'jspdf-autotable';
+// import {jsPDF } from 'jspdf';
+// import { autoTable, RowInput } from 'jspdf-autotable';
 
 
 
@@ -439,7 +439,7 @@ reportePDF(){
 
 
 
-  (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
+  doc.autoTable({ html: '#entrada',columnStyles: {
 
     
     0: {cellWidth: 15},
