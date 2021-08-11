@@ -112,3 +112,4 @@ export class VerVentaComponent implements OnInit {
 
 
 }
+

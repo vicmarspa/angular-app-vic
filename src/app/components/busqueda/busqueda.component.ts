@@ -16,7 +16,6 @@ import { Calibrado } from '../../models/calibrado';
 import { splitClasses } from '@angular/compiler';
 
 
-
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
