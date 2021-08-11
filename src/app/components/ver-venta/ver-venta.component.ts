@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { CalibradoService } from 'src/app/services/calibrado.service';
-// import * as jsPDF from 'jspdf';
-// import 'jspdf-autotable'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable'
 
 
 
 
 
-import {jsPDF } from 'jspdf';
-import { autoTable, RowInput } from 'jspdf-autotable';
+// import {jsPDF } from 'jspdf';
+// import { autoTable, RowInput } from 'jspdf-autotable';
 
 @Component({
   selector: 'app-ver-venta',
@@ -93,7 +93,7 @@ export class VerVentaComponent implements OnInit {
     doc.line(5, 75, 204, 75);    
     
 
-    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
+    doc.autoTable({ html: '#entrada',columnStyles: {
       0: {cellWidth: 28},
       1: {cellWidth: 25},
       2: {cellWidth: 22},

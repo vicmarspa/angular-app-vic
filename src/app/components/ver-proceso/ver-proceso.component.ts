@@ -1,11 +1,11 @@
 import { Component, OnInit,HostBinding } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
 import { CalibradoService } from 'src/app/services/calibrado.service';
-// import * as jsPDF from 'jspdf';
-// import 'jspdf-autotable'
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable'
 
-import {jsPDF } from 'jspdf';
-import { autoTable, RowInput } from 'jspdf-autotable';
+// import {jsPDF } from 'jspdf';
+// import { autoTable, RowInput } from 'jspdf-autotable';
 
 
 import {Calibrado} from '../../models/calibrado';
@@ -305,7 +305,7 @@ refreshPageDirect()
 
 
 
-    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
+    doc.autoTable({ html: '#entrada',columnStyles: {
 
       0: {cellWidth: 22},
       1: {cellWidth: 25},
@@ -322,7 +322,7 @@ refreshPageDirect()
 
       doc.text('Proceso de Salida', 78, 68);
 
-    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#salida',startY:70,columnStyles: {
+    doc.autoTable({ html: '#salida',startY:70,columnStyles: {
   
 
       0: {cellWidth: 22},
@@ -434,7 +434,7 @@ refreshPageDirect()
 
     
 
-    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
+    doc.autoTable({ html: '#entrada',columnStyles: {
       0: {cellWidth: 22},
       1: {cellWidth: 25},
       2: {cellWidth: 22},
@@ -449,7 +449,7 @@ refreshPageDirect()
 
     doc.text('Proceso de Salida', 78,68);
 
-    (doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#salida',startY:70,columnStyles: {
+    doc.autoTable({ html: '#salida',startY:70,columnStyles: {
       0: {cellWidth: 22},
       1: {cellWidth: 25},
       2: {cellWidth: 25},
