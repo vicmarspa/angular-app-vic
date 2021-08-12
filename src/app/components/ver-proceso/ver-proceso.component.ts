@@ -393,11 +393,22 @@ refreshPageDirect()
 
 
 
+    doc.line(5, 15, 22, 15);
 
-    doc.text('Numero de Proceso: ', 10, 20);
-    doc.text(correlativoProcesohtml,48, 20);
+    
+
+    doc.line(5, 6, 22, 6);
 
 
+    doc.line(5, 15, 5, 6)
+
+    doc.line(22, 15, 22, 6)
+
+    doc.setFontSize(28);
+   
+    doc.text(correlativoProcesohtml,10, 14);
+
+    doc.setFontSize(10);
     doc.text('Fecha de Recepción: ', 10, 25);
     doc.text(fechahtml,48, 25);
     doc.text('-', 93,25);
