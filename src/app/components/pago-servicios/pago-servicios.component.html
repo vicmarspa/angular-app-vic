@@ -1,46 +1,34 @@
 <div class="container-fluid col-12">
-    <div class="row">
+    <div class="row mt-4 mb-4 d-flex justify-content-center">
 
         <div class="col-2 m-2"> 
-            <h4 class="d-inline">Fecha: </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
+            <h4 class="d-inline text-dark ml-2">Fecha: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
             <br>          
-            <h4 class="d-inline">KILOGRAMOS TOTAL: </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="total_kilogramos">{{sumaKilogramosCalibrados() | number : '1.0-0'}}</h4>
+            <h4 class="d-inline text-dark ml-2">KILOGRAMOS TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_kilogramos">{{sumaKilogramosCalibrados() | number : '1.0-0'}}</h4>
+            <br>  
+        </div>
+            
+        <div class="col-2 m-2">
+            <h4 class="d-inline text-dark ml-2">PRECIO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_precio">${{sumaPreciosCalibrados() | number : '1.0-0'}}</h4>
             <br>          
-            <h4 class="d-inline">PRECIO TOTAL: </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="total_precio">${{sumaPreciosCalibrados() | number : '1.0-0'}}</h4>
-            <br>          
-            <h4 class="d-inline">BINS TOTAL: </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{sumaBinesCalibrados() | number : '1.0-0'}}</h4>              
+            <h4 class="d-inline text-dark ml-2">BINS TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_bines">{{sumaBinesCalibrados() | number : '1.0-0'}}</h4>
+                          
         </div>
 
         <div class="col-2 m-2">       
-            <h4 class="d-inline">TOTAL ADEUDADO: </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{adeudadoSum() | number : '1.0-0'}}</h4>
+            <h4 class="d-inline text-dark ml-2">TOTAL ADEUDADO: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_adeudado">{{adeudadoSum() | number : '1.0-0'}}</h4>
             <br>
-            <h4 class="d-inline">TOTAL PAGADO </h4>
-            <h4 class="d-inline position-relative" style="left: .5%;" id="total_bines">{{pagadoSum() | number : '1.0-0'}}</h4>                  
+            <h4 class="d-inline text-dark ml-2">TOTAL PAGADO: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_pagado">{{pagadoSum() | number : '1.0-0'}}</h4>                  
         </div>
 
 
-        <div class="col-4 m-2">  
-            <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h2>
-            </div>
-            <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h2>
-            </div>
-            <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h2>
-            </div>
-            <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h2>
-            </div>
-            <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoServicio">{{selectedTipoServicio}}</h2>
-            </div>
-        </div>
+
 
 
     </div>
@@ -173,7 +161,7 @@
             padding: 10px;
             border: 1px solid #000000;
             font-size:20px">
-            <h4 class="ml-4">OPCIONES DE USUARIO</h4>
+            <h4 class="ml-4 text-dark">OPCIONES DE USUARIO</h4>
             <button [routerLink] = "['/pago_servicios']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
             <button [routerLink] ="['/pago_servicios']" class="btn btn-warning  position-relative material-icons ml-2" style="color:white" >refresh</button>
             </div>
@@ -229,7 +217,7 @@
 
                     <td>
                     <!-- <input type="text" class="form-control" [(ngModel)] = pagos_servicios.monto_pago> -->
-                    <form (submit)="insertPay2(row.numero_proceso, dato2, dato3)">
+                    <form (submit)="insertPay2(row.numero_proceso, dato2, dato3)" >
                             <input type="hidden" value="{{row.numero_proceso}}">
                             <input type="text" placeholder="MONTO" class="form-control input-sm"  #dato2 required>
                             <input type="text" placeholder="DESCRIPCIÓN" class="form-control input-sm mt-2" #dato3 required>
@@ -295,7 +283,23 @@
 
 
 
-
+        <div class="col-4 m-2">  
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoServicio">{{selectedTipoServicio}}</h2>
+            </div>
+        </div>
 
 
 
@@ -331,7 +335,7 @@
 
 
 
-            <table class="table" id="entrada">
+            <table class="table" >
                 <thead class="thead-dark">
                   <tr>                    
                     <th scope="col" style="width: 2%;">Proceso</th>
@@ -364,3 +368,53 @@
   
 
 
+
+    
+        <table class="table table-sm" style="visibility: hidden;" id="test">
+            <thead class="thead-dark">
+              <tr>                    
+                <th >Proceso</th>
+                <th >Fruta</th>                                        
+                <th >Tipo Pago</th>
+                <th >Cliente</th>
+                <th >Kilogramos</th>
+                <th >Precio Total</th>
+                <th >Bins</th>
+                <th >Servicio</th>
+                <th >Fecha Creación</th>
+                <th >Total Pagado</th>
+                <th >Total Adeudado</th>
+
+ 
+
+
+            
+
+
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor ='let row of calibrado'>                    
+                <td >{{row.numero_proceso}}</td>
+                <td>{{row.tipo_fruta}}</td>           
+                <td >{{row.tipo_pago}}</td>
+                <td>{{row.nombre}}</td>
+                <td>{{row.total_kg | number: '1.0-0'}}</td>
+                <td ><h2>${{row.total_precio | number: '1.0-0'}}</h2></td>
+                <td>{{row.total_bines | number: '1.0-0'}}</td>
+                <td>{{row.tipo_proceso}}</td>     
+                <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
+                <td><h2>${{row.total_pago | number: '1.0-0'}}</h2></td>
+
+                <td><h2>${{row.adeudado | number: '1.0-0'}}</h2></td>  
+
+              </tr>                  
+            </tbody>
+          </table>
+          <input type="text" value="0" id="borrado" style="display: none;">             
+
+
+
+    

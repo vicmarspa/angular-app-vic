@@ -1,25 +1,28 @@
 <div class="container-fluid col-12">
     <div class="row">
-        <div class="col-5 m-5">
-            <h4 class="d-inline">NUMERO DE PROCESO :</h4>
-            <h4 class="d-inline pl-3" id="proceso">{{calibrado1.numero_proceso}}</h4>
-            <br>
-            <h4 class="d-inline">CORRELATIVO DEL CLIENTE :</h4>
-            <h4 class="d-inline pl-3" id="correlativoProceso">{{correlativoProceso}}</h4>
-            <br>
-            <h4 class="d-inline">TIPO DE PROCESO :</h4>
-            <h4 class="d-inline pl-3" id="proceso">{{calibrado1.tipo_proceso}}</h4>
-            <br>
-            <h4 class="d-inline">FECHA :</h4>
-            <h4 class="d-inline pl-3" id="fecha">{{calibrado1.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
-            <br>
-            <h4 class="d-inline">FECHA SALIDA :</h4>
-            <h4 class="d-inline pl-3" id="fechasalida">{{salidaUna.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
-            <br>
-            <h4 class="d-inline">CLIENTE :</h4> 
-            <h4 class="d-inline pl-3" id="cliente">{{calibrado.nombre}}</h4>
+        <div class="col-5 mt-5 ml-5">
 
-
+            <div style="display: inline-block;
+            border: 1px solid #000000;
+            font-size:20px">
+                <h4 class="d-inline text-dark ml-2">NUMERO DE PROCESO INTERNO:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 50px; margin-right: 8px;" id="proceso">{{calibrado1.numero_proceso}}</h4>
+                <br>
+                <h4 class="d-inline text-dark ml-2">CORRELATIVO DEL CLIENTE:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 81px; margin-right: 8px;" id="correlativoProceso">{{correlativoProceso}}</h4>
+                <br>
+                <h4 class="d-inline text-dark ml-2">TIPO PROCESO:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 168px; margin-right: 8px;" id="proceso">{{calibrado1.tipo_proceso}}</h4>
+                <br>
+                <h4 class="d-inline text-dark ml-2">FECHA INGRESO:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 158px; margin-right: 8px;" id="fecha">{{calibrado1.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
+                <br>
+                <h4 class="d-inline text-dark ml-2">FECHA SALIDA:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 170px; margin-right: 8px;" id="fechasalida">{{salidaUna.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</h4>
+                <br>
+                <h4 class="d-inline text-dark ml-2">CLIENTE:</h4> 
+                <h4 class="d-inline text-dark" style="margin-left: 214px; margin-right: 8px;" id="cliente">{{calibrado.nombre}}</h4>
+            </div>
 
         </div>
 
@@ -41,48 +44,62 @@
 </div>
 <div class="container-fluid col-12">
     <div class="row">
-        <div class="col-5 m-5">
-            <div>
-                <h5 class="d-inline">TOTAL INGRESO:</h5>
-                <h5 class="d-inline position-relative" id="totalingreso" style="left: 2%;">{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KGs</h5> 
-            </div>
-            <div class="mt-2">
-                <h5 class="d-inline pt-5">CANTIDAD BINES INGRESADOS:</h5>
-                <h5 class="d-inline position-relative" id="bins" style="left: 2.5%;">{{cantidadbinsEntradaSum()}}</h5>
-            </div>
-            <div class="mt-2">
-                <h5 class="d-inline pt-5">CANTIDAD BINES DE SALIDA:</h5>
-                <h5 class="d-inline position-relative" id="binsSalida" style="left: 2.5%;">{{cantidadbinsSalidaSum()}}</h5>
-            </div>
-            <div class="mt-2" id="Fruta">
-                <h5 class="d-inline pt-5">TIPO DE FRUTA:  </h5>
-                <h5 class="d-inline pl-3" id="fruta">{{calibrado.tipo_fruta}}</h5>                
-            </div> 
-            <div class="mt-2" id="Fruta">
-                <h5 class="d-inline pt-5">MERMA:  </h5>
-                <h5 class="d-inline position-relative" id="merma" style="left: .5%;">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
-            </div>          
+        <div class="col-5 ml-5 mt-2">
+        <div style="display: inline-block;
+        border: 1px solid #000000;
+        font-size:20px">
+            
+                
+                    <h4 class="d-inline text-dark ml-2">TOTAL INGRESO:</h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 164px; margin-right: 8px;" id="totalingreso" >{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KGs</h4> 
+                
+                    <br>
+                    <h4 class="d-inline text-dark ml-2">CANTIDAD BINES INGRESADOS:</h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 64px; margin-right: 8px;" id="bins">{{cantidadbinsEntradaSum()}}</h4>
+                
+               <br>
+                    <h4 class="d-inline text-dark ml-2">CANTIDAD BINES DE SALIDA:</h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 82px; margin-right: 8px;" id="binsSalida">{{cantidadbinsSalidaSum()}}</h4>
+               
+           <br>
+                    <h4 class="d-inline text-dark ml-2">TIPO DE FRUTA:  </h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 168px; margin-right: 8px;" id="fruta">{{calibrado.tipo_fruta}}</h4>                
+             <br>
+                    <h4 class="d-inline text-dark ml-2" >MERMA:  </h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 215px; margin-right: 8px;" id="merma">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h4>
+               
+            
         </div>
-        <div class="col-5 m-5">
-            <div>
-                <h5 class="d-inline">VALOR SERVICIO: </h5>
-                <h5 class="d-inline pl-3" id="valor">${{calibrado1.valor_servicio}}</h5>                
-            </div>
-            <div class="mt-2">
-                <h5 class="d-inline pt-5">VALOR TOTAL:</h5>
-                <h5 class="d-inline position-relative" id="valortotal" style="left: 5%;">${{(kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) * calibrado.valor_servicio | number: '000.000'}}</h5>
-            </div>
-            <div class="mt-2">
-                <h5 class="d-inline pt-5">TIPO DE PAGO: </h5>
-                <h5 class="d-inline pl-3" id="pago">{{calibrado.tipo_pago}}</h5>
-            </div>           
+    </div>
+
+        <div class="col-5 ml-4 mt-2">
+            <div style="display: inline-block;
+            border: 1px solid #000000;
+            font-size:20px">
+      
+                <h4 class="d-inline text-dark ml-2">VALOR SERVICIO: </h4>
+                <h4 class="d-inline text-dark" style="margin-left: 164px; margin-right: 8px;" id="valor">${{calibrado1.valor_servicio}}</h4>                
+        
+            <br>
+                <h4 class="d-inline text-dark ml-2">VALOR TOTAL:</h4>
+                <h4 class="d-inline text-dark" style="margin-left: 186px; margin-right: 8px;" id="valortotal" >${{(kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) * calibrado.valor_servicio | number: '000.000'}}</h4>
+          <br>
+       
+                <h4 class="d-inline text-dark ml-2">TIPO DE PAGO: </h4>
+                <h4 class="d-inline text-dark" style="margin-left: 180px; margin-right: 8px;" id="pago">{{calibrado.tipo_pago}}</h4>
+                
         </div>
+
+    </div>
+
+
+
     </div>
 </div>
 <div class="container-fluid col-12">
     <div class="row">
         <div class="col-3 ml-5 mt-2 table-responsive ">  
-            <h5>PROCESO DE ENTRADA</h5>
+            <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">PROCESO DE ENTRADA</h5>
 
             <table class="table" id="entrada">
                 <thead class="thead-dark">
@@ -117,7 +134,7 @@
  
 
             <div class="col-5 ml-5 mt-2 table-responsive">
-                <h5>PROCESO DE SALIDA</h5>
+                <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">PROCESO DE SALIDA</h5>
                 <table class="table" id="salida">
                     <thead class="thead-dark">
                     <tr>                        

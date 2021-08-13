@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import 'jspdf-autotable';
 import jsPDF from 'jspdf';
-import { autoTable, RowInput } from 'jspdf-autotable';
+import { autoTable, Cell, RowInput } from 'jspdf-autotable';
 import  { Calibrado } from '../../models/calibrado';
 import  { Pagos_servicios } from '../../models/pagos_servicios';
 import  { splitClasses } from '@angular/compiler';
@@ -564,6 +564,12 @@ var selectedTipoServicio = document.getElementById("selectedTipoServicio");
 var selectedTipoServiciohtml = selectedTipoServicio?.innerHTML;
 
 
+var total_adeudado = document.getElementById("total_adeudado");
+var total_adeudadohtml = total_adeudado?.innerHTML;
+
+
+var total_pagado = document.getElementById("total_pagado");
+var total_pagadohtml = total_pagado?.innerHTML;
 
 
 doc.text( 'Fecha Actual: ', 10, 25);
@@ -594,7 +600,10 @@ doc.text('Precio Total: ', 95, 30);
 doc.text(total_preciohtml, 125, 30);
 doc.text('Bins Total: ', 95, 35);
 doc.text(total_bineshtml, 125, 35);
-
+doc.text('Adeudado Total: ', 95, 40);
+doc.text(total_adeudadohtml, 125, 40);
+doc.text('Pagado Total: ', 95, 45);
+doc.text(total_pagadohtml, 125, 45);
 
 
 
@@ -610,28 +619,32 @@ doc.line(5, 60, 204, 60);
 
 
 
-
-(doc as jsPDF & { autoTable: autoTable }).autoTable({ html: '#entrada',columnStyles: {
+(doc as jsPDF & { autoTable: autoTable } ).autoTable({ html: '#test', columnStyles: {
 
   
   0: {cellWidth: 15},
   1: {cellWidth: 20},
   2: {cellWidth: 18},
-  3: {cellWidth: 18},
+  3: {cellWidth: 20},
   4: {cellWidth: 18},
   5: {cellWidth: 18},
   6: {cellWidth: 15},
-  7: {cellWidth: 15},
+  7: {cellWidth: 20},
   8: {cellWidth: 20},
   9: {cellWidth: 15},
-  10: {cellWidth: 20},
+  10: {cellWidth: 18},
+
+
+
+
+
 
 },margin: {top: 65,right:35,left:10}, styles: {overflow: 'linebreak',
 fontSize: 8},didParseCell: function (data) {
 
   //data.table.body.splice(5);
+  
   var rows = data.table.body;
-
   if (data.row.index === rows.length - 1) {
       data.cell.styles.fillColor = [138, 236, 247];
   }} } )
