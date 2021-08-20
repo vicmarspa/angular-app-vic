@@ -14,7 +14,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class PagoServiciosService {
 
   // API_URI = 'https://vicmarspa.herokuapp.com';
-  API_URI = 'http://localhost:3000';
+  API_URI = 'https://vicmarspa.herokuapp.com';
 
   authSubject = new BehaviorSubject(false);
   private token: string;
