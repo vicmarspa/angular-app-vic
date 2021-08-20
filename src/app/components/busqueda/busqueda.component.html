@@ -1,39 +1,26 @@
 <div class="container-fluid col-12">
     <div class="row mt-4 mb-4 d-flex justify-content-center">
-        
-
         <div class="col-2">
             <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
             <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
         </div>
-
         <div class="col-2">
             <h4 class="d-inline" style="color: #000000;">Kilogramos Total: </h4>
             <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramos">{{sumaKilogramosCalibrados() | number : '000.000'}}</h4>
-        </div>
-            
-                     
+        </div>       
         <div class="col-2">
             <h4 class="d-inline" style="color: #000000;">Precio Total: </h4>
             <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_precio" >${{sumaPreciosCalibrados() | number : '000.000'}}</h4>
         </div>
-            
         <div class="col-2">
             <h4 class="d-inline" style="color: #000000;">Bins Total: </h4>
             <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_bines">{{sumaBinesCalibrados() | number : '000.000'}}</h4>  
         </div>
-
-        
-                      
-             
-
     </div>
 </div>
 
 <div class="container-fluid col-12">
     <div class="row">
-
-
         <div class="col-2" style="font-size:smaller"> 
             <div class="" style="font-size:smaller">
                 <span class=""><b>PROCESO</b></span>
@@ -48,9 +35,6 @@
                 <input type="text" size="30" name="selectedNombre" style="border: 1px solid #000000;" [(ngModel)] = selectedNombre (ngModelChange) = "SearchByClient();">
             </div>
         </div>
-
-
-
         <div class="col-2" style="font-size:smaller">
             <div style="font-size:smaller">
                 <span class=""><b>RANGO DE FECHAS</b></span>
@@ -74,11 +58,14 @@
             </div>
         </div>
 
+
+
+
+
         <div class="col-2" style="font-size:smaller">
             <div class="" style="font-size:smaller">
                 <span class=""><b>TIPO DE PAGO</b></span>
             </div>
-   
             <div>
                 <select class="form-control" style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoPago" (ngModelChange)="SearchByPago()">
                     <option value="">TODOS</option>
@@ -88,9 +75,6 @@
                     <option>TRANSFERENCIA</option>
                     </select> 
             </div>
-
-
-
             <div class="" style="font-size:smaller">
                 <span class=""><b>TIPO DE SERVICIO</b></span>
             </div>
@@ -108,8 +92,10 @@
         </div>
 
 
-        <div class="col-5">
 
+
+
+        <div class="col-5">
             <div style="    display: inline-block;
             margin: 20px;
             padding: 10px;
@@ -122,12 +108,11 @@
             <button [routerLink] = "['/busqueda']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
             <button class="btn btn-warning  position-relative material-icons ml-2" style="color:white" (click)="refreshPageDirect()">refresh</button>
             </div>
-
-
-
         </div>
     </div>
 </div>
+
+
 
 <div class="container-fluid col-12">
     <div class="row">
@@ -152,7 +137,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor ='let row of calibrado'>    
+                  <tr *ngFor ='let row of calibrado.slice().reverse()'>    
                       
 
                     <td><b>{{row.numero_proceso}}</b></td>

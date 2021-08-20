@@ -201,7 +201,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor ='let row of calibrado'>                    
+                  <tr *ngFor ='let row of calibrado.slice().reverse()'>                    
                     <td class="pl-4 ">{{row.numero_proceso}}</td>
                     <td>{{row.tipo_fruta}}</td>           
                     <td class="pl-4">{{row.tipo_pago}}</td>
