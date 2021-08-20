@@ -145,7 +145,7 @@ export class VerProcesoComponent implements OnInit {
     if(this.calibrado1.numero_proceso==this.correlativeResult[i].numero_proceso){
       console.log('FUUUUNCIIIONA es el',i+1);
       this.correlativoProceso = i+1;
-        console.log('Correlativo valor final',this.correlativoProceso+1);
+        console.log('Correlativo valor final',this.correlativoProceso);
     }
   }
 }

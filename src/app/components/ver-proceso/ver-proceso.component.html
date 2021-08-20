@@ -35,7 +35,7 @@
             <h4>OPCIONES DE USUARIO</h4>
             <button class="btn btn-primary  position-relative mr-2"  (click)="nuevoPDF()" >GENERAR DOCUMENTO</button>               
             <button class="btn btn-success  position-relative mr-2"   (click)="copiaClientePDF()" >COPIA DE CLIENTE</button>               
-            <button class="btn btn-warning  position-relative material-icons mr-2" style="color:white" [routerLink] ="['/busqueda/detalle/', calibrado1.numero_proceso]">refresh</button>
+            <button class="btn btn-warning  position-relative material-icons mr-2" style="color:white" (click)="correlativoFuncion(calibrado.nombre)">refresh</button>
             <button [routerLink] = "['/busqueda']" class="btn btn-danger position-relative">VOLVER</button> 
             </div>
 
