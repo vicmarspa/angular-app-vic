@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {tap} from 'rxjs/operators';
 
-import {Pagos_servicios} from '../models/pagos_servicios';
 
+import {Proceso_Camaras} from '../models/proceso_camaras';
 
 import { Observable, BehaviorSubject } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class PagoServiciosService {
+export class IngresoCamarasService {
 
   // API_URI = 'https://vicmarspa.herokuapp.com';
   API_URI = 'http://localhost:3000';
+
 
   authSubject = new BehaviorSubject(false);
   private token: string;
@@ -22,20 +22,16 @@ export class PagoServiciosService {
   constructor(private http:HttpClient) { }
 
 
-
-  getPays(){
-    return this.http.get(`${this.API_URI}/getpays`)
-  }
-
-  insertPays(
-    pagos_servicios : Pagos_servicios
+  insertProcesoCamaras(
+    proceso_Camaras : Proceso_Camaras
     ) {
-      return this.http.post(`${this.API_URI}/insertpays`, pagos_servicios)
+      return this.http.post(`${this.API_URI}/camaras/ingreso`, proceso_Camaras)
   }
 
-  getPayDetail(numero_proceso: string){
-    return this.http.get(`${this.API_URI}/getpaydetail/${numero_proceso}`)
+  getProcesosCamaras(){
+    return this.http.get(`${this.API_URI}/camaras/obtenerservicios`)
   }
 
-  
+
+
 }

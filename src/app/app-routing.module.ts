@@ -31,6 +31,10 @@ import { VerVentaComponent } from './components/ver-venta/ver-venta.component';
 
 import{PagoServiciosComponent} from './components/pago-servicios/pago-servicios.component';
 
+import{IngresoCamarasComponent} from './components/ingreso-camaras/ingreso-camaras.component';
+
+import{VerProcesoCamarasComponent} from './components/ver-proceso-camaras/ver-proceso-camaras.component';
+
 const routes: Routes = [
   {
       path:'',
@@ -152,9 +156,15 @@ const routes: Routes = [
     {
       path:'pago_servicios',
       component:PagoServiciosComponent
+    },
+    {
+      path:'camaras/ingreso',
+      component:IngresoCamarasComponent
+    },
+    {
+      path:'camaras/ver-proceso-camaras',
+      component:VerProcesoCamarasComponent
     }
-    
-    
 ];
 
 @NgModule({

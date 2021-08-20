@@ -174,7 +174,6 @@
 
 
 
-                    
 
                     <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                         <div class="modal-dialog modal-lg"   role="document">
@@ -204,7 +203,7 @@
                                         <a [routerLink] ="['/continuar',selectNumeroProceso]" class="btn btn-primary" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> CONTINUAR</a>
                                         <a [routerLink] ="['./editar',selectNumeroProceso]" class="btn btn-primary ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> MODIFICAR</a>
                                         <a [routerLink] ="['./detalle',selectNumeroProceso]" class="btn btn-primary  ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> DETALLE</a>
-                                        <button class="btn btn-danger ml-2 material-icons" (click) = "BorrarCalibradoPapelera(row.numero_proceso);" style="height: 120px; width: 120px;" data-dismiss="modal">
+                                        <button class="btn btn-danger ml-2 material-icons" (click) = "BorrarCalibradoPapelera(selectNumeroProceso);" style="height: 120px; width: 120px;" data-dismiss="modal">
                                             delete 
                                     </button>
                                          
@@ -217,7 +216,6 @@
                           </div>
                         </div>
                       </div>
-
 
 
 

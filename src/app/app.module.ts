@@ -55,6 +55,8 @@ import { IngresoVentaComponent } from './components/ingreso-venta/ingreso-venta.
 import { IngresoVentaFinalComponent } from './components/ingreso-venta-final/ingreso-venta-final.component';
 import { VerVentaComponent } from './components/ver-venta/ver-venta.component';
 import { PagoServiciosComponent } from './components/pago-servicios/pago-servicios.component';
+import { IngresoCamarasComponent } from './components/ingreso-camaras/ingreso-camaras.component';
+import { VerProcesoCamarasComponent } from './components/ver-proceso-camaras/ver-proceso-camaras.component';
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -91,6 +93,8 @@ import { PagoServiciosComponent } from './components/pago-servicios/pago-servici
     IngresoVentaFinalComponent,
     VerVentaComponent,
     PagoServiciosComponent,
+    IngresoCamarasComponent,
+    VerProcesoCamarasComponent,
     //DialogComponentComponent
     
   ],
