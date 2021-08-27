@@ -12,8 +12,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class ServicioGruasService {
 
-    // API_URI = 'https://vicmarspa.herokuapp.com';
-    API_URI = 'https://vicmarspa.herokuapp.com';
+    // API_URI = 'https://angular-app-vic.herokuapp.com';
+    API_URI = 'https://angular-app-vic.herokuapp.com';
 
     authSubject = new BehaviorSubject(false);
     private token: string;

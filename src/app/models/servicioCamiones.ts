@@ -8,8 +8,9 @@ export interface Servicio_Camiones{
     cantidad?:number;
     cliente?:string;
     numero_guia?:number;
-    chofer?:number;
+    chofer?:string;
     valor_neto?:number;
     iva?:number;
     total?:number;
+    report?:string;
 }

@@ -1,0 +1,77 @@
+<div class="container-fluid col-12">
+    <h2 class="mt-4 mb-4 d-flex justify-content-center">SERVICIO DE CÁMARAS</h2>
+
+  
+    <div class="container-fluid col-12">
+      <div class="row">
+  
+ 
+      </div>
+  </div>
+  
+  
+  
+      <div class="row mt-2">
+          <div class="col-12">
+              <table class="table table-striped table-sm" id="entrada">
+                  <thead class="thead-dark">
+                    <tr>                    
+                      <th scope="col">Proceso</th>
+                      <th scope="col">Report</th>
+                      <th scope="col">Fecha Gestión</th>                                        
+                      <th scope="col">Origen</th>
+                      <th scope="col">Destino</th>
+                      <th scope="col">Formato</th>
+                      <th scope="col" >Cantidad</th>
+                      <th scope="col" >Nombre</th>
+                      <th scope="col" >Numero Guía</th>
+                      <th scope="col" >Chofer</th>
+                      <th scope="col" >Valor Neto</th>
+                      <th scope="col" >Iva</th>
+                      <th scope="col" >Total</th>
+                      <th scope="col" >Opciones</th>   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor ='let row of servicio_camiones'>    
+                      <td><b>{{row.numero_proceso}}</b></td>
+                      <td><b>{{row.report}}</b></td>
+                      <td>{{row.fecha_recepcion | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>                                                   
+                      <td>{{row.origen}}</td>
+                      <td><b>${{row.destino | number}}</b></td>
+                      <td>{{row.formato}}</td>                    
+                      <td>{{row.cantidad}}</td>
+                      <td>{{row.nombre}}</td>
+                      <td>{{row.numero_guia}}</td>
+                      <td>{{row.chofer}}</td>
+                      <td><b>${{row.valor_neto}}</b></td>   
+                      <td>{{row.iva}}</td>
+                      <td>{{row.total}}</td>
+                    </tr>                  
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  
+  
+  
+
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    </div>

@@ -39,6 +39,7 @@ import{VerServicioGruasComponent} from './components/ver-servicio-gruas/ver-serv
 import{ArriendoBinsComponent} from './components/arriendo-bins/arriendo-bins.component';
 import{VerArriendoBinsComponent} from './components/ver-arriendo-bins/ver-arriendo-bins.component';
 import{ServicioCamionesComponent} from './components/servicio-camiones/servicio-camiones.component';
+import{VerServicioCamionesComponent} from './components/ver-servicio-camiones/ver-servicio-camiones.component';
 
 
 const routes: Routes = [
@@ -190,8 +191,11 @@ const routes: Routes = [
     {
       path:'servicio-camiones/ingreso',
       component:ServicioCamionesComponent
+    },
+    {
+      path:'servicio-camiones/ver',
+      component:VerServicioCamionesComponent
     }
-    
     
 ];
 

@@ -28,22 +28,24 @@ export class ServicioCamionesComponent implements OnInit {
 
   servicio_Camiones:Servicio_Camiones = {
 
-    origen:'',
-    destino:'',
-    formato:'',
-    cantidad:0,
-    cliente:'',
+    origen:'',//
+    destino:'',//
+    formato:'',//
+    cantidad:0,//
+    cliente:'',//
     numero_guia:0,
-    chofer:0,
+    chofer:'',
     valor_neto:0,
-    iva:1,
-    total:0
+    iva:0,
+    total:0,
+    report:''
 
   }  
 
 
 
   ngOnInit(): void {
+    
     this.calibradoService.getClientesIngreso().subscribe(
       res => {
         this.clientes = res;
@@ -51,14 +53,48 @@ export class ServicioCamionesComponent implements OnInit {
       },
       err => console.error(err)
     );
+    
   }
 
 
 
   suma(){
-    this.totalPrecioSelected= this.servicio_Camiones.valor_neto*this.servicio_Camiones.iva
+    this.totalPrecioSelected= this.servicio_Camiones.valor_neto*(((this.servicio_Camiones.iva)/19)+1)
     console.log(this.totalPrecioSelected+'esta es la suma')
   }
+
+
+
+
+
+  guardarProceso(){ 
+    this.servicio_Camiones.total  = this.servicio_Camiones.valor_neto * (((this.servicio_Camiones.iva)/100)+1);
+    Swal.fire({
+      title: 'Estás Seguro',
+      text: "Desea Ingresar Este Servicio de Cámaras",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {   
+    this.servicioCamionesService.insertServicioCamiones(this.servicio_Camiones)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      err => console.error(err)
+    )
+    Swal.fire(
+      'Servicio Ingresado',
+      'Se Ha Ingresado Correctamente',
+      'success'
+    )
+  }
+})
+}
 
 
 }

@@ -62,6 +62,7 @@ import { VerServicioGruasComponent } from './components/ver-servicio-gruas/ver-s
 import { ArriendoBinsComponent } from './components/arriendo-bins/arriendo-bins.component';
 import { VerArriendoBinsComponent } from './components/ver-arriendo-bins/ver-arriendo-bins.component';
 import { ServicioCamionesComponent } from './components/servicio-camiones/servicio-camiones.component';
+import { VerServicioCamionesComponent } from './components/ver-servicio-camiones/ver-servicio-camiones.component';
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -105,6 +106,7 @@ import { ServicioCamionesComponent } from './components/servicio-camiones/servic
     ArriendoBinsComponent,
     VerArriendoBinsComponent,
     ServicioCamionesComponent,
+    VerServicioCamionesComponent,
     //DialogComponentComponent
     
   ],
