@@ -4,21 +4,34 @@
 
 
         <div class="sm col-6 p-4">
-            <h5 class="d-inline">NUMERO DE PROCESO: </h5>
-            <h5 class="d-inline pl-3" >{{getUltimo.numero_proceso}}</h5>
-            <br>
-            <h5 class="d-inline">CORRELATIVO DEL CLIENTE: </h5>
-            <h5 class="d-inline pl-3" >{{correlativoProceso}}</h5>
-            <br>
-            <h5 class="mt-4 d-inline">FECHA INGRESO : {{calibrado2.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5> 
-            <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;" [(ngModel)] = getUltimo.numero_proceso > 
-            <br>
-            <h5 class="mt-2">CLIENTE: {{getUltimo.nombre}}</h5> 
-            <h5>TIPO DE PROCESO: {{getUltimo.tipo_proceso}}</h5>                       
-            <h5>TIPO FRUTA: {{getUltimo.tipo_fruta}}</h5>                       
-            <h5>TIPO PAGO: {{getUltimo.tipo_pago}}</h5>  
-            <h5>MERMA: {{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
-                      
+            <div           style="    display: inline-block;
+            border: 1px solid #000000;
+            font-size:20px">
+                <h5 class="d-inline text-dark ml-2">NUMERO DE PROCESO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 80px; margin-right: 8px;">{{getUltimo.numero_proceso}}</h5>
+                <br>
+                <h5 class="d-inline text-dark ml-2">CORRELATIVO DEL CLIENTE: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 52px; margin-right: 8px;">{{correlativoProceso}}</h5>
+                <br>
+                <h5 class="d-inline text-dark ml-2">FECHA INGRESO : </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 108px; margin-right: 8px;">{{calibrado2.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5>
+                <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;" [(ngModel)] = getUltimo.numero_proceso > 
+                <br>
+                <h5 class="d-inline text-dark ml-2">CLIENTE: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 154px; margin-right: 8px;">{{getUltimo.nombre}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TIPO DE PROCESO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 102px; margin-right: 8px;">{{getUltimo.tipo_proceso}}</h5>
+                <br>                    
+                <h5 class="d-inline text-dark ml-2">TIPO FRUTA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{getUltimo.tipo_fruta}}</h5>
+                <br>                       
+                <h5 class="d-inline text-dark ml-2">TIPO PAGO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 140px; margin-right: 8px;">{{getUltimo.tipo_pago}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">MERMA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 158px; margin-right: 8px;">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
+            </div>       
         </div>       
         
         <div class="col-5 ml-5">
@@ -28,7 +41,7 @@
             padding: 10px;
             border: 1px solid #000000;
             font-size:20px">
-            <h4 class="ml-4">OPCIONES DE USUARIO</h4>
+            <h4 class="d-inline text-dark d-flex justify-content-center font-weight-bold">OPCIONES DE USUARIO</h4>
             <form (submit)="insertPay(getUltimo.numero_proceso, dato2)">
                 <input type="hidden" value="{{getUltimo.numero_proceso}}">
                 <input type="hidden" class="form-control input-sm" #dato2 required>
@@ -97,7 +110,7 @@
             <div>
             <select style="margin-left: 15%;" [(ngModel)]="calibreSelected">
                 <option value="0">--Selecciona Calibre--</option>
-                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
+                <option *ngFor="let calibre of getcalibre | orderBy:'calibre'" id="calibre" [value]="calibre.idcalibre">
                     {{calibre.calibre}}
                 </option>                
             </select>                        
@@ -111,7 +124,7 @@
 <div class="container-fluid col-12">
     <div class="row">
         <div class="col-3 p-4 mt-2 table-responsive ">
-            <h5 class="d-inline">PROCESO DE ENTRADA</h5>            
+            <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">PROCESO DE ENTRADA</h5>            
             <table class="table">
                 <thead class="thead-dark">
                 <tr>                                      
@@ -147,7 +160,7 @@
             <div class="col-1"></div> 
 
             <div class="col-4 p-4 mt-2  table-responsive " style="margin-left:150px;" >
-                <h5>PROCESO DE SALIDA</h5>                
+                <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">PROCESO DE SALIDA</h5>                
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>

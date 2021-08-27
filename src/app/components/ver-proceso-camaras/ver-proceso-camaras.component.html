@@ -1,5 +1,5 @@
 <div class="container-fluid col-12">
-
+  <h2 class="mt-4 mb-4 d-flex justify-content-center">SERVICIO DE CÁMARAS</h2>
   <div class="row mt-4 mb-4 d-flex justify-content-center">
     <div class="col-2">
         <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
@@ -158,9 +158,14 @@
                                       <b>Fecha de Término: </b><b id="detailselectFechaTermino">{{selectFechaTermino | date: 'dd-MM-yyyy'}}</b>
                                     </thead>
                                     <tbody>
+                                      <!-- (click)="BorrarPago(row2.id_pago)" -->
                                         <br>
                                         <a (click)="generatePDF()" [routerLink] ="['/camaras/ver-proceso-camaras']" class="btn btn-primary" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> IMPRIMIR</a>
                                         <a (click)="generateClientPDF()" [routerLink] ="['/camaras/ver-proceso-camaras']" class="btn btn-success ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> DOCUMENTO CLIENTE</a>
+                                        <a class="btn btn-danger ml-2 material-icons" style="height: 120px; width: 120px;" (click)="BorrarProcesoCamaras(selectNumeroProceso)">
+                                          <br><br>
+                                          delete 
+                                        </a>
 
                                     </tbody>
                                 </table>

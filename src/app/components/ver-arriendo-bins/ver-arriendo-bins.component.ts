@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { IngresoCamarasService } from 'src/app/services/ingreso-camaras.service';
+import { ArriendoBinsService } from 'src/app/services/arriendo-bins.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import * as jsPDF from 'jspdf';
@@ -8,21 +8,23 @@ import 'jspdf-autotable'
 
 
 
-import { Proceso_Camaras } from '../../models/proceso_camaras';
+import {Arriendo_Bins} from '../../models/arriendoBins';
 import { splitClasses } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
-  selector: 'app-ver-proceso-camaras',
-  templateUrl: './ver-proceso-camaras.component.html',
-  styleUrls: ['./ver-proceso-camaras.component.css']
+  selector: 'app-ver-arriendo-bins',
+  templateUrl: './ver-arriendo-bins.component.html',
+  styleUrls: ['./ver-arriendo-bins.component.css']
 })
-export class VerProcesoCamarasComponent implements OnInit {
+export class VerArriendoBinsComponent implements OnInit {
 
-  constructor(private ingresoCamarasService: IngresoCamarasService, private router:Router, private activedRoute: ActivatedRoute) { }
+  constructor(private arriendoBinsService: ArriendoBinsService, private router:Router, private activedRoute: ActivatedRoute) { }
 
 
-  procesos_camaras:any=[];
+
+
+  arriendo_bins:any=[];
   fechaActual = new Date();
   numero_proceso:any;
   selectedNombre:any;
@@ -51,23 +53,30 @@ export class VerProcesoCamarasComponent implements OnInit {
 
 
 
+
   ngOnInit(): void {
 
-    this.ingresoCamarasService.getProcesosCamaras()
+
+    this.arriendoBinsService.getProcesosArriendoBins()
     .subscribe(
       res => {
-        this.procesos_camaras = res;                 
+        this.arriendo_bins = res;                 
         console.log(res);
       },
       err => console.error(err)
     );
-
   }
 
 
 
+
+
+
+
+
+
   public sumaPrecios(){
-    return this.procesos_camaras.map(row => row.precio_total).reduce((a,b) => a+b, 0);
+    return this.arriendo_bins.map(row => row.precio_total).reduce((a,b) => a+b, 0);
   }
 
 
@@ -77,7 +86,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.arriendo_bins = this.arriendo_bins.filter(res => {
         return res.numero_proceso.toString().match(this.numero_proceso.toString());
       })
     }
@@ -88,18 +97,18 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.arriendo_bins = this.arriendo_bins.filter(res => {
         return res.nombre.toString().match(this.selectedNombre.toString());
       })
     }
   }
 
   dateRangeCreated($event) {    
-    this.procesos_camaras = this.procesos_camaras; 
-    this.ts = this.procesos_camaras.fecha_recepcion;                       
+    this.arriendo_bins = this.arriendo_bins; 
+    this.ts = this.arriendo_bins.fecha_recepcion;                       
     let startDate = $event[0].toJSON().split('T')[0];   
     let endDate = $event[1].toJSON().split('T')[0]; 
-    this.procesos_camaras = this.procesos_camaras.filter(m => new Date(m.fecha_recepcion) >= new Date(startDate) && new Date(m.fecha_recepcion) <= new Date(endDate)        
+    this.arriendo_bins = this.arriendo_bins.filter(m => new Date(m.fecha_recepcion) >= new Date(startDate) && new Date(m.fecha_recepcion) <= new Date(endDate)        
     );  
     console.log(startDate);
     console.log(endDate);
@@ -111,25 +120,12 @@ export class VerProcesoCamarasComponent implements OnInit {
   }
 
 
-  SearchByFruta(){
-    if(this.selectedTipoFruta == ""){
-      this.ngOnInit();
-    }
-    else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
-        return res.tipo_fruta.toString().match(this.selectedTipoFruta.toString());
-      })
-    }
-  }
-
-
-
   SearchByPago(){
     if(this.selectedTipoPago == ""){
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.arriendo_bins = this.arriendo_bins.filter(res => {
         return res.tipo_pago.toString().match(this.selectedTipoPago.toString());
       })
     }
@@ -141,7 +137,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.arriendo_bins = this.arriendo_bins.filter(res => {
         return res.tipo_proceso.toString().match(this.selectedTipoServicio.toString());
       })
     }
@@ -176,8 +172,6 @@ export class VerProcesoCamarasComponent implements OnInit {
     var endDateTexthtml = endDateText?.innerHTML;
     var selectedTipoPago = document.getElementById("selectedTipoPago");
     var selectedTipoPagohtml = selectedTipoPago?.innerHTML;
-    var selectedTipoFruta = document.getElementById("selectedTipoFruta");
-    var selectedTipoFrutahtml = selectedTipoFruta?.innerHTML;
     
   
     doc.text('Fecha Actual: ', 10, 25);
@@ -187,8 +181,6 @@ export class VerProcesoCamarasComponent implements OnInit {
     doc.text(endDateTexthtml,68, 30);
     doc.text('Tipo de Pago: ', 10, 35);
     doc.text(selectedTipoPagohtml,45, 35);
-    doc.text('Tipo de Fruta: ', 10, 40);
-    doc.text(selectedTipoFrutahtml,45, 40);
     doc.text('Precio Total: ', 95, 25);
     doc.text(total_preciohtml,125, 25);
 
@@ -211,8 +203,6 @@ export class VerProcesoCamarasComponent implements OnInit {
       7: {cellWidth: 18},
       8: {cellWidth: 20},
       9: {cellWidth: 15},
-      10: {cellWidth: 20},
-      11: {cellWidth: 10},
 
   
     },margin: {top: 65,right:35,left:10}, styles: {overflow: 'linebreak',
@@ -228,7 +218,7 @@ export class VerProcesoCamarasComponent implements OnInit {
 
 
 
-  menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any, selectPrecio:any, selectPrecioTotal:any, selectFormato:any, selectCantidad:any, selectTipoPago:any, selectFechaInicio:any, selectFechaTermino:any, selectTipoFruta:any){
+  menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any, selectPrecio:any, selectPrecioTotal:any, selectCantidad:any, selectTipoPago:any, selectFechaInicio:any, selectFechaTermino:any){
     
     
 
@@ -237,14 +227,12 @@ export class VerProcesoCamarasComponent implements OnInit {
     this.selectFechaIngreso = selectFechaIngreso;
     this.selectPrecio = selectPrecio;
     this.selectPrecioTotal = selectPrecioTotal;
-    this.selectFormato = selectFormato;
     this.selectCantidad = selectCantidad;
     this.selectTipoPago = selectTipoPago;
     this.selectFechaInicio = selectFechaInicio;
     this.selectFechaTermino = selectFechaTermino;
-    this.selectTipoFruta = selectTipoFruta;
 
-this.correlativoFuncion();
+    this.correlativoFuncion();
   }
   
 
@@ -256,7 +244,7 @@ countProcesCorrelative:number=0;
   correlativoFuncion()
   {
     this.countProces=0;
-    this.procesos_camaras2=this.procesos_camaras;
+    this.procesos_camaras2=this.arriendo_bins;
     for (var i =0; i< this.procesos_camaras2.length ; i++) {
       //cuenta cantidad de procesos
       if(this.procesos_camaras2[i].nombre == this.selectNombre){
@@ -283,7 +271,7 @@ countProcesCorrelative:number=0;
 
 
 
-  BorrarProcesoCamaras(numero_proceso: string){
+  BorrarProcesoArriendoBins(numero_proceso: string){
     Swal.fire({
       title: 'Estas seguro?',
       text: "No se podrá recuperar este pago",
@@ -294,7 +282,7 @@ countProcesCorrelative:number=0;
       confirmButtonText: 'Si, borrala!'
     }).then((result) => {
       if (result.isConfirmed) {
-      this.ingresoCamarasService.deleteProcesoCamaras(numero_proceso)
+      this.arriendoBinsService.deleteProcesoArriendoBins(numero_proceso)
       .subscribe(
         res => {
           console.log(res);          
@@ -341,8 +329,6 @@ countProcesCorrelative:number=0;
     var fechaingreso = document.getElementById("detailselectFechaIngreso");
     var fechaingresohtml = fechaingreso?.innerHTML;
 
-    var tipofruta = document.getElementById("detailselectTipoFruta");
-    var tipofrutahtml = tipofruta?.innerHTML;
 
     var cantidad = document.getElementById("detailselectCantidad");
     var cantidadhtml = cantidad?.innerHTML;
@@ -352,9 +338,6 @@ countProcesCorrelative:number=0;
 
     var preciototal = document.getElementById("detailselectPrecioTotal");
     var preciototalhtml = preciototal?.innerHTML;
-
-    var formato = document.getElementById("detailselectFormato");
-    var formatohtml = formato?.innerHTML;
 
     var tipopago = document.getElementById("detailselectTipoPago");
     var tipopagohtml = tipopago?.innerHTML;
@@ -381,27 +364,23 @@ countProcesCorrelative:number=0;
     doc.text(correlativoProcesohtml,100,45);
     doc.text('Nombre: ', 50,50);
     doc.text(nombrehtml,100,50);
-    doc.text('Formato: ', 50,55);
-    doc.text(formatohtml,100,55);
-    doc.text('Fecha Recepción: ', 50,60);
-    doc.text(fechaingresohtml,100,60);
-    doc.text('Fecha Inicio: ', 50,65);
-    doc.text(fechainiciohtml,100,65);
-    doc.text('Fecha Termino: ', 50,70);
-    doc.text(fechaterminohtml,100,70);
-    doc.text('Tipo Fruta: ', 50,75);
-    doc.text(tipofrutahtml,100,75);
-    doc.text('Precio: ', 50,80);
-    doc.text(preciohtml,100,80);
-    doc.text('Cantidad: ', 50,85);
-    doc.text(cantidadhtml,100,85);
-    doc.text('Precio Total: ', 50,90);
-    doc.text(preciototalhtml,100,90);
-    doc.text('Tipo Pago: ', 50,95);
-    doc.text(tipopagohtml,100,95);
+    doc.text('Fecha Recepción: ', 50,55);
+    doc.text(fechaingresohtml,100,55);
+    doc.text('Fecha Inicio: ', 50,60);
+    doc.text(fechainiciohtml,100,60);
+    doc.text('Fecha Termino: ', 50,65);
+    doc.text(fechaterminohtml,100,65);
+    doc.text('Precio: ', 50,70);
+    doc.text(preciohtml,100,70);
+    doc.text('Cantidad: ', 50,75);
+    doc.text(cantidadhtml,100,75);
+    doc.text('Precio Total: ', 50,80);
+    doc.text(preciototalhtml,100,80);
+    doc.text('Tipo Pago: ', 50,85);
+    doc.text(tipopagohtml,100,85);
     
     doc.line(5, 35, 204, 35 );
-    doc.line(5, 100, 204, 100);
+    doc.line(5, 90, 204, 90);
 
  
     doc.line(5, 15, 22, 15);
@@ -452,9 +431,6 @@ countProcesCorrelative:number=0;
     var fechaingreso = document.getElementById("detailselectFechaIngreso");
     var fechaingresohtml = fechaingreso?.innerHTML;
 
-    var tipofruta = document.getElementById("detailselectTipoFruta");
-    var tipofrutahtml = tipofruta?.innerHTML;
-
     var cantidad = document.getElementById("detailselectCantidad");
     var cantidadhtml = cantidad?.innerHTML;
 
@@ -463,9 +439,6 @@ countProcesCorrelative:number=0;
 
     var preciototal = document.getElementById("detailselectPrecioTotal");
     var preciototalhtml = preciototal?.innerHTML;
-
-    var formato = document.getElementById("detailselectFormato");
-    var formatohtml = formato?.innerHTML;
 
     var tipopago = document.getElementById("detailselectTipoPago");
     var tipopagohtml = tipopago?.innerHTML;
@@ -488,33 +461,29 @@ countProcesCorrelative:number=0;
     doc.text('Detalle de Servicio de Cámaras', 75, 30);
 
 
-    doc.text('Nombre: ', 50,50);
-    doc.text(nombrehtml,100,50);
-    doc.text('Formato: ', 50,55);
-    doc.text(formatohtml,100,55);
-    doc.text('Fecha Recepción: ', 50,60);
-    doc.text(fechaingresohtml,100,60);
-    doc.text('Fecha Inicio: ', 50,65);
-    doc.text(fechainiciohtml,100,65);
-    doc.text('Fecha Termino: ', 50,70);
-    doc.text(fechaterminohtml,100,70);
-    doc.text('Tipo Fruta: ', 50,75);
-    doc.text(tipofrutahtml,100,75);
-    doc.text('Precio: ', 50,80);
-    doc.text(preciohtml,100,80);
-    doc.text('Cantidad: ', 50,85);
-    doc.text(cantidadhtml,100,85);
-    doc.text('Precio Total: ', 50,90);
-    doc.text(preciototalhtml,100,90);
-    doc.text('Tipo Pago: ', 50,95);
-    doc.text(tipopagohtml,100,95);
+    doc.text('Nombre: ', 50,40);
+    doc.text(nombrehtml,100,40);
+    doc.text('Fecha Recepción: ', 50,45);
+    doc.text(fechaingresohtml,100,45);
+    doc.text('Fecha Inicio: ', 50,50);
+    doc.text(fechainiciohtml,100,50);
+    doc.text('Fecha Termino: ', 50,55);
+    doc.text(fechaterminohtml,100,55);
+    doc.text('Precio: ', 50,60);
+    doc.text(preciohtml,100,60);
+    doc.text('Cantidad: ', 50,65);
+    doc.text(cantidadhtml,100,65);
+    doc.text('Precio Total: ', 50,70);
+    doc.text(preciototalhtml,100,70);
+    doc.text('Tipo Pago: ', 50,75);
+    doc.text(tipopagohtml,100,75);
     
 
 
 
     
     doc.line(5, 35, 204, 35 );
-    doc.line(5, 110, 204, 110);
+    doc.line(5, 80, 204, 80);
 
  
     doc.line(5, 15, 22, 15);
@@ -536,22 +505,6 @@ countProcesCorrelative:number=0;
       
    
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

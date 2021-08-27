@@ -1,0 +1,228 @@
+<div class="container-fluid col-12">
+  <h2 class="mt-4 mb-4 d-flex justify-content-center">SERVICIO DE GRÚAS</h2>
+    <div class="row mt-2 mb-2 d-flex justify-content-center">
+      <div class="col-2">
+          <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
+          <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
+      </div>
+      <div class="col-2">
+          <h4 class="d-inline" style="color: #000000;">Precio Total: </h4>
+          <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_precio" >${{sumaPrecios() | number : '000.000'}}</h4>
+      </div>
+    </div>
+  
+    <div class="container-fluid col-12">
+      <div class="row">
+  
+  
+          <div class="col-2" style="font-size:smaller"> 
+              <div class="" style="font-size:smaller">
+                  <span class=""><b>PROCESO</b></span>
+              </div>
+              <div class="" style="font-size:smaller">
+                  <input   type="text" size="35" name="numero_proceso" style="border: 1px solid #000000;" [(ngModel)] = numero_proceso (ngModelChange) = "Search();">
+              </div>
+              <div class="" style="font-size:smaller">
+                  <span class=""><b>CLIENTE</b></span>
+              </div>
+              <div class="">
+                  <input type="text" size="30" name="selectedNombre" style="border: 1px solid #000000;" [(ngModel)] = selectedNombre (ngModelChange) = "SearchByClient();">
+              </div>
+          </div>
+  
+  
+  
+          <div class="col-2" style="font-size:smaller">
+              <div style="font-size:smaller">
+                  <span class=""><b>RANGO DE FECHAS</b></span>
+              </div>
+              <div  id="holi">
+                  <input type="text" style="border: 1px solid #000000; height: 24px;" name="daterange" autocomplete="off" bsDaterangepicker 
+                  [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
+                  id="DateOfBirth" placeholder="Rango de Fechas" (bsValueChange)="dateRangeCreated($event)" class="form-control" />
+              </div> 
+              <div class="" style="font-size:smaller">
+                  <span class=""><b>TIPO DE FRUTA</b></span>
+              </div>
+              <div>
+                  <select class="form-control " style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoFruta" (ngModelChange)="SearchByFruta()">
+                      <option value="">TODOS</option>
+                      <option>PALTA</option>
+                      <option>LIMON</option>
+                      <option>NARANJA</option>
+                      <option>MANDARINA</option>
+                      </select> 
+              </div>
+          </div>
+          <div class="col-2" style="font-size:smaller">
+              <div class="" style="font-size:smaller">
+                  <span class=""><b>TIPO DE PAGO</b></span>
+              </div>
+    
+              <div>
+                  <select class="form-control" style="border: 1px solid #000000; height: 24px; font-size: 82%" [(ngModel)]="selectedTipoPago" (ngModelChange)="SearchByPago()">
+                      <option value="">TODOS</option>
+                      <option>CREDITO</option>
+                      <option>EFECTIVO</option>
+                      <option>CHEQUE</option>
+                      <option>TRANSFERENCIA</option>
+                      </select> 
+              </div>
+          </div>
+  
+  
+          <div class="col-5">
+  
+              <div style="    display: inline-block;
+              margin: 20px;
+              padding: 10px;
+              border: 1px solid #000000;
+              font-size:20px">
+              <button [routerLink] ="['/camaras/ingreso']" type="button" class="btn btn-primary ml-4 material-icons">
+                  add_circle_outline
+                  </button>
+                    <h4 class="d-inline pl-2"><b>Nuevo Servicio</b> </h4>
+              <button [routerLink] = "['/servicio-gruas/ver']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
+              <button class="btn btn-warning  position-relative material-icons ml-2" style="color:white" (click)="refreshPageDirect()">refresh</button>
+              </div>
+  
+  
+  
+          </div>
+      </div>
+  </div>
+  
+  
+  
+      <div class="row mt-2">
+          <div class="col-12">
+              <table class="table table-striped table-sm" id="entrada">
+                  <thead class="thead-dark">
+                    <tr>                    
+                      <th scope="col">Proceso</th>
+                      <th scope="col">Fecha Gestión</th>                                        
+                      <th scope="col">Cliente</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col" >Cantidad</th>
+                      <th scope="col" >Tipo Pago</th>
+                      <th scope="col" >Precio Total</th>
+                      <th scope="col" >Tipo Fruta</th>
+                      <th scope="col" >Opciones</th>   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor ='let row of servicio_Gruas'>    
+                      <td><b>{{row.numero_proceso}}</b></td>
+                      <td>{{row.fecha_recepcion | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>                                                   
+                      <td>{{row.nombre}}</td>
+                      <td><b>${{row.precio | number}}</b></td>
+                      <td>{{row.cantidad}}</td>
+                      <td>{{row.tipo_pago}}</td>
+                      <td><b>${{row.precio_total | number}}</b></td>   
+                      <td>{{row.tipo_fruta}}</td>
+                      <td>   
+                        <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                          <div class="modal-dialog modal-lg"   role="document">
+                            <div class="modal-content" >
+                              <div class="modal-header" >
+                                <h2 class="modal-title">OPCIONES DE PROCESO N°</h2> <h2 class="modal-title" id="detailselectNumeroProceso">{{selectNumeroProceso}}</h2>
+                                <h2 class="modal-title">Correlativo del Cliente N°</h2><h2 class="modal-title" id="detailcountProcesCorrelative">{{countProcesCorrelative}}</h2>
+                              </div>
+                              <div class="modal-body modal-lg">
+                                  <table class="table" id="entrada">
+                                      <thead class="thead-dark">
+                                        <b>Nombre del Cliente: </b><b id="detailselectNombre">{{selectNombre}}</b>   
+                                        <br>
+                                        <b>Fecha de Creación: </b><b id="detailselectFechaIngreso">{{selectFechaIngreso| date: 'dd-MM-yyyy / HH:mm:ss '}}</b>
+                                        <br>
+                                        <b>Tipo de Fruta: </b><b id="detailselectTipoFruta">{{selectTipoFruta}}</b> 
+                                        <br>
+                                        <b>Cantidad: </b><b id="detailselectCantidad">{{selectCantidad | number}}</b> 
+                                        <br>
+                                        <b>Precio: </b><b id="detailselectPrecio">${{selectPrecio | number}}</b>
+                                        <br>
+                                        <b>Precio Total: </b><b id="detailselectPrecioTotal">${{selectPrecioTotal | number}}</b>
+                                        <br>
+                                        <b>Tipo Pago: </b><b id="detailselectTipoPago">{{selectTipoPago}}</b>
+                                      </thead>
+                                      <tbody>
+                                        <!-- (click)="BorrarPago(row2.id_pago)" -->
+                                          <br>
+                                          <a (click)="generatePDF()" [routerLink] ="['/servicio-gruas/ver']" class="btn btn-primary" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> IMPRIMIR</a>
+                                          <a (click)="generateClientPDF()" [routerLink] ="['/servicio-gruas/ver']" class="btn btn-success ml-2" style="height: 120px; width: 120px;" data-dismiss="modal"><br><br> DOCUMENTO CLIENTE</a>
+                                          <a class="btn btn-danger ml-2 material-icons" style="height: 120px; width: 120px;" (click)="BorrarProcesoCamaras(selectNumeroProceso)">
+                                            <br><br>
+                                            delete 
+                                          </a>
+  
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div class="modal-footer modal-lg" >
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">CERRAR</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button (click)="menuOpciones(row.numero_proceso, row.nombre, row.fecha_recepcion, row.precio, row.precio_total, row.cantidad, row.tipo_pago, row.tipo_fruta)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                            OPCIONES
+                        </button>
+                    </td>                  
+                    </tr>                  
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  
+  
+  
+      <div>  
+        <div class="ml-5">
+            <h5 class="d-inline position-relative" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h5>
+        </div>
+        <div class="ml-5">
+            <h5 class="d-inline position-relative" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h5>
+        </div>
+    </div>
+  
+  
+  
+  
+    <table class="table table-striped table-sm" style="visibility: hidden;" id="entrada2">
+      <thead class="thead-dark">
+        <tr>                    
+          <th scope="col">Proceso</th>
+          <th scope="col">Fecha Gestión</th>                                        
+          <th scope="col">Cliente</th>
+          <th scope="col">Precio</th>
+          <th scope="col" >Cantidad</th>
+          <th scope="col" >Tipo Pago</th>
+          <th scope="col" >Precio Total</th>
+          <th scope="col" >Tipo Fruta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor ='let row of servicio_Gruas'>    
+          <td><b>{{row.numero_proceso}}</b></td>
+          <td>{{row.fecha_recepcion | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>                                                   
+          <td>{{row.nombre}}</td>
+          <td><b>${{row.precio | number}}</b></td>
+          <td>{{row.cantidad}}</td>
+          <td>{{row.tipo_pago}}</td>
+          <td><b>${{row.precio_total | number}}</b></td>   
+          <td>{{row.tipo_fruta}}</td>
+        </tr>                  
+      </tbody>
+    </table>
+  
+  
+  
+  
+  
+  

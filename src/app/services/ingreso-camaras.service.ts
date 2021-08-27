@@ -32,6 +32,9 @@ export class IngresoCamarasService {
     return this.http.get(`${this.API_URI}/camaras/obtenerservicios`)
   }
 
+    deleteProcesoCamaras(numero_proceso:string){
+    return this.http.delete(`${this.API_URI}/camaras/delete-proceso/${numero_proceso}`)
+  }
 
 
 }

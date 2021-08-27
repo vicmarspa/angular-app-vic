@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { IngresoCamarasService } from 'src/app/services/ingreso-camaras.service';
+import { ServicioGruasService } from 'src/app/services/servicio-gruas.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import * as jsPDF from 'jspdf';
@@ -8,21 +8,21 @@ import 'jspdf-autotable'
 
 
 
-import { Proceso_Camaras } from '../../models/proceso_camaras';
+import {Servicio_Gruas} from '../../models/servicio_gruas';
 import { splitClasses } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
-  selector: 'app-ver-proceso-camaras',
-  templateUrl: './ver-proceso-camaras.component.html',
-  styleUrls: ['./ver-proceso-camaras.component.css']
+  selector: 'app-ver-servicio-gruas',
+  templateUrl: './ver-servicio-gruas.component.html',
+  styleUrls: ['./ver-servicio-gruas.component.css']
 })
-export class VerProcesoCamarasComponent implements OnInit {
+export class VerServicioGruasComponent implements OnInit {
 
-  constructor(private ingresoCamarasService: IngresoCamarasService, private router:Router, private activedRoute: ActivatedRoute) { }
+  constructor(private servicioGruasService: ServicioGruasService, private router:Router, private activedRoute: ActivatedRoute) { }
 
 
-  procesos_camaras:any=[];
+  servicio_Gruas:any=[];
   fechaActual = new Date();
   numero_proceso:any;
   selectedNombre:any;
@@ -38,14 +38,11 @@ export class VerProcesoCamarasComponent implements OnInit {
   selectTotalBines:any='';
   selectPrecio:any='';
   selectPrecioTotal:any='';
-  selectFormato:any='';
   selectCantidad:any='';
   selectTipoPago:any='';
-  selectFechaInicio:any='';
-  selectFechaTermino:any='';
   selectTipoFruta:any='';
-
   procesos_camaras2:any=[];
+
 
 
 
@@ -53,10 +50,10 @@ export class VerProcesoCamarasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.ingresoCamarasService.getProcesosCamaras()
+    this.servicioGruasService.getProcesosServicioGruas()
     .subscribe(
       res => {
-        this.procesos_camaras = res;                 
+        this.servicio_Gruas = res;                 
         console.log(res);
       },
       err => console.error(err)
@@ -66,8 +63,10 @@ export class VerProcesoCamarasComponent implements OnInit {
 
 
 
+
+
   public sumaPrecios(){
-    return this.procesos_camaras.map(row => row.precio_total).reduce((a,b) => a+b, 0);
+    return this.servicio_Gruas.map(row => row.precio_total).reduce((a,b) => a+b, 0);
   }
 
 
@@ -77,7 +76,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.servicio_Gruas = this.servicio_Gruas.filter(res => {
         return res.numero_proceso.toString().match(this.numero_proceso.toString());
       })
     }
@@ -88,18 +87,18 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.servicio_Gruas = this.servicio_Gruas.filter(res => {
         return res.nombre.toString().match(this.selectedNombre.toString());
       })
     }
   }
 
   dateRangeCreated($event) {    
-    this.procesos_camaras = this.procesos_camaras; 
-    this.ts = this.procesos_camaras.fecha_recepcion;                       
+    this.servicio_Gruas = this.servicio_Gruas; 
+    this.ts = this.servicio_Gruas.fecha_recepcion;                       
     let startDate = $event[0].toJSON().split('T')[0];   
     let endDate = $event[1].toJSON().split('T')[0]; 
-    this.procesos_camaras = this.procesos_camaras.filter(m => new Date(m.fecha_recepcion) >= new Date(startDate) && new Date(m.fecha_recepcion) <= new Date(endDate)        
+    this.servicio_Gruas = this.servicio_Gruas.filter(m => new Date(m.fecha_recepcion) >= new Date(startDate) && new Date(m.fecha_recepcion) <= new Date(endDate)        
     );  
     console.log(startDate);
     console.log(endDate);
@@ -116,7 +115,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.servicio_Gruas = this.servicio_Gruas.filter(res => {
         return res.tipo_fruta.toString().match(this.selectedTipoFruta.toString());
       })
     }
@@ -129,7 +128,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.servicio_Gruas = this.servicio_Gruas.filter(res => {
         return res.tipo_pago.toString().match(this.selectedTipoPago.toString());
       })
     }
@@ -141,7 +140,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       this.ngOnInit();
     }
     else{
-      this.procesos_camaras = this.procesos_camaras.filter(res => {
+      this.servicio_Gruas = this.servicio_Gruas.filter(res => {
         return res.tipo_proceso.toString().match(this.selectedTipoServicio.toString());
       })
     }
@@ -194,14 +193,14 @@ export class VerProcesoCamarasComponent implements OnInit {
 
   
     doc.line(5, 50, 204, 50);
-    doc.text('Detalles del Reporte - Servicio de Cámaras', 75,55);
+    doc.text('Detalles del Reporte - Servicio de Gruas', 74,55);
     doc.line(5, 60, 204, 60);
   
   
     doc.autoTable({ html: '#entrada2',columnStyles: {
   
       
-      0: {cellWidth: 10},
+      0: {cellWidth: 15},
       1: {cellWidth: 18},
       2: {cellWidth: 18},
       3: {cellWidth: 15},
@@ -209,10 +208,7 @@ export class VerProcesoCamarasComponent implements OnInit {
       5: {cellWidth: 18},
       6: {cellWidth: 18},
       7: {cellWidth: 18},
-      8: {cellWidth: 20},
-      9: {cellWidth: 15},
-      10: {cellWidth: 20},
-      11: {cellWidth: 10},
+
 
   
     },margin: {top: 65,right:35,left:10}, styles: {overflow: 'linebreak',
@@ -228,7 +224,7 @@ export class VerProcesoCamarasComponent implements OnInit {
 
 
 
-  menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any, selectPrecio:any, selectPrecioTotal:any, selectFormato:any, selectCantidad:any, selectTipoPago:any, selectFechaInicio:any, selectFechaTermino:any, selectTipoFruta:any){
+  menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any, selectPrecio:any, selectPrecioTotal:any, selectCantidad:any, selectTipoPago:any, selectTipoFruta:any){
     
     
 
@@ -237,11 +233,8 @@ export class VerProcesoCamarasComponent implements OnInit {
     this.selectFechaIngreso = selectFechaIngreso;
     this.selectPrecio = selectPrecio;
     this.selectPrecioTotal = selectPrecioTotal;
-    this.selectFormato = selectFormato;
     this.selectCantidad = selectCantidad;
     this.selectTipoPago = selectTipoPago;
-    this.selectFechaInicio = selectFechaInicio;
-    this.selectFechaTermino = selectFechaTermino;
     this.selectTipoFruta = selectTipoFruta;
 
 this.correlativoFuncion();
@@ -256,7 +249,7 @@ countProcesCorrelative:number=0;
   correlativoFuncion()
   {
     this.countProces=0;
-    this.procesos_camaras2=this.procesos_camaras;
+    this.procesos_camaras2=this.servicio_Gruas;
     for (var i =0; i< this.procesos_camaras2.length ; i++) {
       //cuenta cantidad de procesos
       if(this.procesos_camaras2[i].nombre == this.selectNombre){
@@ -294,7 +287,7 @@ countProcesCorrelative:number=0;
       confirmButtonText: 'Si, borrala!'
     }).then((result) => {
       if (result.isConfirmed) {
-      this.ingresoCamarasService.deleteProcesoCamaras(numero_proceso)
+      this.servicioGruasService.deleteProcesoServicioGruas(numero_proceso)
       .subscribe(
         res => {
           console.log(res);          
@@ -353,17 +346,12 @@ countProcesCorrelative:number=0;
     var preciototal = document.getElementById("detailselectPrecioTotal");
     var preciototalhtml = preciototal?.innerHTML;
 
-    var formato = document.getElementById("detailselectFormato");
-    var formatohtml = formato?.innerHTML;
+;
 
     var tipopago = document.getElementById("detailselectTipoPago");
     var tipopagohtml = tipopago?.innerHTML;
 
-    var fechainicio = document.getElementById("detailselectFechaInicio");
-    var fechainiciohtml = fechainicio?.innerHTML;
 
-    var fechatermino = document.getElementById("detailselectFechaTermino");
-    var fechaterminohtml = fechatermino?.innerHTML;
 
     doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
     doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
@@ -373,35 +361,28 @@ countProcesCorrelative:number=0;
     img.src = '/assets/image.jpg'
     doc.addImage(img, 'jpg', 185, 0, 18, 18)
 
-    doc.text('Detalle de Servicio de Cámaras', 75, 30);
-
+    doc.text('Detalle de Servicio de Grúas', 75, 30);
     doc.text('Numero de Proceso: ', 50,40);
     doc.text(procesohtml,100,40);
     doc.text('Correlativo del Cliente: ', 50,45);
     doc.text(correlativoProcesohtml,100,45);
     doc.text('Nombre: ', 50,50);
     doc.text(nombrehtml,100,50);
-    doc.text('Formato: ', 50,55);
-    doc.text(formatohtml,100,55);
-    doc.text('Fecha Recepción: ', 50,60);
-    doc.text(fechaingresohtml,100,60);
-    doc.text('Fecha Inicio: ', 50,65);
-    doc.text(fechainiciohtml,100,65);
-    doc.text('Fecha Termino: ', 50,70);
-    doc.text(fechaterminohtml,100,70);
-    doc.text('Tipo Fruta: ', 50,75);
-    doc.text(tipofrutahtml,100,75);
-    doc.text('Precio: ', 50,80);
-    doc.text(preciohtml,100,80);
-    doc.text('Cantidad: ', 50,85);
-    doc.text(cantidadhtml,100,85);
-    doc.text('Precio Total: ', 50,90);
-    doc.text(preciototalhtml,100,90);
-    doc.text('Tipo Pago: ', 50,95);
-    doc.text(tipopagohtml,100,95);
+    doc.text('Fecha Recepción: ', 50,55);
+    doc.text(fechaingresohtml,100,55);
+    doc.text('Tipo Fruta: ', 50,60);
+    doc.text(tipofrutahtml,100,60);
+    doc.text('Precio: ', 50,65);
+    doc.text(preciohtml,100,65);
+    doc.text('Cantidad: ', 50,70);
+    doc.text(cantidadhtml,100,70);
+    doc.text('Precio Total: ', 50,75);
+    doc.text(preciototalhtml,100,75);
+    doc.text('Tipo Pago: ', 50,80);
+    doc.text(tipopagohtml,100,80);
     
     doc.line(5, 35, 204, 35 );
-    doc.line(5, 100, 204, 100);
+    doc.line(5, 85, 204, 85);
 
  
     doc.line(5, 15, 22, 15);
@@ -463,18 +444,13 @@ countProcesCorrelative:number=0;
 
     var preciototal = document.getElementById("detailselectPrecioTotal");
     var preciototalhtml = preciototal?.innerHTML;
-
-    var formato = document.getElementById("detailselectFormato");
-    var formatohtml = formato?.innerHTML;
-
+  
     var tipopago = document.getElementById("detailselectTipoPago");
     var tipopagohtml = tipopago?.innerHTML;
 
-    var fechainicio = document.getElementById("detailselectFechaInicio");
-    var fechainiciohtml = fechainicio?.innerHTML;
 
-    var fechatermino = document.getElementById("detailselectFechaTermino");
-    var fechaterminohtml = fechatermino?.innerHTML;
+
+
 
     doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
     doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
@@ -485,36 +461,28 @@ countProcesCorrelative:number=0;
     img.src = '/assets/image.jpg'
     doc.addImage(img, 'jpg', 185, 0, 18, 18)
 
-    doc.text('Detalle de Servicio de Cámaras', 75, 30);
-
-
+    doc.text('Detalle de Servicio de Grúas', 75, 30);
     doc.text('Nombre: ', 50,50);
     doc.text(nombrehtml,100,50);
-    doc.text('Formato: ', 50,55);
-    doc.text(formatohtml,100,55);
-    doc.text('Fecha Recepción: ', 50,60);
-    doc.text(fechaingresohtml,100,60);
-    doc.text('Fecha Inicio: ', 50,65);
-    doc.text(fechainiciohtml,100,65);
-    doc.text('Fecha Termino: ', 50,70);
-    doc.text(fechaterminohtml,100,70);
-    doc.text('Tipo Fruta: ', 50,75);
-    doc.text(tipofrutahtml,100,75);
-    doc.text('Precio: ', 50,80);
-    doc.text(preciohtml,100,80);
-    doc.text('Cantidad: ', 50,85);
-    doc.text(cantidadhtml,100,85);
-    doc.text('Precio Total: ', 50,90);
-    doc.text(preciototalhtml,100,90);
-    doc.text('Tipo Pago: ', 50,95);
-    doc.text(tipopagohtml,100,95);
+    doc.text('Fecha Recepción: ', 50,55);
+    doc.text(fechaingresohtml,100,55);
+    doc.text('Tipo Fruta: ', 50,60);
+    doc.text(tipofrutahtml,100,60);
+    doc.text('Precio: ', 50,65);
+    doc.text(preciohtml,100,65);
+    doc.text('Cantidad: ', 50,70);
+    doc.text(cantidadhtml,100,70);
+    doc.text('Precio Total: ', 50,75);
+    doc.text(preciototalhtml,100,75);
+    doc.text('Tipo Pago: ', 50,80);
+    doc.text(tipopagohtml,100,80);
     
 
 
 
     
     doc.line(5, 35, 204, 35 );
-    doc.line(5, 110, 204, 110);
+    doc.line(5, 95, 204, 95);
 
  
     doc.line(5, 15, 22, 15);
@@ -536,14 +504,6 @@ countProcesCorrelative:number=0;
       
    
   }
-
-
-
-
-
-
-
-
 
 
 

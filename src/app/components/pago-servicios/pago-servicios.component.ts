@@ -479,7 +479,36 @@ insertTotalPay(dato:string, total_adeudado:string){
 
 
 
-
+BorrarPago(id_pago: string){
+  Swal.fire({
+    title: 'Estas seguro?',
+    text: "No se podrá recuperar este pago",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, borrala!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+    this.pagoServiciosService.deletePagoServicio(id_pago)
+    .subscribe(
+      res => {
+        console.log(res);          
+        this.ngOnInit();
+      },
+      err => console.error(err)
+    )
+  
+      Swal.fire(
+        'Borrada!',
+        'La entrada seleccionada ha sido borrada.',
+        'success',
+        
+      )
+    }
+  })
+}
 
 
 

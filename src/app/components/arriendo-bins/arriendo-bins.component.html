@@ -1,47 +1,32 @@
 <!--INGRESO CUERPO-->
 <div class="container-fluid col-12">
     <div class="row justify-content-center">
-        <h1>INGRESAR DATOS PARA SERVICIO DE CÁMARAS</h1>
+        <h1>INGRESAR DATOS PARA SERVICIO ARRIENDO DE BINS</h1>
     </div>
     <div class="row d-flex justify-content-center" >
         <div class="col-4 d-flex justify-content-center" style=" border: 1px solid #000000;">
             <div>
                 <div class="row inline mt-2">
                     <h5 class="text-dark">Cliente: </h5>
-                    <select style="width: 50px; margin-left: 80px; width: 218px;" [(ngModel)]= proceso_Camaras.cliente> 
+                    <select style="width: 50px; margin-left: 80px; width: 218px;" [(ngModel)]= arriendo_bins.cliente> 
                         <option *ngFor="let cliente of clientes | orderBy:'nombre'" [value]="cliente.id_cliente">
                             {{cliente.nombre}}
                         </option>
                     </select>
                 </div>
                 <div class="row inline mt-2">
-                    <h5  class="text-dark">Tipo de Fruta: </h5>
-                    <select style="width: 50px; margin-left: 48px; width: 218px;" [(ngModel)]="proceso_Camaras.tipo_fruta">
-                        <option *ngFor="let fruta of tipo_fruta" [value]="fruta.idtipo_fruta">
-                            {{fruta.tipo_fruta}}
-                        </option>                
-                    </select>                 
-                </div>
-                <div class="row inline mt-2">
                     <h5  class="text-dark">Tipo de Pago: </h5>
-                    <select style="width: 50px; margin-left: 48px; width: 218px;"  [(ngModel)]="proceso_Camaras.tipo_pago">
+                    <select style="width: 50px; margin-left: 48px; width: 218px;"  [(ngModel)]="arriendo_bins.tipo_pago">
                         <option *ngFor="let pago of tipo_pago" [value]="pago.idtipo_pago">
                             {{pago.tipo_pago}}
                         </option>                
                     </select>                   
                 </div>
                 <div class="row inline mt-2">
-                    <h5  class="text-dark">Formato: </h5>     
-                    <select style="width: 50px; margin-left: 72px; width: 218px;" [(ngModel)]="proceso_Camaras.formato">
-                        <option>Pallet</option>
-                        <option>Bin</option>
-                    </select>
-                </div>
-                <div class="row inline mt-2">
                     <h5  class="text-dark">Fecha de Inicio: </h5> 
                     <div>
                         <div class="input-group date" style="margin-left: 38px; width: 218px;" data-provide="datepicker">
-                            <input type="date" class="form-control" [(ngModel)] = proceso_Camaras.fecha_inicio>
+                            <input type="date" class="form-control" [(ngModel)] = arriendo_bins.fecha_inicio>
                         </div>
                     </div>
                 </div>
@@ -49,21 +34,21 @@
                     <h5  class="text-dark">Fecha de Término: </h5>
                     <div>
                         <div class="input-group date" style="margin-left: 24px; width: 218px;" data-provide="datepicker">
-                            <input type="date" class="form-control" [(ngModel)] = proceso_Camaras.fecha_termino>
+                            <input type="date" class="form-control" [(ngModel)] = arriendo_bins.fecha_termino>
                         </div> 
                     </div>
                 </div>
                 <div class="row inline mt-2">
                     <h5  class="text-dark">Precio: </h5>             
-                    <input type="text" style="margin-left: 84px; width: 218px;" [(ngModel)] = proceso_Camaras.precio>
+                    <input type="text" style="margin-left: 84px; width: 218px;" [(ngModel)] = arriendo_bins.precio>
                 </div>
                 <div class="row inline mt-2">
                     <h5  class="text-dark">Cantidad: </h5>             
-                    <input type="text" style="margin-left: 70px; width: 218px;" [(ngModel)] = proceso_Camaras.cantidad>
+                    <input type="text" style="margin-left: 70px; width: 218px;" [(ngModel)] = arriendo_bins.cantidad>
                 </div>
                 <div class="row inline mt-4">
                     <h5  class="text-dark">Precio Total: </h5>             
-                    <h2 class="text-dark" style="margin-left: 55px;">${{proceso_Camaras.precio*proceso_Camaras.cantidad}}</h2>
+                    <h2 class="text-dark" style="margin-left: 55px;">${{arriendo_bins.precio*arriendo_bins.cantidad}}</h2>
                 </div>
                 <div class=" row inline mt-4 d-flex justify-content-center">
                     <div>
@@ -79,6 +64,3 @@
        
         
 
-
-
-    

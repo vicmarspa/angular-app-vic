@@ -37,5 +37,8 @@ export class PagoServiciosService {
     return this.http.get(`${this.API_URI}/getpaydetail/${numero_proceso}`)
   }
 
+  deletePagoServicio(id_pago:string){
+    return this.http.delete(`${this.API_URI}/camaras/delete/${id_pago}`)
+  }
   
 }

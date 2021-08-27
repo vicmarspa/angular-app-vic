@@ -334,23 +334,29 @@
 
 
 
-
+            
             <table class="table" >
                 <thead class="thead-dark">
-                  <tr>                    
-                    <th scope="col" style="width: 2%;">Proceso</th>
-                    <th scope="col" class="pl-2" style="width: 2%;">Fecha</th>                                        
-                    <th scope="col" class="pl-4" style="width: 4%;">Monto</th>
-                    <th scope="col" class="pl-4" style="width: 4%;">Descripción</th>
+                  <tr>                             
+                    <th>Proceso</th>
+                    <th>Fecha</th>                                        
+                    <th>Monto</th>
+                    <th>Descripción</th>
+                    <th>Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor ='let row2 of payDetail'>                    
-                    <td class="pl-4 ">{{row2.numero_proceso}}</td>
-                    <td>{{row2.fecha_registro | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>           
-                    <td class="pl-4">{{row2.monto_pago}}</td>
-                    <td class="pl-4">{{row2.description}}</td>
-                  </tr>                  
+                    <tr *ngFor ='let row2 of payDetail'>
+                        <td>{{row2.numero_proceso}}</td>
+                        <td>{{row2.fecha_registro | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>           
+                        <td>{{row2.monto_pago}}</td>
+                        <td>{{row2.description}}</td>
+                        <td>
+                            <button class="btn btn-danger ml-2 material-icons"  (click)="BorrarPago(row2.id_pago)">
+                                delete 
+                            </button>
+                        </td>
+                    </tr>                  
                 </tbody>
             </table>
         </div>

@@ -57,6 +57,11 @@ import { VerVentaComponent } from './components/ver-venta/ver-venta.component';
 import { PagoServiciosComponent } from './components/pago-servicios/pago-servicios.component';
 import { IngresoCamarasComponent } from './components/ingreso-camaras/ingreso-camaras.component';
 import { VerProcesoCamarasComponent } from './components/ver-proceso-camaras/ver-proceso-camaras.component';
+import { ServicioGruasComponent } from './components/servicio-gruas/servicio-gruas.component';
+import { VerServicioGruasComponent } from './components/ver-servicio-gruas/ver-servicio-gruas.component';
+import { ArriendoBinsComponent } from './components/arriendo-bins/arriendo-bins.component';
+import { VerArriendoBinsComponent } from './components/ver-arriendo-bins/ver-arriendo-bins.component';
+import { ServicioCamionesComponent } from './components/servicio-camiones/servicio-camiones.component';
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -95,6 +100,11 @@ import { VerProcesoCamarasComponent } from './components/ver-proceso-camaras/ver
     PagoServiciosComponent,
     IngresoCamarasComponent,
     VerProcesoCamarasComponent,
+    ServicioGruasComponent,
+    VerServicioGruasComponent,
+    ArriendoBinsComponent,
+    VerArriendoBinsComponent,
+    ServicioCamionesComponent,
     //DialogComponentComponent
     
   ],

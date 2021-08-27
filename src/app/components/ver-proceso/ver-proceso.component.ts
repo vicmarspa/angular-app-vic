@@ -383,8 +383,9 @@ refreshPageDirect()
     var fechasalidahtml = fechasalida?.innerHTML;
 
 
-    doc.text('Dirección: José Joaquín Godoy 100', 128, 8);
-    doc.text('Artificio, La Calera ', 145, 12);
+    doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
+    doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
+    doc.line(5, 20, 204, 20);
 
 
     var img = new Image()
