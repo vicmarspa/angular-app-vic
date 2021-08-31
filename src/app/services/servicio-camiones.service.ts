@@ -13,7 +13,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ServicioCamionesService {
 
       // API_URI = 'https://vicmarspa.herokuapp.com';
-      API_URI = 'https://vicmarspa.herokuapp.com';
+      API_URI = 'http://vicmarspa.herokuapp.com';
 
       authSubject = new BehaviorSubject(false);
       private token: string;
