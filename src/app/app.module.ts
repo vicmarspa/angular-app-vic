@@ -63,6 +63,10 @@ import { ArriendoBinsComponent } from './components/arriendo-bins/arriendo-bins.
 import { VerArriendoBinsComponent } from './components/ver-arriendo-bins/ver-arriendo-bins.component';
 import { ServicioCamionesComponent } from './components/servicio-camiones/servicio-camiones.component';
 import { VerServicioCamionesComponent } from './components/ver-servicio-camiones/ver-servicio-camiones.component';
+import { PagoServicioCamarasComponent } from './components/pago-servicio-camaras/pago-servicio-camaras.component';
+import { PagoServicioGruasComponent } from './components/pago-servicio-gruas/pago-servicio-gruas.component';
+import { PagoServicioBinsComponent } from './components/pago-servicio-bins/pago-servicio-bins.component';
+import { PagoServicioCamionesComponent } from './components/pago-servicio-camiones/pago-servicio-camiones.component';
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -107,8 +111,11 @@ import { VerServicioCamionesComponent } from './components/ver-servicio-camiones
     VerArriendoBinsComponent,
     ServicioCamionesComponent,
     VerServicioCamionesComponent,
+    PagoServicioCamarasComponent,
+    PagoServicioGruasComponent,
+    PagoServicioBinsComponent,
+    PagoServicioCamionesComponent,
     //DialogComponentComponent
-    
   ],
 
   //entryComponents:[DialogComponentComponent],

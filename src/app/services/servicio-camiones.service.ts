@@ -36,8 +36,8 @@ export class ServicioCamionesService {
   putServicioCamiones(numero_proceso: string|number, servicioCamiones:Servicio_Camiones): Observable<Servicio_Camiones>{
     return this.http.put(`${this.API_URI}/servicio_camiones/update/${numero_proceso}`, servicioCamiones)
   }
-
-
+              
+      
 
 
 }

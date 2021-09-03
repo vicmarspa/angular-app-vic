@@ -42,6 +42,18 @@ import{ServicioCamionesComponent} from './components/servicio-camiones/servicio-
 import{VerServicioCamionesComponent} from './components/ver-servicio-camiones/ver-servicio-camiones.component';
 
 
+
+import{PagoServicioCamarasComponent} from './components/pago-servicio-camaras/pago-servicio-camaras.component';
+import{PagoServicioGruasComponent} from './components/pago-servicio-gruas/pago-servicio-gruas.component';
+import{PagoServicioBinsComponent} from './components/pago-servicio-bins/pago-servicio-bins.component';
+import{PagoServicioCamionesComponent} from './components/pago-servicio-camiones/pago-servicio-camiones.component';
+
+
+
+
+
+
+
 const routes: Routes = [
   {
       path:'',
@@ -195,8 +207,24 @@ const routes: Routes = [
     {
       path:'servicio-camiones/ver',
       component:VerServicioCamionesComponent
-    }
-    
+    },
+    {
+      path:'pago_servicios_camaras',
+      component:PagoServicioCamarasComponent
+    },
+    {
+      path:'pago_servicios_gruas',
+      component:PagoServicioGruasComponent
+    },
+    {
+      path:'pago_servicios_bins',
+      component:PagoServicioBinsComponent
+    },
+    {
+      path:'pago_servicios_camiones',
+      component:PagoServicioCamionesComponent
+    },
+
 ];
 
 @NgModule({
