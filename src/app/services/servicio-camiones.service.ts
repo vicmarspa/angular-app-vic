@@ -12,8 +12,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class ServicioCamionesService {
 
-      // API_URI = 'https://vicmarspa.herokuapp.com';
-      API_URI = 'https://vicmarspa.herokuapp.com';
+      // API_URI = 'http://vicmarspa.herokuapp.com';
+      API_URI = 'http://vicmarspa.herokuapp.com';
 
       authSubject = new BehaviorSubject(false);
       private token: string;
@@ -33,11 +33,15 @@ export class ServicioCamionesService {
     return this.http.delete(`${this.API_URI}/servicio_camiones/delete/${numero_proceso}`)
   }
 
-  putServicioCamiones(numero_proceso: string|number, servicioCamiones:Servicio_Camiones): Observable<Servicio_Camiones>{
+  putServicioCamiones(numero_proceso: any, servicioCamiones:Servicio_Camiones): Observable<Servicio_Camiones>{
     return this.http.put(`${this.API_URI}/servicio_camiones/update/${numero_proceso}`, servicioCamiones)
   }
-              
-      
 
+
+  getOneProcess(numero_proceso:string){
+    return this.http.get(`${this.API_URI}/getpaydetail/camiones/edition/${numero_proceso}`)
+  }          
+      
+  
 
 }

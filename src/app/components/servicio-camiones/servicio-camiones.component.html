@@ -47,6 +47,14 @@
                     <h5  class="text-dark">Numero de Guía: </h5>             
                     <input type="text" style="margin-left: 48px; width: 218px;" [(ngModel)] = servicio_Camiones.numero_guia>
                 </div>
+                <div class="row inline mt-2">
+                    <h5  class="text-dark">Fecha de Guía: </h5> 
+                    <div>
+                        <div class="input-group date" style="margin-left: 38px; width: 218px;" data-provide="datepicker">
+                            <input type="date" class="form-control" [(ngModel)] = servicio_Camiones.fecha_guia>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row inline mt-2">
                     <h5  class="text-dark">Chofer: </h5>             

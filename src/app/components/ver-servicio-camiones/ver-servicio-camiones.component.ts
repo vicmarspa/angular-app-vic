@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable'
+import {Servicio_Camiones} from '../../models/servicioCamiones';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-ver-servicio-camiones',
@@ -40,6 +42,29 @@ export class VerServicioCamionesComponent implements OnInit {
 
 
   procesos_camaras2:any=[];
+  get_one_process:any=[];
+
+
+
+  //////////////
+  // variables para la edicion
+  servicio_camiones_edit:Servicio_Camiones={
+
+    numero_proceso:0,
+  //  fecha_recepcion: new Date,
+    origen: '',
+    destino: '',
+    formato: '',
+    cantidad: 0,
+    cliente: '',
+    numero_guia: 0,
+    chofer: '',
+    valor_neto: 0,
+    iva: 0,
+    total: 0,
+    report: '',
+
+  };
 
 
 
@@ -47,6 +72,17 @@ export class VerServicioCamionesComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+
+  /////////////////
+  /////////////////
 
 
   ngOnInit(): void {
@@ -61,6 +97,78 @@ export class VerServicioCamionesComponent implements OnInit {
       },
       err => console.error(err)
     );
+
+}
+
+searchOne(id:any){
+  this.servicioCamionesService.getOneProcess(id)
+  .subscribe(
+    res => {
+      this.get_one_process = res;                 
+      console.log(res);
+    },
+    err => console.error(err)
+  );
+}
+
+
+editproceso(
+  editnumeroproceso:any,
+ // editCreacion:any,
+  editOrigen:any, 
+  editDestino:any, 
+  editFormato:any, 
+  editCantidad:any, 
+  // editCliente:any, 
+  editGuia:any, 
+  editChofer:any,
+  editNeto:any, 
+  editIva:any, 
+  editTotal:any,
+  editReport:any
+){
+  
+console.log("ESTE ES EL CLIENTE"+this.get_one_process.cliente);
+
+  this.servicio_camiones_edit.numero_proceso =  editnumeroproceso;
+  //this.servicio_camiones_edit.fecha_recepcion =  editCreacion;
+  this.servicio_camiones_edit.origen =  editOrigen;
+  this.servicio_camiones_edit.destino =  editDestino;
+  this.servicio_camiones_edit.formato =  editFormato;
+  this.servicio_camiones_edit.cantidad =  editCantidad;
+  this.servicio_camiones_edit.cliente = this.get_one_process.cliente;
+  this.servicio_camiones_edit.numero_guia =  editGuia;
+  this.servicio_camiones_edit.chofer =  editChofer;
+  this.servicio_camiones_edit.valor_neto =  editNeto;
+  this.servicio_camiones_edit.iva =  editIva;
+  this.servicio_camiones_edit.total =  editTotal;
+  this.servicio_camiones_edit.report= editReport;
+  
+  console.log("numero proceso"+editnumeroproceso);
+  //console.log("crecion"+editCreacion);
+  console.log("origen"+editOrigen);
+  console.log("destino"+editDestino);
+  console.log("formato"+editFormato);
+  console.log("cantidad"+editCantidad);
+  // console.log("cliente"+editCliente);
+  console.log("guia"+editGuia);
+  console.log("chofer"+editChofer);
+  console.log("neto"+editNeto);
+  console.log("iva"+editIva);
+  console.log("total"+editTotal);
+  console.log("report"+editReport);
+  console.log("imprimir lista completa");
+  console.log(this.servicio_camiones_edit);
+
+
+  this.servicioCamionesService.putServicioCamiones(editnumeroproceso, this.servicio_camiones_edit )
+  .subscribe(
+    res => {
+      console.log(res);                        
+    },
+    err => console.log(err)
+  )
+
 
 }
 
@@ -253,26 +361,28 @@ correlativoFuncion()
 
   
     doc.line(5, 50, 204, 50);
-    doc.text('Detalles del Reporte - Servicio de Cámaras', 75,55);
+    doc.text('Detalles del Reporte - Servicio de Camiones', 75,55);
     doc.line(5, 60, 204, 60);
   
   
     doc.autoTable({ html: '#entrada2',columnStyles: {
   
       
-      0: {cellWidth: 10},
+      0: {cellWidth: 8},
       1: {cellWidth: 15},
-      2: {cellWidth: 18},
-      3: {cellWidth: 14},
-      4: {cellWidth: 14},
-      5: {cellWidth: 18},
-      6: {cellWidth: 18},
-      7: {cellWidth: 18},
-      8: {cellWidth: 15},
-      9: {cellWidth: 15},
+      2: {cellWidth: 15},
+      3: {cellWidth: 15},
+      4: {cellWidth: 15},
+      5: {cellWidth: 15},
+      6: {cellWidth: 16},
+      7: {cellWidth: 16},
+      8: {cellWidth: 12},
+      9: {cellWidth: 12},
       10: {cellWidth: 15},
-      11: {cellWidth: 8},
-      12: {cellWidth: 18},
+      11: {cellWidth: 15},
+      12: {cellWidth: 8},
+      13: {cellWidth: 18},
+
 
 
   

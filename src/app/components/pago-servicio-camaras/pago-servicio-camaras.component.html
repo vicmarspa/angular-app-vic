@@ -4,10 +4,19 @@
         <div class="col-2 m-2"> 
             <h4 class="d-inline text-dark ml-2">Fecha: </h4>
             <h4 class="d-inline text-dark" style="font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
-            <br>          
-            <h4 class="d-inline text-dark ml-2">KILOGRAMOS TOTAL: </h4>
-            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_kilogramos">{{SumaTotalPagado() | number : '1.0-0'}}</h4>
-            <br>  
+            <br>
+            <h4 class="d-inline text-dark ml-2">PRECIO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_precio">{{sumaPrecios() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">CANTIDAD TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_bines">{{sumaCantidad() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">PAGADO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_pagado">{{pagadoSum() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">ADEUDADO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_adeudado">{{adeudadoSum() | number : '1.0-0'}}</h4>
+            <br>
         </div>
             
         <!-- <div class="col-2 m-2">
@@ -124,8 +133,8 @@
             border: 1px solid #000000;
             font-size:20px">
             <h4 class="ml-4 text-dark">OPCIONES DE USUARIO</h4>
-            <button [routerLink] = "['/pago_servicios']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
-            <button [routerLink] ="['/pago_servicios']" class="btn btn-warning  position-relative material-icons ml-2" style="color:white" >refresh</button>
+            <button [routerLink] = "['/pago_servicios_camaras']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
+            <button [routerLink] ="['/pago_servicios_camaras']" class="btn btn-warning  position-relative material-icons ml-2" style="color:white" >refresh</button>
             </div>
         </div>
     </div>
@@ -316,13 +325,13 @@
                 <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h2>
             </div>
             <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoPago">{{selectedTipoPago}}</h2>
-            </div>
-            <div class="ml-5">
                 <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h2>
             </div>
             <div class="ml-5">
-                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoServicio">{{selectedTipoServicio}}</h2>
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedAdeudado">{{selectedAdeudado}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedNombre">{{selectedNombre}}</h2>
             </div>
         </div>
 
@@ -350,49 +359,40 @@
 
 
     
-        <table class="table table-sm" style="visibility: hidden;" id="test">
-            <thead class="thead-dark">
-              <tr>                    
-                <th >Proceso</th>
-                <th >Fruta</th>                                        
-                <th >Tipo Pago</th>
-                <th >Cliente</th>
-                <th >Kilogramos</th>
-                <th >Precio Total</th>
-                <th >Bins</th>
-                <th >Servicio</th>
-                <th >Fecha Creación</th>
-                <th >Total Pagado</th>
-                <th >Total Adeudado</th>
-
- 
-
-
-            
-
-
-
-
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor ='let row of primaryList'>                    
-                <td >{{row.numero_proceso}}</td>
-                <td>{{row.tipo_fruta}}</td>           
-                <td >{{row.tipo_pago}}</td>
-                <td>{{row.nombre}}</td>
-                <td>{{row.total_kg | number: '1.0-0'}}</td>
-                <td ><h2>${{row.total_precio | number: '1.0-0'}}</h2></td>
-                <td>{{row.total_bines | number: '1.0-0'}}</td>
-                <td>{{row.tipo_proceso}}</td>     
-                <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>
-                <td><h2>${{row.total_pago | number: '1.0-0'}}</h2></td>
-
-                <td><h2>${{row.adeudado | number: '1.0-0'}}</h2></td>  
-
-              </tr>                  
-            </tbody>
-          </table>
+    <table class="table table-sm"  id="test" style="visibility: hidden;">
+        <thead class="thead-dark">
+          <tr>                    
+            <th >#</th>
+            <th>Cliente</th>                                        
+            <th>Recepcion</th>
+            <th>Formato</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Inicio</th>
+            <th>Término</th>
+            <th>Tipo Fruta</th>
+            <th>Precio Total</th>
+            <th>Total Pago</th>
+            <th>Adeudado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor ='let row of primaryList.slice().reverse()'>                    
+            <td>{{row.numero_proceso}}</td>
+            <td>{{row.nombre}}</td>           
+            <td>{{row.fecha_recepcion | date :'dd-MM-yyyy  hh:mm:ss'}}</td>
+            <td>{{row.formato}}</td>
+            <td>{{row.precio | number: '1.0-0'}}</td>
+            <td>{{row.cantidad | number: '1.0-0'}}</td>
+            <td>{{row.fecha_inicio | date :'dd-MM-yyyy'}}</td>
+            <td>{{row.fecha_termino | date :'dd-MM-yyyy'}}</td>     
+            <td>{{row.tipo_fruta}}</td>
+            <td>{{row.precio_total | number: '1.0-0'}}</td>
+            <td>${{row.total_pago | number: '1.0-0'}}</td>
+            <td>${{row.adeudado | number: '1.0-0'}}</td>
+          </tr>                  
+        </tbody>
+      </table>
           <input type="text" value="0" id="borrado" style="display: none;">             
 
 

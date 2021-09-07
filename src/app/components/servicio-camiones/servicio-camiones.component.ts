@@ -38,7 +38,8 @@ export class ServicioCamionesComponent implements OnInit {
     valor_neto:0,
     iva:0,
     total:0,
-    report:''
+    report:'',
+    fecha_guia: new Date
 
   }  
 

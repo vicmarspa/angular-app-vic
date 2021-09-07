@@ -122,6 +122,9 @@ export class PagoServicioCamarasComponent implements OnInit {
   public SumaTotalPagado(){
     return this.primaryList.map(row => row.total_pago).reduce((a,b) => a+b, 0);
   }
+
+
+
   // public cantidadbinsEntradaSum(){
   //   return this.calibradoEntrada.map(row => row.cantidad_bines).reduce((a,b) => a+b, 0);
   // }
@@ -135,21 +138,21 @@ export class PagoServicioCamarasComponent implements OnInit {
   // public sumaKilogramosCalibrados(){
   //   return this.calibrado.map(row => row.total_kg).reduce((a,b) => a+b, 0);
   // }
-  // public sumaPreciosCalibrados(){
-  //   return this.calibrado.map(row => row.total_precio).reduce((a,b) => a+b, 0);
-  // }
-  // public sumaBinesCalibrados(){
-  //   return this.calibrado.map(row => row.total_bines).reduce((a,b) => a+b, 0);
-  // }
+  public sumaPrecios(){
+    return this.primaryList.map(row => row.precio_total).reduce((a,b) => a+b, 0);
+  }
+  public sumaCantidad(){
+    return this.primaryList.map(row => row.cantidad).reduce((a,b) => a+b, 0);
+  }
   
   
-  // public adeudadoSum(){
-  //   return this.calibrado.map(row => row.adeudado).reduce((a,b) => a+b, 0);
-  // }
+  public adeudadoSum(){
+    return this.primaryList.map(row => row.adeudado).reduce((a,b) => a+b, 0);
+  }
   
-  // public pagadoSum(){
-  //   return this.calibrado.map(row => row.total_pago).reduce((a,b) => a+b, 0);
-  // }
+  public pagadoSum(){
+    return this.primaryList.map(row => row.total_pago).reduce((a,b) => a+b, 0);
+  }
   
 
 
@@ -462,87 +465,54 @@ export class PagoServicioCamarasComponent implements OnInit {
   
   
   
-  var total_kilogramos = document.getElementById("total_kilogramos");
-  var total_kilogramoshtml = total_kilogramos?.innerHTML;
-  
-  
-  
+
   var total_precio = document.getElementById("total_precio");
   var total_preciohtml = total_precio?.innerHTML;
-  
   var total_bines = document.getElementById("total_bines");
   var total_bineshtml = total_bines?.innerHTML;
-  
-  
   var fechaActual = document.getElementById("fechaActual");
   var fechaActualhtml = fechaActual?.innerHTML;
-  
-  
   var startDateText = document.getElementById("startDateText");
   var startDateTexthtml = startDateText?.innerHTML;
-  
   var endDateText = document.getElementById("endDateText");
   var endDateTexthtml = endDateText?.innerHTML;
-  
-  
-  var selectedTipoPago = document.getElementById("selectedTipoPago");
-  var selectedTipoPagohtml = selectedTipoPago?.innerHTML;
-  
-  
   var selectedTipoFruta = document.getElementById("selectedTipoFruta");
   var selectedTipoFrutahtml = selectedTipoFruta?.innerHTML;
-  
-  
-  var selectedTipoServicio = document.getElementById("selectedTipoServicio");
-  var selectedTipoServiciohtml = selectedTipoServicio?.innerHTML;
-  
-  
   var total_adeudado = document.getElementById("total_adeudado");
   var total_adeudadohtml = total_adeudado?.innerHTML;
-  
-  
   var total_pagado = document.getElementById("total_pagado");
   var total_pagadohtml = total_pagado?.innerHTML;
+  var selectedAdeudado = document.getElementById("selectedAdeudado");
+  var selectedAdeudadohtml = selectedAdeudado?.innerHTML;
+  var selectedNombre = document.getElementById("selectedNombre");
+  var selectedNombrehtml = selectedNombre?.innerHTML;
   
   
   doc.text( 'Fecha Actual: ', 10, 25);
   doc.text(fechaActualhtml,45, 25);
-  
   doc.text('Rango de Busqueda: ', 10, 30);
   doc.text(startDateTexthtml, 45, 30);
   doc.text(endDateTexthtml, 68, 30);
-  
-  
-  doc.text('Tipo de Pago: ', 10, 35);
-  doc.text(selectedTipoPagohtml, 45, 35);
-  
+  doc.text('Cliente: ', 10, 35);
+  doc.text(selectedNombrehtml, 45, 35);
   doc.text('Tipo de Fruta: ', 10, 40);
   doc.text(selectedTipoFrutahtml, 45, 40);
-  
-  doc.text('Tipo de Servicio: ', 10, 45);
-  doc.text(selectedTipoServiciohtml, 45, 45);
-  
-  
-  
-  
-  
-  
-  doc.text('Kilogramos Total: ', 95, 25, );
-  doc.text(total_kilogramoshtml, 125, 25);
-  doc.text('Precio Total: ', 95, 30);
-  doc.text(total_preciohtml, 125, 30);
-  doc.text('Bins Total: ', 95, 35);
-  doc.text(total_bineshtml, 125, 35);
-  doc.text('Adeudado Total: ', 95, 40);
-  doc.text(total_adeudadohtml, 125, 40);
-  doc.text('Pagado Total: ', 95, 45);
-  doc.text(total_pagadohtml, 125, 45);
+  doc.text('Total Adeudado: ', 10, 45);
+  doc.text(selectedAdeudadohtml, 45, 45);
+  doc.text('Precio Total: ', 95, 25);
+  doc.text(total_preciohtml, 125, 25);
+  doc.text('Bins Total: ', 95, 30);
+  doc.text(total_bineshtml, 125, 30);
+  doc.text('Adeudado Total: ', 95, 35);
+  doc.text(total_adeudadohtml, 125, 35);
+  doc.text('Pagado Total: ', 95, 40);
+  doc.text(total_pagadohtml, 125, 40);
   
   
   
   doc.line(5, 50, 204, 50);
   
-  doc.text('Detalles del Reporte', 80,55);
+  doc.text('Detalles del Reporte - Servicio Cámaras', 80,55);
   
   doc.line(5, 60, 204, 60);
   
@@ -555,17 +525,19 @@ export class PagoServicioCamarasComponent implements OnInit {
   (doc as jsPDF & { autoTable: autoTable } ).autoTable({ html: '#test', columnStyles: {
   
     
-    0: {cellWidth: 15},
+    0: {cellWidth: 8},
     1: {cellWidth: 20},
     2: {cellWidth: 18},
-    3: {cellWidth: 20},
+    3: {cellWidth: 18},
     4: {cellWidth: 18},
     5: {cellWidth: 18},
     6: {cellWidth: 15},
-    7: {cellWidth: 20},
-    8: {cellWidth: 20},
+    7: {cellWidth: 15},
+    8: {cellWidth: 15},
     9: {cellWidth: 15},
     10: {cellWidth: 18},
+    11: {cellWidth: 18},
+
   
   
   

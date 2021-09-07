@@ -13,4 +13,5 @@ export interface Servicio_Camiones{
     iva?:number;
     total?:number;
     report?:string;
+    fecha_guia?:Date;
 }

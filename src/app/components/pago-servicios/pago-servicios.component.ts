@@ -638,7 +638,7 @@ doc.text(total_pagadohtml, 125, 45);
 
 doc.line(5, 50, 204, 50);
 
-doc.text('Detalles del Reporte', 80,55);
+doc.text('Detalles del Reporte - Servicio Calibrado / Desverdizado', 55,55);
 
 doc.line(5, 60, 204, 60);
 
