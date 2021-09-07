@@ -164,10 +164,17 @@ console.log("ESTE ES EL CLIENTE"+this.get_one_process.cliente);
   this.servicioCamionesService.putServicioCamiones(editnumeroproceso, this.servicio_camiones_edit )
   .subscribe(
     res => {
-      console.log(res);                        
+      console.log(res); 
+      window.location.reload();
+                       
     },
     err => console.log(err)
+    
+    
   )
+
+
+
 
 
 }
