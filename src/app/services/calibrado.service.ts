@@ -27,8 +27,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 @Injectable()
 export  class CalibradoService {  
   
-  // API_URI = 'http://vicmarspa.herokuapp.com';
-  API_URI = 'http://vicmarspa.herokuapp.com';
+  // API_URI = 'https://vicmarspa.herokuapp.com';
+  API_URI = 'https://vicmarspa.herokuapp.com';
 
   authSubject = new BehaviorSubject(false);
   private token: string;
