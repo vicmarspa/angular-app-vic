@@ -1,1 +1,405 @@
-<p>pago-servicio-camiones works!</p>
+<div class="container-fluid col-12">
+    <div class="row mt-4 mb-4 d-flex justify-content-center">
+        <h2 class="mt-4 mb-4 d-flex justify-content-center">PAGO SERVICIO CAMIONES</h2>
+        <div class="col-2 m-2"> 
+            <h4 class="d-inline text-dark ml-2">Fecha: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">PRECIO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_precio">{{sumaPrecios() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">CANTIDAD TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_bines">{{sumaCantidad() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">PAGADO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_pagado">{{pagadoSum() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">ADEUDADO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_adeudado">{{adeudadoSum() | number : '1.0-0'}}</h4>
+            <br>
+        </div>
+            
+        <!-- <div class="col-2 m-2">
+            <h4 class="d-inline text-dark ml-2">PRECIO TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_precio">${{sumaPreciosCalibrados() | number : '1.0-0'}}</h4>
+            <br>          
+            <h4 class="d-inline text-dark ml-2">BINS TOTAL: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_bines">{{sumaBinesCalibrados() | number : '1.0-0'}}</h4>
+                          
+        </div>
+
+        <div class="col-2 m-2">       
+            <h4 class="d-inline text-dark ml-2">TOTAL ADEUDADO: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_adeudado">{{adeudadoSum() | number : '1.0-0'}}</h4>
+            <br>
+            <h4 class="d-inline text-dark ml-2">TOTAL PAGADO: </h4>
+            <h4 class="d-inline text-dark" style="font-weight: bold;" id="total_pagado">{{pagadoSum() | number : '1.0-0'}}</h4>                  
+        </div> -->
+
+
+
+
+
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+
+
+        <div class="col-2"> 
+
+            <div class="pl-2">
+                <span class=""><b>BUSCAR PROCESO</b></span>
+            </div>
+            <div class="ml-2">
+                <input class="form-control input-sm" type="text" size="30" name="numero_proceso" [(ngModel)] = numero_proceso (ngModelChange) = "Search();">
+            </div>
+
+            <div class="pl-2">
+                <span class=""><b>BUSCAR CLIENTE</b></span>
+            </div>
+            <div class="ml-2">
+                <input class="form-control input-sm" type="text" size="30" name="selectedNombre" style="text-transform:uppercase;" [(ngModel)] = selectedNombre (ngModelChange) = "SearchByClient();">
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+        <div class="col-2">
+
+
+            <div >
+                <span class="ml-2"><b>FECHA DE RECEPCIÓN</b></span>
+            </div>
+            <div class=" input-group ml-2" id="holi">
+                <input type="text" name="daterange" autocomplete="off" bsDaterangepicker 
+                [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
+                id="DateOfBirth" placeholder="Date Range" (bsValueChange)="dateRangeCreated($event)" class="form-control" />
+            </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+        <div class="col-3 ml-2">
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <h4 class="ml-4 text-dark">OPCIONES DE USUARIO</h4>
+            <button [routerLink] = "['/pago_servicios_camiones']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
+            <button [routerLink] ="['/pago_servicios_camiones']" class="btn btn-warning  position-relative material-icons ml-2" style="color:white" >refresh</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-11 ml-2">
+            <table class="table table-sm"  id="entrada">
+                <thead class="thead-dark">
+                  <tr>                    
+                    <th scope="col" style="width: 2%;">Proceso</th>
+                    <th scope="col" class="pl-2" style="width: 2%;">Report</th>                                        
+                    <th scope="col" class="pl-4" style="width: 4%;">Recepcion</th>
+                    <th scope="col" style="width: 4%;">Origen</th>
+                    <th scope="col" style="width: 4%;">Destino</th>
+                    <th scope="col" style="width: 4%;">Formato</th>
+                    <th scope="col" style="width: 2%;">Cantidad</th>
+                    <th scope="col" style="width: 2%;">Nombre</th>
+                    <th scope="col" class="" style="width: 2%">#Guía</th>
+                    <th scope="col" class="pl-4" style="width: 4%;">Chofer</th>
+                    <th scope="col" class="" style="width: 2%">Neto</th>
+                    <th scope="col" class="" style="width: 2%">Iva</th>
+                    <th scope="col" class="" style="width: 2%">Total</th>
+                    <th scope="col" class="" style="width: 2%">Total Pagado</th>
+                    <th scope="col" class="" style="width: 2%">Total Adeudado</th>
+                    <th scope="col" style="width: 0%; padding-left: 150px;">Opciones</th>                   
+                    <th scope="col" style="width: 0%;"></th>
+                    <th scope="col" style="width: 0%;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ='let row of primaryList.slice().reverse()'>
+                    <td class="pl-4 ">{{row.numero_proceso}}</td>
+                    <td>{{row.report}}</td>           
+                    <td class="pl-4">{{row.fecha_recepcion | date :'dd-MM-yyyy  hh:mm:ss'}}</td>
+                    <td>{{row.origen}}</td>
+                    <td>{{row.destino}}</td>
+                    <td>{{row.formato}}</td>
+                    <td>{{row.cantidad | number: '1.0-0'}}</td>
+                    <td>{{row.nombre}}</td>
+                    <td>{{row.numero_guia}}</td>
+                    <td>{{row.chofer}}</td>
+                    <td>{{row.valor_neto | number: '1.0-0'}}</td>
+                    <td>{{row.iva}}</td>
+                    <td class="bg-primary text-white"><h2>{{row.total | number: '1.0-0'}}</h2></td>
+                    <td class="bg-primary text-white"><h2>${{row.total_pago | number: '1.0-0'}}</h2></td>
+                    <td [ngClass]="{'bg-success text-white' : row.adeudado < 1,  'bg-danger text-white' : row.adeudado > 1, 'bg-warning text-dark': row.adeudado == null}"><h2>${{row.adeudado | number: '1.0-0'}}   </h2></td>
+                    <td>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = pagos_servicios.monto_pago> -->
+                    <form (submit)="insertPay2(row.numero_proceso, dato2, dato3)" >
+                            <input type="hidden" value="{{row.numero_proceso}}">
+                            <input type="text" placeholder="MONTO" class="form-control input-sm"  #dato2 required>
+                            <input type="text" placeholder="DESCRIPCIÓN" class="form-control input-sm mt-2" #dato3 required>
+                        <button class="btn btn-primary mt-2 btn-block">
+                            ABONAR
+                        </button>
+                    </form>
+                    <!-- <input class="" size="8" type="text" [(ngModel)]="pagos_servicios.monto_pago"> -->
+                        <!-- <input class="" size="8" type="text" [(ngModel)]="pagos_servicios.numero_proceso"> -->
+                        <!-- <button type="button" class="btn btn-success ml-2"> INGRESAR PAGO </button> -->
+                        <!-- <a [routerLink] ="['./detalle',row.numero_proceso]" class="btn btn-primary btn-xs ml-2">DETALLE</a> -->
+                    </td>
+                    <td>
+                        <form (submit)="insertTotalPay(row.numero_proceso, row.adeudado)">
+                                <input type="hidden" value="{{row.numero_proceso}}">
+                                <button class="btn btn-success">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    TOTAL
+                                    <br>
+                                </button>
+                        </form>
+                    </td>
+
+
+                    
+                   <td>
+
+                   
+
+
+                    <button class="btn btn-primary "  data-toggle="modal" (click)="getPayDetail(
+                        row.numero_proceso,
+                        row.report,
+                        row.fecha_recepcion,
+                        row.origen,
+                        row.destino,
+                        row.formato,
+                        row.cantidad,
+                        row.nombre,
+                        row.numero_guia,
+                        row.chofer,
+                        row.valor_neto,
+                        row.iva,
+                        row.total,
+                        row.total_pago,
+                        row.adeudado)" data-target="#exampleModal">
+                        <br>
+                        <br>
+                        <br>
+                        DETALLE
+                        <br>
+                        PAGOS 
+                        <br>
+                    </button>
+
+                    <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false" >
+                        <div class="modal-dialog modal-lg"   role="document">
+                          <div class="modal-content modal-lg" >
+                            <div class="modal-header modal-lg" >
+                              <h5 class="modal-title" id="exampleModalLabel" id="detailselectedDetailNumeroProceso">PROCESO N° {{selectedDetailNumeroProceso}}</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body modal-lg">
+                                    <b>Report:  </b><b style="margin-left: 120px;" id="detailselectedDetailReport">{{selectedDetailReport}}</b>
+                                    <br>
+                                    <b>Fecha de Recepción:  </b><b  style="margin-left: 45px;" id="detailselectedDetailFecha_recepcion">{{selectedDetailFecha_recepcion | date :'dd-MM-yyyy  hh:mm:ss'}}</b>
+                                    <br>
+                                    <b>Origen:  </b><b  style="margin-left: 118px;" id="detailselectedDetailOrigen">{{selectedDetailOrigen}}</b>
+                                    <br>
+                                    <b>Destino:  </b><b  style="margin-left: 130px;" id="detailselectedDetailDestino">{{selectedDetailDestino}}</b>
+                                    <br>
+                                    <b>Formato:  </b><b  style="margin-left: 115px;" id="detailselectedDetailFormato">{{selectedDetailFormato}}</b>
+                                    <br>  
+                                    <b>Cantidad:  </b><b  style="margin-left: 78px;" id="detailselectedDetailCantidad">{{selectedDetailCantidad}}</b>
+                                    <br>
+                                    <b>Nombre:  </b><b  style="margin-left: 62px;" id="detailselectedDetailNombre">{{selectedDetailNombre}}</b>
+                                    <br>
+                                    <b>Numero de Guía:  </b><b  style="margin-left: 92px;" id="detailselectedDetailNumeroGuia">{{selectedDetailNumeroGuia}}</b>
+                                    <br>
+                                    <b>Chofer:  </b><b  style="margin-left: 100px;" id="detailselectedDetailChofer">{{selectedDetailChofer}}</b>
+                                    <br>
+                                    <b>Valor Neto:  </b><b  style="margin-left: 108px;" id="detailselectedDetailValorNeto">${{selectedDetailValorNeto}}</b>
+                                    <br>
+                                    <b>Iva:  </b><b  style="margin-left: 112px;" id="detailselectedDetailIva">{{selectedDetailIva}}</b>
+                                    <br>
+                                    <b>Total:  </b><b  style="margin-left: 112px;" id="detailselectedDetailTotal">${{selectedDetailTotal}}</b>
+                                    <br>
+                                    <b>Total Pagado:  </b><b  style="margin-left: 112px;" id="detailselectedDetailTotal_pago">${{selectedDetailTotal_pago}}</b>
+                                    <br>
+                                    <b>Adeudado:  </b><b  style="margin-left: 112px;" id="detailselectedDetailAdeudado">${{selectedDetailAdeudado}}</b>
+                            </div>
+                            <div class="modal-body modal-lg">
+                                <table class="table" >
+                                    <thead class="thead-dark">
+                                      <tr>                             
+                                        <th>Proceso</th>
+                                        <th>Fecha</th>                                        
+                                        <th>Monto</th>
+                                        <th>Descripción</th>
+                                        <th>Eliminar</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor ='let row2 of payDetail'>
+                                            <td>{{row2.numero_proceso}}</td>
+                                            <td>{{row2.fecha_registro | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>           
+                                            <td>{{row2.monto_pago}}</td>
+                                            <td>{{row2.description}}</td>
+                                            <td>
+                                                <button class="btn btn-danger ml-2 material-icons"  data-dismiss="modal" (click)="BorrarPago(row2.id_pago)">
+                                                    delete 
+                                                </button>
+                                            </td>
+                                        </tr>                  
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer modal-lg" >
+                                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="generatePDF()" data-dismiss="modal">IMPRIMIR PROCESO</button>
+                              </div>
+                            <div class="modal-footer modal-lg" >
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+    
+    
+    
+    
+                   </td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </tr>                  
+                </tbody>
+              </table>
+              <input type="text" value="0" id="borrado" style="display: none;">             
+        </div>
+
+        <div class="col-4 m-2">  
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="endDateText">{{endDateText| date :'dd-MM-yyyy'}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedTipoFruta">{{selectedTipoFruta}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedAdeudado">{{selectedAdeudado}}</h2>
+            </div>
+            <div class="ml-5">
+                <h2 class="d-inline position-relative" type="hidden" style="left: .5%; visibility: hidden;" id="selectedNombre">{{selectedNombre}}</h2>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Modal -->
+
+    </div>
+
+
+
+
+  
+
+
+
+    
+    <table class="table table-sm"  id="test" style="visibility: hidden;">
+        <thead class="thead-dark">
+          <tr>                    
+            <th>#</th>
+            <th>Report</th>                                        
+            <th>Recepcion</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Formato</th>
+            <th>Cant</th>
+            <th>Nombre</th>
+            <th>#Guía</th>
+            <th>Chofer</th>
+            <th>Neto</th>
+            <th>Iva</th>
+            <th>Total</th>
+            <th>Total Pagado</th>
+            <th>Total Adeudado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor ='let row of primaryList.slice().reverse()'>                    
+            <td>{{row.numero_proceso}}</td>
+            <td>{{row.report}}</td>           
+            <td>{{row.fecha_recepcion | date :'dd-MM-yyyy  hh:mm:ss'}}</td>
+            <td>{{row.origen}}</td>
+            <td>{{row.destino}}</td>
+            <td>{{row.formato}}</td>
+            <td>{{row.cantidad | number: '1.0-0'}}</td>
+            <td>{{row.nombre}}</td>
+            <td>{{row.numero_guia}}</td>
+            <td>{{row.chofer}}</td>
+            <td>{{row.valor_neto | number: '1.0-0'}}</td>
+            <td>{{row.iva}}</td>
+            <td>{{row.total | number: '1.0-0'}}</td>
+            <td>${{row.total_pago | number: '1.0-0'}}</td>
+            <td>>${{row.adeudado | number: '1.0-0'}}</td>
+          </tr>                  
+        </tbody>
+      </table>
+          <input type="text" value="0" id="borrado" style="display: none;">             
+
+
+
+    
+
