@@ -116,7 +116,7 @@
                 <tr *ngFor ='let row of calibrado1Entrada'>                    
                     <td>{{row.kilogramos | number : '000.000'}}</td>
                     <td>{{row.cantidad_bines}}</td>
-                    <td>{{row.kilogramos - (row.cantidad_bines*40) | number : '000.000'}}</td>              
+                    <td>{{row.kilogramos - (row.cantidad_bines*43) | number : '000.000'}}</td>              
                 </tr>
                 <tr class="table-info">
                     <td><b>{{kilogramosEntradaSum() | number : '000.000'}}</b></td>
