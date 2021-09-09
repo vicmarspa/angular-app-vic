@@ -92,11 +92,12 @@ export class VerServicioCamionesComponent implements OnInit {
     this.servicioCamionesService.getServicioCamiones()
     .subscribe(
       res => {
-        this.servicio_camiones = res;                 
+        this.servicio_camiones = res;
         console.log(res);
       },
       err => console.error(err)
     );
+
 
 }
 
