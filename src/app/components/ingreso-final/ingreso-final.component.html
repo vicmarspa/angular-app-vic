@@ -66,7 +66,15 @@
             </div>
             <div class="ml-4">
                 <input type="text" [(ngModel)]=calibradoEntrada.kilogramos>
-            </div>           
+            </div>   
+
+            <div>
+                <span class=" d-block {{visibilidad}}" style="padding-left: 43px;">KILOGRAMOS EXTRAS</span>
+            </div>
+            <div class="ml-4">
+                <input class="{{visibilidad}}" type="text" [(ngModel)]=resta >
+            </div>   
+
             
         </div>
         <div class="sm col-3 ">

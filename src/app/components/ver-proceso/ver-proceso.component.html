@@ -32,7 +32,7 @@
             padding: 10px;
             border: 1px solid #000000;
             font-size:20px">
-            <h4>OPCIONES DE USUARIO</h4>
+            <h4>OPCIONES DE USUARIO <button class="btn btn-success  position-relative mr-2 {{visibilidad}}" (click)="copiaCliente2PDF()" >DOCUMENTO DESVERDIZADO</button></h4>
             <button class="btn btn-primary  position-relative mr-2"  (click)="nuevoPDF()" >GENERAR DOCUMENTO</button>               
             <button class="btn btn-success  position-relative mr-2"   (click)="copiaClientePDF()" >COPIA DE CLIENTE</button>               
             <button class="btn btn-warning  position-relative material-icons mr-2" style="color:white" (click)="correlativoFuncion(calibrado.nombre)">refresh</button>
@@ -169,4 +169,34 @@
                 </table>       
         </div>
     </div>
+</div>
+
+
+<div class="invisible">
+
+
+    <table class="table" id="entrada2">
+        <thead class="thead-dark">
+        <tr>
+            
+
+            <th scope="col">KG NETO</th>
+                                   
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor ='let row of calibrado1Entrada'>                    
+
+            <td>{{row.kilogramos - (row.cantidad_bines*43) | number : '000.000'}}</td>              
+        </tr>
+        <tr class="table-info">
+
+            <td><b>{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}}</b></td>
+        </tr>
+        
+
+        
+            </tbody>
+        </table>
 </div>

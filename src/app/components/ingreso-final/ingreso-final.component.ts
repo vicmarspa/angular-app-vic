@@ -14,6 +14,7 @@ import{ToastrService} from 'ngx-toastr';
 
 import  {Pagos_servicios} from '../../models/pagos_servicios'
 import { PagoServiciosService} from '../../../app/services/pago-servicios.service'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class IngresoFinalComponent implements OnInit{
   nombreCliente:string ='';
 
 
-
+  resta:number=0;
+  visibilidad:string = 'invisible';
 
   calibrado2:Calibrado = {
     numero_proceso:'',
@@ -97,7 +99,7 @@ export class IngresoFinalComponent implements OnInit{
       .subscribe(
         res => {
           this.correlativoCliente = res;
-          console.log(this.correlativoCliente+'dsadsadsadsa')              
+          console.log(this.correlativoCliente);        
           console.log(res);
         },
         err => console.error(err)
@@ -132,10 +134,15 @@ export class IngresoFinalComponent implements OnInit{
         this.correlativoFuncion(this.nombreCliente);
         console.log(this.getUltimo);              
         console.log(res);
+
+        console.log('tipo de proceso'+this.getUltimo.tipo_proceso);
+    ////////////////////////////////////////////////////
+        if(this.getUltimo.tipo_proceso == 'DESVERDIZADO'){
+          this.visibilidad = 'visible';
+        }
         
       },
       err => console.error(err)
-      
     )
     this.calibradoService.getCalibre()
       .subscribe(
@@ -150,6 +157,8 @@ export class IngresoFinalComponent implements OnInit{
         
   }     
 
+  edit_entrada:number=0;
+
   //Guardar dato en tabla proceso_entrada
   guardarCalibradoEntrada(numero_proceso:string){ 
     
@@ -157,6 +166,14 @@ export class IngresoFinalComponent implements OnInit{
     this.CaputarValor();
     
     this.toastr.success("ENTRADA INGRESADA");
+
+    console.log(this.resta+'esta es la resta')
+
+    if(this.resta  != 0){
+    this.edit_entrada =this.calibradoEntrada.kilogramos-(this.resta-43);
+    console.log(this.edit_entrada+'ESTE ES EL RESULTADO')
+    this.calibradoEntrada.kilogramos = this.edit_entrada;
+    this.resta=0;
 
     delete this.calibradoEntrada.id_entrada;
     delete this.calibradoEntrada.fecha_ingreso;
@@ -170,7 +187,24 @@ export class IngresoFinalComponent implements OnInit{
       },
       err => console.error(err)
     )
-    
+
+    }else{   
+
+      delete this.calibradoEntrada.id_entrada;
+      delete this.calibradoEntrada.fecha_ingreso;
+      delete this.calibradoEntrada.fecha_proceso;    
+      this.calibradoService.saveCalibradoEntrada(numero_proceso,this.calibradoEntrada)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+          
+        },
+        err => console.error(err)
+      )
+    }
+
+
     
   }
 

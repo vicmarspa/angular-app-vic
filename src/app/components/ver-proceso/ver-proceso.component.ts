@@ -49,6 +49,9 @@ export class VerProcesoComponent implements OnInit {
   
   edit:boolean = false;
 
+  visibilidad:string='invisible';
+
+
   constructor(private calibradoService:CalibradoService,private router: Router,private activedRoute:ActivatedRoute) { }
 
 
@@ -80,6 +83,11 @@ export class VerProcesoComponent implements OnInit {
 
 
             this.edit = true;
+
+            if(this.calibrado1.tipo_proceso=='DESVERDIZADO'){
+              this.visibilidad='visible';
+            };
+
           },
           err => console.log(err)
         )
@@ -480,6 +488,111 @@ refreshPageDirect()
       
    
   }
+
+
+
+
+  copiaCliente2PDF(){
+    // Default export is a4 paper, portrait, using millimeters for units
+    const doc = new jsPDF();
+    doc.setFontSize(10);
+    
+    var correlativoProceso = document.getElementById("correlativoProceso");
+    var correlativoProcesohtml = correlativoProceso?.innerHTML;
+    var fecha = document.getElementById("fecha");
+    var fechahtml = fecha?.innerHTML;
+    var totalingreso = document.getElementById("totalingreso");
+    var totalingresohtml = totalingreso?.innerHTML;
+    var bins = document.getElementById("bins");
+    var binshtml = bins?.innerHTML;
+    var valortotal = document.getElementById("valortotal");
+    var valortotalhtml = valortotal?.innerHTML;
+    var cliente = document.getElementById("cliente");
+    var clientehtml = cliente?.innerHTML;
+    var fruta = document.getElementById("fruta");
+    var frutahtml = fruta?.innerHTML;
+    var valor = document.getElementById("valor");
+    var valorhtml = valor?.innerHTML;
+    var pago = document.getElementById("pago");
+    var pagohtml = pago?.innerHTML;
+    var fechasalida = document.getElementById("fechasalida");
+    var fechasalidahtml = fechasalida?.innerHTML;
+
+
+    doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
+    doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
+    doc.line(5, 20, 204, 20);
+
+
+    var img = new Image()
+    img.src = '/assets/image.jpg'
+    doc.addImage(img, 'jpg', 185, 0, 18, 18)
+
+
+
+    doc.line(5, 15, 22, 15);
+
+    
+
+    doc.line(5, 6, 22, 6);
+
+
+    doc.line(5, 15, 5, 6)
+
+    doc.line(22, 15, 22, 6)
+
+    doc.setFontSize(28);
+   
+    doc.text(correlativoProcesohtml,10, 14);
+
+    doc.setFontSize(10);
+    doc.text('Fecha de Recepción: ', 10, 25);
+    doc.text(fechahtml,48, 25);
+    doc.text('-', 93,25);
+    doc.text('Fecha de Salida:', 100,25);
+    doc.text(fechasalidahtml,130, 25);
+    doc.text('Cliente: ', 10, 30);
+    doc.text(clientehtml,28, 30);
+    doc.text('Kilogramos Ingresados: ', 10, 40);
+    doc.text(totalingresohtml,50,40);
+    doc.text('Cantidad: ', 10, 45);
+    doc.text(binshtml,40,45);
+    doc.text('Tipo de Fruta: ', 10, 50);
+    doc.text(frutahtml,35, 50);
+    doc.text('Valor del Servicio: ', 100, 40);
+    doc.text(valorhtml,130, 40);
+    doc.text('Valor Total: ', 100, 45);
+    doc.text(valortotalhtml,120,45);
+
+    /*
+    doc.text(100, 50, 'Tipo de Pago: ');
+    doc.text(pagohtml,125, 50);
+    */
+    doc.line(5, 33, 204, 33);
+    doc.line(5, 55, 204, 55);
+
+    doc.text('Detalle del Pesaje' ,15,60);
+    
+    doc.autoTable({ html: '#entrada2',columnStyles: {
+      0: {cellWidth: 22},
+
+      
+    },margin: {top: 65,right:35,left:15}, styles: {overflow: 'linebreak',
+    fontSize: 10},didParseCell: function (data) {
+      var rows = data.table.body;
+
+      if (data.row.index === rows.length - 1) {
+          data.cell.styles.fillColor = [138, 236, 247];
+      }} } )
+ 
+    
+    
+    doc.output('dataurlnewwindow'); 
+      
+   
+  }
+
+
 
 
 

@@ -65,11 +65,12 @@ export class ContinuarProcesoComponent implements OnInit {
   
 
   ngOnInit(): void {
+
     this.calibradoService.getCalibrados()
       .subscribe(
         res => {
           this.correlativoCliente = res;
-          console.log(this.correlativoCliente+'dsadsadsadsa')              
+          console.log(this.correlativoCliente)              
           console.log(res);
         },
         err => console.error(err)
@@ -114,15 +115,10 @@ export class ContinuarProcesoComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-
           this.getcalibre = res;
         },
         err => console.log(err)
       )
-
-
-
-
 
   }
 
@@ -135,13 +131,13 @@ export class ContinuarProcesoComponent implements OnInit {
 
     delete this.calibradoEntrada.id_entrada;
     delete this.calibradoEntrada.fecha_ingreso;
-    delete this.calibradoEntrada.fecha_proceso;    
+    delete this.calibradoEntrada.fecha_proceso; 
+  
     this.calibradoService.saveContinuarEntrada(numero_proceso,this.calibradoEntrada)
     .subscribe(
       res => {
         console.log(res);
         this.ngOnInit();
-        
       },
       err => console.error(err)
     )
