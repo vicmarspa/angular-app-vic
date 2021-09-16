@@ -236,8 +236,7 @@ export class VerServicioGruasComponent implements OnInit {
     this.selectCantidad = selectCantidad;
     this.selectTipoPago = selectTipoPago;
     this.selectTipoFruta = selectTipoFruta;
-
-this.correlativoFuncion();
+    this.correlativoFuncion();
   }
   
 

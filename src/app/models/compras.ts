@@ -5,7 +5,7 @@ export class Compras {
     estado_compra?:string;
     compra_inicio?:Date;
     compra_fin?:Date;
+    fecha_factura? : Date;
+    numero_factura? : string;
     
-
-
 }

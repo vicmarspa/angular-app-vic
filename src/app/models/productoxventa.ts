@@ -6,4 +6,7 @@ export class ProductoxVenta {
     cantidad_producto?:number;
     precio_prodxventa?:number;
     valortotal_prodxventa?:number;
+    calibre?:number;
+    cantidad_bins?:number;
+
 }

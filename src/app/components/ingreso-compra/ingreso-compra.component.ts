@@ -28,7 +28,9 @@ export class IngresoCompraComponent implements OnInit {
     id_cliente:'',
     estado_compra:'',
     compra_inicio:new Date,
-    compra_fin:new Date
+    compra_fin:new Date,
+    fecha_factura : new Date,
+    numero_factura : ''
   } 
 
   ngOnInit(): void {

@@ -3,71 +3,78 @@
     <div class="row">        
 
 
-        <div class="sm col-6 p-4">
-            <h1 class="d-inline">NUMERO DE COMPRA - LOTE: </h1>
-            <h1 class="d-inline pl-3" >{{compraUltima.idcompra}}</h1>
-            
+        <div class="sm col-4 ml-2 mt-2" style=" border: 1px solid #000000;">
+            <h1 class="d-inline text-dark">NUMERO DE COMPRA - LOTE: </h1>
+            <h1 class="d-inline pl-3 text-dark">{{compraUltima.idcompra}}</h1>
             <br>
-            <h5 class="mt-4 d-inline">FECHA INGRESO : {{compraUltima.compra_inicio | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5> 
-             
+            <h5 class="mt-4 d-inline text-dark">Fecha Ingreso : </h5>
+            <h5 class="d-inline text-dark" style="margin-left: 50px;">{{compraUltima.compra_inicio | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5>
             <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;" [(ngModel)] = compraUltima.idcompra > 
             <br>
-            <h5 class="mt-2">CLIENTE: {{compraUltima.nombre}}</h5> 
-            <h5>CORREO: {{compraUltima.correo}}</h5>                       
-            <h5>TELEFONO: {{compraUltima.telefono}}</h5> 
-            <h5>DIRECCION: {{compraUltima.direccion}}</h5>                    
+            <h5 class=" d-inline mt-2 text-dark">Cliente: </h5> 
+            <h5 class="d-inline text-dark" style="margin-left: 90px;">{{compraUltima.nombre}}</h5>
+            <br>
+            <h5 class=" d-inline text-dark">Correo: </h5>
+            <h5 class="d-inline text-dark">{{compraUltima.correo}}</h5>
+            <br>                      
+            <h5 class="d-inline text-dark">Teléfono: </h5>
+            <h5 class="d-inline text-dark" style="margin-left: 80px;">{{compraUltima.telefono}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">Dirección: </h5>
+            <h5 class="d-inline text-dark" style="margin-left: 78px;">{{compraUltima.direccion}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">Fecha Factura: </h5>
+            <h5 class="d-inline text-dark" style="margin-left: 52px;">{{compraUltima.fecha_factura | date: 'dd-MM-yyyy'}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">Numero Factura: </h5>
+            <h5 class="d-inline text-dark" style="margin-left: 42px;">{{compraUltima.numero_factura}}</h5>
         </div> 
         
         
         <div class="sm col-6 p-4">           
             <br>
-            <h5 class="mt-4 d-inline">MONTO NETO : {{ProductosSum()}}</h5> 
+            <h5 class="mt-4 d-inline text-dark">MONTO NETO : {{ProductosSum() | number:'1.0-0'}}</h5> 
             <br>
-            <h5 class="mt-4 d-inline">IVA :</h5>
-            <select  [(ngModel)]="ivaSelected" style="width: 10%;" class="ml-3">
+            <h5 class="mt-4 d-inline text-dark">IVA :</h5>
+            <select style="border: 1px solid #cdcdcd; width: 10%;" [(ngModel)]="ivaSelected" class="ml-3">
                 <option *ngFor="let i of iva" id="fruta" [value]="i">
                     {{i}}
                 </option>                             
             </select>            
-            <h5 class="d-inline">%</h5>            
+            <h5 class="d-inline text-dark">%</h5>            
             <br>
-            <h5 class="mt-2 d-inline">IMPUESTO ADICIONAL: </h5> 
-            <input type="text" id="impuesto" style="width: 8%;" [(ngModel)] = iAdicional >
-            <h5 class="d-inline">%</h5>
+            <h5 class="mt-2 d-inline text-dark">IMPUESTO ADICIONAL: </h5> 
+            <input type="text" id="impuesto" style="border: 1px solid #cdcdcd; width: 5%;" [(ngModel)] = iAdicional >
+            <h5 class="d-inline text-dark">%</h5>
             <br>
             
-            <h5 class="d-inline">TOTAL: </h5>  
-            <h5 class="d-inline" *ngIf="ivaSelected == 19">{{(((ProductosSum()*19)/100) + ProductosSum()) + ((iAdicional * ProductosSum())/100) }}</h5>
-            <h5 class="d-inline" *ngIf="ivaSelected == 0">{{ProductosSum() + ((iAdicional * ProductosSum())/100)}}</h5>
-                                
-                                
+            <h5 class="d-inline text-dark">TOTAL: </h5>  
+            <h5 class="d-inline text-dark" *ngIf="ivaSelected == 19">{{(((ProductosSum()*19)/100) + ProductosSum()) + ((iAdicional * ProductosSum())/100) | number:'1.0-0'}}</h5>
+            <h5 class="d-inline text-dark" *ngIf="ivaSelected == 0">{{ProductosSum() + ((iAdicional * ProductosSum())/100) | number:'1.0-0'}}</h5>                 
         </div> 
-        
-    
     </div>
 </div> 
 
 <div class="container-fluid col-12">
-    <div class="row">
+    <div class="row mt-4">
         <div class="sm col-2">
             <div>
-                <span class=" d-block" style="padding-left: 43px;">PRODUCTO</span>
+                <span class=" d-block " style="padding-left: 50px;">PRODUCTO</span>
             </div>
-            <div class="ml-4">
-                <select  [(ngModel)]="frutaSelected">
+            <div>
+                <select style="border: 1px solid #cdcdcd;  width: 225px;" [(ngModel)]="frutaSelected">
                     <option *ngFor="let fruta of tipo_fruta" id="fruta" [value]="fruta.idtipo_fruta">
                         {{fruta.tipo_fruta}}
                     </option>                
                 </select>                 
             </div>           
-            
         </div>
         <div class="sm col-2">
             <div>
                 <span class=" d-block" style="padding-left: 50px;">PRECIO</span>
             </div>
             <div >
-                <input type="text" [(ngModel)]=productos.precio>
+                <input style="border: 1px solid #cdcdcd;  width: 225px;" type="text" [(ngModel)]=productos.precio>
             </div>           
             
         </div>
@@ -76,21 +83,21 @@
                 <span class=" d-block" style="padding-left: 50px;">CANTIDAD</span>
             </div>
             <div >
-                <input type="text" [(ngModel)]=productos.cantidad>
+                <input style="border: 1px solid #cdcdcd;  width: 225px;" type="text" [(ngModel)]=productos.cantidad>
             </div>           
             
         </div>
         <div class="sm col-2 ">
             <div>
-               <span class="d-block pl-5" >BINES</span> 
+               <span class="d-block pl-5" style="padding-left: 50px;">BINES</span> 
             </div>
             <div>
-                <input type="text" [(ngModel)]=productos.lote_bines> 
+                <input style="border: 1px solid #cdcdcd; width: 225px;" type="text" [(ngModel)]=productos.lote_bines> 
                 
             
-                <button type="button" class="btn btn-primary ml-2" (click)=guardarProducto(compraUltima.idcompra) >Ingresar</button>                
             </div>
-               
+            <button type="button" class="btn btn-primary btn-block mt-2" (click)=guardarProducto(compraUltima.idcompra) >Ingresar</button>                
+
         </div>
 
 
@@ -101,8 +108,8 @@
    
 <div class="container-fluid col-12">
     <div class="row">
-        <div class="col-4 p-4 mt-2 table-responsive ">
-            <h5 class="d-inline">PRODUCTOS</h5>            
+        <div class="col-4 mt-2 table-responsive ">
+            <h4 class="d-inline text-dark d-flex justify-content-center">PRODUCTOS</h4>            
             <table class="table">
                 <thead class="thead-dark">
                 <tr>                                      

@@ -47,6 +47,7 @@ import{PagoServicioCamarasComponent} from './components/pago-servicio-camaras/pa
 import{PagoServicioGruasComponent} from './components/pago-servicio-gruas/pago-servicio-gruas.component';
 import{PagoServicioBinsComponent} from './components/pago-servicio-bins/pago-servicio-bins.component';
 import{PagoServicioCamionesComponent} from './components/pago-servicio-camiones/pago-servicio-camiones.component';
+import{AdminServiciosComponent} from './components/admin-servicios/admin-servicios.component';
 
 
 
@@ -224,7 +225,10 @@ const routes: Routes = [
       path:'pago_servicios_camiones',
       component:PagoServicioCamionesComponent
     },
-
+    {
+      path:'admin-servicios',
+      component:AdminServiciosComponent
+    }
 ];
 
 @NgModule({

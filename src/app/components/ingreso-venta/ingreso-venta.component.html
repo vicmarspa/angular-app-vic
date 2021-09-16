@@ -6,7 +6,7 @@
         <div class="sm col-2 p-2 mt-3 ">
             <span class=" d-block ml-2" style="padding-left: 25px;">NOMBRE CLIENTE</span>            
             <select class="ml-4" style="margin-left: 5%;" [(ngModel)]="clienteSelected">
-                <option *ngFor="let c of cliente" id="cliente" [value]="c.id_cliente">
+                <option *ngFor="let c of cliente | orderBy:'nombre'" id="cliente" [value]="c.id_cliente">
                     {{c.nombre}}
                 </option>                
             </select>                                     

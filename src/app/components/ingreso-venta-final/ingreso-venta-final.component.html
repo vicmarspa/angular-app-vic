@@ -1,103 +1,145 @@
 <!--INGRESO CUERPO-->
 <div class="container-fluid col-12">
     <div class="row">        
+        <div class="col-5 ml-4 mt-4" style=" border: 1px solid #000000;">
+            <div>
+                <h1 class="d-inline text-dark">NUMERO DE VENTA :</h1>
+                <h1 class="d-inline text-dark">{{unaVenta.idventa}}</h1>
+                <br>
+                <h5 class="d-inline text-dark">FECHA INGRESO :</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 40px">{{unaVenta.venta_creacion | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5>
+ 
+                <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;"> 
+                <br>
+                <h5 class="d-inline text-dark">CLIENTE:</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 85px">{{unaVenta.nombre}}</h5>
 
+                <br>
+                <h5 class="d-inline text-dark">CORREO:</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 85px">{{unaVenta.correo}}</h5>
 
-        <div class="sm col-6 p-4">
-            <h1 class="d-inline">NUMERO DE VENTA : </h1>
-            <h1 class="d-inline pl-1" >{{unaVenta.idventa}}</h1>
-            <br>
-            <h5 class="mt-4 d-inline">FECHA INGRESO : {{unaVenta.venta_creacion | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5> 
-            <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;"> 
-            <br>
-            <h5 class="mt-2">CLIENTE: {{unaVenta.nombre}}</h5> 
-            <h5>CORREO: {{unaVenta.correo}}</h5>                       
-            <h5>TELEFONO: {{unaVenta.telefono}}</h5> 
-            <h5>DIRECCION: {{unaVenta.direccion}}</h5>   
+                <br>                   
+                <h5 class="d-inline text-dark">TELEFONO:</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 75px">{{unaVenta.telefono}}</h5>
 
-        </div> 
-        <h5 class="mt-4 d-inline">TOTAL VENTA : ${{ProductosSum()}} </h5>       
-    
+                <br> 
+                <h5 class="d-inline text-dark">DIRECCION:</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 75px">{{unaVenta.direccion}}</h5>
+                <br>
+                <h5 class="d-inline text-dark">TOTAL VENTA :</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 55px">${{ProductosSum() | number: '1.0-0'}}</h5>
+            </div> 
+        </div>
     </div>
 </div> 
 
-<div class="container-fluid col-12">
+<div class="container-fluid col-12 mt-4">
     <div class="row">
+
         <div class="sm col-2">
             <div>
-                <span class=" d-block" style="padding-left: 95px;">LOTE</span>
+                <span class=" d-block">
+                    LOTE
+                </span>
             </div>
-            <div class="ml-4">
-                <select style="margin-left: 5%;" (change)="onSelectCompra($any($event.target).value)" [(ngModel)]="compraSelected"> 
-                    <option value="0">--Selecciona Lote--</option>                   
+            <div class="">
+                <select style="border: 1px solid #000000; width: auto;" (change)="onSelectCompra($any($event.target).value)" [(ngModel)]="compraSelected"> 
+                    <option value="0">Lotes</option>
                     <option *ngFor="let c of compras" id="compra" value={{c.idcompra}}>
                         {{c.idcompra}}
-                    </option>  
-                                  
-                </select>  
-                                            
+                    </option>         
+                </select>                                
             </div>                     
-            
         </div>
-        <div class="ml-4 col-3">
+
+        <div class="col-2">
             <div>
-                <span class=" d-block" style="padding-left: 75px;">N°PRODUCTO</span>
+                <span class=" d-block">N°PRODUCTO</span>
             </div>
-            <select style="margin-left: 5%;" (change)="onSelectProducto($any($event.target).value)"  [(ngModel)]="productoSelected">
-                <option value="0">--Selecciona Producto--</option>
+            <select style="border: 1px solid #000000; width: auto;" (change)="onSelectProducto($any($event.target).value)"  [(ngModel)]="productoSelected">
+                <option value="0">Productos</option>
                 <option *ngFor="let p of products" id="compra" [value]="p.idproducto">
                     {{p.idproducto}}
                 </option>                             
-            </select>   
-                         
+            </select>            
         </div>
+
         <div class="sm col-2">
             <div>
-                <span class=" d-block" style="padding-left: 50px;">PRECIO</span>
+                <span class=" d-block" >PRECIO</span>
             </div>
             <div >
-                <input type="text" id="cantidad" [(ngModel)]=prodxventa.precio_prodxventa >               
+                <input style="border: 1px solid #000000; width: auto;" type="text" id="cantidad" [(ngModel)]=prodxventa.precio_prodxventa >               
                 
             </div>           
-            
-        </div>         
+        </div>   
+
         <div class="sm col-2">
             <div>
-                <span class=" d-block" style="padding-left: 50px;">CANTIDAD</span>
+                <span class=" d-block">CANTIDAD</span>
             </div>
             <div >
-                <input type="text" id="cantidad" [(ngModel)]=prodxventa.cantidad_producto >
+                <input style="border: 1px solid #000000;" type="text" id="cantidad" [(ngModel)]=prodxventa.cantidad_producto >
                 <input type="text" style="display: none;" [(ngModel)]=restarcantidad >
                 <input type="text" id="resta" style="display: none;" [(ngModel)]="restarcantidad - prodxventa.cantidad_producto" >
-                
             </div>           
-            
-        </div>        
-        <div class="sm col-2 ">            
-            <div>           
-                <button type="button" class="btn btn-primary mt-3" (click)=guardarProductoxVenta()>Ingresar</button>                
-            </div>
-               
         </div>
 
+        <div class="sm col-2">
+            <div>
+                <span class="d-block">CALIBRE</span>
+            </div>
+            <div >
+                <select style="border: 1px solid #000000;"  [(ngModel)]=prodxventa.calibre>
+                    <option value="0">Calibres</option>
+                    <option *ngFor="let calibre of getcalibre" id="calibre">
+                        {{calibre.calibre}}
+                    </option>                
+                </select>                  
+            </div>           
+        </div>  
 
-        
+
+        <div class="sm col-2">
+            <div>
+                <span class=" d-block">CANTIDAD BINS</span>
+            </div>
+            <div >
+                <input style="border: 1px solid #000000;" type="text" id="cantidad" [(ngModel)]=prodxventa.cantidad_bins >               
+            </div>           
+        </div>
         
     </div>
+
+
+
+    <div class="row">
+        <div class="sm col-12 d-flex justify-content-end"> 
+
+            <div class="col-2" style="margin-right: 40px;">           
+                <button type="button" class="btn btn-primary mt-3 btn-block" (click)=guardarProductoxVenta()>Ingresar</button>                
+            </div>  
+        </div>
+    </div>
+
+
+
 </div>
    
 <div class="container-fluid col-12">
     <div class="row">
-        <div class="col-5 p-4 mt-2 table-responsive ">
+        <div class="col-7 mt-2 table-responsive ">
                        
             <table class="table">
                 <thead class="thead-dark">
                 <tr>  
-                    <th scope="col">N°PRODUCTO</th>                                  
-                    <th scope="col">PRODUCTO</th>
-                    <th scope="col">PRECIO</th>
-                    <th scope="col">CANTIDAD</th> 
-                    <th scope="col">TOTAL</th>                                        
+                    <th scope="col">N° Producto</th>                                  
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Kilogramos</th> 
+                    <th scope="col">Total</th>
+                    <th scope="col">Calibre</th>
+                    <th scope="col">Bins</th>                                      
                     <th scope="col">Cancelar?</th> 
 
                 </tr>
@@ -107,8 +149,10 @@
                     <td>{{pv.idproducto}}</td>
                     <td>{{pv.tipo_fruta}}</td>
                     <td>${{pv.precio_prodxventa}}</td>
-                    <td>{{pv.cantidad_producto}} KGs</td>
-                    <td>${{pv.valortotal_prodxventa}} </td>
+                    <td>{{pv.cantidad_producto}}</td>
+                    <td>${{pv.valortotal_prodxventa | number: '1.0-0'}} </td>
+                    <td>{{pv.calibre}}</td>
+                    <td>{{pv.cantidad_bins}}</td>
                                         
                     
                     
@@ -124,14 +168,14 @@
                 
         </div>            
 
-        <div class="col-7 p-4 mt-2 table-responsive">
+        <div class="col-5 mt-2 table-responsive">
             <table class="table" style="width: 45%;">
                 <thead class="thead-dark">
                   <tr>                    
                     <th scope="col" >Lote</th>
                     <th scope="col" >N°Producto</th>
                     <th scope="col" class="pl-2" >Producto</th>                                    
-                    <th scope="col"  >Cantidad</th>  
+                    <th scope="col"  >Kilogramos</th>  
                     <th scope="col" class="pl-2" >Bines</th>  
                                      
                     

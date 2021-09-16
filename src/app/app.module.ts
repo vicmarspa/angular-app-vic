@@ -67,6 +67,7 @@ import { PagoServicioCamarasComponent } from './components/pago-servicio-camaras
 import { PagoServicioGruasComponent } from './components/pago-servicio-gruas/pago-servicio-gruas.component';
 import { PagoServicioBinsComponent } from './components/pago-servicio-bins/pago-servicio-bins.component';
 import { PagoServicioCamionesComponent } from './components/pago-servicio-camiones/pago-servicio-camiones.component';
+import { AdminServiciosComponent } from './components/admin-servicios/admin-servicios.component';
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -115,6 +116,8 @@ import { PagoServicioCamionesComponent } from './components/pago-servicio-camion
     PagoServicioGruasComponent,
     PagoServicioBinsComponent,
     PagoServicioCamionesComponent,
+    AdminServiciosComponent,
+    
     //DialogComponentComponent
   ],
 

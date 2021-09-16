@@ -41,8 +41,12 @@ export class IngresoVentaFinalComponent implements OnInit {
     idproducto:0,
     cantidad_producto:0,
     precio_prodxventa:0,
-    valortotal_prodxventa:0
+    valortotal_prodxventa:0,
+    calibre:0,
+    cantidad_bins:0
   }
+
+  
   productos:Productos = {
     idproducto:0,
     idtipo_fruta:'',
@@ -55,11 +59,14 @@ export class IngresoVentaFinalComponent implements OnInit {
     creacion_lote: new Date
   }
 
-  
+  getcalibre:any = [];
+
   
 
   ngOnInit(): void {
+
     const params = this.activedRoute.snapshot.params;
+
     if(params.idventa){
       this.calibradoService.getProdxVenta(params.idventa)
       .subscribe(
@@ -100,8 +107,14 @@ export class IngresoVentaFinalComponent implements OnInit {
         err => console.error(err)
       );
       
-
-      
+      this.calibradoService.getCalibre()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.getcalibre = res;
+        },
+        err => console.log(err)
+      )
 
   }
 
