@@ -33,19 +33,32 @@
             <br>
             <h5 class="d-inline text-dark">TELEFONO: </h5>
             <h5 class="d-inline text-dark" id="pago">{{compra.telefono}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">FECHA FACTURA: </h5>
+            <h5 class="d-inline text-dark" id="fecha_factura">{{compra.fecha_factura | date: 'dd-MM-yyyy'}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">NUMERO FACTURA: </h5>
+            <h5 class="d-inline text-dark" id="numero_factura">{{compra.numero_factura}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">CANTIDAD BINS: </h5>
+            <h5 class="d-inline text-dark" id="cantidad_bins">{{BinsSum() | number: '000.000'}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">CANTIDAD KILOGRAMOS: </h5>
+            <h5 class="d-inline text-dark" id="cantidad_kilogramos">{{CantidadKilogramosSum() | number: '000.000'}}</h5>
+            <br>
+            <h5 class="d-inline text-dark">TIPO PAGO: </h5>
+            <h5 class="d-inline text-dark" id="tipo_pago">{{compra.tipo_pago}}</h5>
         </div>
         <div class="col-6 ">
-            <div style="    display: inline-block;
+            <div style="display: inline-block;
             margin: 20px;
             padding: 10px;
             border: 1px solid #000000;
             font-size:20px">
             <button class="btn btn-primary  position-relative mr-2"  (click)=nuevoPDF();>GENERAR DOCUMENTO</button>               
-            <button class="btn btn-success  position-relative mr-2"   (click)=nuevoPDF();>COPIA DE CLIENTE</button>               
             <button class="btn btn-warning  position-relative material-icons mr-2" style="color:white" (click)="correlativoFuncion()">refresh</button>
             <button [routerLink] = "['/busqueda-compras']" class="btn btn-danger position-relative">VOLVER</button> 
-            </div>
-            
+            </div> 
         </div>
     </div>
 </div>
@@ -73,15 +86,16 @@
                     <td>{{p.cantidad | number: '000.000'}}</td> 
                     <td>{{p.valortotal | number: '000.000'}}</td> 
                     <td>{{p.lote_bines}}</td>            
-                </tr>                
+                </tr>        
+                <tr class="table-info">
+                    <td></td>
+                    <td></td>
+                    <td><b>{{CantidadKilogramosSum()}}</b></td>
+                    <td><b>{{ProductosSum() | number: '000.000' }}</b></td>
+                    <td><b>{{BinsSum()}}</b></td>
+                </tr>        
                     </tbody>
                 </table>
-                                           
-                
             </div>
-            <div class="w-25">
-
-            </div>
-            
     </div>
 </div>

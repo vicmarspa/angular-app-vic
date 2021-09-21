@@ -86,6 +86,12 @@ export class VerCompraComponent implements OnInit {
     return this.producto.map(productos => productos.valortotal).reduce((a,b) => a+b, 0);
   }
 
+  public BinsSum(){
+    return this.producto.map(productos => productos.lote_bines).reduce((a,b) => a+b, 0);
+  }
+  public CantidadKilogramosSum(){
+    return this.producto.map(productos => productos.cantidad).reduce((a,b) => a+b, 0);
+  }
 
   countProces:number=0;
   countProces2:number=-1;
@@ -136,6 +142,8 @@ export class VerCompraComponent implements OnInit {
     var comprahtml = compra?.innerHTML;
     var correlativecliente = document.getElementById("correlativecliente");
     var correlativeclientehtml = correlativecliente?.innerHTML;
+    var fecha_factura = document.getElementById("fecha_factura");
+    var fecha_facturahtml = fecha_factura?.innerHTML;
     var fecha = document.getElementById("fecha");
     var fechahtml = fecha?.innerHTML;
     var montoneto = document.getElementById("montoneto");
@@ -148,15 +156,21 @@ export class VerCompraComponent implements OnInit {
     var mermahtml = merma?.innerHTML;
     var cliente = document.getElementById("cliente");
     var clientehtml = cliente?.innerHTML;
+    var cantidad_kilogramos = document.getElementById("cantidad_kilogramos");
+    var cantidad_kilogramoshtml = cantidad_kilogramos?.innerHTML;
+    var cantidad_bins = document.getElementById("cantidad_bins");
+    var cantidad_binshtml = cantidad_bins?.innerHTML;
+    var tipo_pago = document.getElementById("tipo_pago");
+    var tipo_pagohtml = tipo_pago?.innerHTML;
     var fruta = document.getElementById("fruta");
     var frutahtml = fruta?.innerHTML;
-    var valor = document.getElementById("valor");
-    var valorhtml = valor?.innerHTML;
+    var numero_factura = document.getElementById("numero_factura");
+    var numero_facturahtml = numero_factura?.innerHTML;
     var pago = document.getElementById("pago");
     var pagohtml = pago?.innerHTML;
 
 
-
+    
 
 
 
@@ -202,44 +216,55 @@ export class VerCompraComponent implements OnInit {
 
     doc.text('NUMERO COMPRA: ', 10, 35);
     doc.text(comprahtml,55, 35);
-    doc.text('CORRELATIVO COMPRA:', 10, 40);
-    doc.text(correlativeclientehtml,55, 40);
+    doc.text('FECHA FACTURA:', 10, 40);
+    doc.text(fecha_facturahtml,55, 40);
     doc.text('FECHA: ', 10, 45);
     doc.text(fechahtml,55, 45);
     doc.text('TELEFONO: ', 10, 50);
     doc.text(pagohtml,55, 50);
     doc.text('MONTO NETO: ', 10, 55);
     doc.text(totalingresohtml,55,55);
-    doc.text('CLIENTE: ', 10, 60);
-    doc.text(clientehtml,55, 60);
+
+    doc.text('TOTAL KILOGRAMOS: ', 10, 60);
+    doc.text(cantidad_kilogramoshtml,55, 60);
+    
+    doc.text('TOTAL BINS: ', 10, 65);
+    doc.text(cantidad_binshtml,55, 65);
+
+    doc.text('CLIENTE: ', 10, 70);
+    doc.text(clientehtml,55, 70);
+
+
 
 
     doc.text('IVA: ', 100, 35);
     doc.text(ivahtml,145, 35);
     doc.text('IMPUESTO ADICIONAL: ', 100, 40);
     doc.text(frutahtml,145, 40);
-    doc.text('CORREO: ', 100, 45);
-    doc.text(valorhtml,145, 45);
+    doc.text('NUMERO FACTURA: ', 100, 45);
+    doc.text(numero_facturahtml,145, 45);
     doc.text('DIRECCION: ', 100, 50);
     doc.text(valortotalhtml,145,50);
     doc.text('TOTAL: ', 100, 55);
     doc.text(mermahtml,145,55);
-  
+    doc.text('TIPO PAGO: ', 100, 60);
+    doc.text(tipo_pagohtml,145, 60);
 
 
 
 
     doc.line(5, 30, 204, 30);
-    doc.line(5, 65, 204, 65);
+    doc.line(5, 75, 204, 75);
 
-    doc.text('Detalle de Compra' ,85,70);
-
-    
+    doc.text('Detalle de Compra' ,85,80);
 
     
+    doc.line(5, 85, 204, 85);
+
+    
     
 
-    doc.autoTable({ html: '#entrada', startY:75, columnStyles: {
+    doc.autoTable({ html: '#entrada', startY:85, columnStyles: {
       0: {cellWidth: 26},
       1: {cellWidth: 22},
       2: {cellWidth: 22},

@@ -20,6 +20,8 @@ export class IngresoCompraComponent implements OnInit {
   clientes:any = [];
   compraUltima:any = [];
   clienteSelected:string = '';
+  tipo_pago:any =[];
+  pagoSelected:string = '';
 
   
 
@@ -30,7 +32,8 @@ export class IngresoCompraComponent implements OnInit {
     compra_inicio:new Date,
     compra_fin:new Date,
     fecha_factura : new Date,
-    numero_factura : ''
+    numero_factura : '',
+    tipo_pago: '',
   } 
 
   ngOnInit(): void {
@@ -43,7 +46,6 @@ export class IngresoCompraComponent implements OnInit {
       },
       err => console.error(err)
     );
-
     this.calibradoService.getUnaCompra()
       .subscribe(
         res => {
@@ -52,6 +54,14 @@ export class IngresoCompraComponent implements OnInit {
         },
         err => console.log(err)
       )
+      this.calibradoService.getTipoPago().subscribe(
+        res => {
+          this.tipo_pago = res;
+          console.log(res)
+          this.pagoSelected;
+        },
+        err => console.error(err)
+      );
   }
 
   guardarCompra(){ 

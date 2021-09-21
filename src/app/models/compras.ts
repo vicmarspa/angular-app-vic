@@ -7,5 +7,6 @@ export class Compras {
     compra_fin?:Date;
     fecha_factura? : Date;
     numero_factura? : string;
+    tipo_pago?: string;
     
 }
