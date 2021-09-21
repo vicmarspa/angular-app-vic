@@ -48,6 +48,26 @@
       </div>
 
 
+
+
+      <div class="col-2" style="font-size:smaller">
+        <div style="font-size:smaller">
+            <span class=""><b>RANGO DE FECHAS</b></span>
+        </div>
+        <div  id="holi">
+            <input type="text" style="border: 1px solid #000000; height: 24px;" name="daterange" autocomplete="off" bsDaterangepicker 
+            [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
+            id="DateOfBirth" placeholder="Rango de Fechas" (bsValueChange)="dateRangeCreated2($event)" class="form-control" />
+        </div> 
+
+      </div>
+
+
+
+
+
+
+
     <div class="col-5">
       <div style="    display: inline-block;
       margin: 20px;

@@ -296,6 +296,26 @@ correlativoFuncion()
   }
 
 
+
+
+
+  dateRangeCreated2($event) {    
+    this.servicio_camiones = this.servicio_camiones; 
+    this.ts = this.servicio_camiones.fecha_guia;                       
+    let startDate = $event[0].toJSON().split('T')[0];   
+    let endDate = $event[1].toJSON().split('T')[0]; 
+    this.servicio_camiones = this.servicio_camiones.filter(m => new Date(m.fecha_guia) >= new Date(startDate) && new Date(m.fecha_guia) <= new Date(endDate)        
+    );  
+    console.log(startDate);
+    console.log(endDate);
+
+    this.startDateText = startDate;
+    this.endDateText = endDate;
+    console.log('esta es la fecha de ingreso'+startDate);
+    console.log('esta es la fecha de salida'+endDate);
+  }
+
+
   SearchByChofer(){
     if(this.selectedNombreChofer == ""){
       this.ngOnInit();

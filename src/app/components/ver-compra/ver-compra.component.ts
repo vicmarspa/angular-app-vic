@@ -264,7 +264,7 @@ export class VerCompraComponent implements OnInit {
     
     
 
-    doc.autoTable({ html: '#entrada', startY:85, columnStyles: {
+    doc.autoTable({ html: '#entrada', startY:90, columnStyles: {
       0: {cellWidth: 26},
       1: {cellWidth: 22},
       2: {cellWidth: 22},
