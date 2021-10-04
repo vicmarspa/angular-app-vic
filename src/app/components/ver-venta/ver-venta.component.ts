@@ -131,7 +131,7 @@ export class VerVentaComponent implements OnInit {
 
     doc.setFontSize(10);
 
-    doc.text('Compra', 95, 25);
+    doc.text('Venta', 95, 25);
 
 
     var numero_venta = document.getElementById("numero_venta");
@@ -263,7 +263,7 @@ export class VerVentaComponent implements OnInit {
     doc.line(5, 30, 204, 30);
     doc.line(5, 70, 204, 70);
 
-    doc.text('Detalle de Compra' ,85,75);
+    doc.text('Detalle de Venta' ,85,75);
 
     doc.line(5, 80, 204, 80);
 
@@ -304,7 +304,7 @@ export class VerVentaComponent implements OnInit {
 
     doc.setFontSize(10);
 
-    doc.text('Compra', 95, 25);
+    doc.text('Venta', 95, 25);
     
     var correlativo_cliente =  document.getElementById("correlativo_cliente");
     var correlativo_clientehtml = correlativo_cliente?.innerHTML;
@@ -429,7 +429,7 @@ export class VerVentaComponent implements OnInit {
     doc.line(5, 30, 204, 30);
     doc.line(5, 65, 204, 65);
 
-    doc.text('Detalle de Compra' ,85,70);
+    doc.text('Detalle de Venta' ,85,70);
 
     doc.line(5, 75, 204, 75);
 

@@ -68,6 +68,10 @@ import { PagoServicioGruasComponent } from './components/pago-servicio-gruas/pag
 import { PagoServicioBinsComponent } from './components/pago-servicio-bins/pago-servicio-bins.component';
 import { PagoServicioCamionesComponent } from './components/pago-servicio-camiones/pago-servicio-camiones.component';
 import { AdminServiciosComponent } from './components/admin-servicios/admin-servicios.component';
+import { CpcIngresoPrincipalComponent } from './components/cpc-ingreso-principal/cpc-ingreso-principal.component';
+import { CpcIngresoFinalComponent } from './components/cpc-ingreso-final/cpc-ingreso-final.component';
+import { VerStockComponent } from './components/ver-stock/ver-stock.component';
+
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
 
@@ -117,6 +121,9 @@ import { AdminServiciosComponent } from './components/admin-servicios/admin-serv
     PagoServicioBinsComponent,
     PagoServicioCamionesComponent,
     AdminServiciosComponent,
+    CpcIngresoPrincipalComponent,
+    CpcIngresoFinalComponent,
+    VerStockComponent,
     
     //DialogComponentComponent
   ],

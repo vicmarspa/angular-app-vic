@@ -1,10 +1,8 @@
 <!--INGRESO CUERPO-->
 <div class="container-fluid col-12">
     <div class="row">        
-
-
         <div class="sm col-6 p-4">
-            <div           style="    display: inline-block;
+            <div style="display: inline-block;
             border: 1px solid #000000;
             font-size:20px">
                 <h5 class="d-inline text-dark ml-2">NUMERO DE PROCESO: </h5>
@@ -32,10 +30,8 @@
                 <h5 class="d-inline text-dark ml-2">MERMA: </h5>
                 <h5 class="d-inline text-dark" style="margin-left: 158px; margin-right: 8px;">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h5>
             </div>       
-        </div>       
-        
+        </div>
         <div class="col-5 ml-5">
-
             <div style="    display: inline-block;
             margin: 20px;
             padding: 10px;
@@ -51,13 +47,9 @@
             </form>
             <button [routerLink]="['/busqueda']" class="btn btn-primary btn-block mt-2">VOLVER</button>
             </div>
-
-
-
         </div>
     </div>
-</div> 
-
+</div>
 <div class="container-fluid col-12">
     <div class="row">
         <div class="sm col-2">
@@ -67,7 +59,6 @@
             <div class="ml-4">
                 <input type="text" [(ngModel)]=calibradoEntrada.kilogramos>
             </div>   
-
             <div>
                 <span class=" d-block {{visibilidad}}" style="padding-left: 43px;">KILOGRAMOS EXTRAS</span>
             </div>

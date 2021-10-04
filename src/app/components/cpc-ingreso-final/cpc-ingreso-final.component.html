@@ -1,0 +1,246 @@
+<div class="container-fluid col-12">
+    <div class="row">        
+        <div class="sm col-6 p-4">
+            <div style="    display: inline-block;
+            border: 1px solid #000000;
+            font-size:20px">
+                <h5 class="d-inline text-dark ml-2">NUMERO DE PROCESO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 80px; margin-right: 8px;">{{getDatosCompra.id_cpc}}</h5>
+                <br>
+                <h5 class="d-inline text-dark ml-2">FECHA INGRESO : </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 108px; margin-right: 8px;">{{getDatosCompra.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</h5>
+                <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;"> 
+                <br>
+                <h5 class="d-inline text-dark ml-2">CLIENTE: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 154px; margin-right: 8px;">{{getDatosCompra.nombre}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">IMPUESTOS: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{getDatosCompra.impuesto}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TOTAL KILOGRAMOS ENTRADA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 35px; margin-right: 8px;">{{kilogramosEntradaSum()}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TOTAL KILOGRAMOS SALIDA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 48px; margin-right: 8px;">{{kilogramosSalidaSum()}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">MERMA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 155px; margin-right: 8px;">{{kilogramosSalidaSum()-kilogramosEntradaSum()}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">VALOR NETO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 125px; margin-right: 8px;">${{ValorTotalSum() | number:'1.0-0'}}</h5>
+                <br>
+                <h5 class="d-inline text-dark ml-2">VALOR TOTAL: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 120px; margin-right: 8px;">${{ValorTotalSum() * (((getDatosCompra.impuesto)/100)+1) | number:'1.0-0'}}</h5>
+                <br>  
+                <h5 class="d-inline text-dark ml-2">BINS SALIDA: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{BinsSalidaSum()}}</h5>
+            </div>
+        </div>
+        <div class="col-5 ml-5">
+            <div style="    display: inline-block;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #000000;
+            font-size:20px">
+            <h4 class="d-inline text-dark d-flex justify-content-center font-weight-bold">OPCIONES DE USUARIO</h4>  
+            <button [routerLink]="['/busqueda']" class="btn btn-primary btn-block mt-2">VOLVER</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="sm col-6">
+            <div>
+                <h3 class="d-flex justify-content-center">INGRESO DATOS ENTRADA</h3>
+            </div>
+        </div>
+        <div class="sm col-5">
+            <div>
+                <h3 class="d-flex justify-content-center">INGRESO DATOS SALIDA</h3>
+            </div>     
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Kilogramos</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosEntrada>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Descuento</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=descuentoEntrada>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">CALIBRE</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=cpcDetailInput.calibre>
+                <option value="0">
+                </option>  
+                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
+                    {{calibre.calibre}}
+                </option>                
+            </select>    
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Precio</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=cpcDetailInput.precio>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Formato</span>
+            </div>
+            <select style="width: 120px; height: 25px;" [(ngModel)]=cpcDetailInput.formato>  
+                <option value="Bin">
+                    Bin
+                </option>
+                <option value="Pallet">
+                    Pallet
+                </option>                  
+            </select>      
+        </div>
+        <div class="sm col-1">
+            <div>
+                <button type="button" class="btn btn-primary" style="margin-top: 8px;" (click) = guardarEntrada()>Ingresar</button>                
+            </div>
+        </div>
+        <div class="sm col-1"> 
+            <div>
+                <span class="d-flex justify-content-center">Calibre</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=cpcDetailOutput.calibre>
+                <option value="0">
+                </option> 
+                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
+                    {{calibre.calibre}}
+                </option>                
+            </select>      
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Kilogramos</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosSalida>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Bins</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=cpcDetailOutput.bins>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Descuento</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=descuentoSalida>
+            </div>     
+        </div>
+        <div class="sm col-1">
+            <div>
+                
+                <button type="button" class="btn btn-primary" style="margin-top: 8px;" (click) = guardarSalida()>Ingresar</button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="col-6 mt-2 table-responsive">
+            <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">DATOS DE ENTRADA</h5>            
+            <table class="table table-striped table-sm">
+                <thead class="thead-dark">
+                <tr>                                      
+                    <th scope="col">Calibre</th>
+                    <th scope="col">Formato</th>
+                    <th scope="col">Valor kg</th>
+                    <th scope="col">Kilogramos Neto</th> 
+                    <th scope="col">Valor Total</th>   
+                    <th scope="col">Eliminar?</th>                        
+                </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor = 'let datosentrada of getDatosCompraEntrada'>
+                    <td>{{datosentrada.calibre}}</td>
+                    <td>{{datosentrada.formato}}</td>
+                    <td>${{datosentrada.precio | number:'1.0-0'}}</td>
+                    <td>{{datosentrada.cantidad | number:'1.0-0'}}</td>
+                    <td>${{datosentrada.valor_total | number:'1.0-0'}}</td>
+                    
+                    <td>
+                        <button class="btn btn-danger ml-2 material-icons" (click)="BorrarEntrada(getDatosCompra.id_cpc, datosentrada.id_detalle_cpc)">
+                            delete 
+                        </button>
+                    </td>
+                </tr>                
+                <tr class="table-info">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{kilogramosEntradaSum()}}</b></td>
+                    <td><b>{{ValorTotalSum() | number:'1.0-0'}}</b></td>
+                    <td></td>
+                </tr>
+                
+                
+                </tbody> 
+                                     
+                </table>         
+                
+            </div>
+
+            <!-- <div class="col-1"></div>  -->
+            <div class="col-5 mt-2  table-responsive ">
+                <h5 class="d-inline text-dark d-flex justify-content-center font-weight-bold">DATOS DE SALIDA</h5>                
+                <table class="table table-striped table-sm">
+                    <thead class="thead-dark">
+                    <tr>                                      
+                        <th scope="col">Calibre</th> 
+                        <th scope="col">Kilogramos Neto</th>
+                        <th scope="col">Bins</th>
+                        <th scope="col">Eliminar?</th>                        
+                    </tr>
+                    </thead> 
+                    <tbody>
+                        <tr *ngFor = 'let datossalida of getDatosCompraSalida'>
+                        <td>{{datossalida.calibre}}</td>
+                        <td>{{datossalida.cantidad}}</td>
+                        <td>{{datossalida.bins}}</td>
+                        
+                        <td><button class="btn btn-danger ml-2 material-icons" (click)="BorrarSalida(getDatosCompra.id_cpc,datossalida.id_detalle_salida_cpc)">
+                            delete 
+                            </button></td>
+                    </tr>                
+                    <tr class="table-info">
+                        <td></td>
+                        <td><b>{{kilogramosSalidaSum() | number:'1.0-0'}}</b></td>
+                        <td><b>{{BinsSalidaSum() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                    </tr>
+                    
+                    
+                    </tbody> 
+                                         
+                    </table> 
+        </div>
+    </div>
+</div>
