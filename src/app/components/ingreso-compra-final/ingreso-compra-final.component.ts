@@ -53,7 +53,18 @@ export class IngresoCompraFinalComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.calibradoService.getTipoFruta()
+    .subscribe(
+      res => {
+        console.log('tipos de frutos')
+        this.tipo_fruta = res;
+        console.log(res)
+        this.frutaSelected;
+      },
+        err => console.error(err)
+    );
     const params = this.activedRoute.snapshot.params;
+
     if(params.idcompra){
       this.calibradoService.getProductos(params.idcompra)
       .subscribe(
@@ -63,7 +74,6 @@ export class IngresoCompraFinalComponent implements OnInit {
         },
         err => console.log(err)
       )
-    
     }
     this.calibradoService.getUnaCompra()
       .subscribe(
@@ -74,51 +84,29 @@ export class IngresoCompraFinalComponent implements OnInit {
         err => console.log(err)
       )
 
-    this.calibradoService.getTipoFruta().subscribe(
-      res => {
-        this.tipo_fruta = res;
-        console.log(res)
-        this.frutaSelected;
-      },
-        err => console.error(err)
-      );
-    
   }
 
   guardarProducto(idcompra:string){ 
-    
-
     this.CaputarValor();
-    
     this.productos.estado_lote = '1'; 
-       
     this.productos.valortotal =  this.productos.precio! * parseInt(this.productos.cantidad);
     this.productos.idtipo_fruta = this.frutaSelected;
-    
-    this.toastr.success("PRODUCTO INGRESADO");
-
     delete this.productos.idproducto;
     delete this.productos.creacion_lote;
-
-        
     this.calibradoService.saveProducto(idcompra,this.productos)
     .subscribe(
       res => {
         console.log(res);
+        this.toastr.success("PRODUCTO INGRESADO");
         this.ngOnInit();
-        
       },
       err => console.error(err)
     )
-    
-    
   }
 
   guardarImpuesto(idcompra:string){     
-
     this.CaputarValor();
     this.Success();
-    
     this.impuestos.iva = this.ivaSelected;
     this.impuestos.impadicional  = (<HTMLInputElement>document.getElementById('impuesto')).value;
     if(this.ivaSelected == 0){
@@ -127,23 +115,15 @@ export class IngresoCompraFinalComponent implements OnInit {
     else{
       this.impuestos.iva_estado = 'Con IVA'
     }
-    
-
-    delete this.impuestos.idimpuestos;
-    
-
-        
+    delete this.impuestos.idimpuestos; 
     this.calibradoService.saveImpuesto(idcompra,this.impuestos)
     .subscribe(
       res => {
         console.log(res);
         this.ngOnInit();
-        
       },
       err => console.error(err)
     )
-    
-    
   }
 
   Success(){
@@ -190,11 +170,10 @@ export class IngresoCompraFinalComponent implements OnInit {
   }
 
   CaputarValor(){
+    this.toastr.success("test");
+
     this.productos.idcompra  = (<HTMLInputElement>document.getElementById('tbx1')).value;
     this.impuestos.idcompra  = (<HTMLInputElement>document.getElementById('tbx1')).value; 
-              
-     
-    
   } 
 
 }

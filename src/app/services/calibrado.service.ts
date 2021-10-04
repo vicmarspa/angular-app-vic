@@ -112,7 +112,7 @@ export  class CalibradoService {
     return this.http.get(`${this.API_URI}/ingreso/${numero_proceso}/final/salida`);
   }
   getProductos(idcompra:string){
-    return this.http.get(`${this.API_URI}/ingreso-compra/${idcompra}/final`);
+    return this.http.get(`${this.API_URI}/ingreso-compra-obtener/${idcompra}/final`);
   }
   getProductosGeneral(){
     return this.http.get(`${this.API_URI}/productos`)
