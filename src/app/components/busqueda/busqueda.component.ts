@@ -23,7 +23,10 @@ import { splitClasses } from '@angular/compiler';
 })
 export class BusquedaComponent implements OnInit {
 
-  constructor(public calibradoService: CalibradoService,private router:Router,private activedRoute: ActivatedRoute) { }
+  constructor(
+    public calibradoService: CalibradoService,
+    private router:Router,
+    private activedRoute: ActivatedRoute,) { }
 
 
 
@@ -56,6 +59,9 @@ export class BusquedaComponent implements OnInit {
   todate:any='';
   searchresult:any='';
   
+  
+
+
 
 
   fechaActual = new Date();
@@ -104,14 +110,22 @@ export class BusquedaComponent implements OnInit {
         err => console.error(err)
       );
      
+      // var date = new Date();
+      // var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
+      // var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      // var añoActual = date.getFullYear();
+      // var mesActual = date.getMonth();
 
+      // console.log("<br>El primer día es: " + primerDia.getDate());
+      // console.log("<br>El ultimo día es: " + ultimoDia.getDate());
+      // console.log("<br>Año actual: " + añoActual);
+      // console.log("<br>Año actual: " + mesActual);
 
+      // this.startDateText = new Date(añoActual, mesActual, primerDia.getDate());
+      // this.endDateText = new Date(añoActual, mesActual, ultimoDia.getDate());
 
-
-
-
-
-
+      // console.log(this.startDateText,"esta es la fecha de incio")
+      // console.log(this.startDateText,"esta es la fecha de termino")
 
   }
   deleteCalibrado(numero_proceso:string) {

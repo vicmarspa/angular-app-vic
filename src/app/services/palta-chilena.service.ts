@@ -89,5 +89,12 @@ export class PaltaChilenaService {
     return this.http.get(`${this.API_URI}/compra-palta-chilena/stock`)
   }
 
+  getCompraStockDetail(id_cpc: string) {
+    return this.http.get(`${this.API_URI}/compra-palta-chilena/stockDetail/${id_cpc}`);
+  }
+
+  getStockDetailDocument(){
+    return this.http.get(`${this.API_URI}/compra-palta-chilena/stockDetailDocument`)
+  }
 
 }

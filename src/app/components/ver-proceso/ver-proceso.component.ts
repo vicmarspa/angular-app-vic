@@ -417,28 +417,61 @@ refreshPageDirect()
    
     doc.text(correlativoProcesohtml,10, 14);
 
-    doc.setFontSize(10);
-    doc.text('Fecha de Recepción: ', 10, 25);
-    doc.text(fechahtml,48, 25);
-    doc.text('-', 93,25);
-    doc.text('Fecha de Salida:', 100,25);
-    doc.text(fechasalidahtml,130, 25);
-    doc.text('Cliente: ', 10, 30);
-    doc.text(clientehtml,28, 30);
-    doc.text('Kilogramos Ingresados: ', 10, 40);
-    doc.text(totalingresohtml,50,40);
-    doc.text('Bins Ingresados: ', 10, 45);
-    doc.text(binshtml,40,45);
-    doc.text('Tipo de Fruta: ', 10, 50);
-    doc.text(frutahtml,35, 50);
-    doc.text('Valor del Servicio: ', 100, 40);
-    doc.text(valorhtml,130, 40);
-    doc.text('Bins Salida: ', 100, 45);
-    doc.text(binsSalidahtml,120,45);
-    doc.text('Valor Total: ', 100, 50);
-    doc.text(valortotalhtml,120,50);
-    doc.text('Merma: ', 10, 55);
-    doc.text(mermahtml,25,55);
+    doc.setFontSize(12);
+    doc.text('FECHA DE RECEPCIÓN: ', 10, 25);
+    doc.setFontType('bold');
+    doc.text(fechahtml,60, 25);
+    doc.setFontType('normal');
+
+
+    doc.text('FECHA DE SALIDA:', 110,25);
+    doc.setFontType('bold');
+    doc.text(fechasalidahtml,150, 25);
+    doc.setFontType('normal');
+
+
+    doc.text('CLIENTE: ', 10, 30);
+    doc.setFontType('bold');
+    doc.text(clientehtml,30, 30);
+    doc.setFontType('normal');
+
+
+    doc.text('KILOGRAMOS INGRESADOS: ', 10, 40);
+    doc.setFontType('bold');
+    doc.text(totalingresohtml,70,40);
+    doc.setFontType('normal');
+
+    doc.text('BINS INGRESADOS: ', 10, 45);
+    doc.setFontType('bold');
+    doc.text(binshtml,52,45);
+    doc.setFontType('normal');
+
+    doc.text('TIPO DE FRUTA: ', 10, 50);
+    doc.setFontType('bold');
+    doc.text(frutahtml,45, 50);
+    doc.setFontType('normal');
+
+
+    doc.text('VALOR DEL SERVICIO: ', 100, 40);
+    doc.setFontType('bold');
+    doc.text(valorhtml,148, 40);
+    doc.setFontType('normal');
+
+    doc.text('BINS DE SALIDA: ', 100, 45);
+    doc.setFontType('bold');
+    doc.text(binsSalidahtml,135,45);
+    doc.setFontType('normal');
+
+    doc.text('VALOR TOTAL: ', 100, 50);
+    doc.setFontType('bold');
+    doc.text(valortotalhtml,132,50);
+    doc.setFontType('normal');
+
+    doc.text('MERMA: ', 10, 55);
+    doc.setFontType('bold');
+    doc.text(mermahtml,28,55);
+    doc.setFontType('normal');
+
     /*
     doc.text(100, 50, 'Tipo de Pago: ');
     doc.text(pagohtml,125, 50);
@@ -446,7 +479,7 @@ refreshPageDirect()
     doc.line(5, 33, 204, 33);
     doc.line(5, 60, 204, 60);
 
-    doc.text('Proceso de Entrada' ,5,68);
+    doc.text('PROCESO DE ENTRADA' ,5,68);
 
 
  
@@ -460,24 +493,24 @@ refreshPageDirect()
       2: {cellWidth: 22},
       
     },margin: {top: 70,right:35,left:5}, styles: {overflow: 'linebreak',
-    fontSize: 8},didParseCell: function (data) {
+    fontSize: 10},didParseCell: function (data) {
       var rows = data.table.body;
 
       if (data.row.index === rows.length - 1) {
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
 
-    doc.text('Proceso de Salida', 78,68);
+    doc.text('PROCESO DE SALIDA', 78,68);
 
     doc.autoTable({ html: '#salida',startY:70,columnStyles: {
-      0: {cellWidth: 22},
+      0: {cellWidth: 24},
       1: {cellWidth: 25},
       2: {cellWidth: 25},
       3: {cellWidth: 25},
       4: {cellWidth: 29},
       
     },margin:{top: 70,right:2,left:78}, styles: {overflow: 'linebreak',
-    fontSize: 8},didParseCell: function (data) {
+    fontSize: 10},didParseCell: function (data) {
       var rows = data.table.body;
       if (data.row.index === rows.length - 1) {
           data.cell.styles.fillColor = [138, 236, 247];

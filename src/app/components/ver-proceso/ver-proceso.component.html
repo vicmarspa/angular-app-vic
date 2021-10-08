@@ -1,7 +1,6 @@
 <div class="container-fluid col-12">
     <div class="row">
         <div class="col-5 mt-5 ml-5">
-
             <div style="display: inline-block;
             border: 1px solid #000000;
             font-size:20px">
@@ -51,7 +50,7 @@
             
                 
                     <h4 class="d-inline text-dark ml-2">TOTAL INGRESO:</h4>
-                    <h4 class="d-inline text-dark" style="margin-left: 164px; margin-right: 8px;" id="totalingreso" >{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KGs</h4> 
+                    <h4 class="d-inline text-dark" style="margin-left: 164px; margin-right: 8px;" id="totalingreso" >{{kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43) | number : '000.000'}} KG</h4> 
                 
                     <br>
                     <h4 class="d-inline text-dark ml-2">CANTIDAD BINES INGRESADOS:</h4>
@@ -66,7 +65,7 @@
                     <h4 class="d-inline text-dark" style="margin-left: 168px; margin-right: 8px;" id="fruta">{{calibrado.tipo_fruta}}</h4>                
              <br>
                     <h4 class="d-inline text-dark ml-2" >MERMA:  </h4>
-                    <h4 class="d-inline text-dark" style="margin-left: 215px; margin-right: 8px;" id="merma">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KGs</h4>
+                    <h4 class="d-inline text-dark" style="margin-left: 215px; margin-right: 8px;" id="merma">{{(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) - (kilogramosEntradaSum()-(cantidadbinsEntradaSum() * 43)) }} KG</h4>
                
             
         </div>
@@ -153,7 +152,7 @@
                         <td>{{rows.kilogramos | number : '000.000'}}</td>
                         <td>{{rows.cantidad_bines_s}}</td>
                         <td>{{rows.kilogramos - (rows.cantidad_bines_s*43) | number : '000.000'}}</td>
-                        <td>{{(((rows.kilogramos - (rows.cantidad_bines_s*43))*100))/(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) | number : '00.00'}}%</td>
+                        <td>{{(((rows.kilogramos - (rows.cantidad_bines_s*43))*100))/(kilogramosSalidaSum()-(cantidadbinsSalidaSum() * 43)) | number : '1.0-1'}}%</td>
                         
                         
                         

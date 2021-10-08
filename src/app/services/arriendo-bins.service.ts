@@ -19,9 +19,7 @@ export class ArriendoBinsService {
       private token: string;
 
   constructor(private http:HttpClient) { }
-
-
-
+  
   insertArriendoBins(
     arriendo_Bins : Arriendo_Bins
     ) {

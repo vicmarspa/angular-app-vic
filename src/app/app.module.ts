@@ -144,9 +144,7 @@ import { VerStockComponent } from './components/ver-stock/ver-stock.component';
     BrowserAnimationsModule,
     NgxDaterangepickerMd.forRoot(),
     BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot()
-
-    
+    DatepickerModule.forRoot()    
   ],
   providers: [
     CalibradoService,
