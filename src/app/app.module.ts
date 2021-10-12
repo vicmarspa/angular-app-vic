@@ -71,6 +71,7 @@ import { AdminServiciosComponent } from './components/admin-servicios/admin-serv
 import { CpcIngresoPrincipalComponent } from './components/cpc-ingreso-principal/cpc-ingreso-principal.component';
 import { CpcIngresoFinalComponent } from './components/cpc-ingreso-final/cpc-ingreso-final.component';
 import { VerStockComponent } from './components/ver-stock/ver-stock.component';
+import { VpcIngresoPrincipalComponent } from './components/vpc-ingreso-principal/vpc-ingreso-principal.component';
 
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
@@ -124,6 +125,7 @@ import { VerStockComponent } from './components/ver-stock/ver-stock.component';
     CpcIngresoPrincipalComponent,
     CpcIngresoFinalComponent,
     VerStockComponent,
+    VpcIngresoPrincipalComponent,
     
     //DialogComponentComponent
   ],

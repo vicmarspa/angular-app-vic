@@ -17,6 +17,9 @@ import {Tipo_Pago} from '../models/tipo_pago';
 import { Calibre } from '../models/calibre';
 import { Clientes } from '../models/clientes';
 
+import {VpcPrincipal} from '../models/vpcPrincipal';
+
+
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -97,4 +100,21 @@ export class PaltaChilenaService {
     return this.http.get(`${this.API_URI}/compra-palta-chilena/stockDetailDocument`)
   }
 
+//  ##   ##  #######  ##   ##  ######     ##
+//  ##   ##   ##   #  ###  ##  # ## #    ####
+//   ## ##    ## #    #### ##    ##     ##  ##
+//   ## ##    ####    ## ####    ##     ##  ##
+//    ###     ## #    ##  ###    ##     ######
+//    ###     ##   #  ##   ##    ##     ##  ##
+//     #     #######  ##   ##   ####    ##  ##
+
+  insertVentaPaltaChilena(vpcPrincipal:VpcPrincipal) {
+    return this.http.post(`${this.API_URI}/venta-palta-chilena/ingreso`, vpcPrincipal)
+  }
+
+
+
+
+
+  
 }

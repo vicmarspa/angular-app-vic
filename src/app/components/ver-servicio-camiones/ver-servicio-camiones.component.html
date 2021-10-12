@@ -375,7 +375,7 @@
                 <td>{{row.cantidad}}</td>
                 <td>{{row.nombre}}</td>
                 <td>{{row.numero_guia}}</td>
-                <td>{{row.fecha_guia | date: 'dd-MM-yyyy'}}</td>
+                <td>{{row.fecha_guia | date: 'dd-MM-yyyy' : '+120'}}</td>
                 <td>{{row.chofer}}</td>
                 <td><b>${{row.valor_neto | number: '1.0-0'}}</b></td>   
                 <td><b>%{{row.iva | number: '1.0-0'}}</b></td>

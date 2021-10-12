@@ -51,6 +51,8 @@ import{AdminServiciosComponent} from './components/admin-servicios/admin-servici
 import{CpcIngresoPrincipalComponent} from './components/cpc-ingreso-principal/cpc-ingreso-principal.component';
 import{CpcIngresoFinalComponent} from './components/cpc-ingreso-final/cpc-ingreso-final.component';
 import{VerStockComponent} from './components/ver-stock/ver-stock.component';
+import{VpcIngresoPrincipalComponent} from './components/vpc-ingreso-principal/vpc-ingreso-principal.component';
+
 
 
 const routes: Routes = [
@@ -238,6 +240,10 @@ const routes: Routes = [
     {
       path:'cpc/ver-stock',
       component:VerStockComponent
+    },
+    {
+      path:'vpc/ingreso-principal',
+      component:VpcIngresoPrincipalComponent
     }
 ];
 

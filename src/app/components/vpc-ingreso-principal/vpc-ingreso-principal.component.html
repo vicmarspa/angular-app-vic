@@ -1,0 +1,35 @@
+<!--INGRESO CUERPO-->
+<div class="container-fluid col-12">
+    <div class="row d-flex justify-content-center mt-2">
+        <h1>INGRESAR DATOS PARA GENERAR VENTA DE PALTA CHILENA</h1>
+    </div>
+    <div class="row d-flex justify-content-center mt-2">
+        <div class="col-4 d-flex justify-content-center" style=" border: 1px solid #000000;">
+            <div>
+                <div class="row inline mt-2">
+                    <h5 class="text-dark">NOMBRE CLIENTE</h5>          
+                    <select style="margin-left: 20px; width: auto;" [(ngModel)]="clienteSelected">
+                        <option *ngFor="let cliente of clientes | orderBy:'nombre'" id="fruta" [value]="cliente.id_cliente">
+                            {{cliente.nombre}}
+                        </option>                
+                    </select>  
+                </div>
+                <div class="row inline mt-2">
+                    <h5 class="text-dark">TIPO DE PAGO</h5>
+                    <select style="margin-left: 40px; width: auto;" [(ngModel)] = pagoSelected>
+                        <option *ngFor="let pago of tipo_pago" id="pago" [value]="pago.idtipo_pago">
+                            {{pago.tipo_pago}}
+                        </option>       
+                      </select>       
+                </div>
+                <div class="row inline mt-2">
+                    <button type="button" class="btn btn-primary btn-lg btn-block mb-2 mt-2" (click)="InsertCpc();"> Ingresar</button>   
+                </div> 
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+       
+        

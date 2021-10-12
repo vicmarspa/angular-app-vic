@@ -116,10 +116,7 @@ export class VerStockComponent implements OnInit {
     var img = new Image()
     img.src = '/assets/image.jpg'
     doc.addImage(img, 'jpg', 185, 0, 18, 18)
-  
     doc.line(5, 20, 204, 20);
-  
-  
 
     var total_kilogramos = document.getElementById("total_kilogramosStock");
     var total_kilogramoshtml = total_kilogramos?.innerHTML;
@@ -127,47 +124,28 @@ export class VerStockComponent implements OnInit {
     var fechaActualhtml = fechaActual?.innerHTML;
   
   
-  
-  
-    doc.text('Kilogramos en Stock: ', 95, 25);
-    doc.text(total_kilogramoshtml,125, 25);
+    doc.text('Kilogramos en Stock: ', 80, 25);
+    doc.text(total_kilogramoshtml,115, 25);
     doc.text('Fecha Actual: ', 10, 25);
-    doc.text(fechaActualhtml,45, 25);
+    doc.text(fechaActualhtml,35, 25);
 
-
   
-  
-  
-  
-    doc.line(5, 50, 204, 50);
-  
-    doc.text('Detalles del Reporte', 80,55);
-    
-    doc.line(5, 60, 204, 60);
-  
-  
-  
-
-
-
-
+    doc.line(5, 30, 204, 30);
+    doc.text('Detalles del Reporte', 80,35);
+    doc.line(5, 40, 204, 40);
 
     doc.autoTable({ html: '#entrada',columnStyles: {
 
     
       0: {cellWidth: 15},
       1: {cellWidth: 20},
-      2: {cellWidth: 18},
-      3: {cellWidth: 18},
-      4: {cellWidth: 18},
+      2: {cellWidth: 25},
+      3: {cellWidth: 25},
+      4: {cellWidth: 25},
       5: {cellWidth: 22},
-      6: {cellWidth: 15},
-      7: {cellWidth: 15},
-      8: {cellWidth: 10},
-      9: {cellWidth: 20},
-      10: {cellWidth: 20},
+
   
-    },margin: {top: 65,right:35,left:10}, styles: {overflow: 'linebreak',
+    },margin: {top: 45,right:35,left:35}, styles: {overflow: 'linebreak',
     fontSize: 8},didParseCell: function (data) {
   
       //data.table.body.splice(5);
@@ -182,11 +160,6 @@ export class VerStockComponent implements OnInit {
     doc.output('dataurlnewwindow'); 
     
    
-  
-    
-   
-  
-  
   }
 
 
