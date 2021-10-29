@@ -33,6 +33,7 @@ export class VerStockComponent implements OnInit {
     total_kilogramos_stock_Detail : any = '';
     porcentaje_Detail : any = '';
     fechaActual = new Date();
+    largeListForProm:number = 0;
   ngOnInit(): void {
     this.paltaChilenaService.getStock()
     .subscribe(
@@ -48,6 +49,7 @@ export class VerStockComponent implements OnInit {
     .subscribe(
       res => {
         this.stockDetailDocument = res;
+        this.largeListForProm = this.stockDetailDocument.length
         console.log(res);                          
       },
       err => console.error(err)
@@ -100,6 +102,14 @@ export class VerStockComponent implements OnInit {
   public kilogramosStockSum(){
     return this.compras.map(row => row.total_kilogramos_stock).reduce((a,b) => a+b, 0);
   }
+  public kilogramosInventarioSum(){
+    return this.compras.map(row => row.total_kilogramos_inventario).reduce((a,b) => a+b, 0);
+  }
+
+  public porcentajePromedioSum(){
+    return this.compras.map(row => row.porcentaje).reduce((a,b) => a+b, 0);
+  }
+
 
 
 

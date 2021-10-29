@@ -8,8 +8,14 @@
                     <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
                     <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="fechaActual">{{fechaActual | date :'dd-MM-yyyy  hh:mm:ss'}}</h4>
                     <br>
-                    <h4 class="d-inline" style="color: #000000;">Kilogramos en Stock: </h4>
-                    <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramosStock">{{kilogramosStockSum() | number : '000.000'}}</h4>    
+                    <h4 class="d-inline" style="color: #000000;">Kilogramos En Stock: </h4>
+                    <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramosStock">{{kilogramosStockSum() | number: '1.0-0'}}</h4>
+                    <br>
+                    <h4 class="d-inline" style="color: #000000;">Kilogramos En Ingresados: </h4>
+                    <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramosStock">{{kilogramosInventarioSum() | number: '1.0-0'}}</h4>
+                    <br>
+                    <h4 class="d-inline" style="color: #000000;">Porcentaje Promedio De Venta: </h4>
+                    <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_kilogramosStock">{{porcentajePromedioSum() / largeListForProm | number: '1.0-2'}}</h4> 
                 </div>   
             </div>
             <div class="col-7 mt-4">
@@ -78,7 +84,15 @@
         <td><b>{{row.kilogramos_stock}}</b></td>
         <td><b>{{row.kilogramos_vendidos}}</b></td>
         <td><b>{{row.porcentaje_vendido | number:'1.1-2'}}%</b></td>
-      </tr>                  
+      </tr>
+      <tr class="table-info">
+        <td></td>
+        <td></td>
+        <td><b>{{kilogramosInventarioSum() | number: '1.0-0'}}</b></td>
+        <td><b>{{kilogramosStockSum() | number: '1.0-0'}}</b></td>
+        <td><b>{{kilogramosInventarioSum() - kilogramosStockSum()| number: '1.0-0'}}</b></td>
+        <td></td>
+    </tr>
     </tbody>
   </table>
   <!-- MODAL INICIO -->

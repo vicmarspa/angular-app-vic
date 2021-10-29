@@ -660,7 +660,7 @@ export class BusquedaCpcComponent implements OnInit {
   
     doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO PRELIMINAR', 50,60);
+    doc.text('DETALLE DE COMPRA - PALTA CHILENA', 70, 60);
     
     doc.line(5, 65, 204, 65);
   
