@@ -22,14 +22,14 @@ export class CpcIngresoFinalComponent implements OnInit {
     private calibradoService: CalibradoService,
   ) { }
   cpcDetailInput:CpcDetailInput = {
-    id_cpc:'',
+    id_cpc:0,
     cantidad:0, 
     calibre:0,
     precio:0,
     formato:'',    
   } 
   cpcDetailOutput:CpcDetailOutput = {
-    id_cpc:'',
+    id_cpc:0,
     calibre:0,
     cantidad:0,
     bins:0,

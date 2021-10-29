@@ -10,6 +10,9 @@ import { Tipo_Pago } from '../../models/tipo_pago';
 import { Clientes } from '../../models/clientes';
 import { Compras } from '../../models/compras';
 import { Ventas } from '../../models/ventas';
+import {CpcPrincipal} from '../../models/cpcPrincipal';
+import { PaltaChilenaService } from 'src/app/services/palta-chilena.service';
+
 
 @Component({
   selector: 'app-eliminados',
@@ -18,7 +21,9 @@ import { Ventas } from '../../models/ventas';
 })
 export class EliminadosComponent implements OnInit {
 
-  constructor(public calibradoService: CalibradoService) { }
+  constructor(
+    public calibradoService: CalibradoService,
+    private paltaChilenaService: PaltaChilenaService) { }
 
   calibrado:any = [];
   calibre:any = [];
@@ -28,6 +33,9 @@ export class EliminadosComponent implements OnInit {
   compras:any = [];
   ventas:any= [];
   products:any = [];
+  compraPaltaChilena:any = [];
+  compraPaltaChilenaMaxRegister:any = [];
+
 
   tipoSelected:string ='';
 
@@ -88,6 +96,14 @@ export class EliminadosComponent implements OnInit {
     venta_fin:new Date
   }
 
+  cpcPrincipal:CpcPrincipal = {
+    id_cpc: 0,
+    cliente_id: 0,
+    fecha_ingreso: new Date,
+    estado:'',
+    impuesto:0,
+  }
+
 
   tbx1?:string='';
 
@@ -100,8 +116,8 @@ export class EliminadosComponent implements OnInit {
       {Tipo:'Fruta'},
       {Tipo:'Pago'},
       {Tipo:'Clientes'},
-      {Tipo:'Productos'}      
-      
+      {Tipo:'Productos'},
+      {Tipo:'Compra Palta Chilena'}      
     ]
 
     this.calibradoService.getCalibradosEliminados()
@@ -169,6 +185,14 @@ export class EliminadosComponent implements OnInit {
       .subscribe(
         res => {
           this.products = res;
+          console.log(res);
+        },
+        err => console.error(err)
+      );
+      this.calibradoService.getCompraPaltaChilenaEliminados()
+      .subscribe(
+        res => {
+          this.compraPaltaChilena = res;
           console.log(res);
         },
         err => console.error(err)
@@ -519,6 +543,112 @@ export class EliminadosComponent implements OnInit {
       }
     })
   }
+
+
+  obtenerMaximoRegistroCompraPaltaChilena(_callBackCompraPaltaChilena){
+
+    this.paltaChilenaService.getMaxRegisterCompraPaltaChilena()
+    .subscribe(
+      res => {
+        this.compraPaltaChilenaMaxRegister = res;
+        console.log(res);
+        _callBackCompraPaltaChilena();
+      },
+      err => console.error(err)
+    );
+
+  }
+
+
+
+  deleteCompraPaltaChilena(id_cpc:string) {
+    this.obtenerMaximoRegistroCompraPaltaChilena(()=>{
+      if(this.compraPaltaChilenaMaxRegister[0].id_cpc == id_cpc){
+        Swal.fire({
+          title: 'Estas seguro(a)?',
+          text: "No se podrá recuperar la compra!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, borrala!'  
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            this.actualizarIdBase(id_cpc);
+
+            Swal.fire(
+              'Borrado!',
+              'La compra seleccionada ha sido borrada.',
+              'success'
+            )
+          }
+        })
+      }else(
+        Swal.fire(
+          'No es posible borrar esta compra',
+          'Solo puedes borrar la ultima compra realizada',
+          'error'
+        )
+      )
+    });
+  }
+
+
+  borrarCompraPaltaChilena(_callBackBorrarCompraPaltaChilena, id_cpc){  
+    this.paltaChilenaService.deleteCompraPaltaChilena(id_cpc)
+    .subscribe(
+      res => {
+        console.log(res);
+        _callBackBorrarCompraPaltaChilena();
+      },
+      err => console.error(err)
+    )
+  }
+
+
+  actualizarIdBase(id_cpc:string){
+    this.borrarCompraPaltaChilena(()=>{
+      this.paltaChilenaService.deleteCompraPaltaChilena2(id_cpc, this.cpcPrincipal)
+      .subscribe(
+        res => {
+          console.log(res);
+          location.reload();
+        },
+        err => console.error(err)
+      )
+    },id_cpc);
+  }
+
+  updateStatusBuyDelete2(id_cpc:number){
+    Swal.fire({
+      title: '¿Estás Seguro?',
+      text: "¿Desea Restablecer Esta Compra?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {   
+    this.cpcPrincipal.id_cpc= id_cpc;
+    this.cpcPrincipal.estado = '1';
+    this.paltaChilenaService.changeBuyStatusDelete2(this.cpcPrincipal)
+    .subscribe(
+      res => {
+        location.reload()
+      },
+      err => console.error(err)
+    );
+    Swal.fire(
+      'Compra Restablecida',
+      'Se Ha Restablecido La Compra',
+      'success'
+        )
+      }
+    })
+  }
+
 
 
 }

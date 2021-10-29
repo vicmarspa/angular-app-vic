@@ -52,6 +52,9 @@ import{CpcIngresoPrincipalComponent} from './components/cpc-ingreso-principal/cp
 import{CpcIngresoFinalComponent} from './components/cpc-ingreso-final/cpc-ingreso-final.component';
 import{VerStockComponent} from './components/ver-stock/ver-stock.component';
 import{VpcIngresoPrincipalComponent} from './components/vpc-ingreso-principal/vpc-ingreso-principal.component';
+import{VpcIngresoFinalComponent} from './components/vpc-ingreso-final/vpc-ingreso-final.component';
+import{BusquedaCpcComponent} from './components/busqueda-cpc/busqueda-cpc.component';
+
 
 
 
@@ -244,7 +247,16 @@ const routes: Routes = [
     {
       path:'vpc/ingreso-principal',
       component:VpcIngresoPrincipalComponent
+    },
+    {
+      path:'vpc/ingreso-final/:id_vpc',
+      component:VpcIngresoFinalComponent
+    },
+    {
+      path:'cpc/busqueda',
+      component:BusquedaCpcComponent
     }
+    
 ];
 
 @NgModule({

@@ -84,6 +84,7 @@ export class VpcIngresoPrincipalComponent implements OnInit {
     )    
   }
 
+  
   Success(){
     Swal.fire({
       //position: 'top-end',
@@ -96,7 +97,7 @@ export class VpcIngresoPrincipalComponent implements OnInit {
       /* Read more about handling dismissals below */
       console.log(this.resMain.insertId,"EL ID INGRESADO ES");
       console.log("hola")
-      window.location.replace("/cpc/ingreso-final/"+this.resMain.insertId);
+      window.location.replace("/vpc/ingreso-final/"+this.resMain.insertId);
     })
   }
 

@@ -334,6 +334,9 @@ export  class CalibradoService {
   getproductosEliminados(){
     return this.http.get(`${this.API_URI}/eliminados/productos`)
   }
+  getCompraPaltaChilenaEliminados(){
+    return this.http.get(`${this.API_URI}/compra-palta-chilena/getAllBuysDelete`)
+  }
 
   //Eliminados - Restaurar
   RestaurarCalibradoPapelera(numero_proceso: string|number, BorrarCalibrado:Calibrado): Observable<Calibrado>{

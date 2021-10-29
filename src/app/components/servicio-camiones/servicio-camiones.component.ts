@@ -70,6 +70,9 @@ export class ServicioCamionesComponent implements OnInit {
 
   guardarProceso(){ 
     this.servicio_Camiones.total  = this.servicio_Camiones.valor_neto * (((this.servicio_Camiones.iva)/100)+1);
+
+
+
     Swal.fire({
       title: 'Estás Seguro',
       text: "Desea Ingresar Este Servicio de Cámaras",
@@ -80,6 +83,9 @@ export class ServicioCamionesComponent implements OnInit {
       confirmButtonText: 'Si'
     }).then((result) => {
       if (result.isConfirmed) {   
+
+
+
     this.servicioCamionesService.insertServicioCamiones(this.servicio_Camiones)
     .subscribe(
       res => {
@@ -88,6 +94,9 @@ export class ServicioCamionesComponent implements OnInit {
       },
       err => console.error(err)
     )
+
+
+
     Swal.fire(
       'Servicio Ingresado',
       'Se Ha Ingresado Correctamente',
@@ -95,6 +104,9 @@ export class ServicioCamionesComponent implements OnInit {
     )
   }
 })
+
+
+
 }
 
 

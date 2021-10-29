@@ -117,14 +117,6 @@ export class VerVentaComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
   nuevoPDF(){
     // Default export is a4 paper, portrait, using millimeters for units
     const doc = new jsPDF();
@@ -435,13 +427,12 @@ export class VerVentaComponent implements OnInit {
 
 
     doc.autoTable({ html: '#entrada2',columnStyles: {
-      0: {cellWidth: 15},
-      1: {cellWidth: 24},
-      2: {cellWidth: 22},
+      0: {cellWidth: 24},
+      1: {cellWidth: 22},
+      2: {cellWidth: 18},
       3: {cellWidth: 18},
-      4: {cellWidth: 18},
+      4: {cellWidth: 30},
       5: {cellWidth: 30},
-      6: {cellWidth: 30},
 
       
     },margin: {top: 80,right:35,left:28},styles: {overflow: 'linebreak',

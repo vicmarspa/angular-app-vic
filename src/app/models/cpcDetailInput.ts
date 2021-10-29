@@ -1,5 +1,5 @@
 export interface CpcDetailInput{
-    id_cpc?: string;
+    id_cpc?: number;
     cantidad?: number;
     calibre?: number;
     precio?: number;
