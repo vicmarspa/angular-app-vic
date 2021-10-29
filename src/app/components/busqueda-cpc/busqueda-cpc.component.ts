@@ -305,6 +305,8 @@ export class BusquedaCpcComponent implements OnInit {
     var selectTotalValor =  document.getElementById("selectTotalValor");
     var selectTotalValorhtml = selectTotalValor?.innerHTML;
     
+    var selectTotalValor =  document.getElementById("selectTotalValor2");
+    var selectTotalValor2html = selectTotalValor?.innerHTML;
 
 
 
@@ -352,35 +354,40 @@ export class BusquedaCpcComponent implements OnInit {
     doc.text(selectedTotalCantidadhtml, 55, 40); 
     doc.setFontType('normal');
 
-    doc.text('PRECIO TOTAL: ', 10, 45); 
+    doc.text('PRECIO NETO: ', 10, 45); 
     doc.setFontType('bold');
     doc.text(selectTotalValorhtml, 55, 45); 
-   
-   
+    doc.setFontType('normal');
+
+    doc.text('PRECIO TOTAL: ', 10, 50); 
+    doc.setFontType('bold');
+    doc.text(selectTotalValor2html, 55, 50); 
   
   
   
-    doc.line(5, 50, 204, 50);
+    doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,55);
+    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,60);
     
-    doc.line(5, 60, 204, 60);
+    doc.line(5, 65, 204, 65);
   
   
   
   
   
-    doc.text('DETALLE DE ENTRADA', 45,65);
+    doc.text('DETALLE DE ENTRADA', 45,70);
 
   
     // top: 65,right:35,left:10
     doc.autoTable({ html: '#datos_entrada',columnStyles: {
-      0: {cellWidth: 25},
-      1: {cellWidth: 20},
-      2: {cellWidth: 18},
-      3: {cellWidth: 25},
-      4: {cellWidth: 25},
-    },margin: {top: 70,right:35,left:5}, styles: {overflow: 'linebreak',
+      0: {cellWidth: 16},
+      1: {cellWidth: 18},
+      2: {cellWidth: 16},
+      3: {cellWidth: 20},
+      4: {cellWidth: 24},
+      5: {cellWidth: 24},
+
+    },margin: {top: 75,right:35,left:5}, styles: {overflow: 'linebreak',
     fontSize: 10},didParseCell: function (data) {
   
       //data.table.body.splice(5);
@@ -390,15 +397,15 @@ export class BusquedaCpcComponent implements OnInit {
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
   
-    doc.text('DETALLE DE SALIDA', 140,65);
+    doc.text('DETALLE DE SALIDA', 140,70);
 
-      doc.autoTable({ html: '#datos_salida', startY:70, columnStyles: {
+      doc.autoTable({ html: '#datos_salida', startY:75, columnStyles: {
         0: {cellWidth: 25},
         1: {cellWidth: 25},
         2: {cellWidth: 12},
         3: {cellWidth: 15},
 
-      },margin: {top: 70,right:2,left:125}, styles: {overflow: 'linebreak',
+      },margin: {top: 75,right:2,left:125}, styles: {overflow: 'linebreak',
       fontSize: 10},didParseCell: function (data) {
     
         //data.table.body.splice(5);
@@ -458,7 +465,8 @@ export class BusquedaCpcComponent implements OnInit {
     var selectTotalValor =  document.getElementById("selectTotalValor");
     var selectTotalValorhtml = selectTotalValor?.innerHTML;
     
-
+    var selectTotalValor2 =  document.getElementById("selectTotalValor2");
+    var selectTotalValor2html = selectTotalValor2?.innerHTML;
 
 
 
@@ -505,25 +513,29 @@ export class BusquedaCpcComponent implements OnInit {
     doc.text(selectedTotalCantidadhtml, 55, 40); 
     doc.setFontType('normal');
 
-    doc.text('PRECIO TOTAL: ', 10, 45); 
+    doc.text('PRECIO NETO: ', 10, 45); 
     doc.setFontType('bold');
-    doc.text(selectTotalValorhtml, 55, 45); 
+    doc.text(selectTotalValorhtml, 55, 45);
+    doc.setFontType('normal');
+
+    doc.text('PRECIO TOTAL: ', 10, 50); 
+    doc.setFontType('bold');
+    doc.text(selectTotalValor2html, 55, 50); 
    
-   
   
   
   
-    doc.line(5, 50, 204, 50);
+    doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO PRELIMINAR', 50,55);
+    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO PRELIMINAR', 50,60);
     
-    doc.line(5, 60, 204, 60);
+    doc.line(5, 65, 204, 65);
   
   
   
   
   
-    doc.text('DETALLE DE ENTRADA', 85,65);
+    doc.text('DETALLE DE ENTRADA', 85,70);
 
   
     // top: 65,right:35,left:10
@@ -533,7 +545,8 @@ export class BusquedaCpcComponent implements OnInit {
       2: {cellWidth: 18},
       3: {cellWidth: 25},
       4: {cellWidth: 25},
-    },margin: {top: 70,right:35,left:45}, styles: {overflow: 'linebreak',
+      5: {cellWidth: 25},
+    },margin: {top: 75,right:35,left:35}, styles: {overflow: 'linebreak',
     fontSize: 10},didParseCell: function (data) {
   
       //data.table.body.splice(5);
