@@ -23,7 +23,7 @@ export class VpcIngresoFinalComponent implements OnInit {
   ) { }
   vpcDetalle:VpcDetalle = {
     id_vpc: 0,
-    id_cpc: 0,
+    id_cpc: '0',
     pallet: 0,
     cantidad: 0,
     calibre: 0,
@@ -33,13 +33,13 @@ export class VpcIngresoFinalComponent implements OnInit {
     cantidad_bins:0, 
   }
   cpcDetailOutput:CpcDetailOutput = {
-    id_cpc: 0,
+    id_cpc: '0',
     calibre:0,
     cantidad:0,
     bins:0,
   }
   cpcDetailOutputDelete:CpcDetailOutput = {
-    id_cpc: 0,
+    id_cpc: '0',
     calibre:0,
     cantidad:0,
     bins:0,
@@ -139,7 +139,7 @@ export class VpcIngresoFinalComponent implements OnInit {
   }
   guardarEntrada(){ 
     this.InsertCantidadEntrada(()=>{
-      if(this.vpcDetalle.id_cpc!=0){
+      if(this.vpcDetalle.id_cpc!='0'){
         if(this.vpcDetalle.cantidad!=0){
           if(this.vpcDetalle.calibre !=0){
             if(this.vpcDetalle.precio !=0){
@@ -252,7 +252,7 @@ export class VpcIngresoFinalComponent implements OnInit {
     )
     _callback4();
   }
-  BorrarDetalleVenta(id_cpc:number, calibre:number, cantidad:number, id_detalle_salida_vpc:string){
+  BorrarDetalleVenta(id_cpc:string, calibre:number, cantidad:number, id_detalle_salida_vpc:string){
     this.cpcDetailOutputDelete.id_cpc = id_cpc;
     this.cpcDetailOutputDelete.calibre = calibre;
     this.cpcDetailOutputDelete.cantidad = cantidad;
@@ -262,7 +262,7 @@ export class VpcIngresoFinalComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          this.cpcDetailOutputDelete.id_cpc = 0;
+          this.cpcDetailOutputDelete.id_cpc = '0';
           this.cpcDetailOutputDelete.calibre = 0;
           this.cpcDetailOutputDelete.cantidad = 0;
           this.cpcDetailOutputDelete.bins = 0;
@@ -288,19 +288,22 @@ export class VpcIngresoFinalComponent implements OnInit {
  
   }
   LoteFilte=[];
-  onSelectUniversity(id:number)
+  onSelectUniversity(id:string)
   {
     //ALMACENAR ESTA VARIABLE
-    if(id != 0){
+    if(id != '0'){
+
+    console.log("termino de entrada");
     this.getStockSell = this.getStockSellRespaldo;
     var LoteSelectionFunction = this.getStockSell
     .filter(function(lote){
-    return lote.id_cpc === id;
+    return lote.id_cpc == id;
     })
     this.LoteFilte = LoteSelectionFunction;
     this.getStockSell = this.LoteFilte;
     console.log(this.LoteFilte)
     }else{
+      console.log("ARROJA ESTE TERMINO");
       this.getStockSell = this.getStockSellRespaldo;
     }
   }

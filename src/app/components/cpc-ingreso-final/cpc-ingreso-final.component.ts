@@ -29,7 +29,7 @@ export class CpcIngresoFinalComponent implements OnInit {
     formato:'',    
   } 
   cpcDetailOutput:CpcDetailOutput = {
-    id_cpc:0,
+    id_cpc:'0',
     calibre:0,
     cantidad:0,
     bins:0,

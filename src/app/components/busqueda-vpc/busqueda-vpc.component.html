@@ -1,0 +1,50 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <table class="table table-striped table-sm">
+            <thead class="thead-dark">
+              <tr>                    
+                <th scope="col">Lote</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Kilogramos</th>
+                <th scope="col">Iva</th>
+                <th scope="col">Precio Iva</th>                                        
+                <th scope="col">Precio Neto</th>
+                <th scope="col">Precio Total</th>
+                <th scope="col" >Opciones</th>   
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor ='let row of getAllSells'>
+                <td><b>{{row.id_vpc}}</b></td>
+                <td><b>{{row.nombre}}</b></td>
+                <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>
+                <td>{{row.tipo_pago}}</td>                   
+
+                <td>{{row.total_cantidad | number:'1.0-0'}}</td>   
+                <td>{{row.precio_productos | number:'1.0-0'}}</td>
+                <td>{{row.costos_adicionales | number:'1.0-0'}}</td>
+                
+                
+                <td><b style="font-size:medium;">{{ row.precio_productos + row.costos_adicionales | number:'1.0-0'}}</b></td>
+                                      
+                <td>  
+                                <!-- (click)="menuOpciones(                    
+                                    row.id_cpc, 
+                                    row.nombre, 
+                                    row.fecha_ingreso, 
+                                    row.impuesto, 
+                                    row.total_cantidad, 
+                                    row.total_valor)" -->
+                  <button  class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                      OPCIONES
+                  </button>
+
+
+
+              </td>  
+              </tr>                  
+            </tbody>
+          </table>
+    </div>
+</div>

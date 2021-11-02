@@ -151,7 +151,7 @@ export class PaltaChilenaService {
   updateStock(cpcDetailOutput:CpcDetailOutput): Observable<Tipo_Fruta>{
     return this.http.put(`${this.API_URI}/venta-palta-chilena/editStockcpc`, cpcDetailOutput)
   }
-  getStockCalibres(id_vpc: number) {
+  getStockCalibres(id_vpc: string) {
     return this.http.get(`${this.API_URI}/venta-palta-chilena/getStockCalibre/${id_vpc}`);
   }
 
@@ -181,6 +181,9 @@ export class PaltaChilenaService {
 
   BorrarGastoAdicional(id_gasto_adicional_cpc: string){
     return this.http.delete(`${this.API_URI}/venta-palta-chilena/eliminar/gastoAdicional/${id_gasto_adicional_cpc}`)
+  }
+  getAllSells(){
+    return this.http.get(`${this.API_URI}/venta-palta-chilena/getAllSells`)
   }
 
 

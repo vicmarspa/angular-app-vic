@@ -1,5 +1,5 @@
 export interface CpcDetailOutput{
-    id_cpc?: number;
+    id_cpc?: string;
     calibre?: number;
     cantidad?: number;
     bins?: number;

@@ -1,6 +1,6 @@
 export interface VpcDetalle{
     id_vpc?: number;
-    id_cpc?: number;
+    id_cpc?: string;
     pallet?: number;
     cantidad?: number;
     calibre?: number;

@@ -54,7 +54,7 @@ import{VerStockComponent} from './components/ver-stock/ver-stock.component';
 import{VpcIngresoPrincipalComponent} from './components/vpc-ingreso-principal/vpc-ingreso-principal.component';
 import{VpcIngresoFinalComponent} from './components/vpc-ingreso-final/vpc-ingreso-final.component';
 import{BusquedaCpcComponent} from './components/busqueda-cpc/busqueda-cpc.component';
-
+import{BusquedaVpcComponent} from './components/busqueda-vpc/busqueda-vpc.component';
 
 
 
@@ -255,6 +255,10 @@ const routes: Routes = [
     {
       path:'cpc/busqueda',
       component:BusquedaCpcComponent
+    },
+    {
+      path:'vpc/busqueda',
+      component:BusquedaVpcComponent
     }
     
 ];
