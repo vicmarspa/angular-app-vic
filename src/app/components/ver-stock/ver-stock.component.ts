@@ -39,7 +39,8 @@ export class VerStockComponent implements OnInit {
     .subscribe(
       res => {
         this.compras = res;
-        this.products = res;                            
+        this.products = res;
+        this.largeListForProm = this.compras.length;                           
         console.log(res);
         console.log(this.compras.length)
       },
@@ -49,7 +50,6 @@ export class VerStockComponent implements OnInit {
     .subscribe(
       res => {
         this.stockDetailDocument = res;
-        this.largeListForProm = this.stockDetailDocument.length
         console.log(res);                          
       },
       err => console.error(err)
