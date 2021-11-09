@@ -258,10 +258,6 @@ export class BusquedaVpcComponent implements OnInit {
 
 
 
-
-
-
-  
 ////////
 ////////
 ////////
