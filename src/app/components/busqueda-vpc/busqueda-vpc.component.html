@@ -259,8 +259,6 @@
                                     <br>
                                     DOCUMENTO
                                   </a>
-
-                                  
                                   <!--  -->
                                   <!-- (click)="reporteIndividualPDF()" -->
                                   <a (click)="reporteIndividualPDF2()" class="btn btn-success ml-2" style="height: 120px; width: 120px;" >
@@ -273,7 +271,6 @@
                                     DOCUMENTO CLIENTE (SIN COSTO ADICIONAL)
                                     <br>
                                     <br>
-
                                   </a>
                                   <!--  -->
                                   <!-- (click)="updateStatusBuyDelete(selectIdCpc)" -->
@@ -283,6 +280,51 @@
                                     delete 
                                   </a> 
                                 </div>
+
+
+                                <br>
+                                <hr>
+                                <h2 class="d-flex justify-content-center">CAMBIAR TIPO DE PAGO</h2>
+                                <hr>
+                                <br>
+
+
+
+
+                                <div class="d-flex justify-content-center">
+                                  <br>
+                                  <br>
+
+
+
+
+                                  <div>
+                                    <select class="form-control" style="border: 1px solid #000000; height: 50px; font-size: 100%" [(ngModel)]=tipo_pago2>
+                                        <option *ngFor="let pago of tipo_pago_list" [value]="pago.idtipo_pago">
+                                          {{pago.tipo_pago}}
+                                        </option> 
+                                    </select> 
+                                  </div>
+
+                                  
+                                  <a  (click)="ActualizarTipoPago(selectedIdVpc)"  class="btn btn-primary ml-2">
+                                    CAMBIAR
+                                  </a>
+
+
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+
                               </tbody>
                             </table>
                           </div>

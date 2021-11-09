@@ -6,8 +6,11 @@ import { Moment } from 'moment';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable'
 import { PaltaChilenaService } from 'src/app/services/palta-chilena.service';
+import{ToastrService} from 'ngx-toastr';
+
 
 import {CpcPrincipal} from '../../models/cpcPrincipal';
+import {VpcPrincipal} from '../../models/vpcPrincipal';
 
 @Component({
   selector: 'app-busqueda-vpc',
@@ -22,11 +25,21 @@ export class BusquedaVpcComponent implements OnInit {
   tipo_pago_list:any =[];
 
 
+  vpcPrincipal:VpcPrincipal = {
+    id_vpc: 0,
+    cliente_id: 0,
+    fecha_ingreso: new Date,
+    tipo_pago: 0,
+    estado: 0,
+  }
+
   constructor(
     public calibradoService: CalibradoService,
     private router:Router,
     private activedRoute: ActivatedRoute,
-    public paltaChilenaService: PaltaChilenaService
+    public paltaChilenaService: PaltaChilenaService,
+    private toastr: ToastrService
+
   ) { }
 
   ngOnInit(): void {
@@ -306,6 +319,62 @@ export class BusquedaVpcComponent implements OnInit {
 ////////
 ////////
 ////////
+
+
+
+
+
+
+
+
+
+
+tipo_pago2:number;
+
+
+ActualizarTipoPago(id_vpc:number){
+  this.vpcPrincipal.id_vpc = id_vpc;
+  this.vpcPrincipal.tipo_pago = this.tipo_pago2;
+  Swal.fire({
+    title: '¿Estás Seguro?',
+    text: "¿Desea Cambiar El Estado De Este Pago?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si'
+  }).then((result) => {
+    if (result.isConfirmed) { 
+    this.paltaChilenaService.updateVentaTipoPago(this.vpcPrincipal)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.vpcPrincipal.id_vpc = 0;
+        this.vpcPrincipal.tipo_pago = 0;
+        this.toastr.success("ACTUALIZADO.");
+      },
+      err => console.error(err)
+    )
+    Swal.fire(
+      {
+        //position: 'top-end',
+        icon: 'success',
+        title: 'Pago Actualizado',
+        html: 'Estamos Redireccionando.',
+        showConfirmButton: false,
+        timer: 2000,
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        location.reload();
+      }
+        )
+      }
+    })
+}
+
+
+
+
 
 
 

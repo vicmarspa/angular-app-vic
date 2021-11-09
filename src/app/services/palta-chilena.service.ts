@@ -186,5 +186,9 @@ export class PaltaChilenaService {
     return this.http.get(`${this.API_URI}/venta-palta-chilena/getAllSells`)
   }
 
+  updateVentaTipoPago(vpcPrincipal:VpcPrincipal){
+    return this.http.put(`${this.API_URI}/venta-palta-chilena/actualizar/tipoPago`, vpcPrincipal)
+  }
+
 
 }
