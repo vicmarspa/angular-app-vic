@@ -267,7 +267,7 @@
   </div>
 </div>
 
-<!--Tabla Productos-->
+<!--Tabla Compra Palta Chilena-->
 <div class="container-fluid col-12" *ngIf="tipoSelected == 'Compra Palta Chilena'">
   <div class="row">
       <div class="col-11 mt-3 ml-5">
@@ -290,6 +290,47 @@
                 
                 <a class="btn btn-primary" (click)=updateStatusBuyDelete2(p.id_cpc)>RESTAURAR</a>  
                 <button class="btn btn-danger ml-2 material-icons" (click)=deleteCompraPaltaChilena(p.id_cpc)>
+                  delete 
+                    </button>                    
+              </td>         
+                                
+            </tr>                  
+          </tbody>
+        </table>
+            <input type="text" value="1" id="restaurado" style="display: none;">             
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--Tabla Venta Palta Chilena-->
+
+<div class="container-fluid col-12" *ngIf="tipoSelected == 'Venta Palta Chilena'">
+  <div class="row">
+      <div class="col-11 mt-3 ml-5">
+        <table class="table" style="width: 30%;">
+          <thead class="thead-dark">
+            <tr>                    
+              <th scope="col">Id</th>
+              <th scope="col" class="pl-2" >Cliente</th>                                    
+              <th scope="col" >Fecha Ingreso</th>                                 
+              <th scope="col" style="padding-left: 4%;">Opciones</th>           
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of ventaPaltaChilena">                    
+              <td class="pl-3">{{p.id_vpc}}</td>
+              <td class="pl-4">{{p.nombre}}</td>                                                   
+              <td class="pl-4">{{p.fecha_ingreso}}</td>                                                           
+              <td>
+                
+                <a class="btn btn-primary" (click)=updateStatusSellDelete2(p.id_vpc)>RESTAURAR</a>  
+                <button class="btn btn-danger ml-2 material-icons" (click)=deleteVentaPaltaChilena(p.id_vpc)>
                   delete 
                     </button>                    
               </td>         

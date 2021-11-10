@@ -338,6 +338,10 @@ export  class CalibradoService {
     return this.http.get(`${this.API_URI}/compra-palta-chilena/getAllBuysDelete`)
   }
 
+  getVentaPaltaChilenaEliminados(){
+    return this.http.get(`${this.API_URI}/venta-palta-chilena/getAllSellDelete`)
+  }
+
   //Eliminados - Restaurar
   RestaurarCalibradoPapelera(numero_proceso: string|number, BorrarCalibrado:Calibrado): Observable<Calibrado>{
     return this.http.put(`${this.API_URI}/eliminados/${numero_proceso}/calibrado`, BorrarCalibrado)

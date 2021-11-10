@@ -370,6 +370,79 @@ ActualizarTipoPago(id_vpc:number){
 
 
 
+ActualizarEstado(id_vpc:number,kilogramos:number,adicional:number){
+  this.vpcPrincipal.id_vpc = id_vpc;
+  this.vpcPrincipal.estado = 0;
+  if(kilogramos==0 && adicional==0){
+    Swal.fire({
+      title: '¿Estás Seguro Que Desea Eliminar Esta venta?',
+      text: "Recuerde Eliminar Definitivamente En La Sección De Registros Borrados Si Desea Reestablecer El Inventario",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) { 
+      this.paltaChilenaService.updateVentaEstado(this.vpcPrincipal)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.vpcPrincipal.id_vpc = 0;
+          this.vpcPrincipal.tipo_pago = 0;
+          this.toastr.success("VENTA ELIMINADA.");
+        },
+        err => console.error(err)
+      )
+      Swal.fire(
+        {
+          //position: 'top-end',
+          icon: 'success',
+          title: 'Venta Eliminada',
+          html: 'Estamos Redireccionando.',
+          showConfirmButton: false,
+          timer: 2000,
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          location.reload();
+        }
+          )
+        }
+      })
+  }else{
+    Swal.fire(
+      {
+        //position: 'top-end',
+        icon: 'error',
+        title: 'No Se Realizó La Operación',
+        html: 'Para Eliminar Esta Venta Debe Ir A La Sección Modificar Y Eliminar El Detalle De La Venta',
+        showConfirmButton: false,
+        timer: 5000,
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        location.reload();
+      }
+        )
+    console.log("no se puede borrar")
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
 
 
 

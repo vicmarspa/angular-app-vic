@@ -190,5 +190,29 @@ export class PaltaChilenaService {
     return this.http.put(`${this.API_URI}/venta-palta-chilena/actualizar/tipoPago`, vpcPrincipal)
   }
 
+  updateVentaEstado(vpcPrincipal:VpcPrincipal){
+    return this.http.put(`${this.API_URI}/venta-palta-chilena/actualizar/estado`, vpcPrincipal)
+  }
 
+
+
+  getMaxRegisterVentaPaltaChilena(){
+    return this.http.get(`${this.API_URI}/venta-palta-chilena/getMaxRegister`)
+  }
+
+
+  deleteVentaPaltaChilena(id_vpc: string){
+    return this.http.delete(`${this.API_URI}/venta-palta-chilena/deleteVentaPaltaChilena/${id_vpc}`)
+  }
+
+  deleteVentaPaltaChilena2(id_vpc: string, vpcPrincipal:VpcPrincipal) {
+    return this.http.post(`${this.API_URI}/venta-palta-chilena/deleteVentaPaltaChilena2/${id_vpc}`,vpcPrincipal)
+  }
+
+  
+  changeSellStatusDelete2(vpcPrincipal:VpcPrincipal){
+    return this.http.put(`${this.API_URI}/venta-palta-chilena/changeStatusSellDelete2`, vpcPrincipal)
+  }
+
+  
 }

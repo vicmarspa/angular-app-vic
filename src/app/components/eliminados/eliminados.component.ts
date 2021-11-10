@@ -12,6 +12,7 @@ import { Compras } from '../../models/compras';
 import { Ventas } from '../../models/ventas';
 import {CpcPrincipal} from '../../models/cpcPrincipal';
 import { PaltaChilenaService } from 'src/app/services/palta-chilena.service';
+import {VpcPrincipal} from '../../models/vpcPrincipal';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class EliminadosComponent implements OnInit {
   compraPaltaChilena:any = [];
   compraPaltaChilenaMaxRegister:any = [];
 
+  ventaPaltaChilena:any = [];
+  ventaPaltaChilenaMaxRegister:any = [];
 
   tipoSelected:string ='';
 
@@ -104,6 +107,13 @@ export class EliminadosComponent implements OnInit {
     impuesto:0,
   }
 
+  vpcPrincipal:VpcPrincipal = {
+    id_vpc: 0,
+    cliente_id: 0,
+    fecha_ingreso: new Date,
+    estado:0,
+  }
+
 
   tbx1?:string='';
 
@@ -117,7 +127,8 @@ export class EliminadosComponent implements OnInit {
       {Tipo:'Pago'},
       {Tipo:'Clientes'},
       {Tipo:'Productos'},
-      {Tipo:'Compra Palta Chilena'}      
+      {Tipo:'Compra Palta Chilena'},
+      {Tipo:'Venta Palta Chilena'}           
     ]
 
     this.calibradoService.getCalibradosEliminados()
@@ -193,6 +204,14 @@ export class EliminadosComponent implements OnInit {
       .subscribe(
         res => {
           this.compraPaltaChilena = res;
+          console.log(res);
+        },
+        err => console.error(err)
+      );
+      this.calibradoService.getVentaPaltaChilenaEliminados()
+      .subscribe(
+        res => {
+          this.ventaPaltaChilena = res;
           console.log(res);
         },
         err => console.error(err)
@@ -649,6 +668,127 @@ export class EliminadosComponent implements OnInit {
     })
   }
 
+
+
+
+
+
+
+
+
+
+
+  obtenerMaximoRegistroVentaPaltaChilena(_callBackVentaPaltaChilena){
+
+    this.paltaChilenaService.getMaxRegisterVentaPaltaChilena()
+    .subscribe(
+      res => {
+        this.ventaPaltaChilenaMaxRegister = res;
+        console.log(res);
+        _callBackVentaPaltaChilena();
+      },
+      err => console.error(err)
+    );
+
+  }
+
+
+
+  deleteVentaPaltaChilena(id_vpc:string) {
+    this.obtenerMaximoRegistroVentaPaltaChilena(()=>{
+      if(this.ventaPaltaChilenaMaxRegister[0].id_vpc == id_vpc){
+        Swal.fire({
+          title: 'Estas seguro(a)?',
+          text: "No se podrá recuperar la venta!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, borrala!'  
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            this.actualizarIdBase2(id_vpc);
+
+            Swal.fire(
+              'Borrado!',
+              'La venta seleccionada ha sido borrada.',
+              'success'
+            )
+          }
+        })
+      }else(
+        Swal.fire(
+          'No es posible borrar esta venta',
+          'Solo puedes borrar la ultima venta realizada',
+          'error'
+        )
+      )
+    });
+  }
+
+
+  borrarVentaPaltaChilena2(_callBackBorrarVentaPaltaChilena, id_vpc){  
+    this.paltaChilenaService.deleteVentaPaltaChilena(id_vpc)
+    .subscribe(
+      res => {
+        console.log(res);
+        _callBackBorrarVentaPaltaChilena();
+      },
+      err => console.error(err)
+    )
+  }
+
+
+  actualizarIdBase2(id_vpc:string){
+    this.borrarVentaPaltaChilena2(()=>{
+      this.paltaChilenaService.deleteVentaPaltaChilena2(id_vpc, this.vpcPrincipal)
+      .subscribe(
+        res => {
+          console.log(res);
+          location.reload();
+        },
+        err => console.error(err)
+      )
+    },id_vpc);
+  }
+
+  updateStatusSellDelete2(id_vpc:number){
+    console.log("se encuentra aqui la funcion");
+    Swal.fire({
+      title: '¿Estás Seguro?',
+      text: "¿Desea Restablecer Esta Venta?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) {   
+    this.vpcPrincipal.id_vpc= id_vpc;
+    this.vpcPrincipal.estado = 1;
+    this.paltaChilenaService.changeSellStatusDelete2(this.vpcPrincipal)
+    .subscribe(
+      res => {
+        location.reload()
+      },
+      err => console.error(err)
+    );
+    Swal.fire(
+      'Venta Restablecida',
+      'Se Ha Restablecido La Venta',
+      'success'
+        )
+      }
+    })
+  }
+
+
+
+
+
+
+  
 
 
 }
