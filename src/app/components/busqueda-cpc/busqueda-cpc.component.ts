@@ -29,7 +29,7 @@ export class BusquedaCpcComponent implements OnInit {
   selectTotalValor:any='';
   getDatosCompraEntrada:any = [];
   getDatosCompraSalida:any = [];
-
+  getDetailProductsSellsObject:any = [];
   
   constructor(
     public calibradoService: CalibradoService,
@@ -95,6 +95,7 @@ export class BusquedaCpcComponent implements OnInit {
     this.selectTotalValor = selectTotalValor;
     this.obtenerDatosEntradaCompra();
     this.obtenerDatosSalidaCompre();
+    this.getDetailProductsSells();
   }
 
 
@@ -118,6 +119,17 @@ export class BusquedaCpcComponent implements OnInit {
       res => {
         console.log(res);
         this.getDatosCompraSalida = res;
+      },
+      err => console.log(err)
+    )
+  }
+
+  getDetailProductsSells(){
+    this.paltaChilenaService.getSellProductDetail(this.selectIdCpc)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.getDetailProductsSellsObject = res;
       },
       err => console.log(err)
     )
@@ -182,7 +194,14 @@ export class BusquedaCpcComponent implements OnInit {
     return this.getAllBuys.map(entrada => entrada.total_valor).reduce((a,b) => a+b, 0);
   }
 
-
+  public PrecioTotalSumDetailProductsSells(){
+    return this.getDetailProductsSellsObject.map(entrada => entrada.precio_total).reduce((a,b) => a+b, 0);
+  }
+  
+  public cantidadSumDetailProductsSells(){
+    return this.getDetailProductsSellsObject.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
+  
   id_cpc:any;
 
   Search(){

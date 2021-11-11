@@ -125,6 +125,10 @@ export class PaltaChilenaService {
     return this.http.put(`${this.API_URI}/compra-palta-chilena/changeStatusBuyDelete2`, cpcPrincipal)
   }
 
+  getSellProductDetail(id_cpc: string) {
+    return this.http.get(`${this.API_URI}/compra-palta-chilena/getDetailProductsSells/${id_cpc}`);
+  }
+
 //  ##   ##  #######  ##   ##  ######     ##
 //  ##   ##   ##   #  ###  ##  # ## #    ####
 //   ## ##    ## #    #### ##    ##     ##  ##
