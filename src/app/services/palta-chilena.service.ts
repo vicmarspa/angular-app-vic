@@ -224,5 +224,7 @@ export class PaltaChilenaService {
     return this.http.get(`${this.API_URI}/venta-palta-chilena/GetDetailAbonoVpc/${id_vpc}`);
   }
 
-
+  deleteAbonosVentaPaltaChilena(id: string){
+    return this.http.delete(`${this.API_URI}/venta-palta-chilena/deleteAbonosVenta/${id}`)
+  }
 }

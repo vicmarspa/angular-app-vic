@@ -502,6 +502,7 @@ ActualizarEstado(id_vpc:number,kilogramos:number,adicional:number){
     console.log("no se puede borrar")
   }
 
+}
 
 
 
@@ -509,11 +510,55 @@ ActualizarEstado(id_vpc:number,kilogramos:number,adicional:number){
 
 
 
+
+
+deleteAbonosVentaPaltaChilena(id:string) {
+
+    
+
+  Swal.fire({
+    title: 'Estas seguro(a)?',
+    text: "No se podrá recuperar la venta!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, borrala!'  
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      this.paltaChilenaService.deleteAbonosVentaPaltaChilena(id)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.obtenerDatosAbonos();
+        },
+        err => console.error(err)
+      )
+
+
+      Swal.fire(
+        'Borrado!',
+        'La venta seleccionada ha sido borrada.',
+        'success'
+      )
+    }
+  })
+
+  
 
 
 
 
 }
+
+
+
+
+
+
+
+
 
 
 
