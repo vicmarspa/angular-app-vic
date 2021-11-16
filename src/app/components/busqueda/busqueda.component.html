@@ -146,7 +146,7 @@
                     <td>{{row.valor_servicio}}</td>
                     <td>{{row.tipo_pago}}</td>
 
-                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss '}}</td>                    
+                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss ' : '-07:00'}}</td>                    
 
                     
                     <td>{{row.nombre}}</td>
@@ -172,7 +172,7 @@
                                     <thead class="thead-dark">
                                         <b>Nombre del Cliente: {{selectNombre}}</b>   
                                         <br>
-                                        <b>Fecha de Creación: {{selectFechaIngreso| date: 'dd-MM-yyyy / HH:mm:ss '}}</b> 
+                                        <b>Fecha de Creación: {{selectFechaIngreso| date: 'dd-MM-yyyy / HH:mm:ss ' : '-07:00'}}</b> 
                                         <br>
                                         <b>Tipo de Servicio: {{selectTipoProceso}}</b> 
                                         <br>

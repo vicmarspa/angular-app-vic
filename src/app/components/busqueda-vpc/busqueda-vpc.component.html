@@ -109,7 +109,7 @@
                 <tr *ngFor ='let row of getAllSells'>
                   <td><b>{{row.id_vpc}}</b></td>
                   <td><b>{{row.nombre}}</b></td>
-                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>
+                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss': '-07:00'}}</td>
                   <td style="color:white; font-weight: bold;" [ngClass]="{'bg-success' : row.tipo_pago == 'EFECTIVO' || row.tipo_pago == 'TRANSFERENCIA' || row.tipo_pago == 'PAGADO',  'bg-danger' : row.tipo_pago == 'CHEQUE' || row.tipo_pago == 'CREDITO'}">{{row.tipo_pago}}</td>                   
                   
                   <td>{{row.total_cantidad | number:'1.0-0'}}</td>   
@@ -155,7 +155,7 @@
                               <thead class="thead-dark">
                                 <b>Nombre:  </b><b style="margin-left: 120px;" id="detailSelectedselectedNombre">{{selectedNombre}}</b>
                                 <br>
-                                <b>Fecha de Recepción:  </b><b  style="margin-left: 45px;" id="detailSelectedselectedFechaIngreso">{{selectedFechaIngreso | date :'dd-MM-yyyy  hh:mm:ss'}}</b>
+                                <b>Fecha de Recepción:  </b><b  style="margin-left: 45px;" id="detailSelectedselectedFechaIngreso">{{selectedFechaIngreso | date :'dd-MM-yyyy  hh:mm:ss' : '-07:00'}}</b>
                                 <br>
                                 <b>Tipo de Pago:  </b><b  style="margin-left: 88px;" id="detailSelectedselectedTipoPago">{{selectedTipoPago}}</b>
                                 <br>
@@ -239,6 +239,71 @@
                                         </table> 
                                     </div>
                                   </div>
+
+
+
+
+
+
+                                
+                                  <br>
+                                  <hr>
+                                  <h2 class="d-flex justify-content-center">ABONOS</h2>
+                                  <hr>
+                                  <br>
+  
+  
+                                  <div class="row">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                      <table class="table table-striped table-sm" id="datos_salida4">
+
+                                        <thead class="thead-dark">
+                                          <tr>
+                                            <th colspan="2" class="invisible"><b>ABONOS</b></th>                                     
+                                          </tr>
+                                            <tr>
+                                                <th scope="col">Fecha Ingreso</th>                                     
+                                                <th scope="col">Cantidad Abono</th> 
+                                            </tr>
+                                        </thead> 
+                                        <tbody>
+                                            <tr *ngFor = 'let datossalida4 of getSellDetailAbonos'>
+                                                <td>{{datossalida4.fecha_ingreso | date :'dd-MM-yyyy  hh:mm:ss' : '-07:00'}}</td>
+                                                <td>${{datossalida4.cantidad_abono | number:'1.0-0'}}</td>
+                                            </tr>               
+                                            <tr class="table-info">
+                                                <td></td>
+                                                <td><b>${{sumAbonados() | number:'1.0-0'}}</b></td>
+                                            </tr>
+                                        </tbody>                       
+                                      </table>  
+                                    </div>
+                                    <div class="col-4"></div>
+                                  </div>
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <br>
                                 <hr>
                                 <h2 class="d-flex justify-content-center">OPCIONES</h2>
@@ -318,6 +383,41 @@
 
 
 
+                                <br>
+                                <hr>
+                                <h2 class="d-flex justify-content-center">AÑADIR ABONO</h2>
+                                <hr>
+                                <br>
+
+
+
+
+                                <div class="d-flex justify-content-center">
+                                  <br>
+                                  <br>
+
+
+
+
+                                  <div>
+                                    <input type="text" style="width: 120px; height: 50px; font-size: 20px;" [(ngModel)]=cantidadabono>
+                                  </div>  
+
+                                  
+                                  <a  (click)="IngresarAbonosVpc(selectedIdVpc)"  class="btn btn-primary ml-2">
+                                    INGRESAR
+                                  </a>
+
+
+
+
+                                </div>
+
+
+
+
+
+
 
 
 
@@ -378,7 +478,7 @@
         <tr *ngFor ='let row of getAllSells'>
           <td><b>{{row.id_vpc}}</b></td>
           <td><b>{{row.nombre}}</b></td>
-          <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}</td>
+          <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-07:00'}}</td>
           <td>{{row.tipo_pago}}</td>                   
           <td>{{row.total_cantidad | number:'1.0-0'}}</td>   
           <td><b style="font-size:large;">${{row.precio_productos | number:'1.0-0'}}</b></td>

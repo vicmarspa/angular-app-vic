@@ -11,11 +11,12 @@ import{ToastrService} from 'ngx-toastr';
 
 import {CpcPrincipal} from '../../models/cpcPrincipal';
 import {VpcPrincipal} from '../../models/vpcPrincipal';
+import { Abonos_Vpc } from '../../models/abonosVpc';
 
 @Component({
   selector: 'app-busqueda-vpc',
   templateUrl: './busqueda-vpc.component.html',
-  styleUrls: ['./busqueda-vpc.component.css']
+  styleUrls: ['./busqueda-vpc.component.css'] 
 })
 export class BusquedaVpcComponent implements OnInit {
 
@@ -33,6 +34,11 @@ export class BusquedaVpcComponent implements OnInit {
     estado: 0,
   }
 
+  abonos_Vpc:Abonos_Vpc = {
+    id_vpc: 0,
+    cantidad_abono: 0
+  }
+
   constructor(
     public calibradoService: CalibradoService,
     private router:Router,
@@ -43,14 +49,12 @@ export class BusquedaVpcComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.paltaChilenaService.getAllSells()
     .subscribe(
       res => {
         this.getAllSells = res;
         this.getAllSellsRespaldo = this.getAllSells;
         this.totalPagado();
-
         console.log(res);
       },
       err => console.error(err)
@@ -192,14 +196,15 @@ export class BusquedaVpcComponent implements OnInit {
       this.selectedTotalCantidad = total_cantidad;
       this.selectedPrecioProductos = precio_productos;
       this.selectedCostosAdicionales = costos_adicionales;
-
     this.obtenerDatos();
     this.obtenerDatosAdicionales();
     this.correlativoFuncion();
+    this.obtenerDatosAbonos();
   }
 
   aditionalCost:any = [];
   getSellDetail:any = [];
+  getSellDetailAbonos:any = [];
 
   obtenerDatos(){
     this.paltaChilenaService.getSellDetail(this.selectedIdVpc)
@@ -210,6 +215,25 @@ export class BusquedaVpcComponent implements OnInit {
       },
       err => console.log(err)
     )
+  }
+
+  obtenerDatosAbonos(){
+    this.paltaChilenaService.GetDetailAbonoVpc(this.selectedIdVpc)
+    .subscribe(
+      res => {
+        console.log("abonos");
+
+        console.log(res);
+        this.getSellDetailAbonos = res;
+      },
+      err => console.log(err)
+    )
+  }
+
+
+
+  public sumAbonados(){
+    return this.getSellDetailAbonos.map(entrada => entrada.cantidad_abono).reduce((a,b) => a+b, 0);
   }
 
 
@@ -367,6 +391,58 @@ ActualizarTipoPago(id_vpc:number){
       }
     })
 }
+
+
+cantidadabono:number=0;
+
+IngresarAbonosVpc(id_vpc:number){
+  this.abonos_Vpc.id_vpc = id_vpc;
+  this.abonos_Vpc.cantidad_abono = this.cantidadabono;
+  Swal.fire({
+    title: '¿Estás Seguro?',
+    text: "¿Desea Ingresar este abono?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si'
+  }).then((result) => {
+    if (result.isConfirmed) { 
+    this.paltaChilenaService.insertAbonosVpc(this.abonos_Vpc)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.abonos_Vpc.id_vpc = 0;
+        this.abonos_Vpc.cantidad_abono = 0;
+        this.toastr.success("ACTUALIZADO.");
+      },
+      err => console.error(err)
+    )
+    Swal.fire(
+      {
+        //position: 'top-end',
+        icon: 'success',
+        title: 'Pago Actualizado',
+        html: 'Estamos Redireccionando.',
+        showConfirmButton: false,
+        timer: 2000,
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        // location.reload();
+        this.obtenerDatosAbonos();
+
+      }
+        )
+      }
+    })
+}
+
+
+
+
+
+
+
 
 
 
@@ -760,6 +836,26 @@ ActualizarEstado(id_vpc:number,kilogramos:number,adicional:number){
         if (data.row.index === rows.length - 1) {
             data.cell.styles.fillColor = [138, 236, 247];
         }} } )
+        
+
+
+
+
+        doc.autoTable({ html: '#datos_salida4', columnStyles: {
+
+          0: {cellWidth: 25},
+          1: {cellWidth: 40},
+
+  
+        },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
+        fontSize: 10},didParseCell: function (data) {
+      
+          //data.table.body.splice(5);
+          var rows = data.table.body;
+      
+          if (data.row.index === rows.length - 1) {
+              data.cell.styles.fillColor = [138, 236, 247];
+          }} } )
     doc.output('dataurlnewwindow'); 
   }
 

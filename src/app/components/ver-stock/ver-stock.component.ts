@@ -34,6 +34,8 @@ export class VerStockComponent implements OnInit {
     porcentaje_Detail : any = '';
     fechaActual = new Date();
     largeListForProm:number = 0;
+    getDetailProductsSellsObject:any = [];
+
   ngOnInit(): void {
     this.paltaChilenaService.getStock()
     .subscribe(
@@ -98,6 +100,7 @@ export class VerStockComponent implements OnInit {
           },
           err => console.error(err)
         );
+    this.getDetailProductsSells();
   }
   public kilogramosStockSum(){
     return this.compras.map(row => row.total_kilogramos_stock).reduce((a,b) => a+b, 0);
@@ -111,9 +114,26 @@ export class VerStockComponent implements OnInit {
   }
 
 
+  getDetailProductsSells(){
+    console.log("identificador", this.id_cpc_Detail)
+    this.paltaChilenaService.getSellProductDetail(this.id_cpc_Detail)
+    .subscribe(
+      res => {
+        console.log(res);
+        this.getDetailProductsSellsObject = res;
+      },
+      err => console.log(err)
+    )
+  }
 
-
-
+  public PrecioTotalSumDetailProductsSells(){
+    return this.getDetailProductsSellsObject.map(entrada => entrada.precio_total).reduce((a,b) => a+b, 0);
+  }
+  
+  public cantidadSumDetailProductsSells(){
+    return this.getDetailProductsSellsObject.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
+  
 
   reportePDF(){
     // Default export is a4 paper, portrait, using millimeters for units

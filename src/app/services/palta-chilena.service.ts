@@ -16,10 +16,10 @@ import {Tipo_Fruta} from '../models/tipo_fruta';
 import {Tipo_Pago} from '../models/tipo_pago';
 import { Calibre } from '../models/calibre';
 import { Clientes } from '../models/clientes';
+import { Abonos_Vpc } from '../models/abonosVpc';
 
 import {VpcPrincipal} from '../models/vpcPrincipal';
 import {GastosAdicionalesVpc} from '../models/gastosAdicionalesVpc';
-
 
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -199,7 +199,6 @@ export class PaltaChilenaService {
   }
 
 
-
   getMaxRegisterVentaPaltaChilena(){
     return this.http.get(`${this.API_URI}/venta-palta-chilena/getMaxRegister`)
   }
@@ -213,10 +212,17 @@ export class PaltaChilenaService {
     return this.http.post(`${this.API_URI}/venta-palta-chilena/deleteVentaPaltaChilena2/${id_vpc}`,vpcPrincipal)
   }
 
-  
   changeSellStatusDelete2(vpcPrincipal:VpcPrincipal){
     return this.http.put(`${this.API_URI}/venta-palta-chilena/changeStatusSellDelete2`, vpcPrincipal)
   }
 
+  insertAbonosVpc(abonos_Vpc:Abonos_Vpc) {
+    return this.http.post(`${this.API_URI}/venta-palta-chilena/ingresoAbonosVpc`, abonos_Vpc)
+  }
   
+  GetDetailAbonoVpc(id_vpc: string) {
+    return this.http.get(`${this.API_URI}/venta-palta-chilena/GetDetailAbonoVpc/${id_vpc}`);
+  }
+
+
 }
