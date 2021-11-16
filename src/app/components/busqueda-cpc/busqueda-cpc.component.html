@@ -90,7 +90,7 @@
                   <tr *ngFor ='let row of getAllBuys'>    
                     <td><b>{{row.id_cpc}}</b></td>
                     <td><b>{{row.nombre}}</b></td>
-                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-07:00'}}</td>
+                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
                     <td>{{row.total_cantidad | number}}</td>                                                
                     <td>{{row.impuesto}}%</td>
                     <td><b style="font-size:medium;">{{ ( (row.total_valor)* (row.impuesto/100) ) | number:'1.0-0'}}</b></td>
@@ -110,7 +110,7 @@
                                     <thead class="thead-dark">
                                       <b>Nombre del Proveedor: </b><b id="selectNombre">{{selectNombre}}</b>   
                                       <br>
-                                      <b>Fecha de Creación: </b><b id="selectedFechaIngreso">{{selectedFechaIngreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-07:00'}}</b>
+                                      <b>Fecha de Creación: </b><b id="selectedFechaIngreso">{{selectedFechaIngreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</b>
                                       <br>
                                       <b>Impuesto: </b><b id="selectedImpuesto">{{selectedImpuesto}}%</b> 
                                       <br>
@@ -347,7 +347,7 @@
                 <tr *ngFor ='let row of getAllBuys'>    
                   <td><b>{{row.id_cpc}}</b></td>
                   <td><b>{{row.nombre}}</b></td>
-                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-07:00'}}</td>
+                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
                   <td>{{row.total_cantidad | number}}</td>                                                
                   <td>{{row.impuesto}}%</td>
                   <td><b style="font-size:medium;">{{ ( (row.total_valor)* (row.impuesto/100) ) | number:'1.0-0'}}</b></td>

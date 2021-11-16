@@ -109,7 +109,7 @@
                 <tr *ngFor ='let row of getAllSells'>
                   <td><b>{{row.id_vpc}}</b></td>
                   <td><b>{{row.nombre}}</b></td>
-                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss': '-07:00'}}</td>
+                  <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss': '-03:00'}}</td>
                   <td style="color:white; font-weight: bold;" [ngClass]="{'bg-success' : row.tipo_pago == 'EFECTIVO' || row.tipo_pago == 'TRANSFERENCIA' || row.tipo_pago == 'PAGADO',  'bg-danger' : row.tipo_pago == 'CHEQUE' || row.tipo_pago == 'CREDITO'}">{{row.tipo_pago}}</td>                   
                   
                   <td>{{row.total_cantidad | number:'1.0-0'}}</td>   
@@ -155,7 +155,7 @@
                               <thead class="thead-dark">
                                 <b>Nombre:  </b><b style="margin-left: 120px;" id="detailSelectedselectedNombre">{{selectedNombre}}</b>
                                 <br>
-                                <b>Fecha de Recepción:  </b><b  style="margin-left: 45px;" id="detailSelectedselectedFechaIngreso">{{selectedFechaIngreso | date :'dd-MM-yyyy  hh:mm:ss' : '-07:00'}}</b>
+                                <b>Fecha de Recepción:  </b><b  style="margin-left: 45px;" id="detailSelectedselectedFechaIngreso">{{selectedFechaIngreso | date :'dd-MM-yyyy  hh:mm:ss' : '-03:00'}}</b>
                                 <br>
                                 <b>Tipo de Pago:  </b><b  style="margin-left: 88px;" id="detailSelectedselectedTipoPago">{{selectedTipoPago}}</b>
                                 <br>
@@ -269,7 +269,7 @@
                                         </thead> 
                                         <tbody>
                                             <tr *ngFor = 'let datossalida4 of getSellDetailAbonos'>
-                                                <td>{{datossalida4.fecha_ingreso | date :'dd-MM-yyyy  hh:mm:ss' : '-07:00'}}</td>
+                                                <td>{{datossalida4.fecha_ingreso | date :'dd-MM-yyyy  hh:mm:ss' : '-03:00'}}</td>
                                                 <td>${{datossalida4.cantidad_abono | number:'1.0-0'}}</td>
                                             </tr>               
                                             <tr class="table-info">
@@ -478,7 +478,7 @@
         <tr *ngFor ='let row of getAllSells'>
           <td><b>{{row.id_vpc}}</b></td>
           <td><b>{{row.nombre}}</b></td>
-          <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-07:00'}}</td>
+          <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
           <td>{{row.tipo_pago}}</td>                   
           <td>{{row.total_cantidad | number:'1.0-0'}}</td>   
           <td><b style="font-size:large;">${{row.precio_productos | number:'1.0-0'}}</b></td>
