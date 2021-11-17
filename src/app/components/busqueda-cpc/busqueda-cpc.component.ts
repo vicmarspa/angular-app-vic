@@ -324,10 +324,11 @@ export class BusquedaCpcComponent implements OnInit {
     var selectTotalValor =  document.getElementById("selectTotalValor");
     var selectTotalValorhtml = selectTotalValor?.innerHTML;
     
-    var selectTotalValor =  document.getElementById("selectTotalValor2");
-    var selectTotalValor2html = selectTotalValor?.innerHTML;
+    var selectTotalValor2 =  document.getElementById("selectTotalValor2");
+    var selectTotalValor2html = selectTotalValor2?.innerHTML;
 
-
+    var utilidadcompra =  document.getElementById("utilidadcompra");
+    var utilidadcomprahtml = utilidadcompra?.innerHTML;
 
 
 
@@ -381,20 +382,24 @@ export class BusquedaCpcComponent implements OnInit {
     doc.text('PRECIO TOTAL: ', 10, 50); 
     doc.setFontType('bold');
     doc.text(selectTotalValor2html, 55, 50); 
+    doc.setFontType('normal');
+
+    doc.text('UTILIDAD: ', 10, 55); 
+    doc.setFontType('bold');
+    doc.text(utilidadcomprahtml, 55, 55); 
   
   
+    doc.line(5, 60, 204, 60);
   
-    doc.line(5, 55, 204, 55);
-  
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,60);
+    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,65);
     
-    doc.line(5, 65, 204, 65);
+    doc.line(5, 70, 204, 70);
   
   
   
   
   
-    doc.text('DETALLE DE ENTRADA', 45,70);
+    doc.text('DETALLE DE ENTRADA', 45,75);
 
   
     // top: 65,right:35,left:10
@@ -406,7 +411,7 @@ export class BusquedaCpcComponent implements OnInit {
       4: {cellWidth: 24},
       5: {cellWidth: 24},
 
-    },margin: {top: 75,right:35,left:5}, styles: {overflow: 'linebreak',
+    },margin: {top: 80,right:35,left:5}, styles: {overflow: 'linebreak',
     fontSize: 10},didParseCell: function (data) {
   
       //data.table.body.splice(5);
@@ -416,9 +421,9 @@ export class BusquedaCpcComponent implements OnInit {
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
   
-    doc.text('DETALLE DE SALIDA', 140,70);
+    doc.text('DETALLE DE SALIDA', 140,75);
 
-      doc.autoTable({ html: '#datos_salida', startY:75, columnStyles: {
+      doc.autoTable({ html: '#datos_salida', startY:80, columnStyles: {
         0: {cellWidth: 25},
         1: {cellWidth: 25},
         2: {cellWidth: 12},
@@ -433,6 +438,26 @@ export class BusquedaCpcComponent implements OnInit {
         if (data.row.index === rows.length - 1) {
             data.cell.styles.fillColor = [138, 236, 247];
         }} } )
+
+        doc.autoTable({ html: '#datos_products_sell_detail', columnStyles: {
+          0: {cellWidth: 25},
+          1: {cellWidth: 25},
+          2: {cellWidth: 25},
+          3: {cellWidth: 25},
+          4: {cellWidth: 25},
+
+  
+        },margin: {top: 75,right:2,left:40}, styles: {overflow: 'linebreak',
+        fontSize: 10},didParseCell: function (data) {
+      
+          //data.table.body.splice(5);
+          var rows = data.table.body;
+      
+          if (data.row.index === rows.length - 1) {
+              data.cell.styles.fillColor = [138, 236, 247];
+          }} } )
+
+
     doc.output('dataurlnewwindow'); 
   }
 
