@@ -55,7 +55,7 @@ import{VpcIngresoPrincipalComponent} from './components/vpc-ingreso-principal/vp
 import{VpcIngresoFinalComponent} from './components/vpc-ingreso-final/vpc-ingreso-final.component';
 import{BusquedaCpcComponent} from './components/busqueda-cpc/busqueda-cpc.component';
 import{BusquedaVpcComponent} from './components/busqueda-vpc/busqueda-vpc.component';
-
+import{CompraGeneralPrincipalComponent} from './components/compra-general-principal/compra-general-principal.component';
 
 
 const routes: Routes = [
@@ -259,6 +259,10 @@ const routes: Routes = [
     {
       path:'vpc/busqueda',
       component:BusquedaVpcComponent
+    },
+    {
+      path:'compra-general/ingreso',
+      component:CompraGeneralPrincipalComponent
     }
     
 ];

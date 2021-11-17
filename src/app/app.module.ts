@@ -75,6 +75,7 @@ import { VpcIngresoPrincipalComponent } from './components/vpc-ingreso-principal
 import { VpcIngresoFinalComponent } from './components/vpc-ingreso-final/vpc-ingreso-final.component';
 import { BusquedaCpcComponent } from './components/busqueda-cpc/busqueda-cpc.component';
 import { BusquedaVpcComponent } from './components/busqueda-vpc/busqueda-vpc.component';
+import { CompraGeneralPrincipalComponent } from './components/compra-general-principal/compra-general-principal.component';
 
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
@@ -132,6 +133,7 @@ import { BusquedaVpcComponent } from './components/busqueda-vpc/busqueda-vpc.com
     VpcIngresoFinalComponent,
     BusquedaCpcComponent,
     BusquedaVpcComponent,
+    CompraGeneralPrincipalComponent,
     //DialogComponentComponent
   ],
 
