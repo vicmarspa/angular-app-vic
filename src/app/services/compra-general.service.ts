@@ -54,6 +54,9 @@ export class CompraGeneralService {
 //   ##  ##  ##   ##  ##   ##   ##       ##  ##  ##  ##
 //    ####    #####   ##   ##  ####     #### ##  ##  ##
 
+getCompra(id_cg: string) {
+  return this.http.get(`${this.API_URI}/compra-general/final/${id_cg}`);
+}
 
 insertCompraGeneral(compraGeneralPrincipal:CompraGeneralPrincipal) {
   return this.http.post(`${this.API_URI}/compra-general/ingreso`, compraGeneralPrincipal)
