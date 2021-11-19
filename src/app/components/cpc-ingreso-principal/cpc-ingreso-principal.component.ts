@@ -51,6 +51,7 @@ export class CpcIngresoPrincipalComponent implements OnInit {
       fecha_ingreso: new Date,
       estado:'',
       impuesto:0,
+      factura_guia:0
     }
 
 

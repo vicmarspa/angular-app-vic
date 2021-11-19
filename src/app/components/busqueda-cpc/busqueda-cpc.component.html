@@ -76,6 +76,7 @@
                 <thead class="thead-dark">
                   <tr>                    
                     <th scope="col">Lote</th>
+                    <th scope="col">Factura / Guía</th>
                     <th scope="col">Proveedor</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Kilogramos</th>
@@ -89,6 +90,7 @@
                 <tbody>
                   <tr *ngFor ='let row of getAllBuys'>    
                     <td><b>{{row.id_cpc}}</b></td>
+                    <td><b>{{row.factura_guia}}</b></td>
                     <td><b>{{row.nombre}}</b></td>
                     <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
                     <td>{{row.total_cantidad | number}}</td>                                                
@@ -108,7 +110,9 @@
                             <div class="modal-body modal-xl">
                                 <table class="table" id="entrada">
                                     <thead class="thead-dark">
-                                      <b>Nombre del Proveedor: </b><b id="selectNombre">{{selectNombre}}</b>   
+                                      <b>Nombre del Proveedor: </b><b id="selectNombre">{{selectNombre}}</b> 
+                                      <br>
+                                      <b>Factura / Guía: </b><b id="selectFacturaGuia">{{selectFacturaGuia}}</b>   
                                       <br>
                                       <b>Fecha de Creación: </b><b id="selectedFechaIngreso">{{selectedFechaIngreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</b>
                                       <br>
@@ -303,7 +307,8 @@
 
 
                       <button (click)="menuOpciones(                    
-                        row.id_cpc, 
+                        row.id_cpc,
+                        row.factura_guia, 
                         row.nombre, 
                         row.fecha_ingreso, 
                         row.impuesto, 

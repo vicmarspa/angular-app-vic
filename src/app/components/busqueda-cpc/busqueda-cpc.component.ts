@@ -23,6 +23,7 @@ export class BusquedaCpcComponent implements OnInit {
   getAllBuysRespaldo:any= [];
   selectIdCpc:any='';
   selectNombre:any='';
+  selectFacturaGuia:any='';
   selectedFechaIngreso:any='';
   selectedImpuesto:any='';
   selectedTotalCantidad:any='';
@@ -81,6 +82,7 @@ export class BusquedaCpcComponent implements OnInit {
 
   menuOpciones(
     selectIdCpc:any,
+    selectFacturaGuia:any,
     selectNombre:any,
     selectedFechaIngreso:any,
     selectedImpuesto:any,
@@ -89,6 +91,7 @@ export class BusquedaCpcComponent implements OnInit {
     ){
     this.selectIdCpc = selectIdCpc;
     this.selectNombre = selectNombre;
+    this.selectFacturaGuia = selectFacturaGuia;
     this.selectedFechaIngreso = selectedFechaIngreso;
     this.selectedImpuesto = selectedImpuesto;
     this.selectedTotalCantidad = selectedTotalCantidad;
@@ -304,13 +307,16 @@ export class BusquedaCpcComponent implements OnInit {
 
 
 
-
+    
   
     var selectIdCpc = document.getElementById("selectIdCpc");
     var selectIdCpchtml = selectIdCpc?.innerHTML;
     
     var selectNombre =  document.getElementById("selectNombre");
     var selectNombrehtml = selectNombre?.innerHTML;
+
+    var selectFacturaGuia =  document.getElementById("selectFacturaGuia");
+    var selectFacturaGuiahtml = selectFacturaGuia?.innerHTML;
     
     var selectedFechaIngreso =  document.getElementById("selectedFechaIngreso");
     var selectedFechaIngresohtml = selectedFechaIngreso?.innerHTML;
@@ -359,47 +365,52 @@ export class BusquedaCpcComponent implements OnInit {
     doc.text(selectNombrehtml, 55, 25); 
     doc.setFontType('normal');
 
-    doc.text('FECHA DE INGRESO: ', 10, 30);
+    doc.text('FACTURA / GUÍA: ', 10, 30);
     doc.setFontType('bold');
-    doc.text(selectedFechaIngresohtml, 55, 30); 
+    doc.text(selectFacturaGuiahtml, 55, 30); 
     doc.setFontType('normal');
 
-    doc.text('IMPUESTOS: ', 10, 35);
+    doc.text('FECHA DE INGRESO: ', 10, 35);
     doc.setFontType('bold');
-    doc.text(selectedImpuestohtml, 55, 35); 
+    doc.text(selectedFechaIngresohtml, 55, 35); 
     doc.setFontType('normal');
 
-    doc.text('KILOGRAMOS: ', 10, 40);
+    doc.text('IMPUESTOS: ', 10, 40);
     doc.setFontType('bold');
-    doc.text(selectedTotalCantidadhtml, 55, 40); 
+    doc.text(selectedImpuestohtml, 55, 40); 
     doc.setFontType('normal');
 
-    doc.text('PRECIO NETO: ', 10, 45); 
+    doc.text('KILOGRAMOS: ', 10, 45);
     doc.setFontType('bold');
-    doc.text(selectTotalValorhtml, 55, 45); 
+    doc.text(selectedTotalCantidadhtml, 55, 45); 
     doc.setFontType('normal');
 
-    doc.text('PRECIO TOTAL: ', 10, 50); 
+    doc.text('PRECIO NETO: ', 10, 50); 
     doc.setFontType('bold');
-    doc.text(selectTotalValor2html, 55, 50); 
+    doc.text(selectTotalValorhtml, 55, 50); 
     doc.setFontType('normal');
 
-    doc.text('UTILIDAD: ', 10, 55); 
+    doc.text('PRECIO TOTAL: ', 10, 55); 
     doc.setFontType('bold');
-    doc.text(utilidadcomprahtml, 55, 55); 
+    doc.text(selectTotalValor2html, 55, 55); 
+    doc.setFontType('normal');
+
+    doc.text('UTILIDAD: ', 10, 60); 
+    doc.setFontType('bold');
+    doc.text(utilidadcomprahtml, 55, 60); 
   
   
-    doc.line(5, 60, 204, 60);
+    doc.line(5, 65, 204, 65);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,65);
+    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,70);
     
-    doc.line(5, 70, 204, 70);
+    doc.line(5, 75, 204, 75);
   
   
   
   
   
-    doc.text('DETALLE DE ENTRADA', 45,75);
+    doc.text('DETALLE DE ENTRADA', 45,80);
 
   
     // top: 65,right:35,left:10
@@ -411,7 +422,7 @@ export class BusquedaCpcComponent implements OnInit {
       4: {cellWidth: 24},
       5: {cellWidth: 24},
 
-    },margin: {top: 80,right:35,left:5}, styles: {overflow: 'linebreak',
+    },margin: {top: 85,right:35,left:5}, styles: {overflow: 'linebreak',
     fontSize: 10},didParseCell: function (data) {
   
       //data.table.body.splice(5);
@@ -421,9 +432,9 @@ export class BusquedaCpcComponent implements OnInit {
           data.cell.styles.fillColor = [138, 236, 247];
       }} } )
   
-    doc.text('DETALLE DE SALIDA', 140,75);
+    doc.text('DETALLE DE SALIDA', 140,80);
 
-      doc.autoTable({ html: '#datos_salida', startY:80, columnStyles: {
+      doc.autoTable({ html: '#datos_salida', startY:85, columnStyles: {
         0: {cellWidth: 25},
         1: {cellWidth: 25},
         2: {cellWidth: 12},
@@ -447,7 +458,7 @@ export class BusquedaCpcComponent implements OnInit {
           4: {cellWidth: 25},
 
   
-        },margin: {top: 75,right:2,left:40}, styles: {overflow: 'linebreak',
+        },margin: {top: 80,right:2,left:40}, styles: {overflow: 'linebreak',
         fontSize: 10},didParseCell: function (data) {
       
           //data.table.body.splice(5);

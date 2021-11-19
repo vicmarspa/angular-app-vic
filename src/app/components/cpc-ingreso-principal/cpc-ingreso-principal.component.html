@@ -22,7 +22,11 @@
                       </select> 
                 </div>
                 <div class="row inline mt-2">
-                    <button type="button" class="btn btn-primary btn-lg btn-block mb-2 mt-2" (click)="InsertCpc();"> Ingresar</button>   
+                    <h5  class="text-dark">NUMERO FACTURA/GUÍA: </h5>             
+                    <input type="text" style="border: 1px solid #000000; margin-left: 15px;" [(ngModel)] = cpcPrincipal.factura_guia>
+                </div>
+                <div class="row inline mt-2">
+                    <button type="button" class="btn btn-primary btn-lg btn-block mb-2 mt-2" (click)="InsertCpc();">INGRESAR</button>   
                 </div> 
             </div>
         </div>

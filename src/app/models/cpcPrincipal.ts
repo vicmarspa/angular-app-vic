@@ -4,6 +4,7 @@ export interface CpcPrincipal{
     fecha_ingreso?: Date;
     estado?: string;
     impuesto?: number;
+    factura_guia?: number;
 }
         
         

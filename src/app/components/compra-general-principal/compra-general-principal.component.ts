@@ -124,7 +124,7 @@ Success(){
     timer: 2000,
   }).then((result) => {
     /* Read more about handling dismissals below */
-    window.location.replace("/cpc/ingreso-final/"+this.resMain.insertId);
+    window.location.replace("/compra-general/ingreso-final/"+this.resMain.insertId);
   })
 }
 
