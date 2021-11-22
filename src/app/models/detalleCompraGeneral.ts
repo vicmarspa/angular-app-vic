@@ -8,4 +8,5 @@ export interface DetalleCompraGeneral{
     cantidad_formato?:number;
     fecha_ingreso?:Date;
     tipo_producto?:number;
+    valor_total?:number;
 }

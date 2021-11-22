@@ -43,6 +43,7 @@ export class CompraGeneralFinalComponent implements OnInit {
   getDatosCompraEntrada:any = [];
   getDatosCompraSalida:any = [];
   getcalibre:any = [];
+  tipo_fruto:any = [];
   kilogramosEntrada:number=0;
   kilogramosSalida:number=0;
   descuentoEntrada:number=0;
@@ -88,7 +89,193 @@ export class CompraGeneralFinalComponent implements OnInit {
         err => console.log(err)
       )
 
+    this.calibradoService.getTipoFruta().subscribe(
+      res => {
+        this.tipo_fruto = res;
+        console.log(res)
+      },
+      err => console.error(err)
+    );
+
   }
+
+
+
+
+
+
+
+
+
+
+
+  InsertCantidadEntrada(_callback){
+    this.detalleCompraGeneral.id_cg = this.getDatosCompra.id_cg;
+    var localvar1 = this.kilogramosEntrada;
+    var localvar2 = this.descuentoEntrada;
+    this.detalleCompraGeneral.cantidad = localvar1 - localvar2
+    this.detalleCompraGeneral.valor_total = (localvar1 - localvar2) * this.detalleCompraGeneral.precio;
+    _callback();
+  }
+  guardarEntrada(){ 
+    this.InsertCantidadEntrada(()=>{
+      if(this.detalleCompraGeneral.tipo_producto !=0){
+        if(this.detalleCompraGeneral.cantidad !=0){
+          if(this.detalleCompraGeneral.calibre !=0){
+            if(this.detalleCompraGeneral.precio !=0){
+              if(this.detalleCompraGeneral.formato !=''){
+                this.compraGeneralService.insertEntradaCompraPaltaChilena(this.detalleCompraGeneral)
+                .subscribe(
+                  res => {
+                    console.log(res);
+                    this.detalleCompraGeneral.cantidad = 0;
+                    this.detalleCompraGeneral.calibre = 0;
+                    this.detalleCompraGeneral.precio = 0;
+                    this.kilogramosEntrada = 0;
+                    this.descuentoEntrada = 0;
+                    this.toastr.success("ENTRADA INGRESADA");
+                    this.ngOnInit();
+                  },
+                  err => console.error(err)
+                )
+              }else{
+                this.toastr.warning("DEBE INGRESAR FORMATO");
+              }
+            }else{
+              this.toastr.warning("DEBE INGESAR PRECIO");
+            }
+          }else{
+            this.toastr.warning("DEBE INGRESAR CALIBRE");
+          }
+        }else{
+          this.toastr.warning("DEBE INGRESAR KILOGRAMOS");
+        }
+      }else{
+        this.toastr.warning("DEBE INGRESAR TIPO DE FRUTO");
+      }
+    });
+  }
+  InsertCantidadSalida(_callback){
+    this.detalleSalidaCompraGeneral.id_cg = this.getDatosCompra.id_cg;
+    var localvar1 = this.kilogramosSalida;
+    var localvar2 = this.descuentoSalida;
+    this.detalleSalidaCompraGeneral.cantidad = localvar1 - localvar2
+    _callback();
+  }
+  guardarSalida(){
+
+
+    this.InsertCantidadSalida(()=>{
+      if(this.detalleSalidaCompraGeneral.calibre !=0){
+        if(this.detalleSalidaCompraGeneral.cantidad !=0){
+          if(this.detalleSalidaCompraGeneral.bins !=0){
+            this.compraGeneralService.insertSalidaCompraPaltaChilena(this.detalleSalidaCompraGeneral)
+            .subscribe(
+              res => {
+                console.log(res);
+                this.detalleSalidaCompraGeneral.cantidad = 0,
+                this.detalleSalidaCompraGeneral.bins = 0,
+                this.kilogramosSalida = 0,
+                this.descuentoSalida = 0,
+                this.toastr.success("ENTRADA INGRESADA");
+                this.ngOnInit();
+              },
+              err => console.error(err)
+            )
+          }else{
+            this.toastr.warning("DEBE INGRESAR BINS");
+          }
+        }else{
+          this.toastr.warning("DEBE INGRESAR KILOGRAMOS");
+        }
+      }else{
+        this.toastr.warning("DEBE INGRESAR CALIBRE");
+      }
+    });
+
+
+
+  }
+  public kilogramosEntradaSum(){
+    return this.getDatosCompraEntrada.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
+  public kilogramosSalidaSum(){
+    return this.getDatosCompraSalida.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
+  public ValorTotalSum(){
+    return this.getDatosCompraEntrada.map(entrada => entrada.valor_total).reduce((a,b) => a+b, 0);
+  }
+  public BinsSalidaSum(){
+    return this.getDatosCompraSalida.map(entrada => entrada.bins).reduce((a,b) => a+b, 0);
+  }
+  BorrarEntrada(id_cg:string,id_detalle_cg: string){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No se podrá recuperar esta entrada!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrala!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+      this.compraGeneralService.BorrarEntrada(id_cg,id_detalle_cg)
+      .subscribe(
+        res => {
+          console.log(res);          
+          this.ngOnInit();
+        },
+        err => console.error(err)
+      )
+    
+        Swal.fire(
+          'Borrada!',
+          'La entrada seleccionada ha sido borrada.',
+          'success'
+        )
+        
+      }
+    })
+  }
+  BorrarSalida(id_cg:string,id_detalle_salida_cg: string){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No se podrá recuperar esta entrada!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrala!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+      this.compraGeneralService.BorrarSalida(id_cg,id_detalle_salida_cg)
+      .subscribe(
+        res => {
+          console.log(res);          
+          this.ngOnInit();
+        },
+        err => console.error(err)
+      )
+        Swal.fire(
+          'Borrada!',
+          'La entrada seleccionada ha sido borrada.',
+          'success'
+        )
+        
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
