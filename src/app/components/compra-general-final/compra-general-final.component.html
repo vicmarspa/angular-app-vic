@@ -15,7 +15,7 @@
                 <h5 class="d-inline text-dark" style="margin-left: 154px; margin-right: 8px;">{{getDatosCompra.nombre}}</h5>
                 <br> 
                 <h5 class="d-inline text-dark ml-2">IMPUESTOS: </h5>
-                <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{getDatosCompra.impuesto}}</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{getDatosCompra.impuestos}}%</h5>
                 <br> 
                 <h5 class="d-inline text-dark ml-2">TOTAL KILOGRAMOS ENTRADA: </h5>
                 <h5 class="d-inline text-dark" style="margin-left: 35px; margin-right: 8px;">{{kilogramosEntradaSum()}}</h5>
@@ -30,7 +30,7 @@
                 <h5 class="d-inline text-dark" style="margin-left: 125px; margin-right: 8px;">${{ValorTotalSum() | number:'1.0-0'}}</h5>
                 <br>
                 <h5 class="d-inline text-dark ml-2">VALOR TOTAL: </h5>
-                <h5 class="d-inline text-dark" style="margin-left: 120px; margin-right: 8px;">${{ValorTotalSum() * (((getDatosCompra.impuesto)/100)+1) | number:'1.0-0'}}</h5>
+                <h5 class="d-inline text-dark" style="margin-left: 120px; margin-right: 8px;">${{ValorTotalSum() * (((getDatosCompra.impuestos)/100)+1) | number:'1.0-0'}}</h5>
                 <br>  
                 <h5 class="d-inline text-dark ml-2">BINS SALIDA: </h5>
                 <h5 class="d-inline text-dark" style="margin-left: 135px; margin-right: 8px;">{{BinsSalidaSum()}}</h5>
