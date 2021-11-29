@@ -1,0 +1,327 @@
+<div class="container-fluid col-12">
+    <hr>
+    <h2 class="d-flex justify-content-center">VENTA GENERAL</h2>
+    <hr>
+    <div class="row">
+        <div class="sm col-9 mt-4 ml-4">
+            <div style="display: inline-block;
+            border: 1px solid #000000;
+            font-size:20px">
+                <h5 class="d-inline text-dark ml-2">
+                    N° VENTA: 
+                </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 80px; margin-right: 8px; font-weight: bold;">
+                    {{datosVenta.id_vpc}}
+                </h5>
+                <br>
+                <h5 class="d-inline text-dark ml-2">
+                    FECHA INGRESO: 
+                </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 45px; margin-right: 8px; font-weight: bold;">
+                    {{datosVenta.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss'}}
+                </h5>
+                <input class="float-right common" type="text" id="tbx1" value="0" style="display: none;"> 
+                <br>
+                <h5 class="d-inline text-dark ml-2">CLIENTE: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 90px; margin-right: 8px; font-weight: bold;">{{datosVenta.nombre}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TIPO PAGO: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 78px; margin-right: 8px; font-weight: bold;">{{datosVenta.tipo_pago}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">PRECIO TOTAL: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 60px; margin-right: 8px; font-weight: bold;">${{preciototalVenta() + precioTotalGastosAdicionales() | number:'1.0-0'}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TOTAL BINS: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 74px; margin-right: 8px; font-weight: bold;">{{cantidadBinsVenta()}}</h5>
+                <br> 
+                <h5 class="d-inline text-dark ml-2">TOTAL STOCK: </h5>
+                <h5 class="d-inline text-dark" style="margin-left: 65px; margin-right: 8px; font-weight: bold;">{{stockDisponibleTotal()}}</h5>
+            </div>
+        </div>
+        <div class="sm col-1">
+            <h3 class="d-flex justify-content-center">COSTOS ADICIONALES</h3>
+            <div>
+                <span>
+                    Descripción
+                </span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=gastosAdicionalesVentaGeneral.descripcion>
+            </div>
+            <div>
+                <span>
+                    Cantidad
+                </span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=gastosAdicionalesVentaGeneral.cantidad>
+            </div>  
+            <div>
+                <span>
+                    Precio
+                </span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=gastosAdicionalesVentaGeneral.precio>
+            </div>
+        </div>
+        <div class="sm col-1 ml-2" style="margin-top: 68px;">
+            <div>
+                <button type="button" class="btn btn-primary" style="margin-top: 8px;" (click) = insertGastosAdicionales()> 
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    Ingresar
+                </button>                
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container-fluid col-12 mt-4">
+    <div class="row">
+        <div class="sm col-9">
+            <div>
+                <h3 class="d-flex justify-content-center">INGRESAR DATOS DE VENTA</h3>
+            </div>
+        </div>
+        <div class="sm col-3">
+            <div>
+                <h3 class="d-flex justify-content-center">STOCK PALTAS CHILENAS</h3>
+            </div>     
+        </div>
+    </div>
+</div>
+<div class="container-fluid col-12">
+    <div class="row">
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Lote</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleVentaGeneral.id_cg (change)="frutaFunction(); onSelectUniversity(detalleVentaGeneral.id_cg);">
+                <option value="0">
+                    --Lotes--
+                </option>  
+                <option *ngFor="let lote of getLotes" id="calibre" [value]="lote.id_cg">
+                    {{lote.id_cg}}
+                </option>                
+            </select>    
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Fruta</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleVentaGeneral.tipo_producto (change)="calibreFunction();">
+                <option value="0">
+                </option>  
+                <option *ngFor="let fruta of fruta" id="fruta" [value]="fruta.tipo_fruto">
+                    {{fruta.fruta_nombre}}
+                </option>                
+            </select>    
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Calibre</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleVentaGeneral.calibre>
+                <option value="0">
+                </option>  
+                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.calibre">
+                    {{calibre.calibre_nombre}}
+                </option>                
+            </select>    
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Formato</span>
+            </div>
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleVentaGeneral.formato >  
+                <option value="Bin">
+                    Bin
+                </option>
+                <option value="Pallet">
+                    Pallet
+                </option>                  
+            </select>      
+        </div>
+
+
+
+
+        
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Kilogramos</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosEntrada>
+            </div>     
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Descuento</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=descuentoEntrada>
+            </div>     
+        </div>
+
+
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Precio</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=detalleVentaGeneral.precio>
+            </div>     
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Bins/Pallet</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=detalleVentaGeneral.cantidad_bins_pallet>
+            </div>     
+        </div>
+
+
+
+
+
+        <div class="sm col-1">
+            <div>
+                <button type="button" class="btn btn-primary" style="margin-top: 8px;" (click) = guardarEntrada()>Ingresar</button>                
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</div>
+<div class="container-fluid col-12 mt-4">
+    <div class="row">
+        <div class="col-9">
+            <table class="table table-striped table-sm">
+                <thead class="thead-dark">
+                    <tr>                                      
+                        <th scope="col">Lote</th>
+                        <th scope="col">Fruta</th>
+                        <th scope="col">Calibre</th>
+                        <th scope="col">Formato</th>
+                        <th scope="col">Kilogramos</th> 
+                        <th scope="col">Precio</th>
+                        <th scope="col">Precio Total</th>
+                        <th scope="col">Bins / Pallet</th>
+                        <th scope="col">Eliminar?</th>                        
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor = 'let datosentrada of getSellDetail'>
+                        <td>{{datosentrada.id_cg}}</td>
+                        <td>{{datosentrada.tipo_fruta}}</td>
+                        <td>{{datosentrada.calibre}}</td>
+                        <td>{{datosentrada.formato}}</td>
+                        <td>{{datosentrada.cantidad | number:'1.0-0'}}</td>
+                        <td>${{datosentrada.precio | number:'1.0-0'}}</td>
+                        <td>${{datosentrada.precio_total | number:'1.0-0'}}</td>
+                        <td>{{datosentrada.cantidad_bins_pallet}}</td>
+                        <td>
+                            <button class="btn btn-danger ml-2 material-icons" (click)="BorrarDetalleVenta(datosentrada.id_cg, datosentrada.calibre_origin, datosentrada.cantidad, datosentrada.id_detalle_venta_general, datosentrada.tipo_producto)">
+                                delete 
+                            </button>
+                        </td>
+                    </tr>                
+                    <tr class="table-info">
+                        <td></td>
+                        <td></td>
+                        <td></td> 
+                        <!-- {{ValorTotalSum() | number:'1.0-0'}} -->
+                        <td></td>
+                        <td></td>
+                        <td><b>${{preciototalVenta() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                        <td><b>{{cantidadBinsVenta() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                    </tr>
+                </tbody>                
+            </table>
+            <hr>
+            <h3 class="d-flex justify-content-center">COSTOS ADICIONALES</h3>
+            <table class="table table-striped table-sm">
+                <thead class="thead-dark">
+                    <tr>                                      
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Precio Total</th>
+                        <th scope="col">Eliminar?</th>                                            
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor = 'let datosentrada2 of aditionalCost'>
+                        <td>{{datosentrada2.descripcion}}</td>
+                        <td>{{datosentrada2.cantidad | number:'1.0-0'}}</td>
+                        <td>{{datosentrada2.precio | number:'1.0-0'}}</td>
+                        <td>{{datosentrada2.precio_total | number:'1.0-0'}}</td>
+                        <td>
+                            <button class="btn btn-danger ml-2 material-icons" (click)="DeleteGastoAdicionalVenta(datosentrada2.id_gastos_adicionales_venta_general)">
+                                delete 
+                            </button>
+                        </td>
+                    </tr>                
+                    <tr class="table-info">
+                        <td></td>
+                        <td><b>{{cantidadGastosAdicionales() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                        <td><b>{{precioTotalGastosAdicionales() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                    </tr>
+                </tbody>                
+            </table>
+            <button [routerLink] ="['/vpc/busqueda']" type="button" class="btn btn-success btn-lg btn-block" style="margin-top: 100px;">TERMINAR VENTA</button>
+        </div>
+        <div class="col-3">
+            <table class="table table-striped table-sm">
+                <thead class="thead-dark">
+                    <tr>                                      
+                        <th scope="col">Lote</th>
+                        <th scope="col">Fruta</th>
+                        <th scope="col">Calibre</th>
+                        <th scope="col">Stock Disponible</th>                      
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr *ngFor = 'let datosentrada2 of getStockSell'>
+                        <td>{{datosentrada2.id_cg}}</td>
+                        <td>{{datosentrada2.tipo_fruta}}</td>
+                        <td>{{datosentrada2.calibre}}</td>
+                        <td>{{datosentrada2.kilogramos_stock | number:'1.0-0'}}</td>
+
+                    </tr>                
+                    <tr class="table-info">
+                        <td></td>
+                        <td></td>
+                        <td><b>{{stockDisponibleTotal() | number:'1.0-0'}}</b></td>
+                        <td></td>
+                    </tr>
+                </tbody>                
+            </table>
+        </div>  
+    </div>
+</div>
+
+<div class="container-fluid col-12 ">
+   <div class="row">
+
+    </div> 
+</div>
+

@@ -32,7 +32,7 @@ export class CompraGeneralFinalComponent implements OnInit {
     tipo_producto:0,
   } 
   detalleSalidaCompraGeneral:DetalleSalidaCompraGeneral = {
-    id_cg:0,
+    id_cg:'',
     calibre:0,
     cantidad:0,
     tipo_fruto:0,

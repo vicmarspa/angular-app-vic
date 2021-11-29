@@ -77,6 +77,8 @@ import { BusquedaCpcComponent } from './components/busqueda-cpc/busqueda-cpc.com
 import { BusquedaVpcComponent } from './components/busqueda-vpc/busqueda-vpc.component';
 import { CompraGeneralPrincipalComponent } from './components/compra-general-principal/compra-general-principal.component';
 import { CompraGeneralFinalComponent } from './components/compra-general-final/compra-general-final.component';
+import { VentaGeneralPrincipalComponent } from './components/venta-general-principal/venta-general-principal.component';
+import { VentaGeneralFinalComponent } from './components/venta-general-final/venta-general-final.component';
 
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
@@ -136,6 +138,8 @@ import { CompraGeneralFinalComponent } from './components/compra-general-final/c
     BusquedaVpcComponent,
     CompraGeneralPrincipalComponent,
     CompraGeneralFinalComponent,
+    VentaGeneralPrincipalComponent,
+    VentaGeneralFinalComponent,
     //DialogComponentComponent
   ],
 

@@ -57,6 +57,8 @@ import{BusquedaCpcComponent} from './components/busqueda-cpc/busqueda-cpc.compon
 import{BusquedaVpcComponent} from './components/busqueda-vpc/busqueda-vpc.component';
 import{CompraGeneralPrincipalComponent} from './components/compra-general-principal/compra-general-principal.component';
 import{CompraGeneralFinalComponent} from './components/compra-general-final/compra-general-final.component';
+import{VentaGeneralPrincipalComponent} from './components/venta-general-principal/venta-general-principal.component';
+import{VentaGeneralFinalComponent} from './components/venta-general-final/venta-general-final.component';
 
 
 const routes: Routes = [
@@ -268,7 +270,15 @@ const routes: Routes = [
     {
       path:'compra-general/ingreso-final/:id_cg',
       component:CompraGeneralFinalComponent
-    }
+    },
+    {
+      path:'venta-general/ingreso-principal',
+      component:VentaGeneralPrincipalComponent
+    },
+    {
+      path:'venta-general/ingreso-final/:id_venta_general',
+      component:VentaGeneralFinalComponent
+    },
 ];
 
 @NgModule({
