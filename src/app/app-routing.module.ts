@@ -59,6 +59,7 @@ import{CompraGeneralPrincipalComponent} from './components/compra-general-princi
 import{CompraGeneralFinalComponent} from './components/compra-general-final/compra-general-final.component';
 import{VentaGeneralPrincipalComponent} from './components/venta-general-principal/venta-general-principal.component';
 import{VentaGeneralFinalComponent} from './components/venta-general-final/venta-general-final.component';
+import{BusquedaVentaGeneralComponent} from './components/busqueda-venta-general/busqueda-venta-general.component';
 
 
 const routes: Routes = [
@@ -278,6 +279,10 @@ const routes: Routes = [
     {
       path:'venta-general/ingreso-final/:id_venta_general',
       component:VentaGeneralFinalComponent
+    },
+    {
+      path:'venta-general/busqueda',
+      component:BusquedaVentaGeneralComponent
     },
 ];
 

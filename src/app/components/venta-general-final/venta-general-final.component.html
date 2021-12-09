@@ -11,7 +11,7 @@
                     N° VENTA: 
                 </h5>
                 <h5 class="d-inline text-dark" style="margin-left: 80px; margin-right: 8px; font-weight: bold;">
-                    {{datosVenta.id_vpc}}
+                    {{datosVenta.id_venta_general}}
                 </h5>
                 <br>
                 <h5 class="d-inline text-dark ml-2">
@@ -88,7 +88,7 @@
         </div>
         <div class="sm col-3">
             <div>
-                <h3 class="d-flex justify-content-center">STOCK PALTAS CHILENAS</h3>
+                <h3 class="d-flex justify-content-center">STOCK</h3>
             </div>     
         </div>
     </div>
@@ -247,8 +247,8 @@
                         <!-- {{ValorTotalSum() | number:'1.0-0'}} -->
                         <td></td>
                         <td></td>
-                        <td><b>${{preciototalVenta() | number:'1.0-0'}}</b></td>
                         <td></td>
+                        <td><b>${{preciototalVenta() | number:'1.0-0'}}</b></td>
                         <td><b>{{cantidadBinsVenta() | number:'1.0-0'}}</b></td>
                         <td></td>
                     </tr>
@@ -310,8 +310,8 @@
                     <tr class="table-info">
                         <td></td>
                         <td></td>
-                        <td><b>{{stockDisponibleTotal() | number:'1.0-0'}}</b></td>
                         <td></td>
+                        <td><b>{{stockDisponibleTotal() | number:'1.0-0'}}</b></td>
                     </tr>
                 </tbody>                
             </table>

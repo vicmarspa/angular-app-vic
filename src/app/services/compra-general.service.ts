@@ -156,4 +156,16 @@ BorrarGastoAdicional(id_gastos_adicionales_venta_general: string){
   return this.http.delete(`${this.API_URI}/venta-general/eliminar/gastoAdicional/${id_gastos_adicionales_venta_general}`)
 }
 
+
+
+
+// RUTAS REFERENTES A SECCION DE BUSQUEDA DE VENTA
+
+
+getAllSells(){
+  return this.http.get(`${this.API_URI}/venta-general/getAllSells`)
+}
+
+
+
 }

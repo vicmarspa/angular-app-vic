@@ -79,6 +79,7 @@ import { CompraGeneralPrincipalComponent } from './components/compra-general-pri
 import { CompraGeneralFinalComponent } from './components/compra-general-final/compra-general-final.component';
 import { VentaGeneralPrincipalComponent } from './components/venta-general-principal/venta-general-principal.component';
 import { VentaGeneralFinalComponent } from './components/venta-general-final/venta-general-final.component';
+import { BusquedaVentaGeneralComponent } from './components/busqueda-venta-general/busqueda-venta-general.component';
 
 //import { DialogComponentComponent } from './components/dialog-component/dialog-component.component';
 
@@ -140,6 +141,7 @@ import { VentaGeneralFinalComponent } from './components/venta-general-final/ven
     CompraGeneralFinalComponent,
     VentaGeneralPrincipalComponent,
     VentaGeneralFinalComponent,
+    BusquedaVentaGeneralComponent,
     //DialogComponentComponent
   ],
 

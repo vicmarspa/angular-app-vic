@@ -64,56 +64,8 @@
 </div>
 <div class="container-fluid col-12">
     <div class="row">
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">Kilogramos</span>
-            </div>
-            <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosEntrada>
-            </div>     
-        </div>
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">Descuento</span>
-            </div>
-            <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=descuentoEntrada>
-            </div>     
-        </div>
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">CALIBRE</span>
-            </div> 
-            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleCompraGeneral.calibre>
-                <option value="0">
-                </option>  
-                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
-                    {{calibre.calibre}}
-                </option>                
-            </select>    
-        </div>
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">Precio</span>
-            </div>
-            <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=detalleCompraGeneral.precio>
-            </div>     
-        </div>
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">Formato</span>
-            </div>
-            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleCompraGeneral.formato>  
-                <option value="Bin">
-                    Bin
-                </option>
-                <option value="Pallet">
-                    Pallet
-                </option>                  
-            </select>      
-        </div>
-        <div class="sm col-1">
+
+        <div class="sm col-1 ml-5">
             <div>
                 <span class="d-flex justify-content-center">Fruta</span>
             </div>
@@ -126,43 +78,56 @@
             </select>      
         </div>
 
-        <div class="sm col-1 ml-5"> 
+        <div class="sm col-1">
             <div>
                 <span class="d-flex justify-content-center">Calibre</span>
             </div> 
-            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleSalidaCompraGeneral.calibre>
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleCompraGeneral.calibre>
                 <option value="0">
-                </option> 
+                </option>  
                 <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
                     {{calibre.calibre}}
                 </option>                
-            </select>      
+            </select>    
         </div>
+
         <div class="sm col-1">
             <div>
                 <span class="d-flex justify-content-center">Kilogramos</span>
             </div>
             <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosSalida>
+                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosEntrada>
             </div>     
         </div>
-        <div class="sm col-1">
-            <div>
-                <span class="d-flex justify-content-center">Bins</span>
-            </div>
-            <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=detalleSalidaCompraGeneral.bins>
-            </div>     
-        </div>
+
         <div class="sm col-1">
             <div>
                 <span class="d-flex justify-content-center">Descuento</span>
             </div>
             <div>
-                <input type="text" style="width: 120px;" [(ngModel)]=descuentoSalida>
+                <input type="text" style="width: 120px;" [(ngModel)]=descuentoEntrada>
             </div>     
         </div>
+
+
+
         <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Precio</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=detalleCompraGeneral.precio>
+            </div>     
+        </div>
+
+
+
+
+
+
+
+
+        <div class="sm col-1" style="margin-left: 120px;">
             <div>
                 <span class="d-flex justify-content-center">Fruta</span>
             </div>
@@ -175,6 +140,77 @@
             </select>      
         </div>
 
+
+
+        <div class="sm col-1"> 
+            <div>
+                <span class="d-flex justify-content-center">Calibre</span>
+            </div> 
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleSalidaCompraGeneral.calibre>
+                <option value="0">
+                </option> 
+                <option *ngFor="let calibre of getcalibre" id="calibre" [value]="calibre.idcalibre">
+                    {{calibre.calibre}}
+                </option>                
+            </select>      
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Kilogramos</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=kilogramosSalida>
+            </div>     
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Descuento</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=descuentoSalida>
+            </div>     
+        </div>
+        
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Pallets/Bins</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=detalleSalidaCompraGeneral.bins>
+            </div>     
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="sm col-1 ml-5">
+            <div>
+                <span class="d-flex justify-content-center">Formato</span>
+            </div>
+            <select style="width: 120px; height: 25px;" [(ngModel)]=detalleCompraGeneral.formato>  
+                <option value="Bin">
+                    Bin
+                </option>
+                <option value="Pallet">
+                    Pallet
+                </option>                  
+            </select>      
+        </div>
+
+        <div class="sm col-1">
+            <div>
+                <span class="d-flex justify-content-center">Pallets/Bins</span>
+            </div>
+            <div>
+                <input type="text" style="width: 120px;" [(ngModel)]=detalleCompraGeneral.cantidad_formato>
+            </div>     
+        </div>
     </div>
 </div>
 <div class="container-fluid col-12">
@@ -200,6 +236,7 @@
                 <tr>                                      
                     <th scope="col">Calibre</th>
                     <th scope="col">Formato</th>
+                    <th scope="col">Bins/Pallet</th>
                     <th scope="col">Fruto</th>
                     <th scope="col">Valor kg</th>
                     <th scope="col">Kilogramos Neto</th> 
@@ -211,6 +248,7 @@
                     <tr *ngFor = 'let datosentrada of getDatosCompraEntrada'>
                     <td>{{datosentrada.calibre}}</td>
                     <td>{{datosentrada.formato}}</td>
+                    <td>{{datosentrada.cantidad_formato}}</td>
                     <td>{{datosentrada.tipo_fruta}}</td>
                     <td>${{datosentrada.precio | number:'1.0-0'}}</td>
                     <td>{{datosentrada.cantidad | number:'1.0-0'}}</td>
@@ -228,6 +266,7 @@
                     <td></td>
                     <td><b>{{kilogramosEntradaSum()}}</b></td>
                     <td><b>{{ValorTotalSum() | number:'1.0-0'}}</b></td>
+                    <td></td>
                     <td></td>
                 </tr>
                 

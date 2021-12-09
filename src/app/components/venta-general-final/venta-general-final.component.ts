@@ -228,7 +228,7 @@ export class VentaGeneralFinalComponent implements OnInit {
     return this.getSellDetail.map(entrada => entrada.precio_total).reduce((a,b) => a+b, 0);
   }
   public cantidadBinsVenta(){
-    return this.getSellDetail.map(entrada => entrada.cantidad_bins).reduce((a,b) => a+b, 0);
+    return this.getSellDetail.map(entrada => entrada.cantidad_bins_pallet).reduce((a,b) => a+b, 0);
   }
   public stockDisponibleTotal(){
     return this.getStockSell.map(entrada => entrada.kilogramos_stock).reduce((a,b) => a+b, 0);
