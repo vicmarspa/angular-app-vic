@@ -102,16 +102,16 @@ export class BusquedaVentaGeneralComponent implements OnInit {
     return this.getAllSells.map(entrada => entrada.costos_adicionales).reduce((a,b) => a+b, 0);
   }
 
-//   public detalleVentaBinsSum(){
-//     return this.getSellDetail.map(entrada => entrada.cantidad_bins).reduce((a,b) => a+b, 0);
-//   }
-//   public detalleVentaCantidadSum(){
-//     return this.getSellDetail.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
-//   }
+  public detalleVentaBinsSum(){
+    return this.getSellDetail.map(entrada => entrada.cantidad_bins_pallet).reduce((a,b) => a+b, 0);
+  }
+  public detalleVentaCantidadSum(){
+    return this.getSellDetail.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
 
-//   public detalleVentaAdicionalCantidadSum(){
-//     return this.aditionalCost.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
-//   }
+  public detalleVentaAdicionalCantidadSum(){
+    return this.aditionalCost.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
 
 
 id_venta_general:any;
@@ -731,133 +731,133 @@ id_venta_general:any;
 
 
 
-//   reporteIndividualPDF(){
-//     // Default export is a4 paper, portrait, using millimeters for units
-//     const doc = new jsPDF();
-//     doc.setFontSize(10);
+  reporteIndividualPDF(){
+    // Default export is a4 paper, portrait, using millimeters for units
+    const doc = new jsPDF();
+    doc.setFontSize(10);
   
-//     doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
-//     doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
+    doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
+    doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
   
-//     var img = new Image()
-//     img.src = '/assets/image.jpg'
-//     doc.addImage(img, 'jpg', 185, 0, 18, 18)
+    var img = new Image()
+    img.src = '/assets/image.jpg'
+    doc.addImage(img, 'jpg', 185, 0, 18, 18)
   
-//     doc.line(5, 20, 204, 20);
-  
-
-
-
-//     var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
-//     var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
-
-//     var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
-//     var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
-    
-//     var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
-//     var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
-    
-//     var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
-//     var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
-    
-//     var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
-//     var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
-    
-//     var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
-//     var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
-//     var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
-    
-//     var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
-//     var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
-//     var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
-
-    
-
-
-
-
-
-
-
+    doc.line(5, 20, 204, 20);
   
 
 
 
+    var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
+    var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
 
-
-
-//     doc.line(5, 15, 35, 15);
+    var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
+    var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
+    
+    var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
+    var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
+    
+    var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
+    var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
+    
+    var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
+    var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
+    
+    var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
+    var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
+    var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
+    
+    var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
+    var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
+    var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
 
     
 
-//     doc.line(5, 6, 35, 6);
-
-//     doc.setFontType('bold');
-//     doc.setFontSize(14);
-//     doc.text('VENTA: ', 8, 12);
-//     doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
-//     doc.setFontType('normal');
-//     doc.setFontSize(10);
 
 
-//     doc.line(5, 15, 5, 6)
 
-//     doc.line(35, 15, 35, 6)
+
 
 
   
-//     doc.text('IDENTIFICADOR: ', 10, 25); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedIdVpc2html, 55, 25); 
-//     doc.setFontType('normal');
 
-//     doc.text('NOMBRE: ', 10, 30); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedNombrehtml, 55, 30); 
-//     doc.setFontType('normal');
 
-//     doc.text('FECHA: ', 10, 35); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedFechaIngresohtml, 55, 35); 
-//     doc.setFontType('normal');
 
-//     doc.text('TIPO DE PAGO: ', 10, 40); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedTipoPagohtml, 55, 40); 
-//     doc.setFontType('normal');
 
-//     doc.text('CANTIDAD: ', 10, 45); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedTotalCantidadhtml, 55, 45); 
-//     doc.setFontType('normal');
 
-//     doc.text('PRECIO: ', 10, 50); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductoshtml, 55, 50); 
-//     doc.setFontType('normal');
 
-//     doc.text('COSTOS ADICIONALES: ', 10, 55); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 55); 
-//     doc.setFontType('normal');
+    doc.line(5, 15, 35, 15);
 
-//     doc.text('PRECIO TOTAL: ', 10, 60); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductos2html, 55, 60); 
+    
+
+    doc.line(5, 6, 35, 6);
+
+    doc.setFontType('bold');
+    doc.setFontSize(14);
+    doc.text('VENTA: ', 8, 12);
+    doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
+    doc.setFontType('normal');
+    doc.setFontSize(10);
+
+
+    doc.line(5, 15, 5, 6)
+
+    doc.line(35, 15, 35, 6)
+
+
+  
+    doc.text('IDENTIFICADOR: ', 10, 25); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedIdVpc2html, 55, 25); 
+    doc.setFontType('normal');
+
+    doc.text('NOMBRE: ', 10, 30); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedNombrehtml, 55, 30); 
+    doc.setFontType('normal');
+
+    doc.text('FECHA: ', 10, 35); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedFechaIngresohtml, 55, 35); 
+    doc.setFontType('normal');
+
+    doc.text('TIPO DE PAGO: ', 10, 40); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedTipoPagohtml, 55, 40); 
+    doc.setFontType('normal');
+
+    doc.text('CANTIDAD: ', 10, 45); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedTotalCantidadhtml, 55, 45); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO: ', 10, 50); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductoshtml, 55, 50); 
+    doc.setFontType('normal');
+
+    doc.text('COSTOS ADICIONALES: ', 10, 55); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 55); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO TOTAL: ', 10, 60); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductos2html, 55, 60); 
    
 
 
   
   
-//     doc.line(5, 65, 204, 65);
+    doc.line(5, 65, 204, 65);
   
-//     doc.text('DETALLE VENTA DE PALTA', 85,70);
+    doc.text('DETALLE VENTA DE PALTA', 85,70);
     
-//     doc.line(5, 75, 204, 75);
+    doc.line(5, 75, 204, 75);
   
   
   
@@ -865,189 +865,189 @@ id_venta_general:any;
   
 
   
-//     // top: 65,right:35,left:10
-//     doc.autoTable({ html: '#datos_entrada',columnStyles: {
-//       0: {cellWidth: 25},
-//       1: {cellWidth: 18},
-//       2: {cellWidth: 20},
-//       3: {cellWidth: 15},
-//       4: {cellWidth: 24},
-//       5: {cellWidth: 24},
-//       6: {cellWidth: 24},
+    // top: 65,right:35,left:10
+    doc.autoTable({ html: '#datos_entrada',columnStyles: {
+      0: {cellWidth: 25},
+      1: {cellWidth: 18},
+      2: {cellWidth: 20},
+      3: {cellWidth: 15},
+      4: {cellWidth: 24},
+      5: {cellWidth: 24},
+      6: {cellWidth: 24},
 
 
-//     },margin: {top: 80,right:35,left:30}, styles: {overflow: 'linebreak',
-//     fontSize: 10},didParseCell: function (data) {
+    },margin: {top: 80,right:35,left:30}, styles: {overflow: 'linebreak',
+    fontSize: 10},didParseCell: function (data) {
   
-//       //data.table.body.splice(5);
-//       var rows = data.table.body;
+      //data.table.body.splice(5);
+      var rows = data.table.body;
   
-//       if (data.row.index === rows.length - 1) {
-//           data.cell.styles.fillColor = [138, 236, 247];
-//       }} } )
+      if (data.row.index === rows.length - 1) {
+          data.cell.styles.fillColor = [138, 236, 247];
+      }} } )
   
 
-//       doc.autoTable({ html: '#datos_salida', columnStyles: {
+      doc.autoTable({ html: '#datos_salida', columnStyles: {
 
-//         0: {cellWidth: 25},
-//         1: {cellWidth: 40},
-//         2: {cellWidth: 20},
-//         3: {cellWidth: 20},
+        0: {cellWidth: 25},
+        1: {cellWidth: 40},
+        2: {cellWidth: 20},
+        3: {cellWidth: 20},
 
-//       },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
-//       fontSize: 10},didParseCell: function (data) {
+      },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
+      fontSize: 10},didParseCell: function (data) {
     
-//         //data.table.body.splice(5);
-//         var rows = data.table.body;
+        //data.table.body.splice(5);
+        var rows = data.table.body;
     
-//         if (data.row.index === rows.length - 1) {
-//             data.cell.styles.fillColor = [138, 236, 247];
-//         }} } )
+        if (data.row.index === rows.length - 1) {
+            data.cell.styles.fillColor = [138, 236, 247];
+        }} } )
         
 
 
 
 
-//         doc.autoTable({ html: '#datos_salida4', columnStyles: {
+        doc.autoTable({ html: '#datos_salida4', columnStyles: {
 
-//           0: {cellWidth: 25},
-//           1: {cellWidth: 40},
+          0: {cellWidth: 25},
+          1: {cellWidth: 40},
 
   
-//         },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
-//         fontSize: 10},didParseCell: function (data) {
+        },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
+        fontSize: 10},didParseCell: function (data) {
       
-//           //data.table.body.splice(5);
-//           var rows = data.table.body;
+          //data.table.body.splice(5);
+          var rows = data.table.body;
       
-//           if (data.row.index === rows.length - 1) {
-//               data.cell.styles.fillColor = [138, 236, 247];
-//           }} } )
-//     doc.output('dataurlnewwindow'); 
-//   }
+          if (data.row.index === rows.length - 1) {
+              data.cell.styles.fillColor = [138, 236, 247];
+          }} } )
+    doc.output('dataurlnewwindow'); 
+  }
 
 
 
-//   reporteIndividualPDF2(){
-//     // Default export is a4 paper, portrait, using millimeters for units
-//     const doc = new jsPDF();
-//     doc.setFontSize(10);
+  reporteIndividualPDF2(){
+    // Default export is a4 paper, portrait, using millimeters for units
+    const doc = new jsPDF();
+    doc.setFontSize(10);
   
-//     doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
-//     doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
+    doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
+    doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
   
-//     var img = new Image()
-//     img.src = '/assets/image.jpg'
-//     doc.addImage(img, 'jpg', 185, 0, 18, 18)
+    var img = new Image()
+    img.src = '/assets/image.jpg'
+    doc.addImage(img, 'jpg', 185, 0, 18, 18)
   
-//     doc.line(5, 20, 204, 20);
-  
-
-
-
-//     var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
-//     var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
-
-//     var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
-//     var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
-    
-//     var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
-//     var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
-    
-//     var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
-//     var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
-    
-//     var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
-//     var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
-    
-//     var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
-//     var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
-//     var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
-    
-//     var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
-//     var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
-//     var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
-
-    
-
-
-
-
-
-
-
+    doc.line(5, 20, 204, 20);
   
 
 
 
+    var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
+    var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
 
-
-
-//     doc.line(5, 15, 35, 15);
+    var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
+    var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
+    
+    var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
+    var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
+    
+    var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
+    var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
+    
+    var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
+    var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
+    
+    var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
+    var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
+    var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
+    
+    var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
+    var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
+    var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
 
     
 
-//     doc.line(5, 6, 35, 6);
-
-//     doc.setFontType('bold');
-//     doc.setFontSize(14);
-//     doc.text('VENTA: ', 8, 12);
-//     doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
-//     doc.setFontType('normal');
-//     doc.setFontSize(10);
 
 
-//     doc.line(5, 15, 5, 6)
 
-//     doc.line(35, 15, 35, 6)
+
 
 
   
 
 
-//     doc.text('NOMBRE: ', 10, 25); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedNombrehtml, 55, 25); 
-//     doc.setFontType('normal');
-
-//     doc.text('FECHA: ', 10, 30); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedFechaIngresohtml, 55, 30); 
-//     doc.setFontType('normal');
 
 
-//     doc.text('CANTIDAD: ', 10, 35); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedTotalCantidadhtml, 55, 35); 
-//     doc.setFontType('normal');
 
-//     doc.text('PRECIO: ', 10, 40); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductoshtml, 55, 40); 
-//     doc.setFontType('normal');
 
-//     doc.text('COSTOS ADICIONALES: ', 10, 45); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 45); 
-//     doc.setFontType('normal');
+    doc.line(5, 15, 35, 15);
 
-//     doc.text('PRECIO TOTAL: ', 10, 50); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductos2html, 55, 50); 
+    
+
+    doc.line(5, 6, 35, 6);
+
+    doc.setFontType('bold');
+    doc.setFontSize(14);
+    doc.text('VENTA: ', 8, 12);
+    doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
+    doc.setFontType('normal');
+    doc.setFontSize(10);
+
+
+    doc.line(5, 15, 5, 6)
+
+    doc.line(35, 15, 35, 6)
+
+
+  
+
+
+    doc.text('NOMBRE: ', 10, 25); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedNombrehtml, 55, 25); 
+    doc.setFontType('normal');
+
+    doc.text('FECHA: ', 10, 30); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedFechaIngresohtml, 55, 30); 
+    doc.setFontType('normal');
+
+
+    doc.text('CANTIDAD: ', 10, 35); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedTotalCantidadhtml, 55, 35); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO: ', 10, 40); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductoshtml, 55, 40); 
+    doc.setFontType('normal');
+
+    doc.text('COSTOS ADICIONALES: ', 10, 45); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 45); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO TOTAL: ', 10, 50); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductos2html, 55, 50); 
    
 
 
   
   
-//     doc.line(5, 55, 204, 55);
+    doc.line(5, 55, 204, 55);
   
-//     doc.text('DETALLE VENTA DE PALTA', 85,60);
+    doc.text('DETALLE VENTA DE PALTA', 85,60);
     
-//     doc.line(5, 65, 204, 65);
+    doc.line(5, 65, 204, 65);
   
   
   
@@ -1055,172 +1055,172 @@ id_venta_general:any;
   
 
   
-//     // top: 65,right:35,left:10
-//     doc.autoTable({ html: '#datos_entrada',columnStyles: {
-//       0: {cellWidth: 25},
-//       1: {cellWidth: 18},
-//       2: {cellWidth: 20},
-//       3: {cellWidth: 15},
-//       4: {cellWidth: 24},
-//       5: {cellWidth: 24},
-//       6: {cellWidth: 24},
+    // top: 65,right:35,left:10
+    doc.autoTable({ html: '#datos_entrada',columnStyles: {
+      0: {cellWidth: 25},
+      1: {cellWidth: 18},
+      2: {cellWidth: 20},
+      3: {cellWidth: 15},
+      4: {cellWidth: 24},
+      5: {cellWidth: 24},
+      6: {cellWidth: 24},
 
 
-//     },margin: {top: 70,right:35,left:30}, styles: {overflow: 'linebreak',
-//     fontSize: 10},didParseCell: function (data) {
+    },margin: {top: 70,right:35,left:30}, styles: {overflow: 'linebreak',
+    fontSize: 10},didParseCell: function (data) {
   
-//       //data.table.body.splice(5);
-//       var rows = data.table.body;
+      //data.table.body.splice(5);
+      var rows = data.table.body;
   
-//       if (data.row.index === rows.length - 1) {
-//           data.cell.styles.fillColor = [138, 236, 247];
-//       }} } )
+      if (data.row.index === rows.length - 1) {
+          data.cell.styles.fillColor = [138, 236, 247];
+      }} } )
   
 
-//       doc.autoTable({ html: '#datos_salida', columnStyles: {
+      doc.autoTable({ html: '#datos_salida', columnStyles: {
 
-//         0: {cellWidth: 25},
-//         1: {cellWidth: 40},
-//         2: {cellWidth: 20},
-//         3: {cellWidth: 20},
+        0: {cellWidth: 25},
+        1: {cellWidth: 40},
+        2: {cellWidth: 20},
+        3: {cellWidth: 20},
 
-//       },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
-//       fontSize: 10},didParseCell: function (data) {
+      },margin: {top: 75,right:2,left:30}, styles: {overflow: 'linebreak',
+      fontSize: 10},didParseCell: function (data) {
     
-//         //data.table.body.splice(5);
-//         var rows = data.table.body;
+        //data.table.body.splice(5);
+        var rows = data.table.body;
     
-//         if (data.row.index === rows.length - 1) {
-//             data.cell.styles.fillColor = [138, 236, 247];
-//         }} } )
-//     doc.output('dataurlnewwindow'); 
-//   }
+        if (data.row.index === rows.length - 1) {
+            data.cell.styles.fillColor = [138, 236, 247];
+        }} } )
+    doc.output('dataurlnewwindow'); 
+  }
 
 
 
 
 
 
-//   reporteIndividualPDF3(){
-//     // Default export is a4 paper, portrait, using millimeters for units
-//     const doc = new jsPDF();
-//     doc.setFontSize(10);
+  reporteIndividualPDF3(){
+    // Default export is a4 paper, portrait, using millimeters for units
+    const doc = new jsPDF();
+    doc.setFontSize(10);
   
-//     doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
-//     doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
+    doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
+    doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
   
-//     var img = new Image()
-//     img.src = '/assets/image.jpg'
-//     doc.addImage(img, 'jpg', 185, 0, 18, 18)
+    var img = new Image()
+    img.src = '/assets/image.jpg'
+    doc.addImage(img, 'jpg', 185, 0, 18, 18)
   
-//     doc.line(5, 20, 204, 20);
-  
-
-
-
-//     var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
-//     var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
-
-//     var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
-//     var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
-    
-//     var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
-//     var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
-    
-//     var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
-//     var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
-    
-//     var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
-//     var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
-    
-//     var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
-//     var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
-//     var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
-    
-//     var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
-//     var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
-    
-//     var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
-//     var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
-
-    
-
-
-
-
-
-
-
+    doc.line(5, 20, 204, 20);
   
 
 
 
+    var detailSelectedselectedIdVpc2 = document.getElementById("detailSelectedselectedIdVpc2");
+    var detailSelectedselectedIdVpc2html = detailSelectedselectedIdVpc2?.innerHTML;
 
-
-
-//     doc.line(5, 15, 35, 15);
+    var detailSelectedselectedIdVpc = document.getElementById("detailSelectedselectedIdVpc");
+    var detailSelectedselectedIdVpchtml = detailSelectedselectedIdVpc?.innerHTML;
+    
+    var detailSelectedselectedNombre =  document.getElementById("detailSelectedselectedNombre");
+    var detailSelectedselectedNombrehtml = detailSelectedselectedNombre?.innerHTML;
+    
+    var detailSelectedselectedFechaIngreso =  document.getElementById("detailSelectedselectedFechaIngreso");
+    var detailSelectedselectedFechaIngresohtml = detailSelectedselectedFechaIngreso?.innerHTML;
+    
+    var detailSelectedselectedTipoPago =  document.getElementById("detailSelectedselectedTipoPago");
+    var detailSelectedselectedTipoPagohtml = detailSelectedselectedTipoPago?.innerHTML;
+    
+    var detailSelectedselectedTotalCantidad =  document.getElementById("detailSelectedselectedTotalCantidad");
+    var detailSelectedselectedTotalCantidadhtml = detailSelectedselectedTotalCantidad?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos =  document.getElementById("detailSelectedselectedPrecioProductos");
+    var detailSelectedselectedPrecioProductoshtml = detailSelectedselectedPrecioProductos?.innerHTML;
+    
+    var detailSelectedselectedCostosAdicionales =  document.getElementById("detailSelectedselectedCostosAdicionales");
+    var detailSelectedselectedCostosAdicionaleshtml = detailSelectedselectedCostosAdicionales?.innerHTML;
+    
+    var detailSelectedselectedPrecioProductos2 =  document.getElementById("detailSelectedselectedPrecioProductos2");
+    var detailSelectedselectedPrecioProductos2html = detailSelectedselectedPrecioProductos2?.innerHTML;
 
     
 
-//     doc.line(5, 6, 35, 6);
-
-//     doc.setFontType('bold');
-//     doc.setFontSize(14);
-//     doc.text('VENTA: ', 8, 12);
-//     doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
-//     doc.setFontType('normal');
-//     doc.setFontSize(10);
 
 
-//     doc.line(5, 15, 5, 6)
 
-//     doc.line(35, 15, 35, 6)
+
 
 
   
 
 
-//     doc.text('NOMBRE: ', 10, 25); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedNombrehtml, 55, 25); 
-//     doc.setFontType('normal');
-
-//     doc.text('FECHA: ', 10, 30); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedFechaIngresohtml, 55, 30); 
-//     doc.setFontType('normal');
 
 
-//     doc.text('CANTIDAD: ', 10, 35); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedTotalCantidadhtml, 55, 35); 
-//     doc.setFontType('normal');
 
-//     doc.text('PRECIO: ', 10, 40); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductoshtml, 55, 40); 
-//     doc.setFontType('normal');
 
-//     doc.text('COSTOS ADICIONALES: ', 10, 45); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 45); 
-//     doc.setFontType('normal');
+    doc.line(5, 15, 35, 15);
 
-//     doc.text('PRECIO TOTAL: ', 10, 50); 
-//     doc.setFontType('bold');
-//     doc.text(detailSelectedselectedPrecioProductos2html, 55, 50); 
+    
+
+    doc.line(5, 6, 35, 6);
+
+    doc.setFontType('bold');
+    doc.setFontSize(14);
+    doc.text('VENTA: ', 8, 12);
+    doc.text(detailSelectedselectedIdVpchtml, 28, 12); 
+    doc.setFontType('normal');
+    doc.setFontSize(10);
+
+
+    doc.line(5, 15, 5, 6)
+
+    doc.line(35, 15, 35, 6)
+
+
+  
+
+
+    doc.text('NOMBRE: ', 10, 25); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedNombrehtml, 55, 25); 
+    doc.setFontType('normal');
+
+    doc.text('FECHA: ', 10, 30); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedFechaIngresohtml, 55, 30); 
+    doc.setFontType('normal');
+
+
+    doc.text('CANTIDAD: ', 10, 35); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedTotalCantidadhtml, 55, 35); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO: ', 10, 40); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductoshtml, 55, 40); 
+    doc.setFontType('normal');
+
+    doc.text('COSTOS ADICIONALES: ', 10, 45); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedCostosAdicionaleshtml, 55, 45); 
+    doc.setFontType('normal');
+
+    doc.text('PRECIO TOTAL: ', 10, 50); 
+    doc.setFontType('bold');
+    doc.text(detailSelectedselectedPrecioProductos2html, 55, 50); 
    
 
 
   
   
-//     doc.line(5, 55, 204, 55);
+    doc.line(5, 55, 204, 55);
   
-//     doc.text('DETALLE VENTA DE PALTA', 85,60);
+    doc.text('DETALLE VENTA DE PALTA', 85,60);
     
-//     doc.line(5, 65, 204, 65);
+    doc.line(5, 65, 204, 65);
   
   
   
@@ -1228,30 +1228,30 @@ id_venta_general:any;
   
 
   
-//     // top: 65,right:35,left:10
-//     doc.autoTable({ html: '#datos_entrada',columnStyles: {
-//       0: {cellWidth: 25},
-//       1: {cellWidth: 18},
-//       2: {cellWidth: 20},
-//       3: {cellWidth: 15},
-//       4: {cellWidth: 24},
-//       5: {cellWidth: 24},
-//       6: {cellWidth: 24},
+    // top: 65,right:35,left:10
+    doc.autoTable({ html: '#datos_entrada',columnStyles: {
+      0: {cellWidth: 25},
+      1: {cellWidth: 18},
+      2: {cellWidth: 20},
+      3: {cellWidth: 15},
+      4: {cellWidth: 24},
+      5: {cellWidth: 24},
+      6: {cellWidth: 24},
 
 
-//     },margin: {top: 70,right:35,left:30}, styles: {overflow: 'linebreak',
-//     fontSize: 10},didParseCell: function (data) {
+    },margin: {top: 70,right:35,left:30}, styles: {overflow: 'linebreak',
+    fontSize: 10},didParseCell: function (data) {
   
-//       //data.table.body.splice(5);
-//       var rows = data.table.body;
+      //data.table.body.splice(5);
+      var rows = data.table.body;
   
-//       if (data.row.index === rows.length - 1) {
-//           data.cell.styles.fillColor = [138, 236, 247];
-//       }} } )
+      if (data.row.index === rows.length - 1) {
+          data.cell.styles.fillColor = [138, 236, 247];
+      }} } )
   
 
-//     doc.output('dataurlnewwindow'); 
-//   }
+    doc.output('dataurlnewwindow'); 
+  }
 
 
 
