@@ -28,6 +28,7 @@ export class BusquedaCpcComponent implements OnInit {
   selectedImpuesto:any='';
   selectedTotalCantidad:any='';
   selectTotalValor:any='';
+  selectLote:any='';
   getDatosCompraEntrada:any = [];
   getDatosCompraSalida:any = [];
   getDetailProductsSellsObject:any = [];
@@ -88,6 +89,8 @@ export class BusquedaCpcComponent implements OnInit {
     selectedImpuesto:any,
     selectedTotalCantidad:any,
     selectTotalValor:any,
+    selectlote:any,
+
     ){
     this.selectIdCpc = selectIdCpc;
     this.selectNombre = selectNombre;
@@ -96,6 +99,7 @@ export class BusquedaCpcComponent implements OnInit {
     this.selectedImpuesto = selectedImpuesto;
     this.selectedTotalCantidad = selectedTotalCantidad;
     this.selectTotalValor = selectTotalValor;
+    this.selectLote = selectlote;
     this.obtenerDatosEntradaCompra();
     this.obtenerDatosSalidaCompre();
     this.getDetailProductsSells();

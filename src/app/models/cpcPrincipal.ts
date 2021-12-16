@@ -5,6 +5,8 @@ export interface CpcPrincipal{
     estado?: string;
     impuesto?: number;
     factura_guia?: number;
+    nick_name?:string;
+    lote?:number;
 }
         
         

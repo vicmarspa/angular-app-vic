@@ -34,9 +34,11 @@
             <br>
             <div class="card border border-secondary">
                 <div class="cardhead bg-primary text-white p-2">
-                    <h2 class="d-flex justify-content-center"> LOTE {{compra.id_cpc}}</h2>
+                    <h2 class="d-flex justify-content-center"> LOTE {{compra.lote}}</h2>
+                    <h2 class="d-flex justify-content-center"> {{compra.nick_name}}</h2>
                 </div>
                 <div class="card-body bg-light">
+                    <h4 class="text-dark">Identificador: <b>{{compra.id_cpc}}</b></h4>
                     <h4 class="text-dark">Kilogramos Totales: <b>{{compra.total_kilogramos_inventario}}</b></h4>
                     <h4 class="text-dark">Kilogramos Restantes: <b>{{compra.total_kilogramos_stock}}</b></h4>
                 </div>

@@ -75,6 +75,7 @@
             <table class="table table-striped table-sm">
                 <thead class="thead-dark">
                   <tr>                    
+                    <th scope="col">Id</th>
                     <th scope="col">Lote</th>
                     <th scope="col">Factura / Guía</th>
                     <th scope="col">Proveedor</th>
@@ -90,6 +91,7 @@
                 <tbody>
                   <tr *ngFor ='let row of getAllBuys'>    
                     <td><b>{{row.id_cpc}}</b></td>
+                    <td><b style="font-size: 25px; color: #2fa4e7;">{{row.lote}}</b></td>
                     <td><b>{{row.factura_guia}}</b></td>
                     <td><b>{{row.nombre}}</b></td>
                     <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
@@ -99,17 +101,17 @@
                     <td><b style="font-size:medium;">${{row.total_valor | number}}</b></td>
                     <td><b style="font-size:medium;">${{ (row.total_valor) + ( (row.total_valor)* (row.impuesto/100) ) | number:'1.0-0'}}</b></td>                                       
                     <td>  
-                        
-                        
                       <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                         <div class="modal-dialog modal-xl"   role="document">
                           <div class="modal-content" >
                             <div class="modal-header" >
-                              <h2 class="modal-title">Lote N°</h2> <h2 class="modal-title" id="selectIdCpc">{{selectIdCpc}}</h2>
+                              <h2 class="modal-title">Lote N°</h2> <h2 class="modal-title" id="selectIdCpc">{{selectLote}}</h2>
                             </div>
                             <div class="modal-body modal-xl">
                                 <table class="table" id="entrada">
                                     <thead class="thead-dark">
+                                      <b>Identificador: </b><b id="selectLote">{{selectIdCpc}}</b> 
+                                      <br>
                                       <b>Nombre del Proveedor: </b><b id="selectNombre">{{selectNombre}}</b> 
                                       <br>
                                       <b>Factura / Guía: </b><b id="selectFacturaGuia">{{selectFacturaGuia}}</b>   
@@ -313,7 +315,9 @@
                         row.fecha_ingreso, 
                         row.impuesto, 
                         row.total_cantidad, 
-                        row.total_valor)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        row.total_valor,
+                        row.lote
+                        )" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
                           OPCIONES
                       </button>
 
