@@ -20,6 +20,7 @@ import { Abonos_Vpc } from '../models/abonosVpc';
 
 import {VpcPrincipal} from '../models/vpcPrincipal';
 import {GastosAdicionalesVpc} from '../models/gastosAdicionalesVpc';
+import { CpcCostosAsociados } from '../models/cpcCostosAsociados';
 
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -226,5 +227,20 @@ export class PaltaChilenaService {
 
   deleteAbonosVentaPaltaChilena(id: string){
     return this.http.delete(`${this.API_URI}/venta-palta-chilena/deleteAbonosVenta/${id}`)
+  }
+
+
+
+
+  insertCostoCpc(cpcCostosAsociados:CpcCostosAsociados) {
+    return this.http.post(`${this.API_URI}/compra-palta-chilena/insert-costo`, cpcCostosAsociados)
+  }
+  
+  GetDetailCostoCpc(id_cpc: string) {
+    return this.http.get(`${this.API_URI}/compra-palta-chilena/get-costo/${id_cpc}`);
+  }
+
+  deleteCostosCompraPaltaChilena(id: string){
+    return this.http.delete(`${this.API_URI}/compra-palta-chilena/delete-costo/${id}`)
   }
 }

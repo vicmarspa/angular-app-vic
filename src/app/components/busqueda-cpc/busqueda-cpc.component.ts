@@ -9,6 +9,8 @@ import { PaltaChilenaService } from 'src/app/services/palta-chilena.service';
 
 import {CpcPrincipal} from '../../models/cpcPrincipal';
 
+import { CpcCostosAsociados } from '../../models/cpcCostosAsociados';
+import{ToastrService} from 'ngx-toastr';
 
 
 
@@ -32,12 +34,16 @@ export class BusquedaCpcComponent implements OnInit {
   getDatosCompraEntrada:any = [];
   getDatosCompraSalida:any = [];
   getDetailProductsSellsObject:any = [];
+  getSellDetailCostos:any = [];
+
   
   constructor(
     public calibradoService: CalibradoService,
     private router:Router,
     private activedRoute: ActivatedRoute,
-    public paltaChilenaService: PaltaChilenaService
+    public paltaChilenaService: PaltaChilenaService,
+    private toastr: ToastrService
+
 
   ) { }
 
@@ -51,6 +57,14 @@ export class BusquedaCpcComponent implements OnInit {
     estado:'',
     impuesto:0,
   }
+
+
+  cpcCostosAsociados:CpcCostosAsociados = {
+    id_cpc: 0,
+    descripcion:'',
+    cantidad: 0
+  }
+
 
   ngOnInit(): void {
     this.asignarVariableIniciales();
@@ -103,6 +117,7 @@ export class BusquedaCpcComponent implements OnInit {
     this.obtenerDatosEntradaCompra();
     this.obtenerDatosSalidaCompre();
     this.getDetailProductsSells();
+    this.obtenerDatosCostos();
   }
 
 
@@ -208,6 +223,10 @@ export class BusquedaCpcComponent implements OnInit {
   public cantidadSumDetailProductsSells(){
     return this.getDetailProductsSellsObject.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
   }
+
+  public sumaCostos(){
+    return this.getSellDetailCostos.map(entrada => entrada.cantidad).reduce((a,b) => a+b, 0);
+  }
   
   id_cpc:any;
 
@@ -287,6 +306,114 @@ export class BusquedaCpcComponent implements OnInit {
     }
     console.log("IVA FINAL", this.sumaTotalPrecio2);
   }
+
+
+
+
+
+
+
+
+  cantidadCosto:number=0;
+  descripcionCostos:string='';
+
+
+  IngresarCostosCpc(id_cpc:number){
+    this.cpcCostosAsociados.id_cpc = id_cpc;
+    this.cpcCostosAsociados.cantidad = this.cantidadCosto;
+    this.cpcCostosAsociados.descripcion = this.descripcionCostos;
+
+    Swal.fire({
+      title: '¿Estás Seguro?',
+      text: "¿Desea Ingresar este costo?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si'
+    }).then((result) => {
+      if (result.isConfirmed) { 
+      this.paltaChilenaService.insertCostoCpc(this.cpcCostosAsociados)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.cpcCostosAsociados.id_cpc = 0;
+          this.cpcCostosAsociados.descripcion = '';
+          this.cpcCostosAsociados.cantidad = 0;
+          this.toastr.success("ACTUALIZADO.");
+        },
+        err => console.error(err)
+      )
+      Swal.fire(
+        {
+          //position: 'top-end',
+          icon: 'success',
+          title: 'Pago Actualizado',
+          html: 'Estamos Redireccionando.',
+          showConfirmButton: false,
+          timer: 2000,
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          // location.reload();
+          this.obtenerDatosCostos();
+  
+        }
+          )
+        }
+      })
+  }
+
+
+  obtenerDatosCostos(){
+    this.paltaChilenaService.GetDetailCostoCpc(this.selectIdCpc)
+    .subscribe(
+      res => {
+        console.log("costos");
+        console.log(res);
+        this.getSellDetailCostos = res;
+      },
+      err => console.log(err)
+    )
+  }
+
+  deleteCostoCompraPaltaChilena(id:string){
+    Swal.fire({
+      title: 'Estas seguro(a)?',
+      text: "No se podrá recuperar la venta!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrala!'  
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.paltaChilenaService.deleteCostosCompraPaltaChilena(id)
+        .subscribe(
+          res => {
+            console.log(res);
+            this.obtenerDatosCostos();
+          },
+          err => console.error(err)
+        )
+        Swal.fire(
+          'Borrado!',
+          'La venta seleccionada ha sido borrada.',
+          'success'
+        )
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
   reporteIndividualPDF(){
@@ -455,11 +582,13 @@ export class BusquedaCpcComponent implements OnInit {
         }} } )
 
         doc.autoTable({ html: '#datos_products_sell_detail', columnStyles: {
+          
           0: {cellWidth: 25},
           1: {cellWidth: 25},
           2: {cellWidth: 25},
           3: {cellWidth: 25},
           4: {cellWidth: 25},
+          
 
   
         },margin: {top: 80,right:2,left:40}, styles: {overflow: 'linebreak',
@@ -471,6 +600,28 @@ export class BusquedaCpcComponent implements OnInit {
           if (data.row.index === rows.length - 1) {
               data.cell.styles.fillColor = [138, 236, 247];
           }} } )
+
+
+
+          
+          doc.autoTable({ html: '#costos_asociados_detail', columnStyles: {
+          
+            0: {cellWidth: 25},
+            1: {cellWidth: 25},
+
+
+            
+  
+    
+          },margin: {top: 80,right:2,left:40}, styles: {overflow: 'linebreak',
+          fontSize: 10},didParseCell: function (data) {
+        
+            //data.table.body.splice(5);
+            var rows = data.table.body;
+        
+            if (data.row.index === rows.length - 1) {
+                data.cell.styles.fillColor = [138, 236, 247];
+            }} } )
 
 
     doc.output('dataurlnewwindow'); 
