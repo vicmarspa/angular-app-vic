@@ -12,8 +12,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class ArriendoBinsService {
 
-      // API_URI = 'https://vicmarspa.herokuapp.com';
-      API_URI = 'https://vicmarspa.herokuapp.com';
+      // API_URI = 'http://localhost:3000';
+      API_URI = 'http://localhost:3000';
 
       authSubject = new BehaviorSubject(false);
       private token: string;

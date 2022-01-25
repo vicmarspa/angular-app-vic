@@ -28,7 +28,7 @@ import {GastosAdicionalesVentaGeneral} from '../models/gastosAdicionalesVentaGen
 })
 export class CompraGeneralService {
 
-  API_URI = 'https://vicmarspa.herokuapp.com';
+  API_URI = 'http://localhost:3000';
 
   authSubject = new BehaviorSubject(false);
   private token: string;
@@ -89,6 +89,11 @@ getCompraSalida(id_cg: string) {
 BorrarSalida(id_cg: string, id_detalle_salida_cg:string){
   return this.http.delete(`${this.API_URI}/compra-general/borrar-detalle-salida/${id_cg}/${id_detalle_salida_cg}`)
 }
+
+getAllBuys(){
+  return this.http.get(`${this.API_URI}/compra-general/getAllBuys`)
+}
+
 
 //  ##   ##  #######  ##   ##  ######     ##
 //  ##   ##   ##   #  ###  ##  # ## #    ####
