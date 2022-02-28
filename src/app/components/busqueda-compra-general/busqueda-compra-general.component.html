@@ -1,5 +1,5 @@
 <div class="container-fluid col-12">
-    <!-- <h2 class="mt-4 mb-4 d-flex justify-content-center">COMPRAS GENERAL</h2>
+    <h2 class="mt-4 mb-4 d-flex justify-content-center">COMPRAS GENERAL</h2>
         <div class="row mt-4 mb-4 d-flex justify-content-center">
             <div class="col-2">
                 <h4 class="d-inline" style="color: #000000;">Fecha: </h4>
@@ -21,7 +21,7 @@
                 <h4 class="d-inline" style="color: #000000;">Precio Total: </h4>
                 <h4 class="d-inline position-relative" style="left: .5%; color: #000000; font-weight: bold;" id="total_precio_iva" >${{sumaTotalPrecio | number:'1.0-0'}}</h4>
             </div>
-        </div> -->
+        </div>
     </div>
   
     <!-- INICIO DEL CONTENEDOR PRINCIPAL -->
@@ -30,22 +30,22 @@
         <div class="row">
                     <!-- BUSQUEDA POR LOTE Y BUSQUEDA POR PROVEEDOR -->
                     <!-- LA BUSQUEDA POR LOTE SE DEBE REMPLAZAR POR BUSQUEDA POR NUMERO DE FACTURA -->
-            <!-- <div class="col-2" style="font-size:smaller"> 
-            <div class="" style="font-size:smaller">
-                <span class=""><b>BUSCAR LOTE</b></span>
+            <div class="col-2" style="font-size:smaller"> 
+                <div class="" style="font-size:smaller">
+                    <span class=""><b>BUSCAR ID</b></span>
+                </div>
+                <div class="" style="font-size:smaller">
+                    <input   type="text" size="35" name="numero_proceso" style="border: 1px solid #000000;"[(ngModel)] = id_cg (ngModelChange) = "Search();" >
+                </div>
+                <div class="" style="font-size:smaller">
+                    <span class=""><b>BUSCAR POR NOMBRE</b></span>
+                </div>
+                <div class="">
+                    <input type="text" size="30" name="nombre" style="border: 1px solid #000000;" [(ngModel)] = nombre (ngModelChange) = "SearchByClient();">
+                </div>
             </div>
-            <div class="" style="font-size:smaller">
-                <input   type="text" size="35" name="numero_proceso" style="border: 1px solid #000000;"[(ngModel)] = id_cpc (ngModelChange) = "Search();" >
-            </div>
-            <div class="" style="font-size:smaller">
-                <span class=""><b>BUSCAR PROVEEDOR</b></span>
-            </div>
-            <div class="">
-                <input type="text" size="30" name="nombre" style="border: 1px solid #000000;" [(ngModel)] = nombre (ngModelChange) = "SearchByClient();">
-            </div>
-            </div> -->
                 <!-- BUSQUEDA POR RANGO DE FECHAS -->
-            <!-- <div class="col-2" style="font-size:smaller">
+             <div class="col-2" style="font-size:smaller">
                 <div style="font-size:smaller">
                     <span class=""><b>RANGO DE FECHAS GESTIÓN</b></span>
                 </div>
@@ -54,21 +54,21 @@
                     [bsConfig]="{ rangeInputFormat : 'DD-MM-YYYY', dateInputFormat: 'DD-MM-YYYY', showWeekNumbers: false }"                 
                     id="DateOfBirth" placeholder="Rango de Fechas" (bsValueChange)="dateRangeCreated($event)" class="form-control" />
                 </div>
-            </div> -->
-                <!-- AGREGAR NUEVA COMPRA Y GENERAR REPORTE -->
-            <!-- <div class="col-5">
+            </div>
+              <!-- AGREGAR NUEVA COMPRA Y GENERAR REPORTE -->
+            <div class="col-5">
                 <div style="    display: inline-block;
                 margin: 20px;
                 padding: 10px;
                 border: 1px solid #000000;
                 font-size:20px">
-                    <button [routerLink] ="['/cpc/ingreso-principal']" type="button" class="btn btn-primary ml-4 material-icons">
+                    <button [routerLink] ="['/compra-general/ingreso']" type="button" class="btn btn-primary ml-4 material-icons">
                     add_circle_outline
                     </button>
                         <h4 class="d-inline pl-2"><b>Nueva Compra</b> </h4>
-                    <button [routerLink] = "['/cpc/busqueda']" class="btn btn-success position-relative ml-2" (click)="reporteGeneralPDF()">GENERAR REPORTE</button>
+                    <button [routerLink] = "['/compra-general/busqueda']" class="btn btn-success position-relative ml-2" (click)="reporteGeneralPDF()">GENERAR REPORTE</button>
                 </div>
-            </div> -->
+            </div>
         </div>
     
         <!-- INICIO DEL DIV PRINCIPAL -->
@@ -91,7 +91,7 @@
                         <th scope="col" >Opciones</th>   
                     </tr>
                     </thead>
-                    <tbody>d
+                    <tbody>
                     <tr *ngFor ='let row of getAllBuys'>    
                         <td><b>{{row.id_cg}}</b></td>
                         <td><b>{{row.numero_factura}}</b></td>
@@ -105,21 +105,21 @@
                         <!-- COLUMNA DE OPCIONES -->
                         <td>
                             <!-- INICIO DEL MODAL     -->
-                            <!-- <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                            <div class="modal fade "id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 
                                 <div class="modal-dialog modal-xl"   role="document">
                                 <div class="modal-content" >
                                     <div class="modal-header" >
-                                    <h2 class="modal-title">Lote N°</h2> <h2 class="modal-title" id="selectIdCpc">{{selectLote}}</h2>
+                                    <h2 class="modal-title">Lote N°</h2> <h2 class="modal-title" id="selectIdCpc">{{selectIdCg}}</h2>
                                     </div>
                                     <div class="modal-body modal-xl">
                                         <table class="table" id="entrada">
                                             <thead class="thead-dark">
-                                            <b>Identificador: </b><b id="selectLote">{{selectIdCpc}}</b> 
+                                            <b>Identificador: </b><b id="selectLote">{{selectIdCg}}</b> 
                                             <br>
                                             <b>Nombre del Proveedor: </b><b id="selectNombre">{{selectNombre}}</b> 
                                             <br>
-                                            <b>Factura / Guía: </b><b id="selectFacturaGuia">{{selectFacturaGuia}}</b>   
+                                            <b>Factura / Guía: </b><b id="selectFacturaGuia">{{selectNumeroFactura}}</b>   
                                             <br>
                                             <b>Fecha de Creación: </b><b id="selectedFechaIngreso">{{selectedFechaIngreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</b>
                                             <br>
@@ -210,16 +210,16 @@
                                                 <hr>
 
 
-
+<!-- 
                                                 <h2 class="d-flex justify-content-center">VENTAS ASOCIADAS A LA COMPRA</h2>
                                                 <hr>
-                                                <br>
+                                                <br> -->
 
 
 
 
 
-
+<!-- 
                                                 <table class="table table-striped table-sm" id="datos_products_sell_detail">
                                                 <thead class="thead-dark">
                                                     <tr class="table-info">
@@ -254,7 +254,7 @@
                                                         <td><b>{{PrecioTotalSumDetailProductsSells() | number:'1.0-0'}}</b></td>
                                                     </tr>
                                                 </tbody>                       
-                                            </table> 
+                                            </table>  -->
 
 
 
@@ -263,16 +263,16 @@
 
 
 
-
+<!-- 
 
                                             <br>
                                             <hr>
                                             <h2 class="d-flex justify-content-center">COSTOS</h2>
                                             <hr>
                                             <br>
+             -->
             
-            
-                                            <div class="row">
+                                            <!-- <div class="row">
                                                 <div class="col-4"></div>
                                                 <div class="col-4">
                                                 <table class="table table-striped table-sm">
@@ -304,7 +304,7 @@
                                                 </div>
                                                 <div class="col-4"></div>
                                             </div>
-            
+             -->
 
 
 
@@ -316,7 +316,7 @@
 
                                             
 
-
+<!-- 
 
 
                                             <br>
@@ -324,9 +324,9 @@
                                             <h2 class="d-flex justify-content-center">AÑADIR COSTOS</h2>
                                             <hr>
                                             <br>
+             -->
             
-            
-            
+<!--             
             
                                             <div class="d-flex justify-content-center">
                                                 <br>
@@ -351,25 +351,25 @@
             
             
             
-                                            </div>
+                                            </div> -->
 
 
                                             
 
 
 
-
+<!-- 
 
                                             <br>
                                             <br>
 
 
-                                            <hr>
+                                            <hr> -->
 
 
 
 
-                                            
+<!--                                             
                                             <h1 class="d-flex justify-content-center" ><b>UTILIDAD</b><b id="utilidadcompra">${{PrecioTotalSumDetailProductsSells() - (selectTotalValor * ((selectedImpuesto/100)+1)) - sumaCostos() | number:'1.0-0'}}</b></h1>
 
 
@@ -378,7 +378,7 @@
 
 
                                                 <br>
-                                                <hr>
+                                                <hr> -->
 
 
 
@@ -390,25 +390,25 @@
                                                 <div class="d-flex justify-content-center">
                                                 <br>
                                                 <br>
-                                                <a [routerLink] ="['/cpc/ingreso-final/', selectIdCpc]" class="btn btn-warning" style="height: 120px; width: 120px; color: white;" data-dismiss="modal">
+                                                <a [routerLink] ="['/compra-general/busqueda', selectIdCg]" class="btn btn-warning" style="height: 120px; width: 120px; color: white;" data-dismiss="modal">
                                                     <br>
                                                     <br>
                                                     MODIFICAR
                                                 </a>
                                                 
-                                                <a (click)="reporteIndividualPreliminarPDF()" [routerLink] ="['/cpc/busqueda']" class="btn btn-primary ml-2" style="height: 120px; width: 120px;" data-dismiss="modal">
+                                                <a (click)="reporteIndividualPreliminarPDF()" [routerLink] ="['/compra-general/busqueda']" class="btn btn-primary ml-2" style="height: 120px; width: 120px;" data-dismiss="modal">
                                                     <br>
                                                     <br>
                                                     DOCUMENTO PRELIMINAR
                                                 </a>
-                                                <a (click)="reporteIndividualPDF()" [routerLink] ="['/cpc/busqueda']" class="btn btn-success ml-2" style="height: 120px; width: 120px;" data-dismiss="modal">
+                                                <a (click)="reporteIndividualPDF()" [routerLink] ="['/compra-general/busqueda']" class="btn btn-success ml-2" style="height: 120px; width: 120px;" data-dismiss="modal">
                                                     <br><br> DOCUMENTO FINAL
                                                 </a>
-                                                <a (click)="updateStatusBuyDelete(selectIdCpc)" class="btn btn-danger ml-2 material-icons" style="height: 120px; width: 120px;">
+                                                <!-- <a (click)="updateStatusBuyDelete(selectIdCpc)" class="btn btn-danger ml-2 material-icons" style="height: 120px; width: 120px;">
                                                     <br>
                                                     <br>
                                                     delete 
-                                                </a> 
+                                                </a>  -->
                                                 </div>
             
 
@@ -421,7 +421,7 @@
                                     </div>
                                 </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- FIN DEL MODAL -->
                             <!-- BOTON PARA ABRIR MODAL -->
                             <button (click)="menuOpciones(                    
@@ -447,30 +447,32 @@
         <!-- FIN DEL DIV PRINCIPAL -->
 
         <!-- TABLA PRINCIPAL INVISIBLE SE USA PARA IMPRIMIR DOCUMENTO -->
-        <!-- <div class="invisible">
+        <div class="invisible">
             <table class="table table-striped table-sm" id="tabla_principal">
                 <thead class="thead-dark">
                     <tr>                    
-                    <th scope="col">Lote</th>
-                    <th scope="col">Proveedor</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Kilogramos</th>
-                    <th scope="col">Iva</th>
-                    <th scope="col">Precio Iva</th>                                        
-                    <th scope="col">Precio Neto</th>
-                    <th scope="col">Precio Total</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Factura</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Ingreso</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Iva</th>
+                        <th scope="col">Iva</th>                                        
+                        <th scope="col">Neto</th>
+                        <th scope="col">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor ='let row of getAllBuys'>    
-                    <td><b>{{row.id_cpc}}</b></td>
-                    <td><b>{{row.nombre}}</b></td>
-                    <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
-                    <td>{{row.total_cantidad | number}}</td>                                                
-                    <td>{{row.impuesto}}%</td>
-                    <td><b style="font-size:medium;">{{ ( (row.total_valor)* (row.impuesto/100) ) | number:'1.0-0'}}</b></td>
-                    <td><b style="font-size:medium;">${{row.total_valor | number}}</b></td>
-                    <td><b style="font-size:medium;">${{ (row.total_valor) + ( (row.total_valor)* (row.impuesto/100) ) | number:'1.0-0'}}</b></td>                   
+                        <td><b>{{row.id_cg}}</b></td>
+                        <td><b>{{row.numero_factura}}</b></td>
+                        <td><b>{{row.nombre}}</b></td>
+                        <td>{{row.fecha_ingreso | date: 'dd-MM-yyyy / HH:mm:ss' : '-03:00'}}</td>
+                        <td>{{row.total_cantidad | number}}</td>
+                        <td>{{row.impuestos}}%</td>
+                        <td><b style="font-size:medium;">${{ ( (row.total_valor)* (row.impuestos/100) ) | number:'1.0-0'}}</b></td>
+                        <td><b style="font-size:medium;">${{row.total_valor | number}}</b></td>
+                        <td><b style="font-size:medium;">${{ (row.total_valor) + ( (row.total_valor)* (row.impuestos/100) ) | number:'1.0-0'}}</b></td>                  
                     </tr>
                     <tr class="table-info">
                     <td></td>
@@ -485,7 +487,7 @@
                 </tr>               
                 </tbody>
                 </table>
-        </div> -->
+        </div>
     </div>
     <!-- FIN DEL CONTENEDOR PRINCIPAL -->
 
@@ -493,7 +495,7 @@
 
                         <!-- DATOS DE CABECERA SE INCLUYE LAS FECHAS DATOS APARECEN OCULTOS-->
     <div>  
-        <!-- <div class="ml-5">
+        <div class="ml-5">
             <h5 class="d-inline position-relative" style="left: .5%; visibility: hidden;" id="startDateText">{{startDateText| date :'dd-MM-yyyy'}}</h5>
         </div>
         <div class="ml-5">
@@ -501,7 +503,7 @@
         </div>
         <div class="ml-5">
             <h5 class="d-inline position-relative"  style="left: .5%; visibility: hidden;" id="nombre">{{nombre}}</h5>
-        </div> -->
+        </div>
                         <!-- TABLA DE COSTOS ASOCIADOS TABLA INVISIBLE -->
         <!-- <table class="invisible" id="costos_asociados_detail">
         <thead class="thead-dark">
