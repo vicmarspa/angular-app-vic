@@ -202,6 +202,8 @@ export class VentaGeneralFinalComponent implements OnInit {
   }
 
   calibreFunction(){
+    console.log("datos",this.detalleVentaGeneral.id_cg, this.detalleVentaGeneral.tipo_producto);
+
     this.compraGeneralService.getStockCalibres(this.detalleVentaGeneral.id_cg, this.detalleVentaGeneral.tipo_producto)
     .subscribe(
       res => {
@@ -326,7 +328,6 @@ export class VentaGeneralFinalComponent implements OnInit {
   {
     //ALMACENAR ESTA VARIABLE
     if(id != '0'){
-
     console.log("termino de entrada");
     this.getStockSell = this.getStockSellRespaldo;
     var LoteSelectionFunction = this.getStockSell
