@@ -855,7 +855,7 @@ id_venta_general:any;
   
     doc.line(5, 65, 204, 65);
   
-    doc.text('DETALLE VENTA DE PALTA', 85,70);
+    doc.text('DETALLE VENTA GENERAL', 85,70);
     
     doc.line(5, 75, 204, 75);
   
@@ -1045,7 +1045,7 @@ id_venta_general:any;
   
     doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE VENTA DE PALTA', 85,60);
+    doc.text('DETALLE VENTA GENERAL', 85,60);
     
     doc.line(5, 65, 204, 65);
   
@@ -1218,7 +1218,7 @@ id_venta_general:any;
   
     doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE VENTA DE PALTA', 85,60);
+    doc.text('DETALLE VENTA DE GENERAL', 85,60);
     
     doc.line(5, 65, 204, 65);
   

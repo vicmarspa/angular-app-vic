@@ -564,7 +564,7 @@ selectedTotalCantidad:any='';
   
     doc.line(5, 65, 204, 65);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO FINAL', 50,70);
+    doc.text('DETALLE DE COMPRA - COMPRA GENERAL - DOCUMENTO FINAL', 50,70);
     
     doc.line(5, 75, 204, 75);
   
@@ -768,7 +768,7 @@ selectedTotalCantidad:any='';
   
     doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA - DOCUMENTO PRELIMINAR', 50,60);
+    doc.text('DETALLE DE COMPRA - COMPRA GENERAL - DOCUMENTO PRELIMINAR', 50,60);
     
     doc.line(5, 65, 204, 65);
   
@@ -901,7 +901,7 @@ selectedTotalCantidad:any='';
   
     doc.line(5, 55, 204, 55);
   
-    doc.text('DETALLE DE COMPRA - PALTA CHILENA', 70, 60);
+    doc.text('DETALLE DE COMPRA - COMPRA GENERAL', 70, 60);
     
     doc.line(5, 65, 204, 65);
   

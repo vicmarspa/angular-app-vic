@@ -209,6 +209,7 @@ export class VentaGeneralFinalComponent implements OnInit {
       res => {
         console.log(res);
         this.getcalibre = res;
+        
       },
       err => console.log(err)
     )
