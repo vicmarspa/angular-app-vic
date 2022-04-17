@@ -21,14 +21,14 @@ import { ProductoxVenta } from '../models/productoxventa';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 
-//http://localhost:3000//
+//https://vicmarspa.herokuapp.com//
 
 
 @Injectable()
 export  class CalibradoService {  
   
-  // API_URI = 'http://localhost:3000/';
-  API_URI = 'http://localhost:3000/';
+  // API_URI = 'https://vicmarspa.herokuapp.com/';
+  API_URI = 'https://vicmarspa.herokuapp.com/';
 
   authSubject = new BehaviorSubject(false);
   private token: string;
