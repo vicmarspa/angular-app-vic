@@ -21,14 +21,14 @@ import { ProductoxVenta } from '../models/productoxventa';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 
-//https://vicmarspa.herokuapp.com/
+//https://vicmarspa.herokuapp.com//
 
 
 @Injectable()
 export  class CalibradoService {  
   
-  // API_URI = 'https://vicmarspa.herokuapp.com';
-  API_URI = 'https://vicmarspa.herokuapp.com';
+  // API_URI = 'https://vicmarspa.herokuapp.com/';
+  API_URI = 'https://vicmarspa.herokuapp.com/';
 
   authSubject = new BehaviorSubject(false);
   private token: string;
@@ -49,6 +49,10 @@ export  class CalibradoService {
   }
   getCalibradosEntrada(){
     return this.http.get(`${this.API_URI}/entrada`)
+  }
+
+  GetCountCalibrados(){
+    return this.http.get(`${this.API_URI}/calibrados/getcountofcalibrados`)
   }
   getCalibrado(numero_proceso: string) {
     return this.http.get(`${this.API_URI}/busqueda/detalle/${numero_proceso}`);

@@ -20,8 +20,12 @@
     </div>
 </div>
 
+
+
 <div class="container-fluid col-12">
     <div class="row">
+        <div class="col-2" style="font-size:smaller">
+        </div>
         <div class="col-2" style="font-size:smaller"> 
             <div class="" style="font-size:smaller">
                 <span class=""><b>PROCESO</b></span>
@@ -58,11 +62,6 @@
                     </select> 
             </div>
         </div>
-
-
-
-
-
         <div class="col-2" style="font-size:smaller">
             <div class="" style="font-size:smaller">
                 <span class=""><b>TIPO DE PAGO</b></span>
@@ -91,12 +90,7 @@
                     </select> 
             </div>
         </div>
-
-
-
-
-
-        <div class="col-5">
+        <div class="col-4">
             <div style="    display: inline-block;
             margin: 20px;
             padding: 10px;
@@ -107,13 +101,30 @@
                 </button>
                   <h4 class="d-inline pl-2"><b>Nuevo Servicio</b> </h4>
             <button [routerLink] = "['/busqueda']" class="btn btn-success position-relative ml-2" (click)="reportePDF()">GENERAR REPORTE</button>
-            <button class="btn btn-warning  position-relative material-icons ml-2" style="color:white" (click)="refreshPageDirect()">refresh</button>
             </div>
         </div>
     </div>
 </div>
 
+<br>
+<br>
 
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation example" >
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click) = "PaginationNextAction()">Siguiente</a></li>
+            <li *ngFor="let itemcount of ListWithCountOfGroups.reverse()" class="page-item">
+                <a class="page-link"  (click) = "AccionPagination(itemcount)">
+                    {{itemcount}}
+                </a>
+            </li>
+          <li class="page-item"><a class="page-link" (click) = "PaginationPreviousAction()">Anterior</a></li>
+        </ul>
+    </nav>
+</div>
+
+<br>
+<br>
 
 <div class="container-fluid col-12">
     <div class="row">
@@ -138,6 +149,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                    <!--*ngFor ='let row of calibrado.slice().reverse() -->
                   <tr *ngFor ='let row of calibrado.slice().reverse()'>    
                       
 

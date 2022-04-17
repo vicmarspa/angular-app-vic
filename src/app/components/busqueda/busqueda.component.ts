@@ -9,12 +9,9 @@ import 'jspdf-autotable'
 // import {jsPDF } from 'jspdf';
 // import { autoTable, RowInput } from 'jspdf-autotable';
 
-
-
 //Modelos
 import { Calibrado } from '../../models/calibrado';
 import { splitClasses } from '@angular/compiler';
-
 
 @Component({
   selector: 'app-busqueda',
@@ -29,8 +26,6 @@ export class BusquedaComponent implements OnInit {
     private activedRoute: ActivatedRoute,) { }
 
 
-
-
   selectNumeroProceso:any='';
   selectNombre:any='';
   selectFechaIngreso:any='';
@@ -39,17 +34,13 @@ export class BusquedaComponent implements OnInit {
   selectTotalBines:any='';
   selectTotalKg:any='';
   selectTotalPrecio:any='';
-
-
-
-
+  selectedNombre:any;
+  selectedTipoPago:any;
+  selectedTipoFruta:any;
+  selectedTipoServicio:any;
   products:any = [];  
   calibrado:any= [];
-
   ts = new Date();
-  
-
-
   calibradoEntrada:any = [];
   fecha_ingreso:any;
   numero_proceso:any;
@@ -58,21 +49,18 @@ export class BusquedaComponent implements OnInit {
   fromdate:any='';
   todate:any='';
   searchresult:any='';
-  
-  
-
-
-
-
   fechaActual = new Date();
   startDateText:any="";
   endDateText:any="";
-
-  selectedNombre:any;
-  selectedTipoPago:any;
-  selectedTipoFruta:any;
-  selectedTipoServicio:any;
-
+  countItemsList:any;
+  countOfPages:number;
+  ListoToPrint:any= [];
+  positionInitList:any;
+  ListWithCountOfGroups:any= [];
+  validateActionPagination:boolean = false;
+  RespaldoCalibrados:any= [];
+  nullList:any= [];
+  totalCountOfPageConstant:number;
 
   calibrado1:Calibrado = {
     numero_proceso:'',  
@@ -85,18 +73,20 @@ export class BusquedaComponent implements OnInit {
     estado:''
   }
 
-  
+  selected!: {startDate: Moment, endDate: Moment};
 
-   selected!: {startDate: Moment, endDate: Moment};
+  ngOnInit(){
 
-  ngOnInit(){ 
-    
     this.calibradoService.getCalibrados()
       .subscribe(
         res => {
-          this.calibrado = res;  
-          this.products = res;                 
-          console.log(res);
+          this.calibrado = res; 
+          this.RespaldoCalibrados= this.calibrado;
+          this.products = res;  
+          this.countItemsList = this.calibrado.length
+          this.obtenerCantidadDeGrupos();
+          this.obtenerDatosPorGrupos(this.countOfPages);
+          this.calibrado=this.ListoToPrint;
         },
         err => console.error(err)
       );
@@ -105,29 +95,69 @@ export class BusquedaComponent implements OnInit {
       .subscribe(
         res => {
           this.calibradoEntrada = res;
-          console.log(res);
         },
         err => console.error(err)
       );
+
+    }
+
+    obtenerCantidadDeGrupos() {
+      //esta seccion lo que hace es contar cuantas paginas se van a requerir para ingresar todos los datos que se encuentran en la lista
+      this.countOfPages = this.countItemsList/40;
+      this.countOfPages = Math.ceil(this.countOfPages);
+      console.log("Cantidad de paginas a crear:", this.countOfPages);
+      this.totalCountOfPageConstant = this.countOfPages;
+      for (let i = 0; i <= this.countOfPages-1; i++) {
+        this.ListWithCountOfGroups[i] = i+1
+      }
+    }
+
+    obtenerDatosPorGrupos(positionOfList:any) {
+      //Esta seccion lo que hace es obtener los datos por grupos
+
+      this.positionInitList = (((40*positionOfList)+1)-40);
+      
+      console.log("NUMERO",this.positionInitList);
+      for (let i = 0; i <= 39; i++) {
+        if( this.calibrado[this.positionInitList]!=null){
+          this.ListoToPrint[i] = this.calibrado[this.positionInitList];
+          console.log("NUMERO",this.positionInitList,"ITERACION:",i);
+
+          this.positionInitList = this.positionInitList+1;
+        }
+      }
+    }
+
+    AccionPagination(pageObtained:any) {
+      this.countOfPages = pageObtained;
+      this.calibrado = this.RespaldoCalibrados;
+
+      for (let i = 0; i <= 40; i++) {
+          this.ListoToPrint.pop();
+      }
+      this.obtenerDatosPorGrupos(this.countOfPages);
+      this.calibrado = this.ListoToPrint;
+    }
+
+    PaginationPreviousAction(){
+      if(this.countOfPages-1 < 1){
+        console.log("no hay mas paginas para mostrar",this.countOfPages);
+        console.log("no hay mas paginas para mostrar");
+      }else{
+        this.AccionPagination(this.countOfPages-1);
+      }
      
-      // var date = new Date();
-      // var primerDia = new Date(date.getFullYear(), date.getMonth(), 1);
-      // var ultimoDia = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-      // var añoActual = date.getFullYear();
-      // var mesActual = date.getMonth();
+    }
 
-      // console.log("<br>El primer día es: " + primerDia.getDate());
-      // console.log("<br>El ultimo día es: " + ultimoDia.getDate());
-      // console.log("<br>Año actual: " + añoActual);
-      // console.log("<br>Año actual: " + mesActual);
+    PaginationNextAction(){
+      if(this.countOfPages+1 > this.totalCountOfPageConstant){
+        console.log("no hay mas paginas para mostrar",this.countOfPages);
+        console.log("no hay mas paginas para mostrar");
+      }else{
+        this.AccionPagination(this.countOfPages+1);
+      }
+    }
 
-      // this.startDateText = new Date(añoActual, mesActual, primerDia.getDate());
-      // this.endDateText = new Date(añoActual, mesActual, ultimoDia.getDate());
-
-      // console.log(this.startDateText,"esta es la fecha de incio")
-      // console.log(this.startDateText,"esta es la fecha de termino")
-
-  }
   deleteCalibrado(numero_proceso:string) {
     Swal.fire({
       title: 'Estas seguro?',
@@ -216,23 +246,15 @@ export class BusquedaComponent implements OnInit {
   public valorCalibrado(){
     return this.calibrado.map(valor => valor.valor_servicio).reduce((a,b) => a+b, 0);
   }
-
-
-
-
   public sumaKilogramosCalibrados(){
     return this.calibrado.map(row => row.total_kg).reduce((a,b) => a+b, 0);
   }
-
   public sumaPreciosCalibrados(){
     return this.calibrado.map(row => row.total_precio).reduce((a,b) => a+b, 0);
   }
-
   public sumaBinesCalibrados(){
     return this.calibrado.map(row => row.total_bines).reduce((a,b) => a+b, 0);
   }
-
-
 
   getTotal(val:Calibrado[]):number{
     let sum = 0;
@@ -244,7 +266,6 @@ export class BusquedaComponent implements OnInit {
     return sum;
   }
   
-
   dateRangeCreated($event) {    
     this.calibrado = this.products; 
     this.ts = this.calibrado.fecha_ingreso;                       
@@ -260,7 +281,6 @@ export class BusquedaComponent implements OnInit {
     console.log('esta es la fecha de ingreso'+startDate);
     console.log('esta es la fecha de salida'+endDate);
   }
-  
 
   SearchByClient(){
     if(this.selectedNombre == ""){
@@ -272,7 +292,6 @@ export class BusquedaComponent implements OnInit {
       })
     }
   }
-
 
   SearchByPago(){
     if(this.selectedTipoPago == ""){
@@ -307,8 +326,6 @@ export class BusquedaComponent implements OnInit {
     }
   }
 
-
-
   refreshPageDirect()
   {
     window.location.reload;
@@ -319,9 +336,6 @@ export class BusquedaComponent implements OnInit {
 
 
 menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any,selectTipoProceso:any,selectTipoFruta:any,selectTotalBine:any,selectTotalKg:any,selectTotalPrecio:any){
-
-
-
   this.selectNumeroProceso=selectNumeroProceso;
   this.selectNombre=selectNombre;
   this.selectFechaIngreso=selectFechaIngreso;
@@ -330,24 +344,7 @@ menuOpciones(selectNumeroProceso:any, selectNombre:any, selectFechaIngreso:any,s
   this.selectTotalBines=selectTotalBine;
   this.selectTotalKg=selectTotalKg;
   this.selectTotalPrecio=selectTotalPrecio;
-
-
-
-
-  console.log('estos son los datos recibidos'+this.selectNumeroProceso+this.selectTotalKg+this.selectNombre+this.selectFechaIngreso)
 }
-
-
-
-
-
-
-/////////////
-/////////////
-/////////////
-/////////////
-
-
 
 
 
@@ -355,26 +352,15 @@ reportePDF(){
   // Default export is a4 paper, portrait, using millimeters for units
   const doc = new jsPDF();
   doc.setFontSize(10);
-
-
-
-
   doc.text('Dirección: J.J Godoy 100, La Calera', 124, 8);
   doc.text('Contacto: contacto@vicmarspa.cl', 124, 12);
-
   var img = new Image()
   img.src = '/assets/image.jpg'
   doc.addImage(img, 'jpg', 185, 0, 18, 18)
-
   doc.line(5, 20, 204, 20);
-
-
-
 
   var total_kilogramos = document.getElementById("total_kilogramos");
   var total_kilogramoshtml = total_kilogramos?.innerHTML;
-
-
 
   var total_precio = document.getElementById("total_precio");
   var total_preciohtml = total_precio?.innerHTML;
@@ -382,10 +368,8 @@ reportePDF(){
   var total_bines = document.getElementById("total_bines");
   var total_bineshtml = total_bines?.innerHTML;
 
-
   var fechaActual = document.getElementById("fechaActual");
   var fechaActualhtml = fechaActual?.innerHTML;
-
 
   var startDateText = document.getElementById("startDateText");
   var startDateTexthtml = startDateText?.innerHTML;
@@ -393,69 +377,36 @@ reportePDF(){
   var endDateText = document.getElementById("endDateText");
   var endDateTexthtml = endDateText?.innerHTML;
 
-
   var selectedTipoPago = document.getElementById("selectedTipoPago");
   var selectedTipoPagohtml = selectedTipoPago?.innerHTML;
-  
 
   var selectedTipoFruta = document.getElementById("selectedTipoFruta");
   var selectedTipoFrutahtml = selectedTipoFruta?.innerHTML;
-  
 
   var selectedTipoServicio = document.getElementById("selectedTipoServicio");
   var selectedTipoServiciohtml = selectedTipoServicio?.innerHTML;
 
-
-
-
   doc.text('Fecha Actual: ', 10, 25);
   doc.text(fechaActualhtml,45, 25);
-
   doc.text('Rango de Busqueda: ', 10, 30);
   doc.text(startDateTexthtml,45, 30);
   doc.text(endDateTexthtml,68, 30);
-
-  
   doc.text('Tipo de Pago: ', 10, 35);
   doc.text(selectedTipoPagohtml,45, 35);
-
   doc.text('Tipo de Fruta: ', 10, 40);
   doc.text(selectedTipoFrutahtml,45, 40);
- 
   doc.text('Tipo de Servicio: ', 10, 45);
   doc.text(selectedTipoServiciohtml,45, 45);
-
-
-
-
-
-
   doc.text('Kilogramos Total: ', 95, 25);
   doc.text(total_kilogramoshtml,125, 25);
   doc.text('Precio Total: ', 95, 30);
   doc.text(total_preciohtml,125, 30);
   doc.text('Bins Total: ', 95, 35);
   doc.text(total_bineshtml,125, 35);
-
-
-
-
   doc.line(5, 50, 204, 50);
-
   doc.text('Detalles del Reporte', 80,55);
-  
   doc.line(5, 60, 204, 60);
-
-
-
-
-
-
-
-
   doc.autoTable({ html: '#entrada',columnStyles: {
-
-    
     0: {cellWidth: 15},
     1: {cellWidth: 20},
     2: {cellWidth: 18},
@@ -467,24 +418,14 @@ reportePDF(){
     8: {cellWidth: 10},
     9: {cellWidth: 20},
     10: {cellWidth: 20},
-
   },margin: {top: 65,right:35,left:10}, styles: {overflow: 'linebreak',
   fontSize: 8},didParseCell: function (data) {
-
     //data.table.body.splice(5);
     var rows = data.table.body;
-
     if (data.row.index === rows.length - 1) {
         data.cell.styles.fillColor = [138, 236, 247];
     }} } )
-
-  
-
   doc.output('dataurlnewwindow'); 
-  
- 
-
-
 }
 
 
